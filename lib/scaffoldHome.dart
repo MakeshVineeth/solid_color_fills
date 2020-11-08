@@ -48,6 +48,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
         color: Theme.of(context).bottomAppBarTheme.color,
         activeColor: Theme.of(context).bottomAppBarTheme.color,
         elevation: Theme.of(context).bottomAppBarTheme.elevation,
+        height: 60,
         initialActiveIndex: _currentIndex,
         items: bottomItems.entries
             .map((entry) => tabItemCustom.getTabItem(
