@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:ui' as ui;
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter/services.dart';
 
 class ColorItem extends StatelessWidget {
   final MapEntry mapEntry;
@@ -16,8 +15,6 @@ class ColorItem extends StatelessWidget {
     fontWeight: FontWeight.w600,
   );
 
-  final GlobalKey globalKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,34 +22,18 @@ class ColorItem extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: fixedCardRadius),
       child: InkWell(
         borderRadius: fixedCardRadius,
-
         // temp
-        onTap: () async {
-          RenderRepaintBoundary boundary =
-              globalKey.currentContext.findRenderObject();
-          ui.Image image = await boundary.toImage();
-          ByteData byteData =
-              await image.toByteData(format: ui.ImageByteFormat.png);
-          Uint8List pngBytes = byteData.buffer.asUint8List();
-          print(pngBytes);
-          Directory tempDir = await getTemporaryDirectory();
-          print(tempDir.path);
-          File file = File('${tempDir.path}//polomv.png');
-          file.writeAsBytes(pngBytes);
-        },
+        onTap: () => writeImage(),
         child: IgnorePointer(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
-                child: RepaintBoundary(
-                  key: globalKey,
-                  child: Container(
-                    margin: EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      color: mapEntry.value,
-                      borderRadius: fixedCardRadius,
-                    ),
+                child: Container(
+                  margin: EdgeInsets.all(6.0),
+                  decoration: BoxDecoration(
+                    color: mapEntry.value,
+                    borderRadius: fixedCardRadius,
                   ),
                 ),
               ),
@@ -68,5 +49,19 @@ class ColorItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void writeImage() async {
+    ui.PictureRecorder recorder = ui.PictureRecorder();
+    Canvas c = new Canvas(recorder);
+    c.drawColor(Colors.red, BlendMode.src); // etc
+    ui.Picture p = recorder.endRecording();
+    ui.Image image = await p.toImage(500, 500);
+    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    Uint8List pngBytes = byteData.buffer.asUint8List();
+    print(pngBytes);
+    Directory tempDir = await getTemporaryDirectory();
+    File file = File('${tempDir.path}//temp.png');
+    file.writeAsBytes(pngBytes);
   }
 }
