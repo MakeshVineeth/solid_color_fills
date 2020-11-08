@@ -5,6 +5,7 @@ import 'package:solid_color_fill_walls/UI/tabItem.dart';
 import 'package:solid_color_fill_walls/UI/fade_indexed_stack.dart';
 import 'package:solid_color_fill_walls/custom_picker.dart';
 import 'package:solid_color_fill_walls/home_tab.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class ScaffoldHome extends StatefulWidget {
   @override
@@ -25,10 +26,15 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
     CustomColorPicker(),
   ];
 
+  void changeStatusBarColor() {
+    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
+  }
+
   int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    changeStatusBarColor();
     return Scaffold(
       appBar: AppBar(
         title: Text(fixedValues.appTitle),
@@ -38,6 +44,10 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
         children: widgetsList,
       ),
       bottomNavigationBar: ConvexAppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        color: Theme.of(context).bottomAppBarTheme.color,
+        activeColor: Theme.of(context).bottomAppBarTheme.color,
+        elevation: Theme.of(context).bottomAppBarTheme.elevation,
         initialActiveIndex: _currentIndex,
         items: bottomItems.entries
             .map((entry) => tabItemCustom.getTabItem(

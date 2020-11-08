@@ -13,6 +13,7 @@ class ColorItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: fixedCardRadius),
       child: InkWell(
         borderRadius: fixedCardRadius,

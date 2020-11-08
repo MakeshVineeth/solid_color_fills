@@ -25,6 +25,9 @@ class FixedValues {
           ),
         ),
       ),
+      bottomAppBarTheme: BottomAppBarTheme(
+        color: Colors.blue[600],
+      ),
     );
     return themeData;
   }
