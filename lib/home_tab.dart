@@ -11,7 +11,12 @@ class _HomeTabState extends State<HomeTab> {
   // List of Colors
   Map colorsList = {
     'Amber': Colors.amber,
-    'OP Red': Colors.red,
+    'OnePlus Red': Color(0xffeb0029),
+    'Yellow': Colors.yellow,
+    'Red': Colors.red,
+    'Green': Colors.green,
+    'Black': Colors.black,
+    'Blue': Colors.blue,
   };
 
   final columnCount = 2;
