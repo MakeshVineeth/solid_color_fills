@@ -94,7 +94,7 @@ class _WallChooserState extends State<WallChooser> {
                             width: 3,
                           ),
                           Card(
-                            elevation: 3,
+                            elevation: 2,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5)),
                             child: InkWell(
@@ -196,7 +196,9 @@ class _WallChooserState extends State<WallChooser> {
         if (result.contains('success'))
           ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
         else
-          ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
+          ScaffoldMessenger.of(context).showSnackBar(snackBarError);
+
+        file.delete();
       }).catchError((err) {
         ScaffoldMessenger.of(context).showSnackBar(snackBarError);
       });
