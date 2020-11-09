@@ -62,16 +62,22 @@ class _WallChooserState extends State<WallChooser> {
                         shape: RoundedRectangleBorder(
                             borderRadius: fixedValues.fixedCardRadius),
                         elevation: 3,
-                        child: Container(
-                          padding: EdgeInsets.all(8),
-                          height: constraints.maxHeight / 1.5,
-                          child: ClipRRect(
-                              borderRadius: fixedValues.fixedCardRadius,
-                              child: displayCanvas()),
+                        child: InkWell(
+                          onTap: () {},
+                          borderRadius: fixedValues.fixedCardRadius,
+                          child: IgnorePointer(
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              height: constraints.maxHeight / 1.5,
+                              child: ClipRRect(
+                                  borderRadius: fixedValues.fixedCardRadius,
+                                  child: displayCanvas()),
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -85,20 +91,34 @@ class _WallChooserState extends State<WallChooser> {
                             ),
                           ),
                           SizedBox(
-                            width: 5,
+                            width: 3,
                           ),
-                          Text(
-                            '${widget.mapEntry.key}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              fontSize: 15,
-                              color: widget.mapEntry.value,
+                          Card(
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(5),
+                              onTap: () {},
+                              child: IgnorePointer(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    '${widget.mapEntry.key}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 15,
+                                      color: widget.mapEntry.value,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       Container(
                         width: constraints.maxWidth / 2,

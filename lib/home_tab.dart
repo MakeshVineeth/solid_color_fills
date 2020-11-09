@@ -17,6 +17,7 @@ class _HomeTabState extends State<HomeTab> {
     'Green': Colors.green,
     'Black': Colors.black,
     'Blue': Colors.blue,
+    'Neumorphic White': Color(0xffe0e5ec),
   };
 
   final columnCount = 2;
