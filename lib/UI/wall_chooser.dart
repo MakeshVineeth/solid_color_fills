@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:wallpaper_manager/wallpaper_manager.dart';
 
 class WallChooser extends StatefulWidget {
   final MapEntry mapEntry;
@@ -85,9 +86,12 @@ class _WallChooserState extends State<WallChooser> {
     File file = File(filePath);
 
     if (pngBytes != null)
-      file.writeAsBytes(pngBytes).then((value) {
+      file.writeAsBytes(pngBytes).then((value) async {
+        int location = WallpaperManager.HOME_SCREEN;
+        final String result =
+            await WallpaperManager.setWallpaperFromFile(filePath, location);
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Saved: $filePath')));
+            .showSnackBar(SnackBar(content: Text('$result: $filePath')));
       }).catchError((err) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('Error: $err')));
