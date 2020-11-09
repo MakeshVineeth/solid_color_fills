@@ -37,7 +37,7 @@ class _HomeTabState extends State<HomeTab> {
         itemBuilder: (context, index) => AnimationConfiguration.staggeredGrid(
           columnCount: columnCount,
           position: index,
-          duration: const Duration(milliseconds: 700),
+          duration: const Duration(milliseconds: 800),
           child: ScaleAnimation(
             child: FadeInAnimation(
               child: ColorItem(
