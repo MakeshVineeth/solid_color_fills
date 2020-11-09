@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:solid_color_fill_walls/fixedValues.dart';
 import 'package:solid_color_fill_walls/scaffoldHome.dart';
+import 'package:solid_color_fill_walls/UI/wall_chooser.dart';
 
 void main() {
   runApp(MaterialHome());
@@ -23,7 +24,10 @@ class MaterialHome extends StatelessWidget {
         darkTheme: dark,
         title: fixedValues.appTitle,
         debugShowCheckedModeBanner: false,
-        home: ScaffoldHome(),
+        routes: {
+          '/': (context) => ScaffoldHome(),
+          '/wall_chooser': (context) => WallChooser(),
+        },
       ),
     );
   }

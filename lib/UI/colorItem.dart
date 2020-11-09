@@ -1,9 +1,5 @@
-import 'dart:typed_data';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'dart:ui' as ui;
-import 'package:path_provider/path_provider.dart';
 
 class ColorItem extends StatelessWidget {
   final MapEntry mapEntry;
@@ -23,7 +19,10 @@ class ColorItem extends StatelessWidget {
       child: InkWell(
         borderRadius: fixedCardRadius,
         // temp
-        onTap: () => writeImage(),
+        onTap: () => Navigator.pushNamed(context, '/wall_chooser', arguments: {
+          'title': mapEntry.key,
+          'color': mapEntry.value,
+        }),
         child: IgnorePointer(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -49,19 +48,5 @@ class ColorItem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void writeImage() async {
-    ui.PictureRecorder recorder = ui.PictureRecorder();
-    Canvas c = new Canvas(recorder);
-    c.drawColor(Colors.red, BlendMode.src); // etc
-    ui.Picture p = recorder.endRecording();
-    ui.Image image = await p.toImage(500, 500);
-    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    Uint8List pngBytes = byteData.buffer.asUint8List();
-    print(pngBytes);
-    Directory tempDir = await getTemporaryDirectory();
-    File file = File('${tempDir.path}//temp.png');
-    file.writeAsBytes(pngBytes);
   }
 }
