@@ -21,9 +21,9 @@ class WallChooser extends StatefulWidget {
 class _WallChooserState extends State<WallChooser> {
   Uint8List pngBytes;
   final SnackBar snackBarSuccess =
-      SnackBar(content: Text('Wallpaper Successfully set!'));
+      SnackBar(content: Text('Yay! Wallpaper Successfully Set!'));
   final SnackBar snackBarError =
-      SnackBar(content: Text('Oops, An Error has occurred!'));
+      SnackBar(content: Text('Oops, An Error has Occurred!'));
   final FixedValues fixedValues = FixedValues();
 
   @override
