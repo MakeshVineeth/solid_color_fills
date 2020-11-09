@@ -20,12 +20,7 @@ class ColorItem extends StatelessWidget {
       child: InkWell(
         borderRadius: fixedCardRadius,
         // temp
-        onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => WallChooser(
-                      mapEntry: mapEntry,
-                    ))),
+        onTap: () => openWallChooser(context),
         child: IgnorePointer(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -51,5 +46,15 @@ class ColorItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void openWallChooser(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => WallChooser(
+                  mapEntry: mapEntry,
+                  size: MediaQuery.of(context).size,
+                )));
   }
 }

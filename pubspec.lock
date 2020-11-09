@@ -420,6 +420,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0-nullsafety.4"
+  wallpaper_manager:
+    dependency: "direct main"
+    description:
+      name: wallpaper_manager
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.10"
   win32:
     dependency: transitive
     description:

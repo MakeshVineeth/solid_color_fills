@@ -6,8 +6,9 @@ import 'package:path_provider/path_provider.dart';
 
 class WallChooser extends StatefulWidget {
   final MapEntry mapEntry;
+  final Size size;
 
-  const WallChooser({@required this.mapEntry});
+  const WallChooser({@required this.mapEntry, @required this.size});
 
   @override
   _WallChooserState createState() => _WallChooserState();
@@ -64,24 +65,32 @@ class _WallChooserState extends State<WallChooser> {
       Canvas c = new Canvas(recorder);
       c.drawColor(color, BlendMode.src); // etc
       ui.Picture p = recorder.endRecording();
-      ui.Image image = await p.toImage(500, 500);
+
+      int width = widget.size.width.round();
+      int height = widget.size.height.round();
+      ui.Image image = await p.toImage(width, height);
       ByteData byteData =
           await image.toByteData(format: ui.ImageByteFormat.png);
 
       setState(() {
-        pngBytes = byteData.buffer.asUint8List();
+        pngBytes = byteData.buffer
+            .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
       });
     }
   }
 
   void writeImageToTemp(BuildContext context) async {
-    Directory tempDir = await getTemporaryDirectory();
-    File file = File('${tempDir.path}//temp.png');
-    file.writeAsBytes(pngBytes).then((err) {
-      SnackBar snackBar = SnackBar(
-        content: Text('Done: ${file.path}'),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    });
+    String tempPath = (await getTemporaryDirectory()).path;
+    String filePath = tempPath + '/temp.png';
+    File file = File(filePath);
+
+    if (pngBytes != null)
+      file.writeAsBytes(pngBytes).then((value) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Saved: $filePath')));
+      }).catchError((err) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Error: $err')));
+      });
   }
 }
