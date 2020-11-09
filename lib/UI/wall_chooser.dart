@@ -193,7 +193,7 @@ class _WallChooserState extends State<WallChooser> {
       file.writeAsBytes(pngBytes).then((value) async {
         String result =
             await WallpaperManager.setWallpaperFromFile(filePath, location);
-        if (result.contains('success'))
+        if (result.contains('set'))
           ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
         else
           ScaffoldMessenger.of(context).showSnackBar(snackBarError);
