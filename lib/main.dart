@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:solid_color_fill_walls/fixedValues.dart';
-import 'package:solid_color_fill_walls/scaffoldHome.dart';
+import 'package:com.mvp.solid_color_fill_walls/fixedValues.dart';
+import 'package:com.mvp.solid_color_fill_walls/scaffoldHome.dart';
 
 void main() {
   runApp(MaterialHome());

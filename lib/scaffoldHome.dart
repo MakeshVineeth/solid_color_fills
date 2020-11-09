@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:solid_color_fill_walls/fixedValues.dart';
+import 'package:com.mvp.solid_color_fill_walls/fixedValues.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:solid_color_fill_walls/UI/tabItem.dart';
-import 'package:solid_color_fill_walls/UI/fade_indexed_stack.dart';
-import 'package:solid_color_fill_walls/custom_picker.dart';
-import 'package:solid_color_fill_walls/home_tab.dart';
+import 'package:com.mvp.solid_color_fill_walls/UI/tabItem.dart';
+import 'package:com.mvp.solid_color_fill_walls/UI/fade_indexed_stack.dart';
+import 'package:com.mvp.solid_color_fill_walls/custom_picker.dart';
+import 'package:com.mvp.solid_color_fill_walls/home_tab.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class ScaffoldHome extends StatefulWidget {

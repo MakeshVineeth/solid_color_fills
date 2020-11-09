@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:wallpaper_manager/wallpaper_manager.dart';
-import 'package:solid_color_fill_walls/fixedValues.dart';
+import 'package:com.mvp.solid_color_fill_walls/fixedValues.dart';
 
 class WallChooser extends StatefulWidget {
   final MapEntry mapEntry;
@@ -94,7 +94,7 @@ class _WallChooserState extends State<WallChooser> {
                             width: 3,
                           ),
                           Card(
-                            elevation: 5,
+                            elevation: 3,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5)),
                             child: InkWell(
