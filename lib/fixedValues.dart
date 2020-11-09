@@ -11,12 +11,19 @@ class FixedValues {
     Color fg = Colors.black;
     Color bg = Colors.white;
 
-    if (brightness == Brightness.dark) {}
+    if (brightness == Brightness.dark) {
+      bg = Colors.black;
+      fg = Colors.white;
+    }
 
     ThemeData themeData = ThemeData(
       brightness: brightness,
       scaffoldBackgroundColor: bg,
+      applyElevationOverlayColor: brightness == Brightness.dark,
       appBarTheme: AppBarTheme(
+        iconTheme: IconThemeData(
+          color: fg,
+        ),
         brightness: brightness,
         centerTitle: true,
         color: bg,
@@ -32,6 +39,19 @@ class FixedValues {
       bottomAppBarTheme: BottomAppBarTheme(
         color: Colors.blue[600],
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(bg),
+        foregroundColor: MaterialStateProperty.all(fg),
+        padding: MaterialStateProperty.all(EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 15,
+        )),
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          borderRadius: fixedCardRadius,
+        )),
+        elevation: MaterialStateProperty.all(3),
+      )),
     );
     return themeData;
   }

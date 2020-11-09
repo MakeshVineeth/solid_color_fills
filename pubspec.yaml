@@ -25,16 +25,14 @@ dependencies:
     sdk: flutter
   adaptive_theme: ^1.1.0
   convex_bottom_bar: ^2.6.0
-  cupertino_icons: ^1.0.0
   flutter_animator: ^2.1.0
-  flutter_fadein: ^1.1.1
   flutter_launcher_icons: ^0.8.1
   flutter_rename_app: ^1.0.0
   flutter_staggered_animations: ^0.1.2
   flutter_statusbarcolor: ^0.2.3
   path_provider: ^1.6.24
-  provider: ^4.3.2+2
   wallpaper_manager: ^1.0.10
+  riverpod: ^0.12.1
 
 dev_dependencies:
   flutter_test:

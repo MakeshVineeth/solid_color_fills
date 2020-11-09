@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:wallpaper_manager/wallpaper_manager.dart';
-import 'package:flutter_fadein/flutter_fadein.dart' as fade;
 import 'package:solid_color_fill_walls/fixedValues.dart';
 
 class WallChooser extends StatefulWidget {
@@ -33,56 +32,105 @@ class _WallChooserState extends State<WallChooser> {
     loadImage(this.widget.mapEntry.value);
   }
 
+  Map buttons = {
+    'Set As Home Screen': WallpaperManager.HOME_SCREEN,
+    'Set As Lock Screen': WallpaperManager.LOCK_SCREEN,
+    'Set As Both': WallpaperManager.BOTH_SCREENS,
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Color'),
+        title: Text('Wallpaper Confirmation'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: ListView(
+      body: LayoutBuilder(
+        builder: (context, constraints) => ListView(
           physics:
               BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: fixedValues.fixedCardRadius),
-                  elevation: 3,
-                  child: Container(
-                    padding: EdgeInsets.all(5),
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: MediaQuery.of(context).size.height / 2,
-                    child: ClipRRect(
-                      borderRadius: fixedValues.fixedCardRadius,
-                      child: displayCanvas(),
-                    ),
-                  ),
-                ),
-                Text(
-                  'Color Info: ${this.widget.mapEntry.key}',
-                  style: fixedValues.colorTitleStyle,
-                ),
-                ElevatedButton(
-                  onPressed: () =>
-                      setImage(context, WallpaperManager.HOME_SCREEN),
-                  child: Text('Set As Home Screen'),
-                ),
-                ElevatedButton(
-                  onPressed: () =>
-                      setImage(context, WallpaperManager.LOCK_SCREEN),
-                  child: Text('Set As Lock Screen'),
-                ),
-                ElevatedButton(
-                  onPressed: () =>
-                      setImage(context, WallpaperManager.BOTH_SCREENS),
-                  child: Text('Set As Both'),
-                ),
-              ],
-            )
+            Container(
+              padding: const EdgeInsets.all(20),
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: fixedValues.fixedCardRadius),
+                        elevation: 3,
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          height: constraints.maxHeight / 1.5,
+                          child: ClipRRect(
+                              borderRadius: fixedValues.fixedCardRadius,
+                              child: displayCanvas()),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Color Info:',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontSize: 15,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '${widget.mapEntry.key}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontSize: 15,
+                              color: widget.mapEntry.value,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: constraints.maxWidth / 2,
+                        child: Column(
+                          children: List.generate(
+                              buttons.length,
+                              (index) => Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () => setImage(
+                                            context,
+                                            buttons.entries
+                                                .elementAt(index)
+                                                .value),
+                                        child: Text(buttons.entries
+                                            .elementAt(index)
+                                            .key),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                    ],
+                                  )),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -91,12 +139,9 @@ class _WallChooserState extends State<WallChooser> {
 
   Widget displayCanvas() {
     if (pngBytes != null)
-      return fade.FadeIn(
-        duration: const Duration(milliseconds: 500),
-        child: Image.memory(pngBytes),
-      );
+      return Image.memory(pngBytes);
     else
-      return fade.FadeIn(child: Text('Loading...'));
+      return Text('Loading...');
   }
 
   void loadImage(Color color) async {
