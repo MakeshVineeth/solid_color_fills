@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:solid_color_fill_walls/UI/wall_chooser.dart';
 
 class ColorItem extends StatelessWidget {
   final MapEntry mapEntry;
@@ -19,10 +20,12 @@ class ColorItem extends StatelessWidget {
       child: InkWell(
         borderRadius: fixedCardRadius,
         // temp
-        onTap: () => Navigator.pushNamed(context, '/wall_chooser', arguments: {
-          'title': mapEntry.key,
-          'color': mapEntry.value,
-        }),
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => WallChooser(
+                      mapEntry: mapEntry,
+                    ))),
         child: IgnorePointer(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

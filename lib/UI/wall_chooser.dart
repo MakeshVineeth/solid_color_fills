@@ -5,6 +5,10 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 class WallChooser extends StatefulWidget {
+  final MapEntry mapEntry;
+
+  const WallChooser({@required this.mapEntry});
+
   @override
   _WallChooserState createState() => _WallChooserState();
 }
@@ -15,7 +19,7 @@ class _WallChooserState extends State<WallChooser> {
   @override
   void initState() {
     super.initState();
-    loadImage();
+    loadImage(this.widget.mapEntry.value);
   }
 
   @override
@@ -25,10 +29,23 @@ class _WallChooserState extends State<WallChooser> {
         title: Text('Color'),
       ),
       body: Center(
-        child: Container(
-          width: 500,
-          height: 500,
-          child: displayCanvas(),
+        child: ListView(
+          physics:
+              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          children: [
+            Container(
+              child: Column(
+                children: [
+                  displayCanvas(),
+                  Text(this.widget.mapEntry.key),
+                  RaisedButton(
+                    onPressed: () => writeImageToTemp(context),
+                    child: Text('Set'),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -41,22 +58,30 @@ class _WallChooserState extends State<WallChooser> {
       return Text('');
   }
 
-  void loadImage() async {
-    ui.PictureRecorder recorder = ui.PictureRecorder();
-    Canvas c = new Canvas(recorder);
-    c.drawColor(Colors.red, BlendMode.src); // etc
-    ui.Picture p = recorder.endRecording();
-    ui.Image image = await p.toImage(500, 500);
-    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+  void loadImage(Color color) async {
+    if (color != null) {
+      ui.PictureRecorder recorder = ui.PictureRecorder();
+      Canvas c = new Canvas(recorder);
+      c.drawColor(color, BlendMode.src); // etc
+      ui.Picture p = recorder.endRecording();
+      ui.Image image = await p.toImage(500, 500);
+      ByteData byteData =
+          await image.toByteData(format: ui.ImageByteFormat.png);
 
-    setState(() {
-      pngBytes = byteData.buffer.asUint8List();
-    });
+      setState(() {
+        pngBytes = byteData.buffer.asUint8List();
+      });
+    }
   }
 
-  void writeImageToTemp() async {
+  void writeImageToTemp(BuildContext context) async {
     Directory tempDir = await getTemporaryDirectory();
     File file = File('${tempDir.path}//temp.png');
-    file.writeAsBytes(pngBytes);
+    file.writeAsBytes(pngBytes).then((err) {
+      SnackBar snackBar = SnackBar(
+        content: Text('Done: ${file.path}'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    });
   }
 }
