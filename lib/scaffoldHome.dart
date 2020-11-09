@@ -17,7 +17,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
   final TabItemCustom tabItemCustom = TabItemCustom();
 
   final bottomItems = {
-    'Home': Icons.home_rounded,
+    'Presents': Icons.home_rounded,
     'Color Picker': Icons.colorize_rounded,
   };
 
