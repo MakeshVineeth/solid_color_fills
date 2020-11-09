@@ -1,7 +1,10 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:com.mvp.solid_color_fill_walls/fixedValues.dart';
+import 'package:com.mvp.solid_color_fill_walls/UI/material_picker_widget.dart';
+import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
+import 'package:com.mvp.solid_color_fill_walls/helperFunctions.dart';
 
 class CustomColorPicker extends StatefulWidget {
   @override
@@ -13,6 +16,7 @@ class _CustomColorPickerState extends State<CustomColorPicker> {
   Color currentColorAdv = Color(0xff443a49);
   Color selectedColor;
   final FixedValues fixedValues = FixedValues();
+  final HelperFunctions helperFunctions = HelperFunctions();
 
   void changeColor(Color color) {
     setState(() => pickerColorAdv = color);
@@ -31,70 +35,19 @@ class _CustomColorPickerState extends State<CustomColorPicker> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Material Colors with Shades',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
-                    fontSize: 15,
-                  ),
+                  'Please choose a Shade.',
+                  style: buttonText(),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                MaterialColorPicker(
-                    shrinkWrap: true,
-                    allowShades: true,
-                    physics: BouncingScrollPhysics(
-                        parent: AlwaysScrollableScrollPhysics()),
-                    onColorChange: (Color color) {},
-                    onMainColorChange: (Color color) => changeCurColor(color),
-                    selectedColor: Colors.red),
-                SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  onPressed: () => showAdv(context),
-                  child: Text('Advanced Color Picker'),
+                MaterialPickerWidget(
+                  function: changeCurColor,
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('Selected:'),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: fixedValues.fixedCardRadius),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: IgnorePointer(
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundColor: selectedColor,
-                                  radius: 15,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(selectedColor != null
-                                    ? selectedColor
-                                        .toString()
-                                        .split('0x')[1]
-                                        .split(')')[0]
-                                    : 'Not Selected'),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                bottomWidget(),
               ],
             ),
           ),
@@ -104,7 +57,9 @@ class _CustomColorPickerState extends State<CustomColorPicker> {
   }
 
   void changeCurColor(Color color) {
-    print(color);
+    setState(() {
+      selectedColor = color;
+    });
   }
 
   void showAdv(BuildContext context) {
@@ -132,6 +87,68 @@ class _CustomColorPickerState extends State<CustomColorPicker> {
               });
               Navigator.of(context).pop();
             },
+          ),
+        ],
+      ),
+    );
+  }
+
+  TextStyle buttonText() {
+    return TextStyle(
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.5,
+      fontSize: 15,
+    );
+  }
+
+  String neatColorStr() {
+    return selectedColor != null
+        ? selectedColor.toString().split('0x')[1].split(')')[0]
+        : 'Not Selected';
+  }
+
+  Widget bottomWidget() {
+    return Container(
+      width: MediaQuery.of(context).size.width / 2,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ElevatedButton(
+            onPressed: () => showAdv(context),
+            child: Text('Advanced Color Picker'),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: fixedValues.fixedCardRadius),
+            child: InkWell(
+              borderRadius: fixedValues.fixedCardRadius,
+              onTap: () => helperFunctions.openWallChooser(
+                context: context,
+                color: selectedColor,
+                colorTitle: neatColorStr(),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: IgnorePointer(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CircleColor(
+                        circleSize: 35,
+                        color: selectedColor ?? Colors.transparent,
+                      ),
+                      Text(
+                        neatColorStr(),
+                        style: buttonText(),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),

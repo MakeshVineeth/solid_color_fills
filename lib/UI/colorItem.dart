@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:com.mvp.solid_color_fill_walls/UI/wall_chooser.dart';
 import 'package:com.mvp.solid_color_fill_walls/fixedValues.dart';
+import 'package:com.mvp.solid_color_fill_walls/helperFunctions.dart';
 
 class ColorItem extends StatelessWidget {
   final MapEntry mapEntry;
 
   ColorItem({@required this.mapEntry});
   final FixedValues fixedValues = FixedValues();
+  final HelperFunctions helperFunctions = HelperFunctions();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,11 @@ class ColorItem extends StatelessWidget {
       child: InkWell(
         borderRadius: fixedValues.fixedCardRadius,
         // temp
-        onTap: () => openWallChooser(context),
+        onTap: () => helperFunctions.openWallChooser(
+          context: context,
+          colorTitle: mapEntry.key,
+          color: mapEntry.value,
+        ),
         child: IgnorePointer(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -43,16 +48,5 @@ class ColorItem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void openWallChooser(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => WallChooser(
-                  mapEntry: mapEntry,
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                )));
   }
 }

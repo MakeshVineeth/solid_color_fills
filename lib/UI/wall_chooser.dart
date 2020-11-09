@@ -7,12 +7,16 @@ import 'package:wallpaper_manager/wallpaper_manager.dart';
 import 'package:com.mvp.solid_color_fill_walls/fixedValues.dart';
 
 class WallChooser extends StatefulWidget {
-  final MapEntry mapEntry;
+  final String colorTitle;
+  final Color color;
   final double width;
   final double height;
 
   const WallChooser(
-      {@required this.mapEntry, @required this.width, @required this.height});
+      {@required this.colorTitle,
+      @required this.color,
+      @required this.width,
+      @required this.height});
 
   @override
   _WallChooserState createState() => _WallChooserState();
@@ -29,7 +33,7 @@ class _WallChooserState extends State<WallChooser> {
   @override
   void initState() {
     super.initState();
-    loadImage(this.widget.mapEntry.value);
+    loadImage(widget.color);
   }
 
   Map buttons = {
@@ -104,11 +108,11 @@ class _WallChooserState extends State<WallChooser> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Text(
-                                    '${widget.mapEntry.key}',
+                                    '${widget.colorTitle}',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w900,
                                       fontSize: 15,
-                                      color: widget.mapEntry.value,
+                                      color: widget.color,
                                     ),
                                   ),
                                 ),
