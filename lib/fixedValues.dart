@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 class FixedValues {
   final appTitle = 'Solid Color Fill';
+  final BorderRadius fixedCardRadius = BorderRadius.circular(20.0);
+  final colorTitleStyle = TextStyle(
+    fontWeight: FontWeight.w600,
+  );
 
   ThemeData getTheme(Brightness brightness) {
     Color fg = Colors.black;
