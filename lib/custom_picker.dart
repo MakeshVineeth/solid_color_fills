@@ -41,11 +41,11 @@ class _CustomColorPickerState extends State<CustomColorPicker> {
                 SizedBox(
                   height: 10,
                 ),
-                MaterialPickerWidget(
-                  function: changeCurColor,
-                ),
-                SizedBox(
-                  height: 10,
+                Container(
+                  height: constraints.maxHeight / 1.5,
+                  child: MaterialPickerWidget(
+                    function: changeCurColor,
+                  ),
                 ),
                 bottomWidget(),
               ],
@@ -65,30 +65,34 @@ class _CustomColorPickerState extends State<CustomColorPicker> {
   void showAdv(BuildContext context) {
     showDialog(
       context: context,
-      child: AlertDialog(
-        title: const Text('Pick a color!'),
-        content: SingleChildScrollView(
-          physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          child: ColorPicker(
-            pickerColor: pickerColorAdv,
-            onColorChanged: changeColor,
-            showLabel: true,
-            pickerAreaHeightPercent: 0.8,
+      barrierColor: Colors.white,
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+        child: AlertDialog(
+          title: const Text('Pick a color!'),
+          content: SingleChildScrollView(
+            physics:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            child: ColorPicker(
+              pickerColor: pickerColorAdv,
+              onColorChanged: changeColor,
+              showLabel: true,
+              pickerAreaHeightPercent: 0.8,
+            ),
           ),
+          actions: [
+            FlatButton(
+              child: const Text('Choose'),
+              onPressed: () {
+                setState(() {
+                  currentColorAdv = pickerColorAdv;
+                  selectedColor = pickerColorAdv;
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
         ),
-        actions: [
-          FlatButton(
-            child: const Text('Choose'),
-            onPressed: () {
-              setState(() {
-                currentColorAdv = pickerColorAdv;
-                selectedColor = pickerColorAdv;
-              });
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
       ),
     );
   }
@@ -109,7 +113,7 @@ class _CustomColorPickerState extends State<CustomColorPicker> {
 
   Widget bottomWidget() {
     return Container(
-      width: MediaQuery.of(context).size.width / 2,
+      width: MediaQuery.of(context).size.width / 1.5,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -121,24 +125,42 @@ class _CustomColorPickerState extends State<CustomColorPicker> {
             height: 10,
           ),
           Card(
+            elevation: Theme.of(context)
+                .elevatedButtonTheme
+                .style
+                .elevation
+                .resolve(null),
             shape: RoundedRectangleBorder(
                 borderRadius: fixedValues.fixedCardRadius),
             child: InkWell(
               borderRadius: fixedValues.fixedCardRadius,
-              onTap: () => helperFunctions.openWallChooser(
-                context: context,
-                color: selectedColor,
-                colorTitle: neatColorStr(),
-              ),
+              onTap: () {
+                if (selectedColor != null)
+                  helperFunctions.openWallChooser(
+                    context: context,
+                    color: selectedColor,
+                    colorTitle: neatColorStr(),
+                  );
+              },
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: IgnorePointer(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Text(
+                        'Color:',
+                        style: buttonText(),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
                       CircleColor(
                         circleSize: 35,
                         color: selectedColor ?? Colors.transparent,
+                      ),
+                      SizedBox(
+                        width: 10,
                       ),
                       Text(
                         neatColorStr(),

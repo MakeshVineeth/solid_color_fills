@@ -43,10 +43,7 @@ class FixedValues {
           style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(bg),
         foregroundColor: MaterialStateProperty.all(fg),
-        padding: MaterialStateProperty.all(EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 15,
-        )),
+        padding: MaterialStateProperty.all(EdgeInsets.all(20)),
         shape: MaterialStateProperty.all(RoundedRectangleBorder(
           borderRadius: fixedCardRadius,
         )),

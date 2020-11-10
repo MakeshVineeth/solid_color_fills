@@ -32,9 +32,9 @@ dependencies:
   flutter_statusbarcolor: ^0.2.3
   path_provider: ^1.6.24
   wallpaper_manager: ^1.0.10
-  riverpod: ^0.12.1
   flutter_colorpicker: ^0.3.4
   flutter_material_color_picker: ^1.0.5
+  flutter_riverpod: ^0.12.1
 
 dev_dependencies:
   flutter_test:
