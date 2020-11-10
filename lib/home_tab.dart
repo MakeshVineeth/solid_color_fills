@@ -19,6 +19,9 @@ class _HomeTabState extends State<HomeTab> {
     'Blue': Colors.blue,
     'Neumorphic White': Color(0xffe0e5ec),
     'Neumorphic Black': Color(0xff26282B),
+    'YouTube': Color(0xffcd201f),
+    'WhatsApp': Color(0xff25D366),
+    'Twitter': Color(0xff55acee),
   };
 
   final columnCount = 2;

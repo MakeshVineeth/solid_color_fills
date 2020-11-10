@@ -63,12 +63,15 @@ class _CustomColorPickerState extends State<CustomColorPicker> {
   }
 
   void showAdv(BuildContext context) {
+    double blurRad = 15;
     showDialog(
       context: context,
-      barrierColor: Colors.white,
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+        filter: ImageFilter.blur(sigmaX: blurRad, sigmaY: blurRad),
         child: AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
+          buttonPadding: EdgeInsets.all(15),
           title: const Text('Pick a color!'),
           content: SingleChildScrollView(
             physics:
