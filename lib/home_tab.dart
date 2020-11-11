@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:com.mvp.solid_color_fill_walls/UI/colorItem.dart';
+import 'package:solid_color_fill/UI/colorItem.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class HomeTab extends StatefulWidget {

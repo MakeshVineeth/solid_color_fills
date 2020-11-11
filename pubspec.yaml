@@ -1,4 +1,4 @@
-name: com.mvp.solid_color_fill_walls
+name: solid_color_fill
 description: A Wallpaper that lets you set any solid color as wallpaper.
 
 # The following line prevents the package from being accidentally published to
@@ -42,10 +42,10 @@ dev_dependencies:
 
 flutter_rename_app:
   application_name: Solid Color Fill
-  dart_package_name: com.mvp.solid_color_fill_walls
-  application_id: com.mvp.solid_color_fill_walls
-  bundle_id: com.mvp.solid_color_fill_walls
-  android_package_name: com.mvp.solid_color_fill_walls
+  dart_package_name: solid_color_fill
+  application_id: com.mvp.solid_color_fill
+  bundle_id: com.mvp.solid_color_fill
+  android_package_name: com.mvp.solid_color_fill
 
 flutter_icons:
   android: "launcher_icon"

@@ -1,10 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:com.mvp.solid_color_fill_walls/fixedValues.dart';
-import 'package:com.mvp.solid_color_fill_walls/UI/material_picker_widget.dart';
+import 'package:solid_color_fill/fixedValues.dart';
+import 'package:solid_color_fill/UI/material_picker_widget.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
-import 'package:com.mvp.solid_color_fill_walls/helperFunctions.dart';
+import 'package:solid_color_fill/helperFunctions.dart';
 
 class CustomColorPicker extends StatefulWidget {
   @override

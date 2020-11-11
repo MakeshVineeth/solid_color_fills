@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:wallpaper_manager/wallpaper_manager.dart';
-import 'package:com.mvp.solid_color_fill_walls/fixedValues.dart';
+import 'package:solid_color_fill/fixedValues.dart';
 
 class WallChooser extends StatefulWidget {
   final String colorTitle;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:com.mvp.solid_color_fill_walls/fixedValues.dart';
-import 'package:com.mvp.solid_color_fill_walls/helperFunctions.dart';
+import 'package:solid_color_fill/fixedValues.dart';
+import 'package:solid_color_fill/helperFunctions.dart';
 
 class ColorItem extends StatelessWidget {
   final MapEntry mapEntry;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:com.mvp.solid_color_fill_walls/UI/wall_chooser.dart';
+import 'package:solid_color_fill/UI/wall_chooser.dart';
 
 class HelperFunctions {
   void openWallChooser({BuildContext context, Color color, String colorTitle}) {
