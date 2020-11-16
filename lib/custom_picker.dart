@@ -161,6 +161,7 @@ class _CustomColorPickerState extends State<CustomColorPicker> {
                       CircleColor(
                         circleSize: 35,
                         color: selectedColor ?? Colors.transparent,
+                        elevation: 2,
                       ),
                       SizedBox(
                         width: 10,

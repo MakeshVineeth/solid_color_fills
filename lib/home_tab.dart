@@ -36,7 +36,7 @@ class _HomeTabState extends State<HomeTab> {
           crossAxisCount: columnCount,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
-          childAspectRatio: 0.7,
+          childAspectRatio: 0.65,
         ),
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         itemBuilder: (context, index) => AnimationConfiguration.staggeredGrid(
