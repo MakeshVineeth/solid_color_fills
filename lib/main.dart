@@ -1,11 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:solid_color_fill/fixedValues.dart';
 import 'package:solid_color_fill/scaffoldHome.dart';
 
 void main() {
-  runApp(MaterialHome());
+  runApp(ProviderScope(child: MaterialHome()));
   GestureBinding.instance.resamplingEnabled = true;
 }
 

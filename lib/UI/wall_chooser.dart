@@ -1,49 +1,29 @@
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
+import 'package:flutter_riverpod/all.dart';
 import 'dart:typed_data';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:solid_color_fill/UI/database/commons.dart';
+import 'package:solid_color_fill/UI/wall_image.dart';
 import 'package:wallpaper_manager/wallpaper_manager.dart';
 import 'package:solid_color_fill/fixedValues.dart';
 
-class WallChooser extends StatefulWidget {
-  final String colorTitle;
-  final Color color;
-  final double width;
-  final double height;
-
-  const WallChooser(
-      {@required this.colorTitle,
-      @required this.color,
-      @required this.width,
-      @required this.height});
-
-  @override
-  _WallChooserState createState() => _WallChooserState();
-}
-
-class _WallChooserState extends State<WallChooser> {
-  Uint8List pngBytes;
+class WallChooser extends ConsumerWidget {
   final SnackBar snackBarSuccess =
       SnackBar(content: Text('Yay! Wallpaper Successfully Set!'));
   final SnackBar snackBarError =
       SnackBar(content: Text('Oops, An Error has Occurred!'));
   final FixedValues fixedValues = FixedValues();
 
-  @override
-  void initState() {
-    super.initState();
-    loadImage(widget.color);
-  }
-
-  Map buttons = {
+  final Map buttons = {
     'Set As Home Screen': WallpaperManager.HOME_SCREEN,
     'Set As Lock Screen': WallpaperManager.LOCK_SCREEN,
     'Set As Both': WallpaperManager.BOTH_SCREENS,
   };
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final object = watch(commonProvider.state);
     return Scaffold(
       appBar: AppBar(
         title: Text('Wallpaper Confirmation'),
@@ -75,7 +55,7 @@ class _WallChooserState extends State<WallChooser> {
                               height: constraints.maxHeight / 1.5,
                               child: ClipRRect(
                                   borderRadius: fixedValues.fixedCardRadius,
-                                  child: displayCanvas()),
+                                  child: WallImage()),
                             ),
                           ),
                         ),
@@ -108,11 +88,11 @@ class _WallChooserState extends State<WallChooser> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Text(
-                                    '${widget.colorTitle}',
+                                    object.colorTitle,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w900,
                                       fontSize: 15,
-                                      color: widget.color,
+                                      color: object.color,
                                     ),
                                   ),
                                 ),
@@ -161,38 +141,11 @@ class _WallChooserState extends State<WallChooser> {
     );
   }
 
-  Widget displayCanvas() {
-    if (pngBytes != null)
-      return Image.memory(pngBytes);
-    else
-      return Text('Loading...');
-  }
-
-  void loadImage(Color color) async {
-    if (color != null) {
-      ui.PictureRecorder recorder = ui.PictureRecorder();
-      Canvas c = new Canvas(recorder);
-      c.drawColor(color, BlendMode.src); // etc
-      ui.Picture p = recorder.endRecording();
-
-      int width = widget.width.round();
-      int height = widget.height.round();
-      ui.Image image = await p.toImage(width, height);
-      ByteData byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
-
-      setState(() {
-        pngBytes = byteData.buffer
-            .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
-      });
-    }
-  }
-
   void setImage(BuildContext context, int location) async {
     String tempPath = (await getTemporaryDirectory()).path;
     String filePath = tempPath + '/temp.png';
     File file = File(filePath);
-
+    Uint8List pngBytes;
     if (pngBytes != null)
       file.writeAsBytes(pngBytes).then((value) async {
         String result =
