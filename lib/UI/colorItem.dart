@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/all.dart';
-import 'package:solid_color_fill/UI/wall_chooser.dart';
 import 'package:solid_color_fill/fixedValues.dart';
 import 'package:solid_color_fill/UI/database/commons.dart';
+import 'package:solid_color_fill/UI/database/helperFunctions.dart';
 
 class ColorItem extends StatelessWidget {
   final MapEntry mapEntry;
@@ -24,8 +24,7 @@ class ColorItem extends StatelessWidget {
                 colorValue: mapEntry.value,
                 colorString: mapEntry.key,
               );
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => WallChooser()));
+          openWallChooser(context);
         },
         child: IgnorePointer(
           child: Column(

@@ -20,7 +20,7 @@ class ColorProvider extends StateNotifier<ColorDetails> {
     colorValue = colorValue ?? _initialColor;
 
     if (colorString != null)
-      colorString = colorString.split('0x').length > 0
+      colorString = colorString.split('0x').length == 2
           ? convertColorStr(colorString)
           : colorString;
     else
@@ -29,8 +29,7 @@ class ColorProvider extends StateNotifier<ColorDetails> {
     state = ColorDetails(color: colorValue, colorTitle: colorString);
   }
 
-  String convertColorStr(String title) =>
-      title.toString().split('0x')[1].split(')')[0];
+  String convertColorStr(String title) => title.split('0x')[1].split(')')[0];
 }
 
 class ColorDetails {
@@ -38,4 +37,15 @@ class ColorDetails {
   final Color color;
 
   ColorDetails({@required this.colorTitle, @required this.color});
+}
+
+final screenSize = StateProvider<ScreenSize>((ref) {
+  return ScreenSize(2000, 1000);
+});
+
+class ScreenSize {
+  double width;
+  double height;
+
+  ScreenSize(this.width, this.height);
 }

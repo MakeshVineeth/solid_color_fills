@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
-import 'dart:typed_data';
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
 import 'package:solid_color_fill/UI/database/commons.dart';
+import 'package:solid_color_fill/UI/database/main_image_functions.dart';
 import 'package:solid_color_fill/UI/wall_image.dart';
 import 'package:wallpaper_manager/wallpaper_manager.dart';
 import 'package:solid_color_fill/fixedValues.dart';
@@ -23,7 +21,7 @@ class WallChooser extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final object = watch(commonProvider.state);
+    final object = context.read(commonProvider.state);
     return Scaffold(
       appBar: AppBar(
         title: Text('Wallpaper Confirmation'),
@@ -141,23 +139,12 @@ class WallChooser extends ConsumerWidget {
     );
   }
 
-  void setImage(BuildContext context, int location) async {
-    String tempPath = (await getTemporaryDirectory()).path;
-    String filePath = tempPath + '/temp.png';
-    File file = File(filePath);
-    Uint8List pngBytes;
-    if (pngBytes != null)
-      file.writeAsBytes(pngBytes).then((value) async {
-        String result =
-            await WallpaperManager.setWallpaperFromFile(filePath, location);
-        if (result.contains('set'))
-          ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
-        else
-          ScaffoldMessenger.of(context).showSnackBar(snackBarError);
-
-        file.delete();
-      }).catchError((err) {
+  void setImage(BuildContext context, int location) {
+    context.read(imageSetter).state.setNow(location).then((bool val) {
+      if (val)
+        ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
+      else
         ScaffoldMessenger.of(context).showSnackBar(snackBarError);
-      });
+    });
   }
 }
