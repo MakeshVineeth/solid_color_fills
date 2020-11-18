@@ -7,6 +7,27 @@ class FixedValues {
     fontWeight: FontWeight.w600,
   );
 
+  // List of Colors
+  final Map colorsList = {
+    'Amber': Colors.amber,
+    'OnePlus Red': Color(0xffeb0029),
+    'Yellow': Colors.yellow,
+    'Red': Colors.red,
+    'Green': Colors.green,
+    'Black': Colors.black,
+    'Blue': Colors.blue,
+    'Neumorphic White': Color(0xffe0e5ec),
+    'Neumorphic Black': Color(0xff26282B),
+    'YouTube': Color(0xffcd201f),
+    'WhatsApp': Color(0xff25D366),
+    'Twitter': Color(0xff55acee),
+    'Reddit': Color(0xffff5700),
+    'Facebook': Color(0xff3b5999),
+  };
+
+  // Height for color card in main tab.
+  final double heightCard = 0.65;
+
   ThemeData getTheme(Brightness brightness) {
     Color fg = Colors.black;
     Color bg = Colors.white;

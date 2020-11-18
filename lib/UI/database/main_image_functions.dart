@@ -45,17 +45,18 @@ class SetImage {
     String filePath = tempPath + '/temp.png';
     File file = File(filePath);
 
-    if (pngBytes != null)
-      file.writeAsBytes(pngBytes).then((value) async {
-        String result =
-            await WallpaperManager.setWallpaperFromFile(filePath, location);
-        if (result.contains('set'))
-          isDone = true;
-        else
-          isDone = false;
+    if (pngBytes != null) {
+      await file.writeAsBytes(pngBytes);
+      String result =
+          await WallpaperManager.setWallpaperFromFile(filePath, location);
 
-        file.delete();
-      }).catchError((err) {});
+      if (result.contains('set'))
+        isDone = true;
+      else
+        isDone = false;
+
+      file.delete();
+    }
 
     return isDone;
   }

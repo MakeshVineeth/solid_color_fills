@@ -117,9 +117,11 @@ class WallChooser extends ConsumerWidget {
                                             buttons.entries
                                                 .elementAt(index)
                                                 .value),
-                                        child: Text(buttons.entries
-                                            .elementAt(index)
-                                            .key),
+                                        child: IgnorePointer(
+                                          child: Text(buttons.entries
+                                              .elementAt(index)
+                                              .key),
+                                        ),
                                       ),
                                       SizedBox(
                                         height: 5,
@@ -139,12 +141,11 @@ class WallChooser extends ConsumerWidget {
     );
   }
 
-  void setImage(BuildContext context, int location) {
-    context.read(imageSetter).state.setNow(location).then((bool val) {
-      if (val)
-        ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
-      else
-        ScaffoldMessenger.of(context).showSnackBar(snackBarError);
-    });
+  void setImage(BuildContext context, int location) async {
+    bool val = await context.read(imageSetter).state.setNow(location);
+    if (val)
+      ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
+    else
+      ScaffoldMessenger.of(context).showSnackBar(snackBarError);
   }
 }

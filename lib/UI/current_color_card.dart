@@ -19,9 +19,9 @@ class CurrentColorCard extends ConsumerWidget {
       child: InkWell(
         borderRadius: fixedValues.fixedCardRadius,
         onTap: () => openWallChooser(context),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: IgnorePointer(
+        child: IgnorePointer(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

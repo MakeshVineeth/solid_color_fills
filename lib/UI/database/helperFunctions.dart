@@ -8,6 +8,8 @@ void openWallChooser(BuildContext context) {
   Size size = MediaQuery.of(context).size;
   context.read(screenSize).state = ScreenSize(size.width, size.height);
 
-  Navigator.push(
-      context, MaterialPageRoute(builder: (context) => WallChooser()));
+  final color = context.read(commonProvider.state).color;
+  if (color != null && color != Colors.transparent)
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => WallChooser()));
 }
