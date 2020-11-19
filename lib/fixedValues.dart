@@ -23,6 +23,8 @@ class FixedValues {
     'Twitter': Color(0xff55acee),
     'Reddit': Color(0xffff5700),
     'Facebook': Color(0xff3b5999),
+    'HackerNews': Color(0xffff6600),
+    'Quora': Color(0xffb92b27),
   };
 
   // Height for color card in main tab.
@@ -69,6 +71,7 @@ class FixedValues {
           borderRadius: fixedCardRadius,
         )),
         elevation: MaterialStateProperty.all(3),
+        overlayColor: MaterialStateProperty.all(Colors.grey[100]),
       )),
     );
     return themeData;

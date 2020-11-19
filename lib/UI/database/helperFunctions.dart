@@ -6,7 +6,10 @@ import 'package:solid_color_fill/UI/wall_chooser.dart';
 
 void openWallChooser(BuildContext context) {
   Size size = MediaQuery.of(context).size;
-  context.read(screenSize).state = ScreenSize(size.width, size.height);
+  ScreenSize newSize = ScreenSize(size.width.round(), size.height.round());
+  final currentState = context.read(screenSize);
+
+  if (currentState.state.width != newSize.width) currentState.state = newSize;
 
   final color = context.read(commonProvider.state).color;
   if (color != null && color != Colors.transparent)

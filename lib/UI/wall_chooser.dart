@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:solid_color_fill/UI/database/commons.dart';
 import 'package:solid_color_fill/UI/database/main_image_functions.dart';
@@ -147,5 +148,6 @@ class WallChooser extends ConsumerWidget {
       ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
     else
       ScaffoldMessenger.of(context).showSnackBar(snackBarError);
+    HapticFeedback.vibrate();
   }
 }

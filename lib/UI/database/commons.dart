@@ -44,8 +44,8 @@ final screenSize = StateProvider<ScreenSize>((ref) {
 });
 
 class ScreenSize {
-  double width;
-  double height;
+  int width;
+  int height;
 
   ScreenSize(this.width, this.height);
 }

@@ -18,8 +18,8 @@ final imageProvision = FutureProvider<Uint8List>((ref) async {
     c.drawColor(color, BlendMode.src); // etc
     ui.Picture p = recorder.endRecording();
 
-    int width = screen.width.round(); //context.size.width.round();
-    int height = screen.height.round(); // context.size.height.round();
+    int width = screen.width; //context.size.width.round();
+    int height = screen.height; // context.size.height.round();
     ui.Image image = await p.toImage(width, height);
     ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 
