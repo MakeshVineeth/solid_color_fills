@@ -145,7 +145,7 @@ class WallChooser extends ConsumerWidget {
           builder: (context) => AlertMsg(
               title: 'MIUI Detected',
               msg:
-                  'MIUI Version: $miuiCheck. Due to MIUI Restrictions, Lockscreen Wallpaper cannot be changed by third-party apps, Please try \'Set as Home Screen\' instead.'),
+                  'Due to MIUI Restrictions, Lockscreen Wallpaper cannot be changed by third-party apps, Please try \'Set as Home Screen\' instead.'),
         );
         return;
       }
