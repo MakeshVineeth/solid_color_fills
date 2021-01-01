@@ -23,7 +23,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  adaptive_theme: ^1.1.0
   animations: ^1.1.2
   convex_bottom_bar: ^2.6.0
   flutter_animator: ^2.1.0
@@ -35,6 +34,7 @@ dependencies:
   flutter_staggered_animations: ^0.1.2
   flutter_statusbarcolor: ^0.2.3
   path_provider: ^1.6.24
+  theme_provider: ^0.4.0+1
   wallpaper_manager: ^1.0.10
 
 dev_dependencies:

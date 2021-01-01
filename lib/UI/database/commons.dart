@@ -3,9 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final commonProvider = StateNotifierProvider<ColorProvider>((ref) {
-  return ColorProvider();
-});
+final commonProvider =
+    StateNotifierProvider<ColorProvider>((ref) => ColorProvider());
 
 class ColorProvider extends StateNotifier<ColorDetails> {
   static final _initialColor = Colors.transparent;
@@ -36,16 +35,14 @@ class ColorDetails {
   final String colorTitle;
   final Color color;
 
-  ColorDetails({@required this.colorTitle, @required this.color});
+  const ColorDetails({@required this.colorTitle, @required this.color});
 }
 
-final screenSize = StateProvider<ScreenSize>((ref) {
-  return ScreenSize(2000, 1000);
-});
+final screenSize = StateProvider<ScreenSize>((ref) => ScreenSize(2000, 1000));
 
 class ScreenSize {
-  int width;
-  int height;
+  final int width;
+  final int height;
 
-  ScreenSize(this.width, this.height);
+  const ScreenSize(this.width, this.height);
 }

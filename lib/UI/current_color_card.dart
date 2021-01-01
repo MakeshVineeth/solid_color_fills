@@ -12,9 +12,9 @@ class CurrentColorCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final object = watch(commonProvider.state);
+
     return Card(
-      elevation:
-          Theme.of(context).elevatedButtonTheme.style.elevation.resolve(null),
+      elevation: Theme.of(context).cardTheme.elevation,
       shape: RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
       child: InkWell(
         borderRadius: fixedValues.fixedCardRadius,
@@ -29,17 +29,13 @@ class CurrentColorCard extends ConsumerWidget {
                   'Color:',
                   style: buttonText(),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                SizedBox(width: 10),
                 CircleColor(
                   circleSize: 35,
                   color: object.color,
                   elevation: 2,
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                SizedBox(width: 10),
                 Text(
                   object.colorTitle,
                   style: buttonText(),

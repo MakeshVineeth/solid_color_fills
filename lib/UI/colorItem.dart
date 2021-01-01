@@ -18,14 +18,7 @@ class ColorItem extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
       child: InkWell(
         borderRadius: fixedValues.fixedCardRadius,
-        // temp
-        onTap: () {
-          context.read(commonProvider).changeColors(
-                colorValue: mapEntry.value,
-                colorString: mapEntry.key,
-              );
-          openWallChooser(context);
-        },
+        onTap: () => changeColor(context),
         child: IgnorePointer(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -51,5 +44,13 @@ class ColorItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void changeColor(BuildContext context) {
+    context.read(commonProvider).changeColors(
+          colorValue: mapEntry.value,
+          colorString: mapEntry.key,
+        );
+    openWallChooser(context);
   }
 }

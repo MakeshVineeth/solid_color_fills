@@ -24,9 +24,7 @@ class WallChooser extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final object = context.read(commonProvider.state);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Wallpaper Confirmation'),
-      ),
+      appBar: AppBar(title: Text('Wallpaper Confirmation')),
       body: LayoutBuilder(
         builder: (context, constraints) => ListView(
           physics:
@@ -41,27 +39,8 @@ class WallChooser extends ConsumerWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: fixedValues.fixedCardRadius),
-                        elevation: 3,
-                        child: InkWell(
-                          onTap: () {},
-                          borderRadius: fixedValues.fixedCardRadius,
-                          child: IgnorePointer(
-                            child: Container(
-                              padding: EdgeInsets.all(8),
-                              height: constraints.maxHeight / 1.5,
-                              child: ClipRRect(
-                                  borderRadius: fixedValues.fixedCardRadius,
-                                  child: WallImage()),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      colorWall(constraints: constraints),
+                      SizedBox(height: 5),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -73,9 +52,7 @@ class WallChooser extends ConsumerWidget {
                               letterSpacing: 0.5,
                             ),
                           ),
-                          SizedBox(
-                            width: 3,
-                          ),
+                          SizedBox(width: 3),
                           Card(
                             elevation: 2,
                             shape: RoundedRectangleBorder(
@@ -100,9 +77,7 @@ class WallChooser extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      SizedBox(height: 5),
                       Container(
                         width: constraints.maxWidth / 2,
                         child: Column(
@@ -124,9 +99,7 @@ class WallChooser extends ConsumerWidget {
                                               .key),
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
+                                      SizedBox(height: 5),
                                     ],
                                   )),
                         ),
@@ -137,6 +110,27 @@ class WallChooser extends ConsumerWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget colorWall({@required BoxConstraints constraints}) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
+      elevation: 3,
+      child: InkWell(
+        onTap: () {},
+        borderRadius: fixedValues.fixedCardRadius,
+        child: IgnorePointer(
+          child: Container(
+            padding: EdgeInsets.all(8),
+            height: constraints.maxHeight / 1.5,
+            child: ClipRRect(
+              borderRadius: fixedValues.fixedCardRadius,
+              child: WallImage(),
+            ),
+          ),
         ),
       ),
     );

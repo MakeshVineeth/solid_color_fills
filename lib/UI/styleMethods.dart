@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-TextStyle buttonText() {
-  return TextStyle(
-    fontWeight: FontWeight.w600,
-    letterSpacing: 0.5,
-    fontSize: 15,
-  );
-}
+TextStyle buttonText() => TextStyle(
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.5,
+      fontSize: 15,
+    );

@@ -25,9 +25,7 @@ class CustomColorPicker extends ConsumerWidget {
                   'Please choose a Shade.',
                   style: buttonText(),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 Container(
                   height: constraints.maxHeight / 1.5,
                   child: MaterialPickerWidget(),
@@ -41,29 +39,23 @@ class CustomColorPicker extends ConsumerWidget {
     );
   }
 
-  void showAdv(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AdvancedColorPicker(),
-    );
-  }
+  void showAdv(BuildContext context) => showDialog(
+        context: context,
+        builder: (context) => AdvancedColorPicker(),
+      );
 
-  Widget bottomWidget(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width / 1.5,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ElevatedButton(
-            onPressed: () => showAdv(context),
-            child: Text('Advanced Color Picker'),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          CurrentColorCard(),
-        ],
-      ),
-    );
-  }
+  Widget bottomWidget(BuildContext context) => Container(
+        width: MediaQuery.of(context).size.width / 1.5,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ElevatedButton(
+              onPressed: () => showAdv(context),
+              child: Text('Advanced Color Picker'),
+            ),
+            SizedBox(height: 10),
+            CurrentColorCard(),
+          ],
+        ),
+      );
 }

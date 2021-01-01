@@ -11,6 +11,8 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   final columnCount = 2;
   final FixedValues fixedValues = FixedValues();
+  double spacing = 10.0;
+
   @override
   Widget build(BuildContext context) {
     return AnimationLimiter(
@@ -19,8 +21,8 @@ class _HomeTabState extends State<HomeTab> {
         padding: EdgeInsets.all(15),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: columnCount,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
+          crossAxisSpacing: spacing,
+          mainAxisSpacing: spacing,
           childAspectRatio: fixedValues.heightCard,
         ),
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
@@ -31,8 +33,7 @@ class _HomeTabState extends State<HomeTab> {
           child: ScaleAnimation(
             child: FadeInAnimation(
               child: ColorItem(
-                mapEntry: fixedValues.colorsList.entries.elementAt(index),
-              ),
+                  mapEntry: fixedValues.colorsList.entries.elementAt(index)),
             ),
           ),
         ),

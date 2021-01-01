@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:solid_color_fill/fixedValues.dart';
 import 'package:solid_color_fill/scaffoldHome.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 void main() {
   runApp(ProviderScope(child: MaterialHome()));
@@ -15,18 +15,26 @@ class MaterialHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveTheme(
-      light: fixedValues.getTheme(Brightness.light),
-      dark: fixedValues.getTheme(Brightness.dark),
-      initial: AdaptiveThemeMode.system,
-      builder: (light, dark) => MaterialApp(
-        theme: light,
-        darkTheme: dark,
-        title: fixedValues.appTitle,
-        debugShowCheckedModeBanner: false,
-        routes: {
-          '/': (context) => ScaffoldHome(),
-        },
+    return ThemeProvider(
+      themes: [
+        AppTheme(
+            id: 'light_theme',
+            data: fixedValues.getTheme(Brightness.light),
+            description: 'Light Theme'),
+        AppTheme(
+            id: 'dark_theme',
+            data: fixedValues.getTheme(Brightness.dark),
+            description: 'Dark Theme'),
+      ],
+      child: ThemeConsumer(
+        child: Builder(
+          builder: (themeContext) => MaterialApp(
+            theme: ThemeProvider.themeOf(themeContext).data,
+            title: fixedValues.appTitle,
+            debugShowCheckedModeBanner: false,
+            home: ScaffoldHome(),
+          ),
+        ),
       ),
     );
   }

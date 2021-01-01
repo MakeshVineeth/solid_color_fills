@@ -7,6 +7,7 @@ class MaterialPickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
+
     return MaterialColorPicker(
       circleSize: (deviceHeight <= 600) ? 50 : 60,
       allowShades: true,

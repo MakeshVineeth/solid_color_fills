@@ -15,11 +15,7 @@ class WallImage extends ConsumerWidget {
     return imageObject.when(
       loading: () => Center(child: const CircularProgressIndicator()),
       error: (err, stack) => Center(child: const CircularProgressIndicator()),
-      data: (value) => FadeIn(
-        child: Image.memory(
-          value,
-        ),
-      ),
+      data: (value) => FadeIn(child: Image.memory(value)),
     );
   }
 }
