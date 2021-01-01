@@ -16,7 +16,7 @@ class CurrentColorCard extends ConsumerWidget {
     return Card(
       elevation:
           Theme.of(context).elevatedButtonTheme.style.elevation.resolve(null),
-      shape: RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
+      shape: fixedValues.roundShape,
       child: InkWell(
         borderRadius: fixedValues.fixedCardRadius,
         onTap: () => openWallChooser(context),

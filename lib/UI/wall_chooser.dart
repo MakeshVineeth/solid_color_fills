@@ -43,41 +43,15 @@ class WallChooser extends ConsumerWidget {
                     children: [
                       colorWall(constraints: constraints),
                       SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Color Info:',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              fontSize: 15,
-                              letterSpacing: 0.5,
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          'Color Info: ' + object.colorTitle,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
                           ),
-                          SizedBox(width: 3),
-                          Card(
-                            elevation: 2,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(5),
-                              onTap: () {},
-                              child: IgnorePointer(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Text(
-                                    object.colorTitle,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 15,
-                                      color: object.color,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                       SizedBox(height: 5),
                       Container(
@@ -119,7 +93,7 @@ class WallChooser extends ConsumerWidget {
 
   Widget colorWall({@required BoxConstraints constraints}) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
+      shape: fixedValues.roundShape,
       elevation: 3,
       child: InkWell(
         onTap: () {},

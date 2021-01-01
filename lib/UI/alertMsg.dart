@@ -13,8 +13,7 @@ class AlertMsg extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeWidget(
       child: AlertDialog(
-        shape:
-            RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
+        shape: fixedValues.roundShape,
         buttonPadding: EdgeInsets.all(15),
         title: Text(title),
         content: SingleChildScrollView(

@@ -26,10 +26,14 @@ class CustomColorPicker extends ConsumerWidget {
                   style: buttonText(),
                 ),
                 SizedBox(height: 10),
-                Container(
-                  height: constraints.maxHeight / 1.5,
-                  child: MaterialPickerWidget(),
+                Card(
+                  shape: fixedValues.roundShape,
+                  child: Container(
+                    height: constraints.maxHeight / 1.5,
+                    child: MaterialPickerWidget(),
+                  ),
                 ),
+                SizedBox(height: 20),
                 bottomWidget(context),
               ],
             ),

@@ -19,8 +19,7 @@ class _AdvancedColorPickerState extends State<AdvancedColorPicker> {
   Widget build(BuildContext context) {
     return FadeWidget(
       child: AlertDialog(
-        shape:
-            RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
+        shape: fixedValues.roundShape,
         buttonPadding: EdgeInsets.all(15),
         title: const Text('Pick a color!'),
         content: SingleChildScrollView(

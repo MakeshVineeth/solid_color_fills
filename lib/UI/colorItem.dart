@@ -15,7 +15,7 @@ class ColorItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
+      shape: fixedValues.roundShape,
       child: InkWell(
         borderRadius: fixedValues.fixedCardRadius,
         onTap: () => changeColor(context),

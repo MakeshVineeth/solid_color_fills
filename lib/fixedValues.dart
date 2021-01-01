@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class FixedValues {
   final appTitle = 'Solid Color Fill';
   final BorderRadius fixedCardRadius = BorderRadius.circular(20.0);
+  final roundShape =
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0));
   final colorTitleStyle = TextStyle(fontWeight: FontWeight.w600);
   final logoFile = 'logo.png';
 
