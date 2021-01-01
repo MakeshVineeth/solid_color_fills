@@ -25,7 +25,6 @@ dependencies:
     sdk: flutter
   animations: ^1.1.2
   convex_bottom_bar: ^2.6.0
-  device_info: ^1.0.0
   flutter_animator: ^2.1.0
   flutter_colorpicker: ^0.3.4
   flutter_launcher_icons: ^0.8.1
@@ -36,6 +35,7 @@ dependencies:
   flutter_statusbarcolor: ^0.2.3
   modal_bottom_sheet: ^1.0.0+1
   path_provider: ^1.6.24
+  system_properties: ^0.0.1
   theme_provider: ^0.4.0+1
   transparent_image: ^1.0.0
   wallpaper_manager: ^1.0.10

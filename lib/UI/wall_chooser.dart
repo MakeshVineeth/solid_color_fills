@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/all.dart';
+import 'package:solid_color_fill/UI/alertMsg.dart';
 import 'package:solid_color_fill/UI/database/commons.dart';
 import 'package:solid_color_fill/UI/database/main_image_functions.dart';
 import 'package:solid_color_fill/UI/wall_image.dart';
 import 'package:wallpaper_manager/wallpaper_manager.dart';
 import 'package:solid_color_fill/fixedValues.dart';
+import 'package:system_properties/system_properties.dart';
 
 class WallChooser extends ConsumerWidget {
   final SnackBar snackBarSuccess =
@@ -128,11 +130,31 @@ class WallChooser extends ConsumerWidget {
   }
 
   void setImage(BuildContext context, int location) async {
-    bool val = await context.read(imageSetter).state.setNow(location);
-    if (val)
-      ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
-    else
-      ScaffoldMessenger.of(context).showSnackBar(snackBarError);
-    HapticFeedback.vibrate();
+    try {
+      String miuiCheck = await SystemProperties.getSystemProperties(
+              "ro.miui.ui.version.name") ??
+          null;
+      if (miuiCheck != null &&
+          miuiCheck != '' &&
+          (location == WallpaperManager.BOTH_SCREENS ||
+              location == WallpaperManager.LOCK_SCREEN)) {
+        await showDialog(
+          context: context,
+          builder: (context) => AlertMsg(
+              title: 'MIUI Detected',
+              msg:
+                  'Due to MIUI Restrictions, Lockscreen Wallpaper cannot be changed by third-party apps, Please try \'Set as Home Screen\' instead.'),
+        );
+        return;
+      }
+
+      bool val = await context.read(imageSetter).state.setNow(location);
+      if (val)
+        ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
+      else
+        ScaffoldMessenger.of(context).showSnackBar(snackBarError);
+
+      HapticFeedback.vibrate();
+    } catch (e) {}
   }
 }

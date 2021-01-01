@@ -12,37 +12,33 @@ class AdvancedColorPicker extends StatefulWidget {
 }
 
 class _AdvancedColorPickerState extends State<AdvancedColorPicker> {
-  final blurRad = 15.0;
   final FixedValues fixedValues = FixedValues();
   Color _color = Colors.blue;
 
   @override
   Widget build(BuildContext context) {
-    return BackdropFilter(
-      filter: ImageFilter.blur(sigmaX: blurRad, sigmaY: blurRad),
-      child: FadeWidget(
-        child: AlertDialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
-          buttonPadding: EdgeInsets.all(15),
-          title: const Text('Pick a color!'),
-          content: SingleChildScrollView(
-            physics:
-                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-            child: ColorPicker(
-              pickerColor: _color,
-              onColorChanged: (color) => _color = color,
-              showLabel: true,
-              pickerAreaHeightPercent: 0.8,
-            ),
+    return FadeWidget(
+      child: AlertDialog(
+        shape:
+            RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
+        buttonPadding: EdgeInsets.all(15),
+        title: const Text('Pick a color!'),
+        content: SingleChildScrollView(
+          physics:
+              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          child: ColorPicker(
+            pickerColor: _color,
+            onColorChanged: (color) => _color = color,
+            showLabel: true,
+            pickerAreaHeightPercent: 0.8,
           ),
-          actions: [
-            FlatButton(
-              child: const Text('Choose'),
-              onPressed: () => onTapping(context),
-            ),
-          ],
         ),
+        actions: [
+          FlatButton(
+            child: const Text('Choose'),
+            onPressed: () => onTapping(context),
+          ),
+        ],
       ),
     );
   }

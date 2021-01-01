@@ -62,9 +62,8 @@ class FixedValues {
         backgroundColor: MaterialStateProperty.all(bg),
         foregroundColor: MaterialStateProperty.all(fg),
         padding: MaterialStateProperty.all(EdgeInsets.all(20)),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-          borderRadius: fixedCardRadius,
-        )),
+        shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: fixedCardRadius)),
         elevation: MaterialStateProperty.all(3),
         overlayColor: MaterialStateProperty.all(Colors.grey[100]),
       )),
