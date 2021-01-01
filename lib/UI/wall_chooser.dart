@@ -122,16 +122,7 @@ class WallChooser extends ConsumerWidget {
       child: InkWell(
         onTap: () {},
         borderRadius: fixedValues.fixedCardRadius,
-        child: IgnorePointer(
-          child: Container(
-            padding: EdgeInsets.all(8),
-            height: constraints.maxHeight / 1.5,
-            child: ClipRRect(
-              borderRadius: fixedValues.fixedCardRadius,
-              child: WallImage(),
-            ),
-          ),
-        ),
+        child: IgnorePointer(child: WallImage(constraints: constraints)),
       ),
     );
   }

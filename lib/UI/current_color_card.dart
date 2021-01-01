@@ -14,7 +14,8 @@ class CurrentColorCard extends ConsumerWidget {
     final object = watch(commonProvider.state);
 
     return Card(
-      elevation: Theme.of(context).cardTheme.elevation,
+      elevation:
+          Theme.of(context).elevatedButtonTheme.style.elevation.resolve(null),
       shape: RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
       child: InkWell(
         borderRadius: fixedValues.fixedCardRadius,
