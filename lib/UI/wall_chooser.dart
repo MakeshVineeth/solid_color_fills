@@ -134,8 +134,10 @@ class WallChooser extends ConsumerWidget {
       String miuiCheck = await SystemProperties.getSystemProperties(
               "ro.miui.ui.version.name") ??
           null;
+      miuiCheck = miuiCheck.trim();
+
       if (miuiCheck != null &&
-          miuiCheck != '' &&
+          miuiCheck.isNotEmpty &&
           (location == WallpaperManager.BOTH_SCREENS ||
               location == WallpaperManager.LOCK_SCREEN)) {
         await showDialog(
@@ -143,7 +145,7 @@ class WallChooser extends ConsumerWidget {
           builder: (context) => AlertMsg(
               title: 'MIUI Detected',
               msg:
-                  'Due to MIUI Restrictions, Lockscreen Wallpaper cannot be changed by third-party apps, Please try \'Set as Home Screen\' instead.'),
+                  'MIUI Version: $miuiCheck. Due to MIUI Restrictions, Lockscreen Wallpaper cannot be changed by third-party apps, Please try \'Set as Home Screen\' instead.'),
         );
         return;
       }

@@ -4,8 +4,8 @@ import 'package:solid_color_fill/fixedValues.dart';
 
 class AlertMsg extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
-  final title;
-  final msg;
+  final String title;
+  final String msg;
 
   AlertMsg({@required this.title, @required this.msg});
 
@@ -16,15 +16,20 @@ class AlertMsg extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: fixedValues.fixedCardRadius),
         buttonPadding: EdgeInsets.all(15),
-        title: title,
+        title: Text(title),
         content: SingleChildScrollView(
           physics:
               BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          child: Text(msg),
+          child: Text(
+            msg,
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
         ),
         actions: [
           FlatButton(
-            child: const Text('Ok'),
+            shape: RoundedRectangleBorder(
+                borderRadius: fixedValues.fixedCardRadius),
+            child: const Text('OK'),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ],
