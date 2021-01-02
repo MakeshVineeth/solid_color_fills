@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 class FixedValues {
   final appTitle = 'Solid Color Fill';
+  final appLegalese = '';
+  final appVersion = '1.0.0';
+
   final BorderRadius fixedCardRadius = BorderRadius.circular(20.0);
   final roundShape =
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0));

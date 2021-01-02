@@ -16,6 +16,8 @@ class MaterialHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
+      saveThemesOnChange: true,
+      loadThemeOnInit: true,
       themes: [
         AppTheme(
             id: 'light_theme',
