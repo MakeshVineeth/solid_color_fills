@@ -43,26 +43,42 @@ class FixedValues {
       {@required Brightness brightness, @required BuildContext context}) {
     Color fg = Colors.black;
     Color bg = Colors.white;
+    double elevation = 3.0;
+    bool isDark = brightness == Brightness.dark;
+    Color primaryColor = (isDark) ? Colors.amber : Colors.blue[600];
 
-    if (brightness == Brightness.dark) {
-      bg = Colors.black;
+    if (isDark) {
+      bg = Colors.black54;
       fg = Colors.white;
+      elevation = 10.0;
     }
 
     ThemeData themeData = ThemeData(
       brightness: brightness,
-      scaffoldBackgroundColor: bg,
+      primaryColor: primaryColor,
+      scaffoldBackgroundColor: isDark ? Colors.black : bg,
       applyElevationOverlayColor: brightness == Brightness.dark,
       appBarTheme: AppBarTheme(
-        iconTheme: IconThemeData(color: fg),
+        iconTheme: IconThemeData(color: (isDark) ? primaryColor : fg),
         brightness: brightness,
         centerTitle: true,
         color: bg,
         textTheme: TextTheme(
-            headline6:
-                Theme.of(context).textTheme.headline6.copyWith(color: fg)),
+          headline6: Theme.of(context).textTheme.headline6.copyWith(
+                color: (isDark) ? primaryColor : fg,
+              ),
+        ),
       ),
-      bottomAppBarTheme: BottomAppBarTheme(color: Colors.blue[600]),
+      bottomAppBarTheme: BottomAppBarTheme(
+        color: (isDark) ? Colors.grey[900] : bg,
+        elevation: elevation,
+      ),
+      cardColor: bg,
+      cardTheme: CardTheme(
+        color: bg,
+        elevation: elevation,
+        shape: roundShape,
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(bg),
@@ -70,8 +86,9 @@ class FixedValues {
         padding: MaterialStateProperty.all(EdgeInsets.all(20)),
         shape: MaterialStateProperty.all(
             RoundedRectangleBorder(borderRadius: fixedCardRadius)),
-        elevation: MaterialStateProperty.all(3),
-        overlayColor: MaterialStateProperty.all(Colors.grey[100]),
+        elevation: MaterialStateProperty.all(elevation),
+        overlayColor: MaterialStateProperty.all(
+            (isDark) ? Colors.black12 : Colors.grey[100]),
       )),
     );
     return themeData;

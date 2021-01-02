@@ -48,9 +48,9 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
         children: widgetsList,
       ),
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        color: Theme.of(context).bottomAppBarTheme.color,
-        activeColor: Theme.of(context).bottomAppBarTheme.color,
+        backgroundColor: Theme.of(context).bottomAppBarTheme.color,
+        color: Theme.of(context).primaryColor,
+        activeColor: Theme.of(context).primaryColor,
         elevation: Theme.of(context).bottomAppBarTheme.elevation,
         height: 60,
         initialActiveIndex: _currentIndex,
