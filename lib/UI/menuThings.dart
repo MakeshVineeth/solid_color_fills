@@ -30,8 +30,9 @@ class MenuThings extends StatelessWidget {
         menuItem(
           icon: FluentIcons.shield_24_regular,
           title: 'Privacy Policy',
-          function: () => launch(
-            'https://raw.githubusercontent.com/MakeshVineeth/commons/main/privacy_policy.txt',
+          function: () => launchUrl(
+            url:
+                'https://raw.githubusercontent.com/MakeshVineeth/commons/main/privacy_policy.txt',
             forceWebView: true,
             enableJavaScript: true,
           ),
@@ -40,12 +41,24 @@ class MenuThings extends StatelessWidget {
         menuItem(
           icon: FluentIcons.star_emphasis_24_regular,
           title: 'Rate Us on Play Store',
-          function: () => launch(
-              'https://play.google.com/store/apps/details?id=com.makeshtech.clock'),
+          function: () => launchUrl(
+              url:
+                  'https://play.google.com/store/apps/details?id=com.makeshtech.clock'),
           context: context,
         )
       ],
     );
+  }
+
+  launchUrl(
+      {@required String url,
+      bool forceWebView = false,
+      bool enableJavaScript = false}) async {
+    try {
+      if (await canLaunch(url))
+        await launch(url,
+            forceWebView: forceWebView, enableJavaScript: enableJavaScript);
+    } catch (e) {}
   }
 
   void showAbout(BuildContext context) => showAboutDialog(
