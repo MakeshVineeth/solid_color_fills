@@ -46,7 +46,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
               context: context,
               builder: (context) => MenuThings(),
             ),
-            icon: Icon(Icons.menu),
+            icon: Icon(Icons.menu_rounded),
           )
         ],
       ),

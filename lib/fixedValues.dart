@@ -31,7 +31,8 @@ class FixedValues {
   // Height for color card in main tab.
   final double heightCard = 0.65;
 
-  ThemeData getTheme(Brightness brightness) {
+  ThemeData getTheme(
+      {@required Brightness brightness, @required BuildContext context}) {
     Color fg = Colors.black;
     Color bg = Colors.white;
 
@@ -50,13 +51,8 @@ class FixedValues {
         centerTitle: true,
         color: bg,
         textTheme: TextTheme(
-          headline6: TextStyle(
-            color: fg,
-            fontSize: 20.0,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 1.0,
-          ),
-        ),
+            headline6:
+                Theme.of(context).textTheme.headline6.copyWith(color: fg)),
       ),
       bottomAppBarTheme: BottomAppBarTheme(color: Colors.blue[600]),
       elevatedButtonTheme: ElevatedButtonThemeData(

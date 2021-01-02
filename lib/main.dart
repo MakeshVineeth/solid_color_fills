@@ -19,11 +19,13 @@ class MaterialHome extends StatelessWidget {
       themes: [
         AppTheme(
             id: 'light_theme',
-            data: fixedValues.getTheme(Brightness.light),
+            data: fixedValues.getTheme(
+                brightness: Brightness.light, context: context),
             description: 'Light Theme'),
         AppTheme(
             id: 'dark_theme',
-            data: fixedValues.getTheme(Brightness.dark),
+            data: fixedValues.getTheme(
+                brightness: Brightness.dark, context: context),
             description: 'Dark Theme'),
       ],
       child: ThemeConsumer(
