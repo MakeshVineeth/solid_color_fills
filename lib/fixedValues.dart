@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class FixedValues {
   final appTitle = 'Solid Color Fills';
   final appLegalese =
-      'An App that lets you set your favorite color as Device Wallpaper. Not satisfied with default colors? Then you choose your own color by using the Color Picker provided in the app. Solid Color Fills has Beautiful UI and Extremely Privacy Friendly.';
+      'An App that lets you set your favorite color as Device Wallpaper. Not satisfied with default colors? Then you can choose your own color by using the Color Picker provided in the app. Solid Color Fills has Beautiful UI and Extremely Privacy Friendly.';
   final appVersion = '1.0.0';
 
   final BorderRadius fixedCardRadius = BorderRadius.circular(20.0);
