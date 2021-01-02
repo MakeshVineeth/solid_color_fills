@@ -1,6 +1,7 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:solid_color_fill/fixedValues.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MenuThings extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
@@ -19,6 +20,15 @@ class MenuThings extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  launchURL(String url) async {
+    if (await canLaunch(url))
+      await launch(
+        url,
+        forceWebView: true,
+        enableJavaScript: true,
+      );
   }
 
   void showAbout(BuildContext context) => showAboutDialog(
@@ -55,6 +65,7 @@ class MenuThings extends StatelessWidget {
           ),
           label: Text(
             title,
+            style: TextStyle(fontWeight: FontWeight.w600),
           ),
         ),
       );
