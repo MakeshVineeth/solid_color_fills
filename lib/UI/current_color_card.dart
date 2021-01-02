@@ -22,7 +22,7 @@ class CurrentColorCard extends ConsumerWidget {
         onTap: () => openWallChooser(context),
         child: IgnorePointer(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.symmetric(vertical: 12),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
