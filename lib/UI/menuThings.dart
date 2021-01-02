@@ -15,20 +15,28 @@ class MenuThings extends StatelessWidget {
         menuItem(
           context: context,
           icon: FluentIcons.info_28_regular,
-          title: 'About',
+          title: 'About ' + fixedValues.appTitle,
           function: () => showAbout(context),
         ),
+        menuItem(
+          icon: FluentIcons.shield_24_regular,
+          title: 'Privacy Policy',
+          function: () => launch(
+            'https://raw.githubusercontent.com/MakeshVineeth/commons/main/privacy_policy.txt',
+            forceWebView: true,
+            enableJavaScript: true,
+          ),
+          context: context,
+        ),
+        menuItem(
+          icon: FluentIcons.star_emphasis_24_regular,
+          title: 'Rate Us on Play Store',
+          function: () => launch(
+              'https://play.google.com/store/apps/details?id=com.makeshtech.clock'),
+          context: context,
+        )
       ],
     );
-  }
-
-  launchURL(String url) async {
-    if (await canLaunch(url))
-      await launch(
-        url,
-        forceWebView: true,
-        enableJavaScript: true,
-      );
   }
 
   void showAbout(BuildContext context) => showAboutDialog(
