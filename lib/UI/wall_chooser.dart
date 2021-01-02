@@ -11,7 +11,7 @@ import 'package:system_properties/system_properties.dart';
 
 class WallChooser extends ConsumerWidget {
   final SnackBar snackBarSuccess =
-      SnackBar(content: Text('Yay! Wallpaper Successfully Set!'));
+      SnackBar(content: Text('Yay! Wallpaper Successfully Set.'));
   final SnackBar snackBarError =
       SnackBar(content: Text('Oops, An Error has Occurred!'));
   final FixedValues fixedValues = FixedValues();

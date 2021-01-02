@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:solid_color_fill/UI/menuThings.dart';
 import 'package:solid_color_fill/fixedValues.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:solid_color_fill/UI/tabItem.dart';
 import 'package:solid_color_fill/UI/fade_indexed_stack.dart';
 import 'package:solid_color_fill/custom_picker.dart';
+import 'package:solid_color_fill/floating_modal.dart';
 import 'package:solid_color_fill/home_tab.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
@@ -38,6 +40,15 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
     return Scaffold(
       appBar: AppBar(
         title: Text(fixedValues.appTitle),
+        actions: [
+          IconButton(
+            onPressed: () => showFloatingModalBottomSheet(
+              context: context,
+              builder: (context) => MenuThings(),
+            ),
+            icon: Icon(Icons.menu),
+          )
+        ],
       ),
       body: FadeIndexedStack(
         index: _currentIndex,
