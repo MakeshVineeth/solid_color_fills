@@ -1,6 +1,8 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:solid_color_fill/UI/themeChooser.dart';
 import 'package:solid_color_fill/fixedValues.dart';
+import 'package:solid_color_fill/floating_modal.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MenuThings extends StatelessWidget {
@@ -12,6 +14,13 @@ class MenuThings extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        menuItem(
+          icon: FluentIcons.dark_theme_24_regular,
+          title: 'Change Theme',
+          function: () => showFloatingModalBottomSheet(
+              context: context, builder: (context) => ThemeChooser()),
+          context: context,
+        ),
         menuItem(
           context: context,
           icon: FluentIcons.info_28_regular,
@@ -54,27 +63,47 @@ class MenuThings extends StatelessWidget {
       );
 
   Widget menuItem({
-    @required IconData icon,
+    IconData icon,
     @required String title,
     @required Function function,
     @required BuildContext context,
-  }) =>
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5),
-        child: FlatButton.icon(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          onPressed: () {
-            Navigator.pop(context);
-            function();
-          },
-          icon: Icon(
-            icon,
-          ),
-          label: Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.w600),
-          ),
-        ),
-      );
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+      child: (icon != null)
+          ? FlatButton.icon(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+              onPressed: () {
+                Navigator.pop(context);
+                function();
+              },
+              icon: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                child: Icon(
+                  icon,
+                ),
+              ),
+              label: Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  height: 1,
+                ),
+              ),
+            )
+          : MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+              onPressed: () {
+                Navigator.pop(context);
+                function();
+              },
+              child: Text(
+                title,
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ),
+    );
+  }
 }

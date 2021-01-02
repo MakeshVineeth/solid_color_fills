@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FixedValues {
-  final appTitle = 'Solid Color Fill';
+  final appTitle = 'Solid Color Fills';
   final appLegalese = '';
   final appVersion = '1.0.0';
 
@@ -10,6 +10,11 @@ class FixedValues {
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0));
   final colorTitleStyle = TextStyle(fontWeight: FontWeight.w600);
   final logoFile = 'logo.png';
+
+  final lightThemeId = 'light_theme';
+  final lightThemeDesc = 'Light Theme';
+  final darkThemeId = 'dark_theme';
+  final darkThemeDesc = 'Dark Theme';
 
   // List of Colors
   final Map colorsList = {
