@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   animations: ^1.1.2
   convex_bottom_bar: ^2.6.0
+  fluentui_system_icons: ^1.1.89
   flutter_animator: ^2.1.0
   flutter_colorpicker: ^0.3.4
   flutter_launcher_icons: ^0.8.1

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
-import 'package:solid_color_fill/fixedValues.dart';
 import 'package:solid_color_fill/UI/material_picker_widget.dart';
 import 'package:solid_color_fill/UI/current_color_card.dart';
 import 'package:solid_color_fill/UI/advanced_color_picker.dart';
 import 'package:solid_color_fill/UI/styleMethods.dart';
 
 class CustomColorPicker extends ConsumerWidget {
-  final FixedValues fixedValues = FixedValues();
-
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return LayoutBuilder(
@@ -27,7 +24,8 @@ class CustomColorPicker extends ConsumerWidget {
                 ),
                 SizedBox(height: 10),
                 Card(
-                  shape: fixedValues.roundShape,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
                   child: Container(
                     height: constraints.maxHeight / 1.5,
                     child: MaterialPickerWidget(),

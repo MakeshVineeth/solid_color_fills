@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:solid_color_fill/UI/menuThings.dart';
 import 'package:solid_color_fill/fixedValues.dart';
@@ -19,8 +20,8 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
   final TabItemCustom tabItemCustom = TabItemCustom();
 
   final bottomItems = {
-    'Presents': Icons.home_rounded,
-    'Color Picker': Icons.colorize_rounded,
+    'Collections': FluentIcons.collections_24_regular,
+    'Color Picker': FluentIcons.color_24_regular,
   };
 
   final widgetsList = [
@@ -40,15 +41,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
     return Scaffold(
       appBar: AppBar(
         title: Text(fixedValues.appTitle),
-        actions: [
-          IconButton(
-            onPressed: () => showFloatingModalBottomSheet(
-              context: context,
-              builder: (context) => MenuThings(),
-            ),
-            icon: Icon(Icons.menu_rounded),
-          )
-        ],
+        actions: [menuButton()],
       ),
       body: FadeIndexedStack(
         index: _currentIndex,
@@ -75,4 +68,12 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
       ),
     );
   }
+
+  Widget menuButton() => IconButton(
+        onPressed: () => showFloatingModalBottomSheet(
+          context: context,
+          builder: (context) => MenuThings(),
+        ),
+        icon: Icon(FluentIcons.navigation_24_regular),
+      );
 }

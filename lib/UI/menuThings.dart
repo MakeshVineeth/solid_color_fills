@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
 class MenuThings extends StatelessWidget {
@@ -14,7 +15,7 @@ class MenuThings extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0)),
               onPressed: () {},
               icon: Icon(
-                Icons.info_outline,
+                FluentIcons.info_28_regular,
               ),
               label: Text(
                 'About This App',
