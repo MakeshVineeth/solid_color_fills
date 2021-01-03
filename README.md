@@ -1,3 +1,3 @@
-# solid_color_fills
+# Solid Color Fills
 
-A Wallpaper that lets you set any solid color as wallpaper.
+A Wallpaper App that lets you set any color as your Homescren or Lockscreen Wallpaper.
