@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mvp.solid_color_fill_walls">
+    package="com.makeshtech.solid_color_fills">
 
     <queries>
         <intent>
@@ -9,8 +9,10 @@
         </intent>
     </queries>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
-        android:label="Solid Color Fill"
+        android:label="Solid Color Fills"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
-import 'package:solid_color_fill/fixedValues.dart';
-import 'package:solid_color_fill/scaffoldHome.dart';
+import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/scaffoldHome.dart';
 import 'package:theme_provider/theme_provider.dart';
 
 void main() {

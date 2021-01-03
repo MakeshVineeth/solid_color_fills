@@ -2,9 +2,9 @@ import 'dart:ui';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
-import 'package:solid_color_fill/UI/database/commons.dart';
-import 'package:solid_color_fill/UI/fade_widget.dart';
-import 'package:solid_color_fill/fixedValues.dart';
+import 'package:solid_color_fills/UI/database/commons.dart';
+import 'package:solid_color_fills/UI/fade_widget.dart';
+import 'package:solid_color_fills/fixedValues.dart';
 
 class AdvancedColorPicker extends StatefulWidget {
   @override

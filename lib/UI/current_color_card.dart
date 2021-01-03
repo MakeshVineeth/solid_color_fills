@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
-import 'package:solid_color_fill/fixedValues.dart';
-import 'package:solid_color_fill/UI/database/commons.dart';
-import 'package:solid_color_fill/UI/database/helperFunctions.dart';
-import 'package:solid_color_fill/UI/styleMethods.dart';
+import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/UI/database/commons.dart';
+import 'package:solid_color_fills/UI/database/helperFunctions.dart';
+import 'package:solid_color_fills/UI/styleMethods.dart';
 
 class CurrentColorCard extends ConsumerWidget {
   final FixedValues fixedValues = FixedValues();

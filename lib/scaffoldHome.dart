@@ -1,13 +1,13 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:solid_color_fill/UI/menuThings.dart';
-import 'package:solid_color_fill/fixedValues.dart';
+import 'package:solid_color_fills/UI/menuThings.dart';
+import 'package:solid_color_fills/fixedValues.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:solid_color_fill/UI/tabItem.dart';
-import 'package:solid_color_fill/UI/fade_indexed_stack.dart';
-import 'package:solid_color_fill/custom_picker.dart';
-import 'package:solid_color_fill/floating_modal.dart';
-import 'package:solid_color_fill/home_tab.dart';
+import 'package:solid_color_fills/UI/tabItem.dart';
+import 'package:solid_color_fills/UI/fade_indexed_stack.dart';
+import 'package:solid_color_fills/custom_picker.dart';
+import 'package:solid_color_fills/floating_modal.dart';
+import 'package:solid_color_fills/home_tab.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class ScaffoldHome extends StatefulWidget {

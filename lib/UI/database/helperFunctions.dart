@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:solid_color_fill/UI/database/commons.dart';
+import 'package:solid_color_fills/UI/database/commons.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:flutter/material.dart';
-import 'package:solid_color_fill/UI/wall_chooser.dart';
+import 'package:solid_color_fills/UI/wall_chooser.dart';
 
 void openWallChooser(BuildContext context) {
   Size size = MediaQuery.of(context).size;

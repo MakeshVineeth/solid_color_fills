@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:solid_color_fill/UI/colorItem.dart';
+import 'package:solid_color_fills/UI/colorItem.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:solid_color_fill/fixedValues.dart';
+import 'package:solid_color_fills/fixedValues.dart';
 
 class HomeTab extends StatefulWidget {
   @override

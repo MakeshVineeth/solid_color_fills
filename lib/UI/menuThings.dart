@@ -1,8 +1,8 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:solid_color_fill/UI/themeChooser.dart';
-import 'package:solid_color_fill/fixedValues.dart';
-import 'package:solid_color_fill/floating_modal.dart';
+import 'package:solid_color_fills/UI/themeChooser.dart';
+import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/floating_modal.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MenuThings extends StatelessWidget {
@@ -43,7 +43,7 @@ class MenuThings extends StatelessWidget {
           title: 'Rate Us on Play Store',
           function: () => launchUrl(
               url:
-                  'https://play.google.com/store/apps/details?id=com.makeshtech.clock'),
+                  'https://play.google.com/store/apps/details?id=com.makeshtech.solid_color_fills'),
           context: context,
         )
       ],

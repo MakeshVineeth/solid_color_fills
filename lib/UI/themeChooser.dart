@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:solid_color_fill/UI/menuThings.dart';
-import 'package:solid_color_fill/fixedValues.dart';
+import 'package:solid_color_fills/UI/menuThings.dart';
+import 'package:solid_color_fills/fixedValues.dart';
 import 'package:theme_provider/theme_provider.dart';
 
 class ThemeChooser extends StatelessWidget {
