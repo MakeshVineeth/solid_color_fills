@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solid_color_fills/UI/colorItem.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:solid_color_fills/UI/scaleThis.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
 class HomeTab extends StatefulWidget {
@@ -15,26 +15,21 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimationLimiter(
-      child: GridView.builder(
-        itemCount: fixedValues.colorsList.length,
-        padding: EdgeInsets.all(15),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: columnCount,
-          crossAxisSpacing: spacing,
-          mainAxisSpacing: spacing,
-          childAspectRatio: fixedValues.heightCard,
-        ),
-        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-        itemBuilder: (context, index) => AnimationConfiguration.staggeredGrid(
-          columnCount: columnCount,
-          position: index,
-          duration: const Duration(milliseconds: 800),
-          child: ScaleAnimation(
-            child: FadeInAnimation(
-              child: ColorItem(
-                  mapEntry: fixedValues.colorsList.entries.elementAt(index)),
-            ),
+    return GridView.count(
+      padding: EdgeInsets.all(15),
+      crossAxisCount: columnCount,
+      crossAxisSpacing: spacing,
+      mainAxisSpacing: spacing,
+      childAspectRatio: fixedValues.heightCard,
+      addAutomaticKeepAlives: true,
+      addRepaintBoundaries: true,
+      cacheExtent: 5000,
+      physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      children: List.generate(
+        fixedValues.colorsList.length,
+        (index) => ScaleThis(
+          child: ColorItem(
+            mapEntry: fixedValues.colorsList.entries.elementAt(index),
           ),
         ),
       ),

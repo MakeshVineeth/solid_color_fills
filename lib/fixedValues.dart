@@ -60,14 +60,12 @@ class FixedValues {
       scaffoldBackgroundColor: isDark ? Colors.black : bg,
       applyElevationOverlayColor: brightness == Brightness.dark,
       appBarTheme: AppBarTheme(
-        iconTheme: IconThemeData(color: (isDark) ? primaryColor : fg),
+        iconTheme: IconThemeData(color: fg),
+        elevation: isDark ? 0 : elevation,
         brightness: brightness,
         centerTitle: true,
-        color: bg,
         textTheme: TextTheme(
-          headline6: Theme.of(context).textTheme.headline6.copyWith(
-                color: (isDark) ? primaryColor : fg,
-              ),
+          headline6: Theme.of(context).textTheme.headline6.copyWith(color: fg),
         ),
       ),
       bottomAppBarTheme: BottomAppBarTheme(

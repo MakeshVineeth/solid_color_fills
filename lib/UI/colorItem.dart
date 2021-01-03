@@ -36,9 +36,7 @@ class ColorItem extends StatelessWidget {
                 mapEntry.key,
                 style: fixedValues.colorTitleStyle,
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
             ],
           ),
         ),
