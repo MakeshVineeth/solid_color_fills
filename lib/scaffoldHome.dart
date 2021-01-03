@@ -40,9 +40,6 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
     changeStatusBarColor();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).brightness == Brightness.light
-            ? Theme.of(context).scaffoldBackgroundColor
-            : Colors.black,
         title: Text(fixedValues.appTitle),
         actions: [menuButton()],
       ),

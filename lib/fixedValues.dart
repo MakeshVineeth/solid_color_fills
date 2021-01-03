@@ -62,6 +62,12 @@ class FixedValues {
       appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(color: fg),
         elevation: isDark ? 0 : elevation,
+        color: Theme.of(context).brightness == Brightness.light
+            ? bg
+            : Colors.black,
+        backgroundColor: Theme.of(context).brightness == Brightness.light
+            ? bg
+            : Colors.black,
         brightness: brightness,
         centerTitle: true,
         textTheme: TextTheme(
