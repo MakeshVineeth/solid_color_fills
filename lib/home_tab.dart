@@ -15,24 +15,30 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      padding: EdgeInsets.all(15),
-      crossAxisCount: columnCount,
-      crossAxisSpacing: spacing,
-      mainAxisSpacing: spacing,
-      childAspectRatio: fixedValues.heightCard,
-      addAutomaticKeepAlives: true,
-      addRepaintBoundaries: true,
-      cacheExtent: 5000,
-      physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-      children: List.generate(
-        fixedValues.colorsList.length,
-        (index) => ScaleThis(
-          child: ColorItem(
-            mapEntry: fixedValues.colorsList.entries.elementAt(index),
+    return CustomScrollView(
+      primary: false,
+      slivers: [
+        SliverPadding(
+          padding: EdgeInsets.all(15),
+          sliver: SliverGrid.count(
+            crossAxisCount: columnCount,
+            childAspectRatio: fixedValues.heightCard,
+            crossAxisSpacing: spacing,
+            mainAxisSpacing: spacing,
+            children: List.generate(
+              fixedValues.colorsList.length,
+              (index) => ScaleThis(
+                  child: ColorItem(
+                      mapEntry:
+                          fixedValues.colorsList.entries.elementAt(index))),
+            ),
           ),
         ),
-      ),
+      ],
+      scrollDirection: Axis.vertical,
+      semanticChildCount: fixedValues.colorsList.length,
+      cacheExtent: 5500,
+      physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
     );
   }
 }
