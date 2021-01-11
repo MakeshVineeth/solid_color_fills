@@ -33,6 +33,7 @@ dependencies:
   flutter_rename_app: ^1.0.0
   flutter_riverpod: ^0.12.1
   flutter_statusbarcolor: ^0.2.3
+  introduction_screen: ^1.0.9
   modal_bottom_sheet: ^1.0.0+1
   path_provider: ^1.6.24
   system_properties: ^0.0.1
