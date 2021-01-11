@@ -19,7 +19,7 @@ class CustomColorPicker extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Please choose a Shade.',
+                  'Select a Tone.',
                   style: buttonText(),
                 ),
                 SizedBox(height: 10),

@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
+import 'package:solid_color_fills/UI/privacy_policy.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:solid_color_fills/scaffoldHome.dart';
 import 'package:theme_provider/theme_provider.dart';
@@ -38,7 +39,11 @@ class MaterialHome extends StatelessWidget {
             theme: ThemeProvider.themeOf(themeContext).data,
             title: fixedValues.appTitle,
             debugShowCheckedModeBanner: false,
-            home: ScaffoldHome(),
+            initialRoute: '/',
+            routes: {
+              '/': (themeContext) => ScaffoldHome(),
+              '/privacy': (themeContext) => PrivacyPolicy(),
+            },
           ),
         ),
       ),
