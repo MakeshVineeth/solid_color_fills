@@ -22,7 +22,7 @@ class ColorItem extends StatelessWidget {
           shape: fixedValues.roundShape,
           child: GridTile(
             child: Container(
-              margin: const EdgeInsets.fromLTRB(6, 6, 6, 20),
+              margin: const EdgeInsets.fromLTRB(6, 6, 6, 30),
               decoration: BoxDecoration(
                 color: mapEntry.value,
                 borderRadius: fixedValues.fixedCardRadius,
@@ -30,7 +30,7 @@ class ColorItem extends StatelessWidget {
             ),
             footer: Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 3.0),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
                   mapEntry.key,
                   style: fixedValues.colorTitleStyle,
