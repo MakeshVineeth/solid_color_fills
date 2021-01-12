@@ -39,7 +39,7 @@ class _HomeTabState extends State<HomeTab> {
       scrollDirection: Axis.vertical,
       semanticChildCount: fixedValues.colorsList.length,
       cacheExtent: 5500,
-      physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
     );
   }
 }
