@@ -42,8 +42,8 @@ class MaterialHome extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             initialRoute: '/',
             routes: {
-              '/': (themeContext) => IntroScreen(),
-              '/home': (themeContext) => ScaffoldHome(),
+              '/': (themeContext) => ScaffoldHome(),
+              '/intro': (themeContext) => IntroScreen(),
               '/privacy': (themeContext) => PrivacyPolicy(),
             },
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
 class IntroScreen extends StatelessWidget {
@@ -16,7 +17,10 @@ class IntroScreen extends StatelessWidget {
             'Done',
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
-          onDone: () => Navigator.pushReplacementNamed(context, '/home'),
+          onDone: () {
+            _firstTime();
+            return Navigator.pop(context);
+          },
           next: const Text(
             'Next',
             style: const TextStyle(fontWeight: FontWeight.w600),
@@ -26,7 +30,10 @@ class IntroScreen extends StatelessWidget {
             'Skip',
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
-          onSkip: () => Navigator.pushReplacementNamed(context, '/home'),
+          onSkip: () {
+            _firstTime();
+            return Navigator.pop(context);
+          },
           showSkipButton: true,
           pages: [
             PageViewModel(
@@ -105,4 +112,9 @@ class IntroScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+_firstTime() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('first_launch', false);
 }

@@ -1,5 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solid_color_fills/UI/menuThings.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -29,7 +30,20 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
     CustomColorPicker(),
   ];
 
-  void changeStatusBarColor() => FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
+  _firstLaunch() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool check = prefs.getBool('first_launch') ?? true;
+    if (check) Navigator.pushNamed(context, '/intro');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _firstLaunch();
+  }
+
+  void changeStatusBarColor() =>
+      FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
 
   int _currentIndex = 0;
 
