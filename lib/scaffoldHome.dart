@@ -29,9 +29,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
     CustomColorPicker(),
   ];
 
-  void changeStatusBarColor() {
-    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
-  }
+  void changeStatusBarColor() => FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
 
   int _currentIndex = 0;
 
