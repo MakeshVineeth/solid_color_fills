@@ -36,6 +36,7 @@ dependencies:
   introduction_screen: ^1.0.9
   modal_bottom_sheet: ^1.0.0+1
   path_provider: ^1.6.24
+  shared_preferences: ^0.5.12+4
   system_properties: ^0.0.1
   theme_provider: ^0.4.0+1
   transparent_image: ^1.0.0

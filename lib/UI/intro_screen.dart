@@ -70,6 +70,36 @@ class IntroScreen extends StatelessWidget {
                 ),
               ),
             ),
+            PageViewModel(
+              title: 'Select a Material Tone',
+              body:
+                  'Not satisfied with the default collections? You can choose your own tone from the Material Color Picker available in Color Picker Tab.',
+              image: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage('assets/Tut_3.png'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            PageViewModel(
+              title: 'Advanced Color Picker',
+              body:
+                  'Feeling little bored? You can play around with the Advanced Color Picker included in the app.',
+              image: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage('assets/Tut_4.png'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
