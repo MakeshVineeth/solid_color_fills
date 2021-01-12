@@ -13,31 +13,30 @@ class ColorItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3,
-      shape: fixedValues.roundShape,
-      child: InkWell(
-        borderRadius: fixedValues.fixedCardRadius,
-        onTap: () => changeColor(context),
-        child: IgnorePointer(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.all(6.0),
-                  decoration: BoxDecoration(
-                    color: mapEntry.value,
-                    borderRadius: fixedValues.fixedCardRadius,
-                  ),
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () => changeColor(context),
+      child: IgnorePointer(
+        child: Card(
+          elevation: 3,
+          shape: fixedValues.roundShape,
+          child: GridTile(
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(6, 6, 6, 20),
+              decoration: BoxDecoration(
+                color: mapEntry.value,
+                borderRadius: fixedValues.fixedCardRadius,
+              ),
+            ),
+            footer: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 3.0),
+                child: Text(
+                  mapEntry.key,
+                  style: fixedValues.colorTitleStyle,
                 ),
               ),
-              Text(
-                mapEntry.key,
-                style: fixedValues.colorTitleStyle,
-              ),
-              SizedBox(height: 10),
-            ],
+            ),
           ),
         ),
       ),

@@ -28,9 +28,10 @@ class _HomeTabState extends State<HomeTab> {
             children: List.generate(
               fixedValues.colorsList.length,
               (index) => ScaleThis(
-                  child: ColorItem(
-                      mapEntry:
-                          fixedValues.colorsList.entries.elementAt(index))),
+                child: ColorItem(
+                  mapEntry: fixedValues.colorsList.entries.elementAt(index),
+                ),
+              ),
             ),
           ),
         ),

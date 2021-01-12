@@ -35,6 +35,10 @@ class FixedValues {
     'Facebook': Color(0xff3b5999),
     'HackerNews': Color(0xffff6600),
     'Quora': Color(0xffb92b27),
+    'Purple': Colors.purple,
+    'White': Colors.white,
+    'Caramel': Color(0xff8f614b),
+    'Moon': Color(0xff989da6),
   };
 
   // Height for color card in main tab.
