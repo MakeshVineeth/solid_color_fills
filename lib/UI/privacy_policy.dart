@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PrivacyPolicy extends StatelessWidget {
   final initial =
-      'We do not collect your personal data, period. Moreover, Solid Color Fills is an Open Source Project.';
+      'We do not collect your personal data, period. Solid Color Fills is an Open Source Project.';
 
   final hereInOurCompany =
       'At MakeshTech, one of our main priorities is the privacy of our users. This Privacy Policy document contains types of information that is collected and recorded by MakeshTech and how we use it.';
