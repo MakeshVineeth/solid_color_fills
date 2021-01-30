@@ -9,37 +9,39 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  final columnCount = 2;
   final FixedValues fixedValues = FixedValues();
   double spacing = 10.0;
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      primary: false,
-      slivers: [
-        SliverPadding(
-          padding: EdgeInsets.all(15),
-          sliver: SliverGrid.count(
-            crossAxisCount: columnCount,
-            childAspectRatio: fixedValues.heightCard,
-            crossAxisSpacing: spacing,
-            mainAxisSpacing: spacing,
-            children: List.generate(
-              fixedValues.colorsList.length,
-              (index) => ScaleThis(
-                child: ColorItem(
-                  mapEntry: fixedValues.colorsList.entries.elementAt(index),
+    return OrientationBuilder(
+      builder: (context, orientation) => CustomScrollView(
+        primary: false,
+        slivers: [
+          SliverPadding(
+            padding: EdgeInsets.all(15),
+            sliver: SliverGrid.count(
+              crossAxisCount: (orientation == Orientation.portrait) ? 2 : 3,
+              childAspectRatio:
+                  (orientation == Orientation.portrait) ? 0.65 : 1.2,
+              crossAxisSpacing: spacing,
+              mainAxisSpacing: spacing,
+              children: List.generate(
+                fixedValues.colorsList.length,
+                (index) => ScaleThis(
+                  child: ColorItem(
+                    mapEntry: fixedValues.colorsList.entries.elementAt(index),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
-      scrollDirection: Axis.vertical,
-      semanticChildCount: fixedValues.colorsList.length,
-      cacheExtent: 5500,
-      physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        ],
+        scrollDirection: Axis.vertical,
+        semanticChildCount: fixedValues.colorsList.length,
+        cacheExtent: 5500,
+        physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+      ),
     );
   }
 }

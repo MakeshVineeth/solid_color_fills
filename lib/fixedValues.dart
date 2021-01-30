@@ -41,9 +41,6 @@ class FixedValues {
     'Moon': Color(0xff989da6),
   };
 
-  // Height for color card in main tab.
-  final double heightCard = 0.65;
-
   ThemeData getTheme(
       {@required Brightness brightness, @required BuildContext context}) {
     Color fg = Colors.black;
@@ -66,7 +63,6 @@ class FixedValues {
       appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(color: fg),
         elevation: isDark ? 0 : elevation,
-        
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? bg
             : Colors.black,
