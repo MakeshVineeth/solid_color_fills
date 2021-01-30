@@ -79,9 +79,13 @@ class MenuThings extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
       child: (icon != null)
-          ? FlatButton.icon(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
+          ? TextButton.icon(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0))),
+                foregroundColor: MaterialStateProperty.all(
+                    Theme.of(context).textTheme.button.color),
+              ),
               onPressed: () {
                 Navigator.pop(context);
                 function();

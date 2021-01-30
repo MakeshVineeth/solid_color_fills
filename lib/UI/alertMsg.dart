@@ -25,9 +25,13 @@ class AlertMsg extends StatelessWidget {
           ),
         ),
         actions: [
-          FlatButton(
-            shape: RoundedRectangleBorder(
-                borderRadius: fixedValues.fixedCardRadius),
+          TextButton(
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: fixedValues.fixedCardRadius)),
+              foregroundColor: MaterialStateProperty.all(
+                  Theme.of(context).textTheme.button.color),
+            ),
             child: const Text('OK'),
             onPressed: () => Navigator.of(context).pop(),
           ),

@@ -25,7 +25,7 @@ class FixedValues {
     'Red': Colors.red,
     'Green': Colors.green,
     'Black': Colors.black,
-    'Blue': Colors.blue,
+    'Pitch Blue': Colors.blue,
     'Neumorphic White': Color(0xffe0e5ec),
     'Neumorphic Black': Color(0xff26282B),
     'YouTube': Color(0xffcd201f),
@@ -66,9 +66,7 @@ class FixedValues {
       appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(color: fg),
         elevation: isDark ? 0 : elevation,
-        color: Theme.of(context).brightness == Brightness.light
-            ? bg
-            : Colors.black,
+        
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? bg
             : Colors.black,
@@ -100,6 +98,7 @@ class FixedValues {
             (isDark) ? Colors.black12 : Colors.grey[100]),
       )),
     );
+
     return themeData;
   }
 }

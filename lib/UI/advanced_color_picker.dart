@@ -33,8 +33,11 @@ class _AdvancedColorPickerState extends State<AdvancedColorPicker> {
           ),
         ),
         actions: [
-          FlatButton(
+          TextButton(
             child: const Text('Choose'),
+            style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(
+                    Theme.of(context).textTheme.button.color)),
             onPressed: () => onTapping(context),
           ),
         ],

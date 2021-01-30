@@ -29,17 +29,15 @@ class PrivacyPolicy extends StatelessWidget {
   final text6 =
       'MakeshTech\'s Privacy Policy does not apply to other advertisers. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information.';
 
-  final text7 = 'So, if any of our apps are supported by advertising, be assured that we will also provide an option to disable them through a much affordable in-app purchase. We would also provide an option to disable Interest-Based Ads, thus less tracking, for the people who do not intend to pay.';
-
+  final text7 =
+      'So, if any of our apps are supported by advertising, be assured that we will also provide an option to disable them through a much affordable in-app purchase. We would also provide an option to disable Interest-Based Ads, thus less tracking, for the people who do not intend to pay.';
 
   final space = 10.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Privacy Policy'),
-      ),
+      appBar: AppBar(title: Text('Privacy Policy')),
       body: Container(
         margin: EdgeInsets.all(10.0),
         width: MediaQuery.of(context).size.width,
@@ -55,16 +53,19 @@ class PrivacyPolicy extends StatelessWidget {
                 children: [
                   Text(
                     text,
+                    textAlign: TextAlign.justify,
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: space),
                   Text(
                     text0,
+                    textAlign: TextAlign.justify,
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: space),
                   Text(
                     text1,
+                    textAlign: TextAlign.justify,
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: space),
@@ -78,11 +79,13 @@ class PrivacyPolicy extends StatelessWidget {
                   SizedBox(height: space),
                   Text(
                     text2,
+                    textAlign: TextAlign.justify,
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: space),
                   Text(
                     text3,
+                    textAlign: TextAlign.justify,
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: space),
@@ -96,6 +99,7 @@ class PrivacyPolicy extends StatelessWidget {
                   SizedBox(height: space),
                   Text(
                     text4,
+                    textAlign: TextAlign.justify,
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: space),
@@ -109,6 +113,7 @@ class PrivacyPolicy extends StatelessWidget {
                   SizedBox(height: space),
                   Text(
                     text5,
+                    textAlign: TextAlign.justify,
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: space),
@@ -122,11 +127,13 @@ class PrivacyPolicy extends StatelessWidget {
                   SizedBox(height: space),
                   Text(
                     text6,
+                    textAlign: TextAlign.justify,
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: space),
                   Text(
                     text7,
+                    textAlign: TextAlign.justify,
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ],
