@@ -55,7 +55,10 @@ class WallChooser extends ConsumerWidget {
                       ),
                       SizedBox(height: 5),
                       Container(
-                        width: constraints.maxWidth / 2,
+                        width: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? constraints.maxWidth / 2
+                            : constraints.maxWidth / 3,
                         child: Column(
                           children: List.generate(
                               buttons.length,
