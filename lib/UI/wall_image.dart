@@ -23,27 +23,43 @@ class WallImage extends ConsumerWidget {
           error: (obj, err) => CrossFadeState.showSecond,
         ),
         firstChild: containerCustom(
+          context: context,
           child: Image.memory(
             imageObject?.data?.value ?? kTransparentImage,
             fit: BoxFit.fill,
           ),
         ),
         secondChild: containerCustom(
+          context: context,
           child: Center(
             child: const CircularProgressIndicator(),
           ),
         ));
   }
 
-  Widget containerCustom({@required Widget child}) {
-    return Container(
-      padding: EdgeInsets.all(8),
-      width: 250,
-      height: constraints.maxHeight / 1.7,
-      child: ClipRRect(
-        borderRadius: fixedValues.fixedCardRadius,
-        child: child,
-      ),
-    );
+  Widget containerCustom(
+      {@required Widget child, @required BuildContext context}) {
+    bool isHorizontal =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
+    if (isHorizontal)
+      return Container(
+        padding: EdgeInsets.all(8),
+        width: 250,
+        height: constraints.maxHeight / 2,
+        child: ClipRRect(
+          borderRadius: fixedValues.fixedCardRadius,
+          child: child,
+        ),
+      );
+    else
+      return Container(
+        padding: EdgeInsets.all(8),
+        height: constraints.maxHeight / 1.7,
+        child: ClipRRect(
+          borderRadius: fixedValues.fixedCardRadius,
+          child: child,
+        ),
+      );
   }
 }
