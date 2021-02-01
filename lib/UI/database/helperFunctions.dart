@@ -9,8 +9,16 @@ void openWallChooser(BuildContext context) {
   Size size = window.physicalSize;
 
   if (size != Size.zero) {
-    final ScreenSize newSize =
-        ScreenSize(size.width.ceil(), size.height.ceil());
+    int height = size.height.ceil();
+    int width = size.width.ceil();
+
+    if (width > height) {
+      int temp = height;
+      height = width;
+      width = temp;
+    }
+
+    final ScreenSize newSize = ScreenSize(width, height);
     final currentState = context.read(screenSize);
 
     if (currentState.state.width != newSize.width) currentState.state = newSize;
