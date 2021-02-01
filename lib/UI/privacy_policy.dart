@@ -49,6 +49,7 @@ class PrivacyPolicy extends StatelessWidget {
               child: Column(
                 children: [
                   paraText(initial),
+                  SizedBox(height: space),
                   paraText(hereInOurCompany),
                   paraText(contact),
                   headingTitle(consentTitle),
