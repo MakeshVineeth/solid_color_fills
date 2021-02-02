@@ -12,20 +12,29 @@ class ScaleThis extends StatefulWidget {
 class _ScaleThisState extends State<ScaleThis> with TickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
+  final dur = const Duration(milliseconds: 500);
 
   @override
   void initState() {
     super.initState();
 
     _controller = AnimationController(
-      duration: const Duration(seconds: 1),
+      duration: dur,
       vsync: this,
     );
 
     _animation = CurvedAnimation(
       parent: _controller,
-      curve: Curves.fastOutSlowIn,
+      curve: Curves.easeOutCirc,
     );
+
+    _controller.forward();
+  }
+
+  @override
+  void didUpdateWidget(Widget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _controller.duration = dur;
   }
 
   @override
@@ -36,8 +45,6 @@ class _ScaleThisState extends State<ScaleThis> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    _controller.forward();
-
     return ScaleTransition(
       scale: _animation,
       child: widget.child,
