@@ -21,11 +21,11 @@ class ColorItem extends StatelessWidget {
           elevation: 3,
           shape: fixedValues.roundShape,
           child: GridTile(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(6, 6, 6, 30),
-              child: ClipRRect(
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(6, 6, 6, 30),
+              decoration: BoxDecoration(
+                color: mapEntry.value,
                 borderRadius: fixedValues.fixedCardRadius,
-                child: ColoredBox(color: mapEntry.value),
               ),
             ),
             footer: Center(
