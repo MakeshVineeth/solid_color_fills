@@ -12,7 +12,7 @@ class ScaleThis extends StatefulWidget {
 class _ScaleThisState extends State<ScaleThis> with TickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
-  final dur = const Duration(milliseconds: 500);
+  final dur = const Duration(seconds: 1);
 
   @override
   void initState() {
