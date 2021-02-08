@@ -23,7 +23,7 @@ class _HomeTabState extends State<HomeTab> {
             sliver: SliverGrid.count(
               crossAxisCount: (orientation == Orientation.portrait) ? 2 : 3,
               childAspectRatio:
-                  (orientation == Orientation.portrait) ? 0.65 : 1.2,
+                  (orientation == Orientation.portrait) ? 0.70 : 1.2,
               crossAxisSpacing: spacing,
               mainAxisSpacing: spacing,
               children: List.generate(

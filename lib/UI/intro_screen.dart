@@ -13,27 +13,14 @@ class IntroScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: IntroductionScreen(
-          done: const Text(
-            'Done',
-            style: const TextStyle(fontWeight: FontWeight.w600),
-          ),
-          onDone: () {
-            _firstTime();
-            return Navigator.pop(context);
-          },
-          next: const Text(
-            'Next',
-            style: const TextStyle(fontWeight: FontWeight.w600),
-          ),
+          animationDuration: 280,
+          curve: Curves.decelerate,
+          done: textWidget('Done'),
+          onDone: () => finishTask(context),
+          next: textWidget('Next'),
           showNextButton: true,
-          skip: const Text(
-            'Skip',
-            style: const TextStyle(fontWeight: FontWeight.w600),
-          ),
-          onSkip: () {
-            _firstTime();
-            return Navigator.pop(context);
-          },
+          skip: textWidget('Skip'),
+          onSkip: () => finishTask(context),
           showSkipButton: true,
           pages: [
             PageViewModel(
@@ -47,71 +34,64 @@ class IntroScreen extends StatelessWidget {
                 ),
               ),
             ),
-            PageViewModel(
+            returnPage(
               title: 'Cherry-Picked Colors.',
               body:
                   'You can choose from a variety of cherry-picked colors available on Collections Tab.',
-              image: Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/Tut_1.png'),
-                    ),
-                  ),
-                ),
-              ),
+              path: 'assets/Tut_1.png',
             ),
-            PageViewModel(
+            returnPage(
               title: 'Set as Wallpaper',
               body:
                   'Click on any Color to open the Wall Chooser, where you can set the Color as your Lockscreen or Homescreen Wallpaper',
-              image: Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/Tut_2.png'),
-                    ),
-                  ),
-                ),
-              ),
+              path: 'assets/Tut_2.png',
             ),
-            PageViewModel(
+            returnPage(
               title: 'Select a Material Tone',
               body:
                   'Not satisfied with the default collections? You can choose your own tone from the Material Color Picker available in Color Picker Tab.',
-              image: Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/Tut_3.png'),
-                    ),
-                  ),
-                ),
-              ),
+              path: 'assets/Tut_3.png',
             ),
-            PageViewModel(
+            returnPage(
               title: 'Advanced Color Picker',
               body:
                   'Feeling little bored? You can play around with the Advanced Color Picker included in the app.',
-              image: Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/Tut_4.png'),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+              path: 'assets/Tut_4.png',
+            )
           ],
         ),
       ),
     );
   }
+}
+
+Text textWidget(String text) {
+  return Text(
+    text,
+    style: const TextStyle(fontWeight: FontWeight.w600),
+  );
+}
+
+PageViewModel returnPage({@required title, @required body, @required path}) {
+  return PageViewModel(
+    title: title,
+    body: body,
+    image: Center(
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage(path),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+void finishTask(BuildContext context) {
+  _firstTime();
+  return Navigator.pop(context);
 }
 
 _firstTime() async {

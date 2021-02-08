@@ -25,7 +25,7 @@ class _ScaleThisState extends State<ScaleThis> with TickerProviderStateMixin {
 
     _animation = CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeOutCirc,
+      curve: Curves.bounceOut,
     );
 
     _controller.forward();
