@@ -55,7 +55,7 @@ class WallImage extends ConsumerWidget {
     else
       return Container(
         padding: const EdgeInsets.all(8),
-        width: constraints.maxWidth / 2,
+        width: constraints.maxWidth / 1.8,
         height: constraints.maxHeight / 1.8,
         child: ClipRRect(
           borderRadius: fixedValues.fixedCardRadius,
