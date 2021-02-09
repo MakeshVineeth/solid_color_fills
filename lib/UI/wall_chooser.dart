@@ -73,9 +73,12 @@ class WallChooser extends ConsumerWidget {
                                                 .elementAt(index)
                                                 .value),
                                         child: IgnorePointer(
-                                          child: Text(buttons.entries
-                                              .elementAt(index)
-                                              .key),
+                                          child: Text(
+                                            buttons.entries
+                                                .elementAt(index)
+                                                .key,
+                                            textAlign: TextAlign.center,
+                                          ),
                                         ),
                                       ),
                                       SizedBox(height: 5),

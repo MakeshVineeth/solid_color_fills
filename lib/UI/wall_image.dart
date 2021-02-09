@@ -44,7 +44,7 @@ class WallImage extends ConsumerWidget {
 
     if (isHorizontal)
       return Container(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         width: 300,
         height: constraints.maxHeight / 2,
         child: ClipRRect(
@@ -54,8 +54,9 @@ class WallImage extends ConsumerWidget {
       );
     else
       return Container(
-        padding: EdgeInsets.all(8),
-        height: constraints.maxHeight / 1.7,
+        padding: const EdgeInsets.all(8),
+        width: constraints.maxWidth / 2,
+        height: constraints.maxHeight / 2,
         child: ClipRRect(
           borderRadius: fixedValues.fixedCardRadius,
           child: child,

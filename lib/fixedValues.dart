@@ -21,7 +21,7 @@ class FixedValues {
   final Map colorsList = {
     'Amber': Colors.amber,
     'OnePlus Red': Color(0xffeb0029),
-    'Yellow': Colors.yellow,
+    'Midnight Blue': Color(0xff2c3e50),
     'Red': Colors.red,
     'Green': Colors.green,
     'Pitch Black': Colors.black,
