@@ -86,7 +86,7 @@ class WallChooser extends ConsumerWidget {
                                   )),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 15),
                       Text(
                         'Note: Lockscreen wallpaper access is restricted to third-party apps on some systems like MIUI, realme UI etc.',
                         textAlign: TextAlign.center,
