@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/database/commons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';

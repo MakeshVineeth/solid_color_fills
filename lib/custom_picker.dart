@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/material_picker_widget.dart';
 import 'package:solid_color_fills/UI/current_color_card.dart';
 import 'package:solid_color_fills/UI/advanced_color_picker.dart';

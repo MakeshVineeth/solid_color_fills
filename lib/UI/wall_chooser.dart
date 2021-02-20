@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/alertMsg.dart';
 import 'package:solid_color_fills/UI/database/commons.dart';
 import 'package:solid_color_fills/UI/database/main_image_functions.dart';
@@ -84,6 +84,14 @@ class WallChooser extends ConsumerWidget {
                                       SizedBox(height: 5),
                                     ],
                                   )),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Note: Lockscreen wallpaper access is restricted to third-party apps on some systems like MIUI, realme UI etc.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
