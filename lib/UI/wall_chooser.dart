@@ -20,6 +20,7 @@ class WallChooser extends ConsumerWidget {
     'Set As Home Screen': WallpaperManager.HOME_SCREEN,
     'Set As Lock Screen': WallpaperManager.LOCK_SCREEN,
     'Set As Both': WallpaperManager.BOTH_SCREENS,
+    'Open in Gallery': 4,
   };
 
   @override
@@ -88,7 +89,7 @@ class WallChooser extends ConsumerWidget {
                       ),
                       SizedBox(height: 15),
                       Text(
-                        'Note: Lockscreen wallpaper access is restricted to third-party apps on some systems like MIUI, realme UI etc.',
+                        'Note: Use the Open in Gallery option if you\'re having troubles changing the lock screen wallpaper.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
@@ -138,7 +139,11 @@ class WallChooser extends ConsumerWidget {
         return;
       }
 
-      bool val = await context.read(imageSetter).state.setNow(location);
+      bool val =
+          await context.read(imageSetter).state.setNow(location: location);
+
+      if (location == 4) return;
+
       if (val)
         ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
       else

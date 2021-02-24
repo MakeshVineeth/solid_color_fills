@@ -6,6 +6,7 @@ import 'package:solid_color_fills/UI/database/commons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:wallpaper_manager/wallpaper_manager.dart';
+import 'package:open_file/open_file.dart';
 
 final imageProvision = FutureProvider<Uint8List>((ref) async {
   Uint8List uint8list;
@@ -39,7 +40,7 @@ class SetImage {
   Uint8List pngBytes;
   SetImage(this.pngBytes);
 
-  Future<bool> setNow(int location) async {
+  Future<bool> setNow({@required int location, bool openFile = false}) async {
     bool isDone = false;
     String tempPath = (await getTemporaryDirectory()).path;
     String filePath = tempPath + '/temp.png';
@@ -47,15 +48,20 @@ class SetImage {
 
     if (pngBytes != null) {
       await file.writeAsBytes(pngBytes);
-      String result =
-          await WallpaperManager.setWallpaperFromFile(filePath, location);
 
-      if (result.contains('set'))
-        isDone = true;
-      else
-        isDone = false;
+      if (location == 4) {
+        await OpenFile.open(filePath);
+      } else {
+        String result =
+            await WallpaperManager.setWallpaperFromFile(filePath, location);
 
-      file.delete();
+        if (result.contains('set'))
+          isDone = true;
+        else
+          isDone = false;
+
+        file.delete();
+      }
     }
 
     return isDone;
