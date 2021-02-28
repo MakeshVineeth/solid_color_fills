@@ -6,7 +6,7 @@ import 'package:solid_color_fills/UI/database/commons.dart';
 import 'package:solid_color_fills/UI/database/helperFunctions.dart';
 
 class ColorItem extends StatelessWidget {
-  final MapEntry mapEntry;
+  final mapEntry;
 
   ColorItem({@required this.mapEntry});
   final FixedValues fixedValues = FixedValues();
@@ -25,7 +25,7 @@ class ColorItem extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(6, 6, 6, 30),
               child: ClipRRect(
                 borderRadius: fixedValues.fixedCardRadius,
-                child: ColoredBox(color: mapEntry.value),
+                child: ColoredBox(color: returnColorItem()),
               ),
             ),
             footer: Center(
@@ -43,9 +43,18 @@ class ColorItem extends StatelessWidget {
     );
   }
 
+  Color returnColorItem() {
+    if (mapEntry.value is String) {
+      String hexCodeStr = mapEntry.value.toString().substring(1);
+      String color = '0xFF$hexCodeStr';
+      return Color(int.tryParse(color));
+    } else
+      return mapEntry.value;
+  }
+
   void changeColor(BuildContext context) {
     context.read(commonProvider).changeColors(
-          colorValue: mapEntry.value,
+          colorValue: returnColorItem(),
           colorString: mapEntry.key,
         );
     openWallChooser(context);

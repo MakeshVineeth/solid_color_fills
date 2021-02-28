@@ -31,7 +31,8 @@ class WallChooser extends ConsumerWidget {
       body: LayoutBuilder(
         builder: (context, constraints) => ListView(
           physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          cacheExtent: 2000,
           children: [
             Container(
               padding: const EdgeInsets.all(20),

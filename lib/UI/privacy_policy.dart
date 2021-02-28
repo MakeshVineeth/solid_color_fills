@@ -44,8 +44,8 @@ class PrivacyPolicy extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
+              physics: AlwaysScrollableScrollPhysics(
+                  parent: BouncingScrollPhysics()),
               child: Column(
                 children: [
                   paraText(initial),
