@@ -16,7 +16,7 @@ class WallChooser extends ConsumerWidget {
       SnackBar(content: Text('Oops, An Error has Occurred!'));
   final FixedValues fixedValues = FixedValues();
 
-  final Map buttons = {
+  final Map<String, int> buttons = {
     'Set As Home Screen': WallpaperManager.HOME_SCREEN,
     'Set As Lock Screen': WallpaperManager.LOCK_SCREEN,
     'Set As Both': WallpaperManager.BOTH_SCREENS,

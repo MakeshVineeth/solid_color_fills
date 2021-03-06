@@ -6,9 +6,7 @@ import 'package:solid_color_fills/fixedValues.dart';
 import 'package:solid_color_fills/scaffoldHome.dart';
 import 'package:theme_provider/theme_provider.dart';
 
-void main() {
-  runApp(ProviderScope(child: MaterialHome()));
-}
+void main() => runApp(ProviderScope(child: MaterialHome()));
 
 class MaterialHome extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();

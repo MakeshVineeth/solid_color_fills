@@ -83,15 +83,13 @@ class FixedValues {
         shape: roundShape,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(bg),
-        foregroundColor: MaterialStateProperty.all(fg),
-        padding: MaterialStateProperty.all(EdgeInsets.all(20)),
-        shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: fixedCardRadius)),
-        elevation: MaterialStateProperty.all(elevation),
-        overlayColor: MaterialStateProperty.all(
-            (isDark) ? Colors.black12 : Colors.grey[100]),
+          style: ElevatedButton.styleFrom(
+        onPrimary: fg,
+        primary: bg,
+        padding: EdgeInsets.all(20),
+        shape: RoundedRectangleBorder(borderRadius: fixedCardRadius),
+        elevation: elevation,
+        enableFeedback: true,
       )),
     );
 

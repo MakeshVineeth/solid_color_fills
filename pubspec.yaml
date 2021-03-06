@@ -15,7 +15,7 @@ dependencies:
   flutter_animator: ^2.1.0
   flutter_colorpicker: ^0.3.4
   flutter_material_color_picker: ^1.0.5
-  flutter_riverpod: ^0.12.1
+  flutter_riverpod: ^0.13.1
   flutter_statusbarcolor: ^0.2.3
   introduction_screen: ^1.0.9
   modal_bottom_sheet: ^1.0.0+1
