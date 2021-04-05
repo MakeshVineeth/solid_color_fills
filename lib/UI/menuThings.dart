@@ -50,6 +50,7 @@ class MenuThings extends StatelessWidget {
       bool forceWebView = false,
       bool enableJavaScript = false}) async {
     try {
+      url = Uri.encodeFull(url);
       if (await canLaunch(url))
         await launch(url,
             forceWebView: forceWebView, enableJavaScript: enableJavaScript);
