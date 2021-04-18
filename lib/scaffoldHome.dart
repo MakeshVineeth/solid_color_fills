@@ -42,8 +42,14 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
     _firstLaunch();
   }
 
-  void changeStatusBarColor() =>
-      FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
+  void changeStatusBarColor() {
+    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+
+    FlutterStatusbarcolor.setNavigationBarColor(
+        isLightTheme ? Colors.white : FixedValues.bottomNavBg);
+    FlutterStatusbarcolor.setNavigationBarWhiteForeground(!isLightTheme);
+  }
 
   int _currentIndex = 0;
 

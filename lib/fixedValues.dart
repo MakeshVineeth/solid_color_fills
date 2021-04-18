@@ -16,6 +16,7 @@ class FixedValues {
   final lightThemeDesc = 'Light Theme';
   final darkThemeId = 'dark_theme';
   final darkThemeDesc = 'Dark Theme';
+  static final Color bottomNavBg = Colors.grey[900];
 
   // List of Colors
   final Map colorsList = {
@@ -73,7 +74,7 @@ class FixedValues {
         ),
       ),
       bottomAppBarTheme: BottomAppBarTheme(
-        color: (isDark) ? Colors.grey[900] : bg,
+        color: (isDark) ? bottomNavBg : bg,
         elevation: elevation,
       ),
       cardColor: bg,
