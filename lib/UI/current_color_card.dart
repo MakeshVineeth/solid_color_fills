@@ -11,7 +11,7 @@ class CurrentColorCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final object = watch(commonProvider.state);
+    final object = watch(commonProvider);
 
     return Card(
       child: InkWell(

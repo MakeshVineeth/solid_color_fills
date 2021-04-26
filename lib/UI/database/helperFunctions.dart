@@ -24,7 +24,7 @@ void openWallChooser(BuildContext context) {
     if (currentState.state.width != newSize.width) currentState.state = newSize;
   }
 
-  final color = context.read(commonProvider.state).color;
+  final color = context.read(commonProvider).color;
   if (color != null && color != Colors.transparent)
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => WallChooser()));

@@ -9,23 +9,23 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  animations: ^1.1.2
-  convex_bottom_bar: ^2.6.0
+  animations: ^2.0.0
+  convex_bottom_bar: ^3.0.0
   fluentui_system_icons: ^1.1.89
-  flutter_animator: ^2.1.0
-  flutter_colorpicker: ^0.3.4
+  flutter_animator: ^3.1.1
+  flutter_colorpicker: ^0.4.0
   flutter_material_color_picker: ^1.0.5
-  flutter_riverpod: ^0.13.1
+  flutter_riverpod: ^0.14.0+2
   flutter_statusbarcolor: ^0.2.3
-  introduction_screen: ^1.0.9
-  modal_bottom_sheet: ^1.0.0+1
+  introduction_screen: ^2.1.0
+  modal_bottom_sheet: ^2.0.0
   open_file: ^3.0.3
-  path_provider: ^1.6.24
-  shared_preferences: ^0.5.12+4
+  path_provider: ^2.0.1
+  shared_preferences: ^2.0.5
   system_properties: ^0.0.1
-  theme_provider: ^0.4.0+1
-  transparent_image: ^1.0.0
-  url_launcher: ^5.7.10
+  theme_provider: ^0.5.0
+  transparent_image: ^2.0.0
+  url_launcher: ^6.0.3
   wallpaper_manager: ^1.0.10
 
 dev_dependencies:

@@ -46,7 +46,7 @@ class _AdvancedColorPickerState extends State<AdvancedColorPicker> {
   }
 
   void onTapping(BuildContext context) {
-    context.read(commonProvider).changeColors(
+    context.read(commonProvider.notifier).changeColors(
           colorValue: _color,
           colorString: _color.toString(),
         );

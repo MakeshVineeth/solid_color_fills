@@ -13,10 +13,11 @@ class MaterialPickerWidget extends StatelessWidget {
       allowShades: true,
       onlyShadeSelection: true,
       physics: BouncingScrollPhysics(),
-      onColorChange: (Color color) => context.read(commonProvider).changeColors(
-            colorValue: color,
-            colorString: color.toString(),
-          ),
+      onColorChange: (Color color) =>
+          context.read(commonProvider.notifier).changeColors(
+                colorValue: color,
+                colorString: color.toString(),
+              ),
     );
   }
 }

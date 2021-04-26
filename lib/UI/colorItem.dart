@@ -53,7 +53,7 @@ class ColorItem extends StatelessWidget {
   }
 
   void changeColor(BuildContext context) {
-    context.read(commonProvider).changeColors(
+    context.read(commonProvider.notifier).changeColors(
           colorValue: returnColorItem(),
           colorString: mapEntry.key,
         );

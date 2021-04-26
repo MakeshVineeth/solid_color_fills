@@ -10,7 +10,7 @@ import 'package:open_file/open_file.dart';
 
 final imageProvision = FutureProvider<Uint8List>((ref) async {
   Uint8List uint8list;
-  Color color = ref.watch(commonProvider.state).color;
+  Color color = ref.watch(commonProvider).color;
   final screen = ref.watch(screenSize).state;
 
   if (color != null) {

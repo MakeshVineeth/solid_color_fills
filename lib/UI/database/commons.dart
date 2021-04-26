@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final commonProvider =
-    StateNotifierProvider<ColorProvider>((ref) => ColorProvider());
+final commonProvider = StateNotifierProvider<ColorProvider, ColorDetails>(
+    (ref) => ColorProvider());
 
 class ColorProvider extends StateNotifier<ColorDetails> {
   static final _initialColor = Colors.transparent;

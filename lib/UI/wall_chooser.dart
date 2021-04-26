@@ -25,7 +25,7 @@ class WallChooser extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final object = context.read(commonProvider.state);
+    final object = context.read(commonProvider);
     return Scaffold(
       appBar: AppBar(title: Text('Wallpaper Confirmation')),
       body: LayoutBuilder(
