@@ -4,25 +4,25 @@ Solid Color Fills
 An Open-Source app that can set your favourite color as Homescreen or Lockscreen Wallpaper. **Make your device colorful using Solid Color Fills!**
 
 
-|                                Collections                                |                                Color Picker                                |
-| :-----------------------------------------------------------------------: | :------------------------------------------------------------------------: |
-| <img src="assets/screenshots/Collections.png" alt="drawing" width="200"/> | <img src="assets/screenshots/Color_Picker.png" alt="drawing" width="200"/> |
+|                                         Collections                                          |                                       Color Picker                                       |
+| :------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: |
+| <img src="assets/screenshots/Collections.png" alt="Image of Color Collections" width="200"/> | <img src="assets/screenshots/Color_Picker.png" alt="Image of Color Picker" width="200"/> |
 
-|                             Advanced Color Picker                              |                             Wallpaper Selection                             |
-| :----------------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
-| <img src="assets/screenshots/Adv_Color_Picker.png" alt="drawing" width="200"/> | <img src="assets/screenshots/Set_Wallpaper.png" alt="drawing" width="200"/> |
+|                                          Advanced Color Picker                                          |                                      Wallpaper Selection                                       |
+| :-----------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
+| <img src="assets/screenshots/Adv_Color_Picker.png" alt="Advanced Color Picker Screenshot" width="200"/> | <img src="assets/screenshots/Set_Wallpaper.png" alt="Wallpaper Selection Window" width="200"/> |
 
 
 Features
 ------
-* Set any solid color as your device wallpaper.
+* Set any Solid Color as your Device Wallpaper.
 * Open Source and Privacy Friendly.
 * Minimalistic and Pleasant UI.
 * Toggle Light/Dark Theme for the app.
 * Various Cherry-Picked Colors to choose from.
 * Flexible options like Set as Home Screen only, Open Image in Gallery etc.
 * Advanced Color Pickers.
-* Built with Latest Flutter 2.
+* Built with Latest [Flutter](https://flutter.dev) 2.
 
 
 Download
