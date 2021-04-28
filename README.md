@@ -4,13 +4,13 @@ Solid Color Fills
 An Open-Source app that can set your favourite color as Homescreen or Lockscreen Wallpaper. **Make your device colorful using Solid Color Fills!**
 
 
-Collections                |  Color Picker
-:-------------------------:|:-------------------------:
-![](assets/screenshots/Collections.jpg)  |  ![](assets/screenshots/Color_Picker.jpg)
+|               Collections               |               Color Picker               |
+| :-------------------------------------: | :--------------------------------------: |
+| ![](assets/screenshots/Collections.jpg) | ![](assets/screenshots/Color_Picker.jpg) |
 
-Advanced Color Picker                |  Wallpaper Selection
-:-------------------------:|:-------------------------:
-![](assets/screenshots/Adv_Color_Picker.jpg)  |  ![](assets/screenshots/Set_Wallpaper.jpg)
+|            Advanced Color Picker             |            Wallpaper Selection            |
+| :------------------------------------------: | :---------------------------------------: |
+| ![](assets/screenshots/Adv_Color_Picker.jpg) | ![](assets/screenshots/Set_Wallpaper.jpg) |
 
 
 Features
