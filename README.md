@@ -4,6 +4,7 @@ Solid Color Fills
 An Open-Source app that can set your favourite color as Homescreen or Lockscreen Wallpaper. **Make your device colorful using Solid Color Fills!**
 
 
+
 |                                         Collections                                          |                                       Color Picker                                       |
 | :------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: |
 | <img src="assets/screenshots/Collections.png" alt="Image of Color Collections" width="200"/> | <img src="assets/screenshots/Color_Picker.png" alt="Image of Color Picker" width="200"/> |
@@ -32,7 +33,7 @@ Download
 
 Notes
 ------
-Set as Lock Screen wallpaper does not work in some systems like MIUI, Realme OS, etc due to system-level restrictions. In such scenarios, you can try open the image in System Gallery app and set as Wallpaper.
+Set as Lock Screen wallpaper does not work in some systems like MIUI, Realme OS, etc due to system-level restrictions. In such scenarios, you can try open the image in System/Stock Gallery app and set as Wallpaper.
 
 
 Support Me
