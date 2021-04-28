@@ -6,11 +6,11 @@ An Open-Source app that can set your favourite color as Homescreen or Lockscreen
 
 |               Collections               |               Color Picker               |
 | :-------------------------------------: | :--------------------------------------: |
-| ![](assets/screenshots/Collections.png) | ![](assets/screenshots/Color_Picker.png) |
+| ![](assets/screenshots/Collections.png=250px) | ![](assets/screenshots/Color_Picker.png=250px) |
 
 |            Advanced Color Picker             |            Wallpaper Selection            |
 | :------------------------------------------: | :---------------------------------------: |
-| ![](assets/screenshots/Adv_Color_Picker.png) | ![](assets/screenshots/Set_Wallpaper.png) |
+| ![](assets/screenshots/Adv_Color_Picker.png=250px) | ![](assets/screenshots/Set_Wallpaper.png=250px) |
 
 
 Features
@@ -22,7 +22,7 @@ Features
 * Various Cherry-Picked Colors to choose from.
 * Flexible options like Set as Home Screen only, Open Image in Gallery etc.
 * Advanced Color Pickers.
-* Built with Flutter 2.
+* Built with Latest Flutter 2.
 
 
 Download
@@ -33,6 +33,11 @@ Download
 Notes
 ------
 Set as Lock Screen wallpaper does not work in some systems like MIUI, Realme OS, etc due to system-level restrictions. In such scenarios, you can try open the image in System Gallery app and set as Wallpaper.
+
+
+Support Me
+------
+Motivate me by downloading the app directly from Play Store and please write a nice review, Thank you 😃
 
 
 Credits
