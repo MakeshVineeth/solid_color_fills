@@ -4,13 +4,13 @@ Solid Color Fills
 An Open-Source app that can set your favourite color as Homescreen or Lockscreen Wallpaper. **Make your device colorful using Solid Color Fills!**
 
 
-|                                Collections                                |                    Color Picker                    |
-| :-----------------------------------------------------------------------: | :------------------------------------------------: |
-| <img src="assets/screenshots/Collections.png" alt="drawing" width="200"/> | ![test](assets/screenshots/Color_Picker.png=250px) |
+|                                Collections                                |                                Color Picker                                |
+| :-----------------------------------------------------------------------: | :------------------------------------------------------------------------: |
+| <img src="assets/screenshots/Collections.png" alt="drawing" width="200"/> | <img src="assets/screenshots/Color_Picker.png" alt="drawing" width="200"/> |
 
-|               Advanced Color Picker                |               Wallpaper Selection               |
-| :------------------------------------------------: | :---------------------------------------------: |
-| ![](assets/screenshots/Adv_Color_Picker.png=250px) | ![](assets/screenshots/Set_Wallpaper.png=250px) |
+|                             Advanced Color Picker                              |                             Wallpaper Selection                             |
+| :----------------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
+| <img src="assets/screenshots/Adv_Color_Picker.png" alt="drawing" width="200"/> | <img src="assets/screenshots/Set_Wallpaper.png" alt="drawing" width="200"/> |
 
 
 Features
@@ -27,7 +27,7 @@ Features
 
 Download
 ------
-<a href='https://play.google.com/store/apps/details?id=com.makeshtech.solid_color_fills&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+<a href='https://play.google.com/store/apps/details?id=com.makeshtech.solid_color_fills&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="100"/></a>
 
 
 Notes
