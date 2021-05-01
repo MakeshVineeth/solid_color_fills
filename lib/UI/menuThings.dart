@@ -32,7 +32,6 @@ class MenuThings extends StatelessWidget {
           title: 'Privacy Policy',
           function: () => launchUrl(
             url: 'https://makeshvineeth.github.io/privacy_policy/',
-            forceWebView: true,
           ),
           context: context,
         ),
