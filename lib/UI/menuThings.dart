@@ -30,7 +30,10 @@ class MenuThings extends StatelessWidget {
         menuItem(
           icon: FluentIcons.shield_24_regular,
           title: 'Privacy Policy',
-          function: () => Navigator.pushNamed(context, '/privacy'),
+          function: () => launchUrl(
+            url: 'https://makeshvineeth.github.io/privacy_policy/',
+            forceWebView: true,
+          ),
           context: context,
         ),
         menuItem(

@@ -126,7 +126,7 @@ packages:
       name: fluentui_system_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.120"
+    version: "1.1.121"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -173,7 +173,7 @@ packages:
       name: flutter_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0+2"
+    version: "0.14.0+3"
   flutter_statusbarcolor:
     dependency: "direct main"
     description:
@@ -351,7 +351,7 @@ packages:
       name: riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0+1"
+    version: "0.14.0+3"
   shared_preferences:
     dependency: "direct main"
     description:

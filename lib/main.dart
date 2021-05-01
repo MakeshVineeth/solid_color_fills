@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/intro_screen.dart';
-import 'package:solid_color_fills/UI/privacy_policy.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:solid_color_fills/scaffoldHome.dart';
 import 'package:theme_provider/theme_provider.dart';
@@ -40,7 +39,6 @@ class MaterialHome extends StatelessWidget {
             routes: {
               '/': (themeContext) => ScaffoldHome(),
               '/intro': (themeContext) => IntroScreen(),
-              '/privacy': (themeContext) => PrivacyPolicy(),
             },
           ),
         ),
