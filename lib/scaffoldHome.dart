@@ -1,5 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solid_color_fills/UI/menuThings.dart';
 import 'package:solid_color_fills/fixedValues.dart';
@@ -9,7 +10,6 @@ import 'package:solid_color_fills/UI/fade_indexed_stack.dart';
 import 'package:solid_color_fills/custom_picker.dart';
 import 'package:solid_color_fills/floating_modal.dart';
 import 'package:solid_color_fills/home_tab.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class ScaffoldHome extends StatefulWidget {
   @override
@@ -43,12 +43,19 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
   }
 
   void changeStatusBarColor() {
-    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
     bool isLightTheme = Theme.of(context).brightness == Brightness.light;
 
-    FlutterStatusbarcolor.setNavigationBarColor(
-        isLightTheme ? Colors.white : FixedValues.bottomNavBg);
-    FlutterStatusbarcolor.setNavigationBarWhiteForeground(!isLightTheme);
+    SystemUiOverlayStyle style = SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness:
+          isLightTheme ? Brightness.dark : Brightness.light,
+      systemNavigationBarColor:
+          isLightTheme ? Colors.white : FixedValues.bottomNavBg,
+      systemNavigationBarIconBrightness:
+          isLightTheme ? Brightness.dark : Brightness.light,
+    );
+
+    SystemChrome.setSystemUIOverlayStyle(style);
   }
 
   int _currentIndex = 0;
