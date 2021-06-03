@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/intro_screen.dart';
 import 'package:solid_color_fills/fixedValues.dart';
@@ -15,7 +16,8 @@ class MaterialHome extends StatelessWidget {
     return ThemeProvider(
       saveThemesOnChange: true,
       loadThemeOnInit: true,
-      defaultThemeId: Theme.of(context).brightness == Brightness.light
+      defaultThemeId: SchedulerBinding.instance.window.platformBrightness ==
+              Brightness.light
           ? fixedValues.lightThemeId
           : fixedValues.darkThemeId,
       themes: [
