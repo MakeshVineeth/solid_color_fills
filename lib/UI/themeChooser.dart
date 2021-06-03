@@ -26,10 +26,6 @@ class ThemeChooser extends StatelessWidget {
     );
   }
 
-  void setTheme(BuildContext context, String themeID) {
-    String currentTheme = ThemeProvider.themeOf(context).id;
-
-    if (!currentTheme.contains(themeID))
+  void setTheme(BuildContext context, String themeID) =>
       ThemeProvider.controllerOf(context).setTheme(themeID);
-  }
 }
