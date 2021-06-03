@@ -33,66 +33,72 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
   _firstLaunch() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool check = prefs.getBool('first_launch') ?? true;
-    if (check) Navigator.pushNamed(context, '/intro');
+    if (check) await Navigator.pushNamed(context, '/intro');
   }
 
   @override
   void initState() {
-    super.initState();
     _firstLaunch();
+    super.initState();
   }
 
-  void changeStatusBarColor() {
+  SystemUiOverlayStyle changeStatusBarColor() {
     bool isLightTheme = Theme.of(context).brightness == Brightness.light;
 
-    SystemUiOverlayStyle style = SystemUiOverlayStyle(
+    SystemUiOverlayStyle light = SystemUiOverlayStyle.light.copyWith(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness:
-          isLightTheme ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor:
-          isLightTheme ? Colors.white : FixedValues.bottomNavBg,
-      systemNavigationBarIconBrightness:
-          isLightTheme ? Brightness.dark : Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Colors.white,
+      systemNavigationBarIconBrightness: Brightness.dark,
     );
 
-    SystemChrome.setSystemUIOverlayStyle(style);
+    SystemUiOverlayStyle dark = SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarColor: FixedValues.bottomNavBg,
+      systemNavigationBarIconBrightness: Brightness.light,
+    );
+
+    return isLightTheme ? light : dark;
   }
 
   int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    changeStatusBarColor();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(fixedValues.appTitle),
-        actions: [menuButton()],
-      ),
-      body: FadeIndexedStack(
-        index: _currentIndex,
-        children: widgetsList,
-      ),
-      bottomNavigationBar: ConvexAppBar(
-        backgroundColor: Theme.of(context).bottomAppBarTheme.color,
-        color: Theme.of(context).primaryColor,
-        curve: Curves.linear,
-        activeColor: Theme.of(context).primaryColor,
-        elevation: Theme.of(context).bottomAppBarTheme.elevation,
-        height: (MediaQuery.of(context).orientation == Orientation.portrait)
-            ? 60
-            : 55,
-        initialActiveIndex: _currentIndex,
-        items: bottomItems.entries
-            .map((entry) => tabItemCustom.getTabItem(
-                  title: entry.key,
-                  icon: bottomItems[entry.key],
-                ))
-            .toList(),
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: changeStatusBarColor(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(fixedValues.appTitle),
+          actions: [menuButton()],
+        ),
+        body: FadeIndexedStack(
+          index: _currentIndex,
+          children: widgetsList,
+        ),
+        bottomNavigationBar: ConvexAppBar(
+          backgroundColor: Theme.of(context).bottomAppBarTheme.color,
+          color: Theme.of(context).primaryColor,
+          curve: Curves.linear,
+          activeColor: Theme.of(context).primaryColor,
+          elevation: Theme.of(context).bottomAppBarTheme.elevation,
+          height: (MediaQuery.of(context).orientation == Orientation.portrait)
+              ? 60
+              : 55,
+          initialActiveIndex: _currentIndex,
+          items: bottomItems.entries
+              .map((entry) => tabItemCustom.getTabItem(
+                    title: entry.key,
+                    icon: bottomItems[entry.key],
+                  ))
+              .toList(),
+          onTap: (int index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+        ),
       ),
     );
   }

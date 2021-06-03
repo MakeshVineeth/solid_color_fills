@@ -15,6 +15,9 @@ class MaterialHome extends StatelessWidget {
     return ThemeProvider(
       saveThemesOnChange: true,
       loadThemeOnInit: true,
+      defaultThemeId: Theme.of(context).brightness == Brightness.light
+          ? fixedValues.lightThemeId
+          : fixedValues.darkThemeId,
       themes: [
         AppTheme(
           id: fixedValues.lightThemeId,

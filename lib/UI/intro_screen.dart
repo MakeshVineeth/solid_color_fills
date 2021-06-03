@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
 class IntroScreen extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
-  final SystemUiOverlayStyle style =
-      SystemUiOverlayStyle(statusBarColor: Colors.transparent);
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(style);
-
     return Scaffold(
       body: SafeArea(
         child: IntroductionScreen(
