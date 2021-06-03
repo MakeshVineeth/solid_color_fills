@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FixedValues {
   final appTitle = 'Solid Color Fills';
@@ -95,5 +96,25 @@ class FixedValues {
     );
 
     return themeData;
+  }
+
+  static SystemUiOverlayStyle changeNavBarColor(BuildContext context) {
+    SystemUiOverlayStyle _light = SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.white,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    );
+
+    SystemUiOverlayStyle _dark = SystemUiOverlayStyle(
+      systemNavigationBarColor: FixedValues.bottomNavBg,
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    );
+
+    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
+    SystemChrome.setSystemUIOverlayStyle(isLightTheme ? _light : _dark);
+    return isLightTheme ? _light : _dark;
   }
 }

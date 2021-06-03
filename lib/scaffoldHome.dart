@@ -42,32 +42,12 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
     super.initState();
   }
 
-  SystemUiOverlayStyle changeStatusBarColor() {
-    bool isLightTheme = Theme.of(context).brightness == Brightness.light;
-
-    SystemUiOverlayStyle light = SystemUiOverlayStyle.light.copyWith(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: Colors.white,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    );
-
-    SystemUiOverlayStyle dark = SystemUiOverlayStyle.dark.copyWith(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: FixedValues.bottomNavBg,
-      systemNavigationBarIconBrightness: Brightness.light,
-    );
-
-    return isLightTheme ? light : dark;
-  }
-
   int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: changeStatusBarColor(),
+      value: FixedValues.changeNavBarColor(context),
       child: Scaffold(
         appBar: AppBar(
           title: Text(fixedValues.appTitle),

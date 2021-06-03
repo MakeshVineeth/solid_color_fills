@@ -14,17 +14,22 @@ class ThemeChooser extends StatelessWidget {
       children: [
         menuThings.menuItem(
           title: fixedValues.lightThemeDesc,
-          function: () => ThemeProvider.controllerOf(context)
-              .setTheme(fixedValues.lightThemeId),
+          function: () => setTheme(context, fixedValues.lightThemeId),
           context: context,
         ),
         menuThings.menuItem(
           title: fixedValues.darkThemeDesc,
-          function: () => ThemeProvider.controllerOf(context)
-              .setTheme(fixedValues.darkThemeId),
+          function: () => setTheme(context, fixedValues.darkThemeId),
           context: context,
         ),
       ],
     );
+  }
+
+  void setTheme(BuildContext context, String themeID) {
+    String currentTheme = ThemeProvider.themeOf(context).id;
+
+    if (!currentTheme.contains(themeID))
+      ThemeProvider.controllerOf(context).setTheme(themeID);
   }
 }
