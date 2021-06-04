@@ -14,23 +14,11 @@ class MaterialHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return ThemeProvider(
       saveThemesOnChange: true,
-      loadThemeOnInit: false,
-      onInitCallback: (controller, savedThemeFuture) async {
-        String savedTheme = await savedThemeFuture;
-
-        if (savedTheme != null) {
-          controller.setTheme(savedTheme);
-        } else {
-          Brightness platformBrightness =
-              SchedulerBinding.instance.window.platformBrightness;
-          String defaultTheme = platformBrightness == Brightness.light
-              ? fixedValues.lightThemeId
-              : fixedValues.darkThemeId;
-
-          controller.setTheme(defaultTheme);
-          controller.forgetSavedTheme();
-        }
-      },
+      loadThemeOnInit: true,
+      defaultThemeId: SchedulerBinding.instance.window.platformBrightness ==
+              Brightness.light
+          ? fixedValues.lightThemeId
+          : fixedValues.darkThemeId,
       themes: [
         AppTheme(
           id: fixedValues.lightThemeId,
