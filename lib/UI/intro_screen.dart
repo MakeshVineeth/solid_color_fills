@@ -6,6 +6,9 @@ import 'package:solid_color_fills/fixedValues.dart';
 
 class IntroScreen extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
+  final Function function;
+
+  IntroScreen({@required this.function});
 
   @override
   Widget build(BuildContext context) {
@@ -70,38 +73,38 @@ class IntroScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-Text textWidget(String text) {
-  return Text(
-    text,
-    style: const TextStyle(fontWeight: FontWeight.w600),
-  );
-}
+  void finishTask(BuildContext context) async {
+    await firstTime();
+    function();
+  }
 
-PageViewModel returnPage({@required title, @required body, @required path}) {
-  return PageViewModel(
-    title: title,
-    body: body,
-    image: Center(
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage(path),
+  Future<void> firstTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('first_launch', false);
+  }
+
+  Text textWidget(String text) {
+    return Text(
+      text,
+      style: const TextStyle(fontWeight: FontWeight.w600),
+    );
+  }
+
+  PageViewModel returnPage({@required title, @required body, @required path}) {
+    return PageViewModel(
+      title: title,
+      body: body,
+      image: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(path),
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
-
-void finishTask(BuildContext context) {
-  _firstTime();
-  return Navigator.pop(context);
-}
-
-_firstTime() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setBool('first_launch', false);
+    );
+  }
 }

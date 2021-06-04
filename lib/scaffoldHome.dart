@@ -1,7 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solid_color_fills/UI/menuThings.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -25,22 +24,10 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
     'Color Picker': FluentIcons.color_24_regular,
   };
 
-  final widgetsList = [
+  final widgetsList = <Widget>[
     HomeTab(),
     CustomColorPicker(),
   ];
-
-  _firstLaunch() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool check = prefs.getBool('first_launch') ?? true;
-    if (check) await Navigator.pushNamed(context, '/intro');
-  }
-
-  @override
-  void initState() {
-    _firstLaunch();
-    super.initState();
-  }
 
   int _currentIndex = 0;
 

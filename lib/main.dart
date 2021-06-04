@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:solid_color_fills/UI/intro_screen.dart';
+import 'package:solid_color_fills/UI/database/Wrapper.dart';
 import 'package:solid_color_fills/fixedValues.dart';
-import 'package:solid_color_fills/scaffoldHome.dart';
 import 'package:theme_provider/theme_provider.dart';
 
 void main() => runApp(ProviderScope(child: MaterialHome()));
@@ -52,11 +51,7 @@ class MaterialHome extends StatelessWidget {
             theme: ThemeProvider.themeOf(themeContext).data,
             title: fixedValues.appTitle,
             debugShowCheckedModeBanner: false,
-            initialRoute: '/',
-            routes: {
-              '/': (themeContext) => ScaffoldHome(),
-              '/intro': (themeContext) => IntroScreen(),
-            },
+            home: Wrapper(),
           ),
         ),
       ),
