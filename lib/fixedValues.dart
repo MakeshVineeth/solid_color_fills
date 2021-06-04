@@ -17,6 +17,7 @@ class FixedValues {
   final lightThemeDesc = 'Light Theme';
   final darkThemeId = 'dark_theme';
   final darkThemeDesc = 'Dark Theme';
+  final systemDefaultTheme = 'System Default';
   static final Color bottomNavBg = Colors.grey[900];
 
   // List of Colors
