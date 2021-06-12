@@ -43,15 +43,15 @@ class SetImage {
   Uint8List pngBytes;
   SetImage(this.pngBytes);
 
-  Future<bool> setNow({@required int location, bool openFile = false}) async {
+  Future<bool> setNow({@required int location}) async {
     // Returns true if success.
     try {
       bool isDone = false;
-      String tempPath = (await getTemporaryDirectory()).path;
-      String filePath = tempPath + '/temp.png';
-      File file = File(filePath);
 
       if (pngBytes != null) {
+        String tempPath = (await getTemporaryDirectory()).path;
+        String filePath = tempPath + '/temp.png';
+        File file = File(filePath);
         await file.writeAsBytes(pngBytes);
 
         if (location == 4) {

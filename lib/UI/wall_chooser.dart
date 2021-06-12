@@ -60,41 +60,34 @@ class WallChooser extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 5),
                       Container(
                         width: MediaQuery.of(context).orientation ==
                                 Orientation.portrait
                             ? constraints.maxWidth / 2
                             : constraints.maxWidth / 3,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: List.generate(
                               buttons.length,
-                              (index) => Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () => setImage(
-                                          context,
-                                          buttons.entries
-                                              .elementAt(index)
-                                              .value,
-                                        ),
-                                        child: IgnorePointer(
-                                          child: Text(
-                                            buttons.entries
-                                                .elementAt(index)
-                                                .key,
-                                            textAlign: TextAlign.center,
-                                          ),
+                              (index) => Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 3),
+                                    child: ElevatedButton(
+                                      onPressed: () => setImage(
+                                        context,
+                                        buttons.entries.elementAt(index).value,
+                                      ),
+                                      child: IgnorePointer(
+                                        child: Text(
+                                          buttons.entries.elementAt(index).key,
+                                          textAlign: TextAlign.center,
                                         ),
                                       ),
-                                      SizedBox(height: 5),
-                                    ],
+                                    ),
                                   )),
                         ),
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 12),
                       Text(
                         'Note: Use the Open in Gallery option if you\'re having troubles changing the lock screen wallpaper.',
                         textAlign: TextAlign.center,
@@ -125,12 +118,11 @@ class WallChooser extends ConsumerWidget {
     );
   }
 
-  void setImage(BuildContext context, int location) async {
+  Future<void> setImage(BuildContext context, int location) async {
     try {
       // Checks for MIUI device and displays Not Supported Message.
-      String miuiCheck = await SystemProperties.getSystemProperties(
-              "ro.miui.ui.version.name") ??
-          null;
+      String miuiCheck = await SystemProperties?.getSystemProperties(
+          "ro.miui.ui.version.name");
 
       if (miuiCheck != null &&
           miuiCheck.trim().isNotEmpty &&
@@ -147,16 +139,15 @@ class WallChooser extends ConsumerWidget {
         return;
       }
 
-      bool val =
-          await context.read(imageSetter).state.setNow(location: location);
+      context.read(imageSetter).state.setNow(location: location).then((val) {
+        // If location is 4, means to open the gallery, no need to display message.
+        if (location == 4) return;
 
-      // If location is 4, means to open the gallery, no need to display message.
-      if (location == 4) return;
-
-      if (val)
-        ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
-      else
-        ScaffoldMessenger.of(context).showSnackBar(snackBarError);
+        if (val)
+          ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
+        else
+          ScaffoldMessenger.of(context).showSnackBar(snackBarError);
+      });
     } catch (_) {}
   }
 }
