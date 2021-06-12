@@ -26,6 +26,7 @@ class WallChooser extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final object = context.read(commonProvider);
+
     return Scaffold(
       appBar: AppBar(title: Text('Wallpaper Confirmation')),
       body: LayoutBuilder(
@@ -121,6 +122,7 @@ class WallChooser extends ConsumerWidget {
 
   void setImage(BuildContext context, int location) async {
     try {
+      // Checks for MIUI device and displays Not Supported Message.
       String miuiCheck = await SystemProperties.getSystemProperties(
               "ro.miui.ui.version.name") ??
           null;
@@ -151,6 +153,6 @@ class WallChooser extends ConsumerWidget {
         ScaffoldMessenger.of(context).showSnackBar(snackBarError);
 
       HapticFeedback.vibrate();
-    } catch (e) {}
+    } catch (_) {}
   }
 }

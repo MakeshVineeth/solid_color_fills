@@ -7,11 +7,11 @@ An Open-Source app that can set your favourite color as Homescreen or Lockscreen
 
 |                                         Collections                                          |                                       Color Picker                                       |
 | :------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: |
-| <img src="assets/screenshots/Collections.png" alt="Image of Color Collections" width="200"/> | <img src="assets/screenshots/Color_Picker.png" alt="Image of Color Picker" width="200"/> |
+| <img src="screenshots/Collections.png" alt="Image of Color Collections" width="200"/> | <img src="screenshots/Color_Picker.png" alt="Image of Color Picker" width="200"/> |
 
 |                                          Advanced Color Picker                                          |                                      Wallpaper Selection                                       |
 | :-----------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
-| <img src="assets/screenshots/Adv_Color_Picker.png" alt="Advanced Color Picker Screenshot" width="200"/> | <img src="assets/screenshots/Set_Wallpaper.png" alt="Wallpaper Selection Window" width="200"/> |
+| <img src="screenshots/Adv_Color_Picker.png" alt="Advanced Color Picker Screenshot" width="200"/> | <img src="screenshots/Set_Wallpaper.png" alt="Wallpaper Selection Window" width="200"/> |
 
 
 Features

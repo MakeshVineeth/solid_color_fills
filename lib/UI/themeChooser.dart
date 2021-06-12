@@ -1,8 +1,7 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:solid_color_fills/UI/menuThings.dart';
 import 'package:solid_color_fills/fixedValues.dart';
-import 'package:theme_provider/theme_provider.dart';
 
 class ThemeChooser extends StatelessWidget {
   final MenuThings menuThings = MenuThings();
@@ -15,37 +14,23 @@ class ThemeChooser extends StatelessWidget {
       children: [
         menuThings.menuItem(
           title: fixedValues.lightThemeDesc,
-          function: () => setTheme(context, fixedValues.lightThemeId),
+          function: () => setTheme(context, AdaptiveThemeMode.light),
           context: context,
         ),
         menuThings.menuItem(
           title: fixedValues.darkThemeDesc,
-          function: () => setTheme(context, fixedValues.darkThemeId),
+          function: () => setTheme(context, AdaptiveThemeMode.dark),
           context: context,
         ),
         menuThings.menuItem(
           title: fixedValues.systemDefaultTheme,
-          function: () => setTheme(context, fixedValues.systemDefaultTheme),
+          function: () => setTheme(context, AdaptiveThemeMode.system),
           context: context,
         ),
       ],
     );
   }
 
-  void setTheme(BuildContext context, String themeID) {
-    ThemeController controller = ThemeProvider.controllerOf(context);
-
-    if (themeID.contains(fixedValues.systemDefaultTheme)) {
-      Brightness platformBrightness =
-          SchedulerBinding.instance.window.platformBrightness;
-
-      String defaultTheme = platformBrightness == Brightness.light
-          ? fixedValues.lightThemeId
-          : fixedValues.darkThemeId;
-
-      controller.setTheme(defaultTheme);
-      controller.forgetSavedTheme();
-    } else
-      controller.setTheme(themeID);
-  }
+  void setTheme(BuildContext context, AdaptiveThemeMode themeID) =>
+      AdaptiveTheme.of(context).setThemeMode(themeID);
 }

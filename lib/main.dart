@@ -1,47 +1,41 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/database/Wrapper.dart';
 import 'package:solid_color_fills/fixedValues.dart';
-import 'package:theme_provider/theme_provider.dart';
 
-void main() => runApp(ProviderScope(child: MaterialHome()));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final AdaptiveThemeMode savedTheme =
+      await AdaptiveTheme.getThemeMode() ?? AdaptiveThemeMode.system;
+  runApp(ProviderScope(child: MaterialHome(initialTheme: savedTheme)));
+}
 
 class MaterialHome extends StatelessWidget {
+  final AdaptiveThemeMode initialTheme;
+
+  MaterialHome({@required this.initialTheme});
+
   final FixedValues fixedValues = FixedValues();
 
   @override
   Widget build(BuildContext context) {
-    return ThemeProvider(
-      saveThemesOnChange: true,
-      loadThemeOnInit: true,
-      defaultThemeId: SchedulerBinding.instance.window.platformBrightness ==
-              Brightness.light
-          ? fixedValues.lightThemeId
-          : fixedValues.darkThemeId,
-      themes: [
-        AppTheme(
-          id: fixedValues.lightThemeId,
-          data: fixedValues.getTheme(
-              brightness: Brightness.light, context: context),
-          description: fixedValues.lightThemeDesc,
-        ),
-        AppTheme(
-          id: fixedValues.darkThemeId,
-          data: fixedValues.getTheme(
-              brightness: Brightness.dark, context: context),
-          description: fixedValues.darkThemeDesc,
-        ),
-      ],
-      child: ThemeConsumer(
-        child: Builder(
-          builder: (themeContext) => MaterialApp(
-            theme: ThemeProvider.themeOf(themeContext).data,
-            title: fixedValues.appTitle,
-            debugShowCheckedModeBanner: false,
-            home: Wrapper(),
-          ),
-        ),
+    return AdaptiveTheme(
+      light: fixedValues.getTheme(
+        brightness: Brightness.light,
+        context: context,
+      ),
+      dark: fixedValues.getTheme(
+        brightness: Brightness.dark,
+        context: context,
+      ),
+      initial: initialTheme,
+      builder: (theme, darkTheme) => MaterialApp(
+        theme: theme,
+        darkTheme: darkTheme,
+        title: fixedValues.appTitle,
+        debugShowCheckedModeBanner: false,
+        home: Wrapper(),
       ),
     );
   }

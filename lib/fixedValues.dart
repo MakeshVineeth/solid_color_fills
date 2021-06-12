@@ -13,9 +13,7 @@ class FixedValues {
   final colorTitleStyle = TextStyle(fontWeight: FontWeight.w600);
   final logoFile = 'logo.png';
 
-  final lightThemeId = 'light_theme';
   final lightThemeDesc = 'Light Theme';
-  final darkThemeId = 'dark_theme';
   final darkThemeDesc = 'Dark Theme';
   final systemDefaultTheme = 'System Default';
   static final Color bottomNavBg = Colors.grey[900];

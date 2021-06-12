@@ -14,18 +14,21 @@ final imageProvision = FutureProvider<Uint8List>((ref) async {
   final screen = ref.watch(screenSize).state;
 
   if (color != null) {
-    ui.PictureRecorder recorder = ui.PictureRecorder();
-    Canvas c = new Canvas(recorder);
-    c.drawColor(color, BlendMode.src); // etc
-    ui.Picture p = recorder.endRecording();
+    try {
+      ui.PictureRecorder recorder = ui.PictureRecorder();
+      Canvas c = Canvas(recorder);
+      c.drawColor(color, BlendMode.src); // etc
+      ui.Picture p = recorder.endRecording();
 
-    int width = screen.width; //context.size.width.round();
-    int height = screen.height; // context.size.height.round();
-    ui.Image image = await p.toImage(width, height);
-    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      int width = screen.width;
+      int height = screen.height;
+      ui.Image image = await p.toImage(width, height);
+      ByteData byteData =
+          await image.toByteData(format: ui.ImageByteFormat.png);
 
-    uint8list = byteData.buffer
-        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
+      uint8list = byteData.buffer
+          .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
+    } catch (_) {}
   }
 
   return uint8list;
@@ -41,29 +44,34 @@ class SetImage {
   SetImage(this.pngBytes);
 
   Future<bool> setNow({@required int location, bool openFile = false}) async {
-    bool isDone = false;
-    String tempPath = (await getTemporaryDirectory()).path;
-    String filePath = tempPath + '/temp.png';
-    File file = File(filePath);
+    // Returns true if success.
+    try {
+      bool isDone = false;
+      String tempPath = (await getTemporaryDirectory()).path;
+      String filePath = tempPath + '/temp.png';
+      File file = File(filePath);
 
-    if (pngBytes != null) {
-      await file.writeAsBytes(pngBytes);
+      if (pngBytes != null) {
+        await file.writeAsBytes(pngBytes);
 
-      if (location == 4) {
-        await OpenFile.open(filePath);
-      } else {
-        String result =
-            await WallpaperManager.setWallpaperFromFile(filePath, location);
+        if (location == 4) {
+          await OpenFile.open(filePath);
+        } else {
+          String result =
+              await WallpaperManager.setWallpaperFromFile(filePath, location);
 
-        if (result.contains('set'))
-          isDone = true;
-        else
-          isDone = false;
+          if (result.contains('set'))
+            isDone = true;
+          else
+            isDone = false;
 
-        file.delete();
+          file.delete();
+        }
       }
-    }
 
-    return isDone;
+      return isDone;
+    } catch (_) {
+      return false;
+    }
   }
 }
