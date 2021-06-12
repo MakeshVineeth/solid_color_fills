@@ -15,17 +15,18 @@ dependencies:
   fluentui_system_icons: ^1.1.126
   flutter_animator: ^3.1.1
   flutter_colorpicker: ^0.4.0
-  material_color_picker_wns: ^1.0.8
   flutter_riverpod: ^0.14.0+3
+  flutter_wallpaper_manager: ^0.0.3
   introduction_screen: ^2.1.0
+  material_color_picker_wns: ^1.0.8
   modal_bottom_sheet: ^2.0.0
   open_file: ^3.2.1
+  page_transition: ^2.0.2
   path_provider: ^2.0.2
   shared_preferences: ^2.0.6
   system_properties: ^0.0.1
   transparent_image: ^2.0.0
   url_launcher: ^6.0.5
-  wallpaper_manager: ^1.0.10
 
 dev_dependencies:
   flutter_test:

@@ -130,6 +130,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_wallpaper_manager:
+    dependency: "direct main"
+    description:
+      name: flutter_wallpaper_manager
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -198,6 +205,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.1"
+  page_transition:
+    dependency: "direct main"
+    description:
+      name: page_transition
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   path:
     dependency: transitive
     description:
@@ -434,13 +448,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  wallpaper_manager:
-    dependency: "direct main"
-    description:
-      name: wallpaper_manager
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.10"
   win32:
     dependency: transitive
     description:

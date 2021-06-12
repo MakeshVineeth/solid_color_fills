@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/alertMsg.dart';
 import 'package:solid_color_fills/UI/database/commons.dart';
 import 'package:solid_color_fills/UI/database/main_image_functions.dart';
 import 'package:solid_color_fills/UI/wall_image.dart';
-import 'package:wallpaper_manager/wallpaper_manager.dart';
+import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:system_properties/system_properties.dart';
 
 class WallChooser extends ConsumerWidget {
   final SnackBar snackBarSuccess =
-      SnackBar(content: Text('Yay! Wallpaper Successfully Set.'));
+      SnackBar(content: const Text('Yay! Wallpaper Successfully Set.'));
   final SnackBar snackBarError =
-      SnackBar(content: Text('Oops, An Error has Occurred!'));
+      SnackBar(content: const Text('Oops, An Error has Occurred!'));
   final FixedValues fixedValues = FixedValues();
 
   final Map<String, int> buttons = {
     'Set As Home Screen': WallpaperManager.HOME_SCREEN,
     'Set As Lock Screen': WallpaperManager.LOCK_SCREEN,
-    'Set As Both': WallpaperManager.BOTH_SCREENS,
+    'Set As Both': WallpaperManager.BOTH_SCREEN,
     'Open in Gallery': 4,
   };
 
@@ -44,7 +43,12 @@ class WallChooser extends ConsumerWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      colorWall(constraints: constraints),
+                      Hero(
+                        tag: object.colorTitle
+                            .toLowerCase()
+                            .replaceAll(' ', '_'),
+                        child: colorWall(constraints: constraints),
+                      ),
                       SizedBox(height: 5),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -71,10 +75,11 @@ class WallChooser extends ConsumerWidget {
                                     children: [
                                       ElevatedButton(
                                         onPressed: () => setImage(
-                                            context,
-                                            buttons.entries
-                                                .elementAt(index)
-                                                .value),
+                                          context,
+                                          buttons.entries
+                                              .elementAt(index)
+                                              .value,
+                                        ),
                                         child: IgnorePointer(
                                           child: Text(
                                             buttons.entries
@@ -126,18 +131,18 @@ class WallChooser extends ConsumerWidget {
       String miuiCheck = await SystemProperties.getSystemProperties(
               "ro.miui.ui.version.name") ??
           null;
-      miuiCheck = miuiCheck.trim();
 
       if (miuiCheck != null &&
-          miuiCheck.isNotEmpty &&
-          (location == WallpaperManager.BOTH_SCREENS ||
+          miuiCheck.trim().isNotEmpty &&
+          (location == WallpaperManager.BOTH_SCREEN ||
               location == WallpaperManager.LOCK_SCREEN)) {
         await showDialog(
           context: context,
           builder: (context) => AlertMsg(
-              title: 'MIUI Detected',
-              msg:
-                  'Due to MIUI Restrictions, Lockscreen Wallpaper cannot be changed by third-party apps, Please try \'Set as Home Screen\' instead.'),
+            title: 'MIUI Detected',
+            msg:
+                'Due to MIUI Restrictions, Lockscreen Wallpaper cannot be changed by third-party apps, Please try \'Set as Home Screen\' instead.',
+          ),
         );
         return;
       }
@@ -145,14 +150,13 @@ class WallChooser extends ConsumerWidget {
       bool val =
           await context.read(imageSetter).state.setNow(location: location);
 
+      // If location is 4, means to open the gallery, no need to display message.
       if (location == 4) return;
 
       if (val)
         ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
       else
         ScaffoldMessenger.of(context).showSnackBar(snackBarError);
-
-      HapticFeedback.vibrate();
     } catch (_) {}
   }
 }

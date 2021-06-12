@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ScaleThis extends StatefulWidget {
   final Widget child;
 
-  ScaleThis({@required this.child});
+  const ScaleThis({@required this.child});
 
   @override
   _ScaleThisState createState() => _ScaleThisState();

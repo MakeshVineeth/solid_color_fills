@@ -47,16 +47,19 @@ class MenuThings extends StatelessWidget {
     );
   }
 
-  launchUrl(
+  void launchUrl(
       {@required String url,
       bool forceWebView = false,
       bool enableJavaScript = false}) async {
     try {
       url = Uri.encodeFull(url);
       if (await canLaunch(url))
-        await launch(url,
-            forceWebView: forceWebView, enableJavaScript: enableJavaScript);
-    } catch (e) {}
+        await launch(
+          url,
+          forceWebView: forceWebView,
+          enableJavaScript: enableJavaScript,
+        );
+    } catch (_) {}
   }
 
   void showAbout(BuildContext context) => showAboutDialog(
@@ -78,47 +81,46 @@ class MenuThings extends StatelessWidget {
     @required String title,
     @required Function function,
     @required BuildContext context,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-      child: (icon != null)
-          ? TextButton.icon(
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0))),
-                foregroundColor: MaterialStateProperty.all(
-                    Theme.of(context).textTheme.button.color),
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-                function();
-              },
-              icon: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5.0),
-                child: Icon(
-                  icon,
+  }) =>
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+        child: (icon != null)
+            ? TextButton.icon(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0))),
+                  foregroundColor: MaterialStateProperty.all(
+                      Theme.of(context).textTheme.button.color),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  function();
+                },
+                icon: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
+                  child: Icon(
+                    icon,
+                  ),
+                ),
+                label: Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    height: 1,
+                  ),
+                ),
+              )
+            : MaterialButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                onPressed: () {
+                  Navigator.pop(context);
+                  function();
+                },
+                child: Text(
+                  title,
+                  style: TextStyle(fontWeight: FontWeight.w600),
                 ),
               ),
-              label: Text(
-                title,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  height: 1,
-                ),
-              ),
-            )
-          : MaterialButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
-              onPressed: () {
-                Navigator.pop(context);
-                function();
-              },
-              child: Text(
-                title,
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-            ),
-    );
-  }
+      );
 }

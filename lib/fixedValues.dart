@@ -19,7 +19,7 @@ class FixedValues {
   static final Color bottomNavBg = Colors.grey[900];
 
   // List of Colors
-  final Map colorsList = {
+  final Map<String, dynamic> colorsList = {
     'Amber': Colors.amber,
     'Red': Colors.red,
     'Green': Colors.green,
@@ -98,14 +98,14 @@ class FixedValues {
   }
 
   static SystemUiOverlayStyle changeNavBarColor(BuildContext context) {
-    SystemUiOverlayStyle _light = SystemUiOverlayStyle(
+    final SystemUiOverlayStyle _light = SystemUiOverlayStyle(
       systemNavigationBarColor: Colors.white,
       systemNavigationBarIconBrightness: Brightness.dark,
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     );
 
-    SystemUiOverlayStyle _dark = SystemUiOverlayStyle(
+    final SystemUiOverlayStyle _dark = SystemUiOverlayStyle(
       systemNavigationBarColor: FixedValues.bottomNavBg,
       systemNavigationBarIconBrightness: Brightness.light,
       statusBarColor: Colors.transparent,

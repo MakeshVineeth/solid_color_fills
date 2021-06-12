@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/database/commons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
-import 'package:wallpaper_manager/wallpaper_manager.dart';
+import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:open_file/open_file.dart';
 
 final imageProvision = FutureProvider<Uint8List>((ref) async {
@@ -57,15 +57,15 @@ class SetImage {
         if (location == 4) {
           await OpenFile.open(filePath);
         } else {
-          String result =
+          bool result =
               await WallpaperManager.setWallpaperFromFile(filePath, location);
 
-          if (result.contains('set'))
+          if (result)
             isDone = true;
           else
             isDone = false;
 
-          file.delete();
+          await file.delete();
         }
       }
 

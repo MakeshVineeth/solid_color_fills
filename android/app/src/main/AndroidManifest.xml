@@ -22,7 +22,8 @@
 
    <application
         android:label="Solid Color Fills"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/launcher_icon"
+        android:allowBackup="false">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

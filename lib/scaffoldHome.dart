@@ -60,11 +60,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
                     icon: bottomItems[entry.key],
                   ))
               .toList(),
-          onTap: (int index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
+          onTap: (int index) => setState(() => _currentIndex = index),
         ),
       ),
     );

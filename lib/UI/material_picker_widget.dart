@@ -6,7 +6,7 @@ import 'package:solid_color_fills/UI/database/commons.dart';
 class MaterialPickerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double deviceHeight = MediaQuery.of(context).size.height;
+    final double deviceHeight = MediaQuery.of(context).size.height;
 
     return MaterialColorPicker(
       circleSize: (deviceHeight <= 600) ? 50 : 60,
