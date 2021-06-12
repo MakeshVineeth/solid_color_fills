@@ -1,7 +1,7 @@
 name: solid_color_fills
 description: A Wallpaper that lets you set any solid color as wallpaper.
 publish_to: 'none'
-version: 1.0.0+7
+version: 1.0.0+8
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
