@@ -17,6 +17,7 @@ class ColorProvider extends StateNotifier<ColorDetails> {
       {@required Color colorValue, @required String colorString}) {
     colorValue = colorValue ?? _initialColor;
 
+    // Color value will be something like Color(0xff...) so we're trimming here.
     if (colorString != null)
       colorString = colorString.split('0x').length == 2
           ? convertColorStr(colorString)
