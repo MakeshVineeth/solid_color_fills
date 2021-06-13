@@ -6,7 +6,7 @@ import 'package:solid_color_fills/UI/wall_chooser.dart';
 import 'dart:ui';
 
 void openWallChooser(BuildContext context) {
-  final Duration transition = const Duration(milliseconds: 300);
+  final Duration transition = const Duration(milliseconds: 400);
   Size size = window.physicalSize;
 
   if (size != Size.zero) {
