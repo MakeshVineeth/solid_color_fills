@@ -45,3 +45,4 @@ Credits
 ------
 * Icons made by [Freepik](https://www.freepik.com) from [www.flaticon.com](https://www.flaticon.com)
 * App Screenshots created with [MockUPhone](https://mockuphone.com).
+* Google Play and the Google Play logo are trademarks of Google LLC.
