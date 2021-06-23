@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/alertMsg.dart';
 import 'package:solid_color_fills/UI/database/commons.dart';
+import 'package:solid_color_fills/UI/database/helperFunctions.dart';
 import 'package:solid_color_fills/UI/database/main_image_functions.dart';
 import 'package:solid_color_fills/UI/wall_image.dart';
 import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
@@ -9,10 +10,18 @@ import 'package:solid_color_fills/fixedValues.dart';
 import 'package:system_properties/system_properties.dart';
 
 class WallChooser extends ConsumerWidget {
-  final SnackBar snackBarSuccess =
-      SnackBar(content: const Text('Yay! Wallpaper Successfully Set.'));
-  final SnackBar snackBarError =
-      SnackBar(content: const Text('Oops, An Error has Occurred!'));
+  static final Duration snackBarDur = const Duration(seconds: 3);
+
+  final SnackBar snackBarSuccess = SnackBar(
+    content: const Text('Yay! Wallpaper Successfully Set.'),
+    duration: snackBarDur,
+  );
+
+  final SnackBar snackBarError = SnackBar(
+    content: const Text('Oops, An Error has Occurred!'),
+    duration: snackBarDur,
+  );
+
   final FixedValues fixedValues = FixedValues();
 
   final Map<String, int> buttons = {
@@ -143,9 +152,10 @@ class WallChooser extends ConsumerWidget {
         // If location is 4, means to open the gallery, no need to display message.
         if (location == 4) return;
 
-        if (val)
+        if (val) {
           ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
-        else
+          askForReview(action: true);
+        } else
           ScaffoldMessenger.of(context).showSnackBar(snackBarError);
       });
     } catch (_) {}

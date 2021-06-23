@@ -27,6 +27,7 @@ dependencies:
   system_properties: ^0.0.1
   transparent_image: ^2.0.0
   url_launcher: ^6.0.5
+  in_app_review: ^2.0.2
 
 dev_dependencies:
   flutter_test:

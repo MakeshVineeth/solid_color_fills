@@ -61,6 +61,6 @@ class ColorItem extends StatelessWidget {
           colorString: mapEntry.key,
         );
 
-    openWallChooser(context);
+    openWallChooser(context: context);
   }
 }

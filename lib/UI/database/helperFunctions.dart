@@ -1,12 +1,15 @@
+import 'package:in_app_review/in_app_review.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solid_color_fills/UI/database/commons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:solid_color_fills/UI/wall_chooser.dart';
 import 'dart:ui';
 
-void openWallChooser(BuildContext context) {
-  final Duration transition = const Duration(milliseconds: 400);
+void openWallChooser(
+    {@required BuildContext context,
+    Duration transition = const Duration(milliseconds: 500)}) {
   Size size = window.physicalSize;
 
   if (size != Size.zero) {
@@ -37,4 +40,41 @@ void openWallChooser(BuildContext context) {
         type: PageTransitionType.fade,
       ),
     );
+}
+
+Future<void> askForReview({bool action = false}) async {
+  try {
+    const String reviewCountPrefs = 'review_count';
+    const String dateStrPrefs = 'review_date';
+
+    final prefs = await SharedPreferences.getInstance();
+    int reviewAskedCount = prefs.getInt(reviewCountPrefs) ?? 0;
+
+    if (reviewAskedCount > 2) return;
+
+    String dateStr = prefs.getString(dateStrPrefs);
+    DateTime now = DateTime.now();
+
+    DateTime dateCheck;
+    // If dateStr is null, it means there is no shared preference yet which should mean first time.
+    if (dateStr == null) {
+      await prefs.setString(dateStrPrefs, now.toString());
+      dateCheck = now;
+    } else
+      dateCheck = DateTime.tryParse(dateStr);
+
+    Duration difference = now.difference(dateCheck);
+
+    if ((action && reviewAskedCount == 0) || difference.inHours >= 7) {
+      final InAppReview inAppReview = InAppReview.instance;
+      final bool isAvailable = await inAppReview.isAvailable();
+
+      if (isAvailable) {
+        Future.delayed(const Duration(seconds: 2), () async {
+          await prefs.setInt(reviewCountPrefs, ++reviewAskedCount);
+          await inAppReview.requestReview();
+        });
+      }
+    }
+  } catch (_) {}
 }

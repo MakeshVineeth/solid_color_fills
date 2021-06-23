@@ -1,6 +1,7 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:solid_color_fills/UI/database/helperFunctions.dart';
 import 'package:solid_color_fills/UI/menuThings.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -30,6 +31,12 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
   ];
 
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    askForReview();
+  }
 
   @override
   Widget build(BuildContext context) {
