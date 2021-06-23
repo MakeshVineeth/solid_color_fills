@@ -1,5 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:solid_color_fills/UI/themeChooser.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:solid_color_fills/floating_modal.dart';
@@ -38,9 +39,10 @@ class MenuThings extends StatelessWidget {
         menuItem(
           icon: FluentIcons.star_emphasis_24_regular,
           title: 'Rate Us on Play Store',
-          function: () => launchUrl(
-              url:
-                  'https://play.google.com/store/apps/details?id=com.makeshtech.solid_color_fills'),
+          function: () {
+            final InAppReview inAppReview = InAppReview.instance;
+            inAppReview.openStoreListing();
+          },
           context: context,
         )
       ],
