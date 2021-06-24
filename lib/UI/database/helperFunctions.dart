@@ -50,7 +50,7 @@ Future<void> askForReview({bool action = false}) async {
     final prefs = await SharedPreferences.getInstance();
     int reviewAskedCount = prefs.getInt(reviewCountPrefs) ?? 0;
 
-    if (reviewAskedCount > 2) return;
+    if (reviewAskedCount > 1) return;
 
     String dateStr = prefs.getString(dateStrPrefs);
     DateTime now = DateTime.now();
