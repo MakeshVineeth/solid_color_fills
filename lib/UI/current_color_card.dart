@@ -18,7 +18,7 @@ class CurrentColorCard extends ConsumerWidget {
         borderRadius: fixedValues.fixedCardRadius,
         onTap: () => openWallChooser(
           context: context,
-          transition: const Duration(milliseconds: 350),
+          transition: const Duration(milliseconds: 300),
         ),
         child: IgnorePointer(
           child: Padding(

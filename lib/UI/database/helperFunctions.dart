@@ -9,7 +9,7 @@ import 'dart:ui';
 
 void openWallChooser(
     {@required BuildContext context,
-    Duration transition = const Duration(milliseconds: 500)}) {
+    Duration transition = const Duration(milliseconds: 450)}) {
   Size size = window.physicalSize;
 
   if (size != Size.zero) {
@@ -70,7 +70,7 @@ Future<void> askForReview({bool action = false}) async {
       final bool isAvailable = await inAppReview.isAvailable();
 
       if (isAvailable) {
-        Future.delayed(const Duration(seconds: 2), () async {
+        Future.delayed(const Duration(seconds: 1), () async {
           await prefs.setInt(reviewCountPrefs, ++reviewAskedCount);
           await inAppReview.requestReview();
         });
