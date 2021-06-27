@@ -14,7 +14,7 @@ dependencies:
   convex_bottom_bar: ^3.0.0
   fluentui_system_icons: ^1.1.133
   flutter_animator: ^3.1.1
-  flutter_colorpicker: ^0.5.0
+  flutter_colorpicker: ^0.4.0
   flutter_riverpod: ^0.14.0+3
   flutter_wallpaper_manager: ^0.0.3
   introduction_screen: ^2.1.0
