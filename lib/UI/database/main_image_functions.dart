@@ -48,38 +48,33 @@ class SetImage {
   Future<bool> setNow({@required int location}) async {
     // Returns true if success.
     try {
-      if (pngBytes != null) {
-        if (location == 4) {
-          String tempPath = (await getTemporaryDirectory()).path;
-          String filePath = tempPath + '/temp.png';
-          File file = File(filePath);
+      if (pngBytes == null) return false;
 
-          await file.writeAsBytes(pngBytes);
+      // This native method is part of wallpaper plugin, see the plugin's source code.
+      if (location != 4) {
+        _channel.invokeMethod(
+          'setWallpaper',
+          {
+            'data': pngBytes,
+            'location': location,
+          },
+        );
 
-          if (await file.exists()) {
-            OpenResult openResult = await OpenFile.open(filePath);
-            if (openResult.type == ResultType.done)
-              return true;
-            else
-              return false;
-          } else
-            return false;
-        }
+        return true;
+      }
 
-        // This native method is part of wallpaper plugin, see the plugin's source code.
-        else {
-          _channel.invokeMethod(
-            'setWallpaper',
-            {
-              'data': pngBytes,
-              'location': location,
-            },
-          );
+      String tempPath = (await getTemporaryDirectory()).path;
+      String filePath = tempPath + '/temp.png';
+      File file = File(filePath);
 
-          return true;
-        }
-      } else
-        return false;
+      await file.writeAsBytes(pngBytes);
+      bool fileExists = await file.exists();
+      if (!fileExists) return false;
+
+      OpenResult openResult = await OpenFile.open(filePath);
+      if (openResult.type != ResultType.done) return false;
+
+      return true;
     } catch (_) {
       return false;
     }

@@ -86,11 +86,23 @@ class WallChooser extends ConsumerWidget {
                         ),
                       ),
                       SizedBox(height: 12),
-                      Text(
-                        'Note: Use the Open in Gallery option if you\'re having troubles changing the lock screen wallpaper.',
+                      RichText(
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                        text: TextSpan(
+                          text: 'Note: ',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).textTheme.button.color,
+                          ),
+                          children: const <TextSpan>[
+                            TextSpan(
+                              text:
+                                  'Use the Open in Gallery option if you\'re having troubles changing the lock screen wallpaper.',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -147,8 +159,8 @@ class WallChooser extends ConsumerWidget {
         String outputMessage;
 
         if (val) {
-          outputMessage = 'Yay! Wallpaper successfully set for ' +
-              wallpaperLocationText(location);
+          outputMessage =
+              'Yay! Wallpaper set for ' + wallpaperLocationText(location);
           askForReview(action: true);
         } else
           outputMessage = 'Oops, An error has occurred!';
