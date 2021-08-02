@@ -14,30 +14,28 @@ class ColorItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTap: () => changeColor(context, ref),
-      child: IgnorePointer(
-        child: Hero(
-          tag: mapEntry.key.toString().toLowerCase().replaceAll(' ', '_'),
-          child: Card(
-            elevation: 3,
-            shape: fixedValues.roundShape,
-            child: GridTile(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(6, 6, 6, 30),
-                child: ClipRRect(
-                  borderRadius: fixedValues.fixedCardRadius,
-                  child: ColoredBox(color: returnColorItem()),
-                ),
+    return Hero(
+      tag: mapEntry.key.toString().toLowerCase().replaceAll(' ', '_'),
+      child: Card(
+        elevation: 3,
+        shape: fixedValues.roundShape,
+        child: InkWell(
+          onTap: () => changeColor(context, ref),
+          borderRadius: fixedValues.fixedCardRadius,
+          child: GridTile(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(6, 6, 6, 30),
+              child: ClipRRect(
+                borderRadius: fixedValues.fixedCardRadius,
+                child: ColoredBox(color: returnColorItem()),
               ),
-              footer: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    mapEntry.key,
-                    style: fixedValues.colorTitleStyle,
-                  ),
+            ),
+            footer: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  mapEntry.key,
+                  style: fixedValues.colorTitleStyle,
                 ),
               ),
             ),
