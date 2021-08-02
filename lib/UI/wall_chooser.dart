@@ -10,18 +10,6 @@ import 'package:solid_color_fills/fixedValues.dart';
 import 'package:system_properties/system_properties.dart';
 
 class WallChooser extends ConsumerWidget {
-  static final Duration snackBarDur = const Duration(seconds: 3);
-
-  final SnackBar snackBarSuccess = SnackBar(
-    content: const Text('Yay! Wallpaper Successfully Set.'),
-    duration: snackBarDur,
-  );
-
-  final SnackBar snackBarError = SnackBar(
-    content: const Text('Oops, An Error has Occurred!'),
-    duration: snackBarDur,
-  );
-
   final FixedValues fixedValues = FixedValues();
 
   final Map<String, int> buttons = {
@@ -156,11 +144,32 @@ class WallChooser extends ConsumerWidget {
         // If location is 4, means to open the gallery, no need to display message.
         if (location == 4) return;
 
+        String outputMessage;
+
         if (val) {
-          ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
+          outputMessage = 'Yay! Wallpaper successfully set for ' +
+              wallpaperLocationText(location);
           askForReview(action: true);
         } else
-          ScaffoldMessenger.of(context).showSnackBar(snackBarError);
+          outputMessage = 'Oops, An error has occurred!';
+
+        final SnackBar snackBar = SnackBar(
+          content: Text(
+            outputMessage,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          duration: const Duration(seconds: 3),
+          behavior: SnackBarBehavior.floating,
+          elevation: 6.0,
+          shape: fixedValues.roundShape,
+          backgroundColor: Theme.of(context).primaryColor,
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       });
     } catch (_) {}
   }

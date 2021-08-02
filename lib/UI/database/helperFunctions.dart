@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:solid_color_fills/UI/wall_chooser.dart';
 import 'dart:ui';
 
+import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
+
 void openWallChooser({
   @required WidgetRef ref,
   @required BuildContext context,
@@ -79,4 +81,24 @@ Future<void> askForReview({bool action = false}) async {
       }
     }
   } catch (_) {}
+}
+
+String wallpaperLocationText(int location) {
+  String message;
+
+  switch (location) {
+    case WallpaperManagerFlutter.HOME_SCREEN:
+      message = 'Home Screen.';
+      break;
+    case WallpaperManagerFlutter.LOCK_SCREEN:
+      message = 'Lock Screen.';
+      break;
+    case WallpaperManagerFlutter.BOTH_SCREENS:
+      message = 'Home Screen & Lock Screen.';
+      break;
+    default:
+      message = 'Nothing :(';
+  }
+
+  return message;
 }
