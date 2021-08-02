@@ -41,7 +41,7 @@ void openWallChooser({
         child: WallChooser(),
         type: PageTransitionType.fade,
       ),
-    );
+    ).then((_) => ScaffoldMessenger.of(context).hideCurrentSnackBar());
 }
 
 Future<void> askForReview({bool action = false}) async {
