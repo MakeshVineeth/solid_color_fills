@@ -116,17 +116,15 @@ class WallChooser extends ConsumerWidget {
     );
   }
 
-  Widget colorWall({@required BoxConstraints constraints}) {
-    return Card(
-      shape: fixedValues.roundShape,
-      elevation: 3,
-      child: InkWell(
-        onTap: () {},
-        borderRadius: fixedValues.fixedCardRadius,
-        child: IgnorePointer(child: WallImage(constraints: constraints)),
-      ),
-    );
-  }
+  Widget colorWall({@required BoxConstraints constraints}) => Card(
+        shape: fixedValues.roundShape,
+        elevation: 3,
+        child: InkWell(
+          onTap: () {},
+          borderRadius: fixedValues.fixedCardRadius,
+          child: IgnorePointer(child: WallImage(constraints: constraints)),
+        ),
+      );
 
   Future<void> setImage(
       BuildContext context, int location, WidgetRef ref) async {
