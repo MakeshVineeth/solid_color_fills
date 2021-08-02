@@ -131,6 +131,9 @@ class WallChooser extends ConsumerWidget {
   Future<void> setImage(
       BuildContext context, int location, WidgetRef ref) async {
     try {
+      ScaffoldMessenger.of(context)
+          .hideCurrentSnackBar(); // Hide existing snack bars if present.
+
       // Checks for MIUI device and displays Not Supported Message.
       final String miuiCheck = await SystemProperties?.getSystemProperties(
           "ro.miui.ui.version.name");
