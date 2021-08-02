@@ -150,7 +150,9 @@ class WallChooser extends ConsumerWidget {
         return;
       }
 
-      ref.read(imageSetter).state.setNow(location: location).then((val) {
+      final SetImage setImageClass = ref.read(imageSetter).state;
+
+      setImageClass.setNow(location: location).then((val) {
         // If location is 4, means to open the gallery, no need to display message.
         if (location == 4) return;
 

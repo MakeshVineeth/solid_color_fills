@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,7 +35,7 @@ final imageProvision = FutureProvider<Uint8List>((ref) async {
 });
 
 final imageSetter = StateProvider<SetImage>((ref) {
-  Uint8List pngBytes = ref.watch(imageProvision).data.value;
+  Uint8List pngBytes = ref.watch(imageProvision).data?.value;
   return SetImage(pngBytes);
 });
 
@@ -44,7 +43,7 @@ const MethodChannel _channel = const MethodChannel('setwallpaper');
 
 class SetImage {
   Uint8List pngBytes;
-  SetImage(this.pngBytes) : assert(pngBytes != null);
+  SetImage(this.pngBytes);
 
   Future<bool> setNow({@required int location}) async {
     // Returns true if success.
@@ -52,15 +51,19 @@ class SetImage {
       if (pngBytes != null) {
         if (location == 4) {
           String tempPath = (await getTemporaryDirectory()).path;
-          String filePath = tempPath + '/temp.png';
+          String filePath = tempPath + 'temp.png';
           File file = File(filePath);
 
           await file.writeAsBytes(pngBytes);
 
           if (await file.exists()) {
             OpenResult openResult = await OpenFile.open(filePath);
-            if (openResult.type == ResultType.done) await file.delete();
-          }
+            if (openResult.type == ResultType.done)
+              return true;
+            else
+              return false;
+          } else
+            return false;
         }
 
         // This native method is part of wallpaper plugin, see the plugin's source code.
@@ -72,9 +75,9 @@ class SetImage {
               'location': location,
             },
           );
-        }
 
-        return true;
+          return true;
+        }
       } else
         return false;
     } catch (_) {
