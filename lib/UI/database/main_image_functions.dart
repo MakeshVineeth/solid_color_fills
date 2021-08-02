@@ -51,7 +51,7 @@ class SetImage {
       if (pngBytes != null) {
         if (location == 4) {
           String tempPath = (await getTemporaryDirectory()).path;
-          String filePath = tempPath + 'temp.png';
+          String filePath = tempPath + '/temp.png';
           File file = File(filePath);
 
           await file.writeAsBytes(pngBytes);
