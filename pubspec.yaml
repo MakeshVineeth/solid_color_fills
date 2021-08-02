@@ -1,6 +1,6 @@
 name: solid_color_fills
 description: A Wallpaper that lets you set any solid color as wallpaper.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.2+11
 
 environment:
@@ -14,9 +14,9 @@ dependencies:
   convex_bottom_bar: ^3.0.0
   fluentui_system_icons: ^1.1.135
   flutter_animator: ^3.1.2
-  flutter_colorpicker: ^0.5.0
-  flutter_riverpod: ^0.14.0+3
-  flutter_wallpaper_manager: ^0.0.3
+  flutter_colorpicker: ^0.4.0
+  flutter_riverpod: ^1.0.0-dev.6
+  in_app_review: ^2.0.2
   introduction_screen: ^2.1.0
   material_color_picker_wns: ^1.0.8
   modal_bottom_sheet: ^2.0.0
@@ -27,7 +27,7 @@ dependencies:
   system_properties: ^0.0.1
   transparent_image: ^2.0.0
   url_launcher: ^6.0.9
-  in_app_review: ^2.0.2
+  wallpaper_manager_flutter: ^0.0.2
 
 dev_dependencies:
   flutter_test:

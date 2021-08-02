@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:solid_color_fills/UI/wall_chooser.dart';
 import 'dart:ui';
 
-void openWallChooser(
-    {@required BuildContext context,
-    Duration transition = const Duration(milliseconds: 450)}) {
+void openWallChooser({
+  @required WidgetRef ref,
+  @required BuildContext context,
+  Duration transition = const Duration(milliseconds: 450),
+}) {
   Size size = window.physicalSize;
 
   if (size != Size.zero) {
@@ -23,12 +25,12 @@ void openWallChooser(
     }
 
     final ScreenSize newSize = ScreenSize(width, height);
-    final currentState = context.read(screenSize);
+    final currentState = ref.read(screenSize);
 
     if (currentState.state.width != newSize.width) currentState.state = newSize;
   }
 
-  final color = context.read(commonProvider).color;
+  final color = ref.read(commonProvider).color;
 
   if (color != null && color != Colors.transparent)
     Navigator.push(

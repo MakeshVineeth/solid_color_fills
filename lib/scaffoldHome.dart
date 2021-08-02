@@ -20,7 +20,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
   final FixedValues fixedValues = FixedValues();
   final TabItemCustom tabItemCustom = TabItemCustom();
 
-  final bottomItems = {
+  final Map<String, IconData> bottomItems = {
     'Collections': FluentIcons.collections_24_regular,
     'Color Picker': FluentIcons.color_24_regular,
   };

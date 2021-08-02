@@ -5,9 +5,11 @@ import 'package:solid_color_fills/fixedValues.dart';
 class AlertMsg extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
   final String title;
-  final String msg;
+  final String message;
 
-  AlertMsg({@required this.title, @required this.msg});
+  AlertMsg({@required this.title, @required this.message})
+      : assert(message != null),
+        assert(title != null);
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +20,20 @@ class AlertMsg extends StatelessWidget {
         title: Text(title),
         content: SingleChildScrollView(
           physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           child: Text(
-            msg,
+            message,
             style: TextStyle(fontWeight: FontWeight.w600),
           ),
         ),
         actions: [
           TextButton(
             style: ButtonStyle(
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: fixedValues.fixedCardRadius)),
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: fixedValues.fixedCardRadius,
+                ),
+              ),
               foregroundColor: MaterialStateProperty.all(
                   Theme.of(context).textTheme.button.color),
             ),

@@ -14,7 +14,7 @@ void main() async {
 class MaterialHome extends StatelessWidget {
   final AdaptiveThemeMode initialTheme;
 
-  MaterialHome({@required this.initialTheme});
+  MaterialHome({@required this.initialTheme}) : assert(initialTheme != null);
 
   final FixedValues fixedValues = FixedValues();
 

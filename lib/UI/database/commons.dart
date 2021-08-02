@@ -11,10 +11,14 @@ class ColorProvider extends StateNotifier<ColorDetails> {
   static final _initial =
       ColorDetails(color: _initialColor, colorTitle: _initialText);
 
-  ColorProvider() : super(_initial);
+  ColorProvider()
+      : assert(_initial != null),
+        super(_initial);
 
-  void changeColors(
-      {@required Color colorValue, @required String colorString}) {
+  void changeColors({
+    @required Color colorValue,
+    @required String colorString,
+  }) {
     colorValue = colorValue ?? _initialColor;
 
     // Color value will be something like Color(0xff...) so we're trimming here.
@@ -35,14 +39,19 @@ class ColorDetails {
   final String colorTitle;
   final Color color;
 
-  const ColorDetails({@required this.colorTitle, @required this.color});
+  const ColorDetails({@required this.colorTitle, @required this.color})
+      : assert(colorTitle != null),
+        assert(color != null);
 }
 
-final screenSize = StateProvider<ScreenSize>((ref) => ScreenSize(2000, 1000));
+final screenSize = StateProvider<ScreenSize>(
+    (ref) => ScreenSize(2000, 1000)); // Initialize with some random values.
 
 class ScreenSize {
   final int width;
   final int height;
 
-  const ScreenSize(this.width, this.height);
+  const ScreenSize(this.width, this.height)
+      : assert(width != null),
+        assert(height != null);
 }

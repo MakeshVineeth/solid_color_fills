@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class FixedValues {
-  final appTitle = 'Solid Color Fills';
-  final appLegalese =
+  final String appTitle = 'Solid Color Fills';
+  final String appLegalese =
       'An App that lets you set your favorite color as Device Wallpaper. Not satisfied with default colors? Then you can choose your own color by using the Color Picker provided in the app. Solid Color Fills has Beautiful UI and Privacy Friendly.';
-  final appVersion = '1.0.2';
+  final String appVersion = '1.0.2';
 
   final BorderRadius fixedCardRadius = BorderRadius.circular(20.0);
   final roundShape =
@@ -13,9 +13,9 @@ class FixedValues {
   final colorTitleStyle = TextStyle(fontWeight: FontWeight.w600);
   final logoFile = 'logo.png';
 
-  final lightThemeDesc = 'Light Theme';
-  final darkThemeDesc = 'Dark Theme';
-  final systemDefaultTheme = 'System Default';
+  final String lightThemeDesc = 'Light Theme';
+  final String darkThemeDesc = 'Dark Theme';
+  final String systemDefaultTheme = 'System Default';
   static final Color bottomNavBg = Colors.grey[900];
 
   // List of Colors
@@ -42,8 +42,10 @@ class FixedValues {
     'Serenity': '#92A8D1',
   };
 
-  ThemeData getTheme(
-      {@required Brightness brightness, @required BuildContext context}) {
+  ThemeData getTheme({
+    @required Brightness brightness,
+    @required BuildContext context,
+  }) {
     Color fg = Colors.black;
     Color bg = Colors.white;
     double elevation = 3.0;
@@ -98,22 +100,19 @@ class FixedValues {
   }
 
   static SystemUiOverlayStyle changeNavBarColor(BuildContext context) {
-    final SystemUiOverlayStyle _light = SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.white,
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    );
-
-    final SystemUiOverlayStyle _dark = SystemUiOverlayStyle(
-      systemNavigationBarColor: FixedValues.bottomNavBg,
-      systemNavigationBarIconBrightness: Brightness.light,
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-    );
-
     bool isLightTheme = Theme.of(context).brightness == Brightness.light;
-    SystemChrome.setSystemUIOverlayStyle(isLightTheme ? _light : _dark);
-    return isLightTheme ? _light : _dark;
+
+    final SystemUiOverlayStyle flatTheme = SystemUiOverlayStyle(
+      systemNavigationBarColor:
+          isLightTheme ? Colors.white : FixedValues.bottomNavBg,
+      systemNavigationBarIconBrightness:
+          isLightTheme ? Brightness.dark : Brightness.light,
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness:
+          isLightTheme ? Brightness.dark : Brightness.light,
+    );
+
+    SystemChrome.setSystemUIOverlayStyle(flatTheme);
+    return flatTheme;
   }
 }

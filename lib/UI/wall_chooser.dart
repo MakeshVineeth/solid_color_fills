@@ -5,7 +5,7 @@ import 'package:solid_color_fills/UI/database/commons.dart';
 import 'package:solid_color_fills/UI/database/helperFunctions.dart';
 import 'package:solid_color_fills/UI/database/main_image_functions.dart';
 import 'package:solid_color_fills/UI/wall_image.dart';
-import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
+import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:system_properties/system_properties.dart';
 
@@ -25,15 +25,15 @@ class WallChooser extends ConsumerWidget {
   final FixedValues fixedValues = FixedValues();
 
   final Map<String, int> buttons = {
-    'Set As Home Screen': WallpaperManager.HOME_SCREEN,
-    'Set As Lock Screen': WallpaperManager.LOCK_SCREEN,
-    'Set As Both': WallpaperManager.BOTH_SCREEN,
+    'Set As Home Screen': WallpaperManagerFlutter.HOME_SCREEN,
+    'Set As Lock Screen': WallpaperManagerFlutter.LOCK_SCREEN,
+    'Set As Both': WallpaperManagerFlutter.BOTH_SCREENS,
     'Open in Gallery': 4,
   };
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final object = context.read(commonProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final object = ref.read(commonProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text('Wallpaper Confirmation')),
@@ -85,6 +85,7 @@ class WallChooser extends ConsumerWidget {
                                       onPressed: () => setImage(
                                         context,
                                         buttons.entries.elementAt(index).value,
+                                        ref,
                                       ),
                                       child: IgnorePointer(
                                         child: Text(
@@ -127,28 +128,29 @@ class WallChooser extends ConsumerWidget {
     );
   }
 
-  Future<void> setImage(BuildContext context, int location) async {
+  Future<void> setImage(
+      BuildContext context, int location, WidgetRef ref) async {
     try {
       // Checks for MIUI device and displays Not Supported Message.
-      String miuiCheck = await SystemProperties?.getSystemProperties(
+      final String miuiCheck = await SystemProperties?.getSystemProperties(
           "ro.miui.ui.version.name");
 
       if (miuiCheck != null &&
           miuiCheck.trim().isNotEmpty &&
-          (location == WallpaperManager.BOTH_SCREEN ||
-              location == WallpaperManager.LOCK_SCREEN)) {
+          (location == WallpaperManagerFlutter.BOTH_SCREENS ||
+              location == WallpaperManagerFlutter.LOCK_SCREEN)) {
         await showDialog(
           context: context,
           builder: (context) => AlertMsg(
             title: 'MIUI Detected',
-            msg:
+            message:
                 'Due to MIUI Restrictions, Lockscreen Wallpaper cannot be changed by third-party apps, Please try \'Set as Home Screen\' instead.',
           ),
         );
         return;
       }
 
-      context.read(imageSetter).state.setNow(location: location).then((val) {
+      ref.read(imageSetter).state.setNow(location: location).then((val) {
         // If location is 4, means to open the gallery, no need to display message.
         if (location == 4) return;
 

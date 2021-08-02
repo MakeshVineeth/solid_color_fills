@@ -3,9 +3,9 @@ import 'package:material_color_picker_wns/material_color_picker_wns.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/database/commons.dart';
 
-class MaterialPickerWidget extends StatelessWidget {
+class MaterialPickerWidget extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final double deviceHeight = MediaQuery.of(context).size.height;
 
     return MaterialColorPicker(
@@ -14,7 +14,7 @@ class MaterialPickerWidget extends StatelessWidget {
       onlyShadeSelection: true,
       physics: BouncingScrollPhysics(),
       onColorChange: (Color color) =>
-          context.read(commonProvider.notifier).changeColors(
+          ref.read(commonProvider.notifier).changeColors(
                 colorValue: color,
                 colorString: color.toString(),
               ),

@@ -8,7 +8,7 @@ class IntroScreen extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
   final Function function;
 
-  IntroScreen({@required this.function});
+  IntroScreen({@required this.function}) : assert(function != null);
 
   @override
   Widget build(BuildContext context) {
@@ -84,27 +84,24 @@ class IntroScreen extends StatelessWidget {
     await prefs.setBool('first_launch', false);
   }
 
-  Text textWidget(String text) {
-    return Text(
-      text,
-      style: const TextStyle(fontWeight: FontWeight.w600),
-    );
-  }
+  Text textWidget(String text) => Text(
+        text,
+        style: const TextStyle(fontWeight: FontWeight.w600),
+      );
 
-  PageViewModel returnPage({@required title, @required body, @required path}) {
-    return PageViewModel(
-      title: title,
-      body: body,
-      image: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(path),
+  PageViewModel returnPage({@required title, @required body, @required path}) =>
+      PageViewModel(
+        title: title,
+        body: body,
+        image: Center(
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage(path),
+              ),
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

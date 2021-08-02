@@ -9,11 +9,11 @@ class WallImage extends ConsumerWidget {
   final FixedValues fixedValues = FixedValues();
   final BoxConstraints constraints;
 
-  WallImage({@required this.constraints});
+  WallImage({@required this.constraints}) : assert(constraints != null);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    AsyncValue<Uint8List> imageObject = watch(imageProvision);
+  Widget build(BuildContext context, WidgetRef ref) {
+    AsyncValue<Uint8List> imageObject = ref.watch(imageProvision);
 
     return AnimatedCrossFade(
         duration: const Duration(milliseconds: 800),

@@ -7,10 +7,10 @@ import 'package:solid_color_fills/UI/styleMethods.dart';
 
 class CustomColorPicker extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return LayoutBuilder(
       builder: (context, constraints) => ListView(
-        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         children: [
           Container(
             padding: EdgeInsets.all(20),

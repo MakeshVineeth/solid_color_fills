@@ -3,14 +3,9 @@ import 'package:solid_color_fills/UI/colorItem.dart';
 import 'package:solid_color_fills/UI/scaleThis.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
-class HomeTab extends StatefulWidget {
-  @override
-  _HomeTabState createState() => _HomeTabState();
-}
-
-class _HomeTabState extends State<HomeTab> {
+class HomeTab extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
-  double spacing = 10.0;
+  final double spacing = 10.0;
 
   @override
   Widget build(BuildContext context) {

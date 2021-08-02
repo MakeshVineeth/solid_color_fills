@@ -6,8 +6,9 @@ class FloatingModal extends StatelessWidget {
   final Widget child;
   final Color backgroundColor;
 
-  const FloatingModal({Key key, this.child, this.backgroundColor})
-      : super(key: key);
+  const FloatingModal({Key key, @required this.child, this.backgroundColor})
+      : assert(child != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,10 @@ Future<T> showFloatingModalBottomSheet<T>({
   final result = await showCustomModalBottomSheet(
     context: context,
     builder: builder,
-    containerWidget: (_, animation, child) => FloatingModal(child: child),
+    containerWidget: (_, animation, child) => FloatingModal(
+      child: child,
+      backgroundColor: backgroundColor,
+    ),
     bounce: true,
     expand: false,
   );

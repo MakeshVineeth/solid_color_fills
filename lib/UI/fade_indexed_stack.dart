@@ -7,12 +7,14 @@ class FadeIndexedStack extends StatefulWidget {
 
   const FadeIndexedStack({
     Key key,
-    this.index,
-    this.children,
+    @required this.index,
+    @required this.children,
     this.duration = const Duration(
       milliseconds: 600,
     ),
-  }) : super(key: key);
+  })  : assert(index != null),
+        assert(children != null),
+        super(key: key);
 
   @override
   _FadeIndexedStackState createState() => _FadeIndexedStackState();

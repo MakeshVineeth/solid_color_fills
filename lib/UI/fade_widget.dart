@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class FadeWidget extends StatefulWidget {
   final Widget child;
 
-  const FadeWidget({@required this.child});
+  const FadeWidget({@required this.child}) : assert(child != null);
 
   @override
   _FadeWidgetState createState() => _FadeWidgetState();

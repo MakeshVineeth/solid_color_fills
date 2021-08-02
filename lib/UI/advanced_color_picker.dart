@@ -6,12 +6,12 @@ import 'package:solid_color_fills/UI/database/commons.dart';
 import 'package:solid_color_fills/UI/fade_widget.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
-class AdvancedColorPicker extends StatefulWidget {
+class AdvancedColorPicker extends ConsumerStatefulWidget {
   @override
   _AdvancedColorPickerState createState() => _AdvancedColorPickerState();
 }
 
-class _AdvancedColorPickerState extends State<AdvancedColorPicker> {
+class _AdvancedColorPickerState extends ConsumerState<AdvancedColorPicker> {
   final FixedValues fixedValues = FixedValues();
   Color _color = Colors.blue;
 
@@ -24,7 +24,7 @@ class _AdvancedColorPickerState extends State<AdvancedColorPicker> {
         title: const Text('Pick a color!'),
         content: SingleChildScrollView(
           physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           child: ColorPicker(
             pickerColor: _color,
             onColorChanged: (color) => _color = color,
@@ -46,10 +46,11 @@ class _AdvancedColorPickerState extends State<AdvancedColorPicker> {
   }
 
   void onTapping(BuildContext context) {
-    context.read(commonProvider.notifier).changeColors(
+    ref.read(commonProvider.notifier).changeColors(
           colorValue: _color,
           colorString: _color.toString(),
         );
+
     Navigator.of(context).pop();
   }
 }

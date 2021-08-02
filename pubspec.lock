@@ -117,26 +117,19 @@ packages:
       name: flutter_colorpicker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.0"
+    version: "0.4.0"
   flutter_riverpod:
     dependency: "direct main"
     description:
       name: flutter_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0+3"
+    version: "1.0.0-dev.6"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_wallpaper_manager:
-    dependency: "direct main"
-    description:
-      name: flutter_wallpaper_manager
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.3"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -295,7 +288,7 @@ packages:
       name: riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0+3"
+    version: "1.0.0-dev.6"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -462,6 +455,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  wallpaper_manager_flutter:
+    dependency: "direct main"
+    description:
+      name: wallpaper_manager_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   win32:
     dependency: transitive
     description:

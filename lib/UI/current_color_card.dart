@@ -10,14 +10,15 @@ class CurrentColorCard extends ConsumerWidget {
   final FixedValues fixedValues = FixedValues();
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final object = watch(commonProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final object = ref.watch(commonProvider);
 
     return Card(
       child: InkWell(
         borderRadius: fixedValues.fixedCardRadius,
         onTap: () => openWallChooser(
           context: context,
+          ref: ref,
           transition: const Duration(milliseconds: 300),
         ),
         child: IgnorePointer(

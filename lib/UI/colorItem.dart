@@ -5,17 +5,18 @@ import 'package:solid_color_fills/fixedValues.dart';
 import 'package:solid_color_fills/UI/database/commons.dart';
 import 'package:solid_color_fills/UI/database/helperFunctions.dart';
 
-class ColorItem extends StatelessWidget {
+class ColorItem extends ConsumerWidget {
   final mapEntry;
 
-  ColorItem({@required this.mapEntry});
+  ColorItem({@required this.mapEntry}) : assert(mapEntry != null);
+
   final FixedValues fixedValues = FixedValues();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () => changeColor(context),
+      onTap: () => changeColor(context, ref),
       child: IgnorePointer(
         child: Hero(
           tag: mapEntry.key.toString().toLowerCase().replaceAll(' ', '_'),
@@ -55,12 +56,12 @@ class ColorItem extends StatelessWidget {
       return mapEntry.value;
   }
 
-  void changeColor(BuildContext context) {
-    context.read(commonProvider.notifier).changeColors(
+  void changeColor(BuildContext context, WidgetRef ref) {
+    ref.read(commonProvider.notifier).changeColors(
           colorValue: returnColorItem(),
           colorString: mapEntry.key,
         );
 
-    openWallChooser(context: context);
+    openWallChooser(context: context, ref: ref);
   }
 }
