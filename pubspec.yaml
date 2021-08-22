@@ -12,10 +12,10 @@ dependencies:
   adaptive_theme: ^2.2.0
   animations: ^2.0.1
   convex_bottom_bar: ^3.0.0
-  fluentui_system_icons: ^1.1.135
+  fluentui_system_icons: ^1.1.136
   flutter_animator: ^3.1.2
   flutter_colorpicker: ^0.4.0
-  flutter_riverpod: ^1.0.0-dev.6
+  flutter_riverpod: ^1.0.0-dev.7
   in_app_review: ^2.0.2
   introduction_screen: ^2.1.0
   material_color_picker_wns: ^1.0.8
@@ -28,6 +28,7 @@ dependencies:
   transparent_image: ^2.0.0
   url_launcher: ^6.0.9
   wallpaper_manager_flutter: ^0.0.2
+  random_color: ^1.0.6-nullsafety
 
 dev_dependencies:
   flutter_test:
