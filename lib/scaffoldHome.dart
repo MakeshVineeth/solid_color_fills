@@ -10,6 +10,7 @@ import 'package:solid_color_fills/UI/fade_indexed_stack.dart';
 import 'package:solid_color_fills/custom_picker.dart';
 import 'package:solid_color_fills/floating_modal.dart';
 import 'package:solid_color_fills/home_tab.dart';
+import 'package:solid_color_fills/infinite/infinite_screen.dart';
 
 class ScaffoldHome extends StatefulWidget {
   @override
@@ -23,11 +24,13 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
   final Map<String, IconData> bottomItems = {
     'Collections': FluentIcons.collections_24_regular,
     'Color Picker': FluentIcons.color_24_regular,
+    'Feed': Icons.all_inclusive_outlined
   };
 
   final widgetsList = <Widget>[
     HomeTab(),
     CustomColorPicker(),
+    InfiniteScreen(),
   ];
 
   int _currentIndex = 0;

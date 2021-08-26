@@ -38,7 +38,7 @@ class MenuThings extends StatelessWidget {
         ),
         menuItem(
           icon: FluentIcons.star_emphasis_24_regular,
-          title: 'Rate Us on Play Store',
+          title: 'Rate us on Play Store',
           function: () {
             final InAppReview inAppReview = InAppReview.instance;
             inAppReview.openStoreListing();
