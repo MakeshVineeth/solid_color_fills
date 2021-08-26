@@ -1,6 +1,7 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_review/in_app_review.dart';
+import 'package:solid_color_fills/UI/aboutPage.dart';
 import 'package:solid_color_fills/UI/themeChooser.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:solid_color_fills/floating_modal.dart';
@@ -26,7 +27,7 @@ class MenuThings extends StatelessWidget {
           context: context,
           icon: FluentIcons.info_28_regular,
           title: 'About ' + fixedValues.appTitle,
-          function: () => showAbout(context),
+          function: () => AboutPage.showAboutDialogFunc(context),
         ),
         menuItem(
           icon: FluentIcons.shield_24_regular,
@@ -63,20 +64,6 @@ class MenuThings extends StatelessWidget {
         );
     } catch (_) {}
   }
-
-  void showAbout(BuildContext context) => showAboutDialog(
-        context: context,
-        applicationName: fixedValues.appTitle,
-        applicationLegalese: fixedValues.appLegalese,
-        applicationVersion: fixedValues.appVersion,
-        applicationIcon: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            'assets/logo.png',
-            width: 30,
-          ),
-        ),
-      );
 
   Widget menuItem({
     IconData icon,
