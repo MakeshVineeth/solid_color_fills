@@ -3,6 +3,12 @@ import 'package:flutter/services.dart';
 
 class FixedValues {
   final String appTitle = 'Solid Color Fills';
+  final TextStyle appTitleStyle = const TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 25,
+    height: 1,
+  );
+
   final String appLegalese =
       'An App that lets you set your favorite color as Device Wallpaper. Not satisfied with default colors? Then you can choose your own color by using the Color Picker provided in the app. Solid Color Fills has Beautiful UI and Privacy Friendly.';
   final String appVersion = '1.0.2';
@@ -16,7 +22,10 @@ class FixedValues {
   final String lightThemeDesc = 'Light Theme';
   final String darkThemeDesc = 'Dark Theme';
   final String systemDefaultTheme = 'System Default';
-  static final Color bottomNavBg = Colors.grey[900];
+  final Color bottomNavBg = Colors.grey[900];
+
+  final String logo = 'logo.png';
+  final double sigmaLevel = 5.0;
 
   // List of Colors
   final Map<String, dynamic> colorsList = {
@@ -104,7 +113,7 @@ class FixedValues {
 
     final SystemUiOverlayStyle flatTheme = SystemUiOverlayStyle(
       systemNavigationBarColor:
-          isLightTheme ? Colors.white : FixedValues.bottomNavBg,
+          isLightTheme ? Colors.white : FixedValues().bottomNavBg,
       systemNavigationBarIconBrightness:
           isLightTheme ? Brightness.dark : Brightness.light,
       statusBarColor: Colors.transparent,

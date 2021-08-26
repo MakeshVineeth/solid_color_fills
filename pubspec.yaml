@@ -29,6 +29,7 @@ dependencies:
   url_launcher: ^6.0.9
   wallpaper_manager_flutter: ^0.0.2
   random_color: ^1.0.6-nullsafety
+  quick_actions: ^0.6.0+6
 
 dev_dependencies:
   flutter_test:
