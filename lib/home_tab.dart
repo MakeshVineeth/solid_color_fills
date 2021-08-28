@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solid_color_fills/UI/colorItem.dart';
-import 'package:solid_color_fills/UI/scaleThis.dart';
+import 'package:solid_color_fills/UI/animations/scaleThis.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
 class HomeTab extends StatelessWidget {

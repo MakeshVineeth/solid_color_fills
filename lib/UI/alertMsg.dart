@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solid_color_fills/UI/fade_widget.dart';
+import 'package:solid_color_fills/UI/animations/fade_widget.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
 class AlertMsg extends StatelessWidget {

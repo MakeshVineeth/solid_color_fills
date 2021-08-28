@@ -1,7 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:solid_color_fills/UI/database/Wrapper.dart';
+import 'package:solid_color_fills/database/Wrapper.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
 void main() async {

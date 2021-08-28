@@ -1,12 +1,12 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:solid_color_fills/UI/database/helperFunctions.dart';
+import 'package:solid_color_fills/database/helperFunctions.dart';
 import 'package:solid_color_fills/UI/menuThings.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:solid_color_fills/UI/tabItem.dart';
-import 'package:solid_color_fills/UI/fade_indexed_stack.dart';
+import 'package:solid_color_fills/UI/animations/fade_indexed_stack.dart';
 import 'package:solid_color_fills/custom_picker.dart';
 import 'package:solid_color_fills/floating_modal.dart';
 import 'package:solid_color_fills/home_tab.dart';

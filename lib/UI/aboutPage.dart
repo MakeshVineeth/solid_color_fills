@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:solid_color_fills/UI/dialogTextBtn.dart';
-import 'package:solid_color_fills/UI/showBlurDialog.dart';
+import 'package:solid_color_fills/UI/animations/showBlurDialog.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'buttons_links.dart';
-import 'fade_scale_widget.dart';
+import 'animations/fade_scale_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {

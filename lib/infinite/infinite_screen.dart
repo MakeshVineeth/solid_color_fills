@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:random_color/random_color.dart';
 import 'package:solid_color_fills/UI/colorItem.dart';
-import 'package:solid_color_fills/UI/scaleThis.dart';
+import 'package:solid_color_fills/UI/animations/scaleThis.dart';
 
 class InfiniteScreen extends StatefulWidget {
   const InfiniteScreen({Key key}) : super(key: key);
