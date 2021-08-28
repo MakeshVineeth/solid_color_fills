@@ -124,4 +124,10 @@ class FixedValues {
     SystemChrome.setSystemUIOverlayStyle(flatTheme);
     return flatTheme;
   }
+
+  static TextStyle buttonText() => const TextStyle(
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.5,
+        fontSize: 15,
+      );
 }

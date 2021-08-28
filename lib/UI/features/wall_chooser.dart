@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:solid_color_fills/UI/animations/showBlurDialog.dart';
 import 'package:solid_color_fills/UI/dialogs/alertMsg.dart';
 import 'package:solid_color_fills/database/commons.dart';
 import 'package:solid_color_fills/database/helperFunctions.dart';
@@ -141,14 +142,15 @@ class WallChooser extends ConsumerWidget {
           miuiCheck.trim().isNotEmpty &&
           (location == WallpaperManagerFlutter.BOTH_SCREENS ||
               location == WallpaperManagerFlutter.LOCK_SCREEN)) {
-        await showDialog(
+        await showBlurDialog(
           context: context,
-          builder: (context) => AlertMsg(
+          child: AlertMsg(
             title: 'MIUI Detected',
             message:
                 'Due to MIUI Restrictions, Lockscreen Wallpaper cannot be changed by third-party apps, Please try \'Set as Home Screen\' instead.',
           ),
         );
+
         return;
       }
 

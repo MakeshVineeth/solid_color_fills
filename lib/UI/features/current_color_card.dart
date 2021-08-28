@@ -4,7 +4,6 @@ import 'package:material_color_picker_wns/material_color_picker_wns.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:solid_color_fills/database/commons.dart';
 import 'package:solid_color_fills/database/helperFunctions.dart';
-import 'package:solid_color_fills/UI/styleMethods.dart';
 
 class CurrentColorCard extends ConsumerWidget {
   final FixedValues fixedValues = FixedValues();
@@ -29,7 +28,7 @@ class CurrentColorCard extends ConsumerWidget {
               children: [
                 Text(
                   'Color:',
-                  style: buttonText(),
+                  style: FixedValues.buttonText(),
                 ),
                 SizedBox(width: 10),
                 CircleColor(
@@ -40,7 +39,7 @@ class CurrentColorCard extends ConsumerWidget {
                 SizedBox(width: 10),
                 Text(
                   object.colorTitle,
-                  style: buttonText(),
+                  style: FixedValues.buttonText(),
                 ),
               ],
             ),

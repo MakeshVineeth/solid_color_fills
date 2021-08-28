@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
-
 import 'package:solid_color_fills/fixedValues.dart';
 
 class BlurredWindow extends StatefulWidget {
   final Widget child;
 
   const BlurredWindow({@required this.child});
+
   @override
   _BlurredWindowState createState() => _BlurredWindowState();
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:solid_color_fills/UI/animations/showBlurDialog.dart';
 import 'package:solid_color_fills/UI/features/material_picker_widget.dart';
 import 'package:solid_color_fills/UI/features/current_color_card.dart';
 import 'package:solid_color_fills/UI/features/advanced_color_picker.dart';
-import 'package:solid_color_fills/UI/styleMethods.dart';
+import 'package:solid_color_fills/fixedValues.dart';
 
 class CustomColorPicker extends ConsumerWidget {
   @override
@@ -20,7 +21,7 @@ class CustomColorPicker extends ConsumerWidget {
               children: [
                 Text(
                   'Select a Tone.',
-                  style: buttonText(),
+                  style: FixedValues.buttonText(),
                 ),
                 SizedBox(height: 10),
                 Card(
@@ -41,18 +42,16 @@ class CustomColorPicker extends ConsumerWidget {
     );
   }
 
-  void showAdv(BuildContext context) => showDialog(
-        context: context,
-        builder: (context) => AdvancedColorPicker(),
-      );
-
   Widget bottomWidget(BuildContext context) => Container(
         width: MediaQuery.of(context).size.width / 1.5,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ElevatedButton(
-              onPressed: () => showAdv(context),
+              onPressed: () => showBlurDialog(
+                context: context,
+                child: AdvancedColorPicker(),
+              ),
               child: Text('Advanced Color Picker'),
             ),
             SizedBox(height: 10),
