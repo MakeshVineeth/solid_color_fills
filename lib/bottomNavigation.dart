@@ -122,12 +122,11 @@ class _ScaffoldHomeState extends State<ScaffoldHome> with RestorationMixin {
       );
 
   void _onItemTapped(int index) {
-    setTabIndex(index);
-
     if (mounted && index != null && index < widgetsList.length) {
       setState(() => _currentIndex.value = index);
       _bottomAppBarKey.currentState
           .animateTo(index); // ConvexAppBar doesn't navigate by itself.
+      setTabIndex(index);
     }
   }
 
