@@ -40,8 +40,8 @@ class _ScaleBounceState extends State<ScaleBounce>
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override
