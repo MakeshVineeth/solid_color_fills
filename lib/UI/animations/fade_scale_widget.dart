@@ -4,7 +4,7 @@ import 'package:animations/animations.dart';
 class FadeScale extends StatefulWidget {
   final Widget child;
 
-  const FadeScale({this.child}) : assert(child != null);
+  const FadeScale({@required this.child}) : assert(child != null);
 
   @override
   _FadeThisState createState() => _FadeThisState();

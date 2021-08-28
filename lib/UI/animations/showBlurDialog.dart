@@ -21,14 +21,15 @@ class _BlurredWindowState extends State<BlurredWindow> {
   void initState() {
     super.initState();
 
-    setState(() {
-      _currentOpacity = 1;
-      _currentChild = BackdropFilter(
-        filter: ImageFilter.blur(
-            sigmaX: _fixedValues.sigmaLevel, sigmaY: _fixedValues.sigmaLevel),
-        child: widget.child,
-      );
-    });
+    if (mounted)
+      setState(() {
+        _currentOpacity = 1;
+        _currentChild = BackdropFilter(
+          filter: ImageFilter.blur(
+              sigmaX: _fixedValues.sigmaLevel, sigmaY: _fixedValues.sigmaLevel),
+          child: widget.child,
+        );
+      });
   }
 
   @override
@@ -44,8 +45,8 @@ class _BlurredWindowState extends State<BlurredWindow> {
             key: UniqueKey(),
             duration: duration,
             child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
+                physics: AlwaysScrollableScrollPhysics(
+                    parent: BouncingScrollPhysics()),
                 child: Container(
                     height: constraints.maxHeight,
                     width: constraints.maxWidth,
