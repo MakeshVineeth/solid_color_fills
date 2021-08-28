@@ -7,10 +7,10 @@ import 'package:solid_color_fills/fixedValues.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:solid_color_fills/UI/tabItem.dart';
 import 'package:solid_color_fills/UI/animations/fade_indexed_stack.dart';
-import 'package:solid_color_fills/custom_picker.dart';
-import 'package:solid_color_fills/floating_modal.dart';
-import 'package:solid_color_fills/home_tab.dart';
-import 'package:solid_color_fills/infinite/infinite_screen.dart';
+import 'package:solid_color_fills/screens/color_pickers_screen.dart';
+import 'package:solid_color_fills/UI/floating_modal.dart';
+import 'package:solid_color_fills/screens/collections.dart';
+import 'package:solid_color_fills/screens/feed_screen.dart';
 
 class ScaffoldHome extends StatefulWidget {
   @override
@@ -30,7 +30,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
   final widgetsList = <Widget>[
     HomeTab(),
     CustomColorPicker(),
-    InfiniteScreen(),
+    FeedScreen(),
   ];
 
   int _currentIndex = 0;

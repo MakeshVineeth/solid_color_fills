@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:random_color/random_color.dart';
-import 'package:solid_color_fills/UI/colorItem.dart';
+import 'package:solid_color_fills/UI/features/colorItem.dart';
 import 'package:solid_color_fills/UI/animations/scaleThis.dart';
 
-class InfiniteScreen extends StatefulWidget {
-  const InfiniteScreen({Key key}) : super(key: key);
+class FeedScreen extends StatefulWidget {
+  const FeedScreen({Key key}) : super(key: key);
 
   @override
-  _InfiniteScreenState createState() => _InfiniteScreenState();
+  _FeedScreenState createState() => _FeedScreenState();
 }
 
-class _InfiniteScreenState extends State<InfiniteScreen> {
+class _FeedScreenState extends State<FeedScreen> {
   final Map<String, dynamic> colorsList = {};
   final double spacing = 10.0;
 

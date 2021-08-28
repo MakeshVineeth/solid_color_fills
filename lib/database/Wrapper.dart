@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solid_color_fills/UI/intro_screen.dart';
-import 'package:solid_color_fills/scaffoldHome.dart';
+import 'package:solid_color_fills/bottomNavigation.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({Key key}) : super(key: key);

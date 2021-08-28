@@ -4,7 +4,7 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:solid_color_fills/UI/aboutPage.dart';
 import 'package:solid_color_fills/UI/themeChooser.dart';
 import 'package:solid_color_fills/fixedValues.dart';
-import 'package:solid_color_fills/floating_modal.dart';
+import 'package:solid_color_fills/UI/floating_modal.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MenuThings extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:in_app_review/in_app_review.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:solid_color_fills/UI/database/commons.dart';
+import 'package:solid_color_fills/database/commons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:solid_color_fills/UI/wall_chooser.dart';
