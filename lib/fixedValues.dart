@@ -27,6 +27,10 @@ class FixedValues {
   final String logo = 'logo.png';
   final double sigmaLevel = 5.0;
 
+  static const String collectionScreenTitle = 'Collections';
+  static const String colorPickersScreenTitle = 'Color Picker';
+  static const String feedScreenTitle = 'Feed';
+
   // List of Colors
   final Map<String, dynamic> colorsList = {
     'Amber': Colors.amber,

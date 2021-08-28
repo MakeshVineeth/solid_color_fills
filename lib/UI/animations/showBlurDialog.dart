@@ -5,7 +5,7 @@ import 'package:solid_color_fills/fixedValues.dart';
 class BlurredWindow extends StatefulWidget {
   final Widget child;
 
-  const BlurredWindow({@required this.child});
+  const BlurredWindow({@required this.child}) : assert(child != null);
 
   @override
   _BlurredWindowState createState() => _BlurredWindowState();

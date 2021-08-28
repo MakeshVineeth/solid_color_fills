@@ -6,8 +6,10 @@ import 'package:solid_color_fills/fixedValues.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   final AdaptiveThemeMode savedTheme =
       await AdaptiveTheme.getThemeMode() ?? AdaptiveThemeMode.system;
+
   runApp(ProviderScope(child: MaterialHome(initialTheme: savedTheme)));
 }
 

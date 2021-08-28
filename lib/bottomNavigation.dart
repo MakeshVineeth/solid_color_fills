@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quick_actions/quick_actions.dart';
+import 'package:solid_color_fills/database/app_shortcuts.dart';
 import 'package:solid_color_fills/database/helperFunctions.dart';
 import 'package:solid_color_fills/UI/dialogs/menuThings.dart';
 import 'package:solid_color_fills/fixedValues.dart';
@@ -20,6 +23,7 @@ class ScaffoldHome extends StatefulWidget {
 class _ScaffoldHomeState extends State<ScaffoldHome> {
   final FixedValues fixedValues = FixedValues();
   final TabItemCustom tabItemCustom = TabItemCustom();
+  final QuickActions quickActions = const QuickActions();
 
   final Map<String, IconData> bottomItems = {
     'Collections': FluentIcons.collections_24_regular,
@@ -41,6 +45,24 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
     askForReview();
   }
 
+  void quickShortcuts() {
+    if (Platform.isAndroid) {
+      quickActions.initialize((shortcutType) {
+        int index = 0;
+
+        if (shortcutType == AppShortcuts.collectionQuickAction.type)
+          index = 0;
+        else if (shortcutType == AppShortcuts.colorsQuickAction.type)
+          index = 1;
+        else if (shortcutType == AppShortcuts.feedQuickAction.type) index = 2;
+
+        _onItemTapped(index);
+      });
+
+      quickActions.setShortcutItems(AppShortcuts.shortcutsList);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -48,7 +70,9 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(fixedValues.appTitle),
-          actions: [menuButton()],
+          actions: <Widget>[
+            menuButton(),
+          ],
         ),
         body: FadeIndexedStack(
           index: _currentIndex,
@@ -65,12 +89,14 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
               : 55,
           initialActiveIndex: _currentIndex,
           items: bottomItems.entries
-              .map((entry) => tabItemCustom.getTabItem(
-                    title: entry.key,
-                    icon: bottomItems[entry.key],
-                  ))
+              .map(
+                (entry) => tabItemCustom.getTabItem(
+                  title: entry.key,
+                  icon: bottomItems[entry.key],
+                ),
+              )
               .toList(),
-          onTap: (int index) => setState(() => _currentIndex = index),
+          onTap: _onItemTapped,
         ),
       ),
     );
@@ -83,4 +109,8 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
         ),
         icon: Icon(FluentIcons.navigation_24_regular),
       );
+
+  void _onItemTapped(int index) {
+    if (mounted) setState(() => _currentIndex = index);
+  }
 }
