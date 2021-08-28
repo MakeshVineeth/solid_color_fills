@@ -30,6 +30,7 @@ class FixedValues {
   static const String collectionScreenTitle = 'Collections';
   static const String colorPickersScreenTitle = 'Color Picker';
   static const String feedScreenTitle = 'Feed';
+  static const String tabIndexPref = 'tab_index';
 
   // List of Colors
   final Map<String, dynamic> colorsList = {

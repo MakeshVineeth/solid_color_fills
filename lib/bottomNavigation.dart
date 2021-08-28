@@ -20,7 +20,7 @@ class ScaffoldHome extends StatefulWidget {
   _ScaffoldHomeState createState() => _ScaffoldHomeState();
 }
 
-class _ScaffoldHomeState extends State<ScaffoldHome> {
+class _ScaffoldHomeState extends State<ScaffoldHome> with RestorationMixin {
   final FixedValues fixedValues = FixedValues();
   final TabItemCustom tabItemCustom = TabItemCustom();
   final QuickActions quickActions = const QuickActions();
@@ -39,12 +39,17 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
     FeedScreen(),
   ];
 
-  int _currentIndex = 0;
+  final RestorableInt _currentIndex = RestorableInt(0);
 
   @override
   void initState() {
-    quickShortcuts();
     super.initState();
+    initialTasks();
+  }
+
+  Future<void> initialTasks() async {
+    _onItemTapped(await getTabIndex());
+    quickShortcuts();
     askForReview();
   }
 
@@ -58,8 +63,6 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
         else if (shortcutType == AppShortcuts.colorsQuickAction.type)
           index = 1;
         else if (shortcutType == AppShortcuts.feedQuickAction.type) index = 2;
-
-        if (index != null) _bottomAppBarKey.currentState.animateTo(index);
 
         _onItemTapped(index);
       });
@@ -80,7 +83,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
           ],
         ),
         body: FadeIndexedStack(
-          index: _currentIndex,
+          index: _currentIndex.value,
           children: widgetsList,
         ),
         bottomNavigationBar: ConvexAppBar(
@@ -93,7 +96,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
           height: (MediaQuery.of(context).orientation == Orientation.portrait)
               ? 60
               : 55,
-          initialActiveIndex: _currentIndex,
+          initialActiveIndex: _currentIndex.value,
           items: bottomItems.entries
               .map(
                 (entry) => tabItemCustom.getTabItem(
@@ -119,7 +122,20 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
       );
 
   void _onItemTapped(int index) {
-    if (mounted && index != null && index < widgetsList.length)
-      setState(() => _currentIndex = index);
+    setTabIndex(index);
+
+    if (mounted && index != null && index < widgetsList.length) {
+      setState(() => _currentIndex.value = index);
+      _bottomAppBarKey.currentState
+          .animateTo(index); // ConvexAppBar doesn't navigate by itself.
+    }
+  }
+
+  @override
+  String get restorationId => 'landing_page';
+
+  @override
+  void restoreState(RestorationBucket oldBucket, bool initialRestore) {
+    registerForRestoration(_currentIndex, restorationId);
   }
 }

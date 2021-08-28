@@ -5,6 +5,7 @@ import 'package:solid_color_fills/database/commons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:solid_color_fills/UI/features/wall_chooser.dart';
+import 'package:solid_color_fills/fixedValues.dart';
 import 'dart:ui';
 
 import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
@@ -101,4 +102,14 @@ String wallpaperLocationText(int location) {
   }
 
   return message;
+}
+
+Future<void> setTabIndex(int index) async {
+  final prefs = await SharedPreferences.getInstance();
+  if (index != null) prefs.setInt(FixedValues.tabIndexPref, index);
+}
+
+Future<int> getTabIndex() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getInt(FixedValues.tabIndexPref) ?? 0;
 }
