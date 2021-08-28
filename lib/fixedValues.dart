@@ -11,7 +11,7 @@ class FixedValues {
 
   final String appLegalese =
       'An App that lets you set your favorite color as Device Wallpaper. Not satisfied with default colors? Then you can choose your own color by using the Color Picker provided in the app. Solid Color Fills has Beautiful UI and Privacy Friendly.';
-  final String appVersion = '1.0.2';
+  final String appVersion = '1.0.3';
 
   final BorderRadius fixedCardRadius = BorderRadius.circular(20.0);
   final roundShape =
