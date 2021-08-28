@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:solid_color_fills/UI/animations/fade_scale_widget.dart';
 import 'package:solid_color_fills/database/commons.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
@@ -16,28 +17,31 @@ class _AdvancedColorPickerState extends ConsumerState<AdvancedColorPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      shape: fixedValues.roundShape,
-      buttonPadding: EdgeInsets.all(15),
-      title: const Text('Pick a color!'),
-      content: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-        child: ColorPicker(
-          pickerColor: _color,
-          onColorChanged: (color) => _color = color,
-          showLabel: true,
-          pickerAreaHeightPercent: 0.8,
+    return FadeScale(
+      child: AlertDialog(
+        shape: fixedValues.roundShape,
+        buttonPadding: EdgeInsets.all(15),
+        title: const Text('Pick a color!'),
+        content: SingleChildScrollView(
+          physics:
+              AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          child: ColorPicker(
+            pickerColor: _color,
+            onColorChanged: (color) => _color = color,
+            showLabel: true,
+            pickerAreaHeightPercent: 0.8,
+          ),
         ),
+        actions: [
+          TextButton(
+            child: const Text('Choose'),
+            style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(
+                    Theme.of(context).textTheme.button.color)),
+            onPressed: () => onTapping(context),
+          ),
+        ],
       ),
-      actions: [
-        TextButton(
-          child: const Text('Choose'),
-          style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all(
-                  Theme.of(context).textTheme.button.color)),
-          onPressed: () => onTapping(context),
-        ),
-      ],
     );
   }
 

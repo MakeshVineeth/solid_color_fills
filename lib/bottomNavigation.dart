@@ -24,6 +24,8 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
   final FixedValues fixedValues = FixedValues();
   final TabItemCustom tabItemCustom = TabItemCustom();
   final QuickActions quickActions = const QuickActions();
+  final GlobalKey<ConvexAppBarState> _bottomAppBarKey =
+      GlobalKey<ConvexAppBarState>();
 
   final Map<String, IconData> bottomItems = {
     'Collections': FluentIcons.collections_24_regular,
@@ -41,9 +43,9 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
 
   @override
   void initState() {
+    quickShortcuts();
     super.initState();
     askForReview();
-    quickShortcuts();
   }
 
   void quickShortcuts() {
@@ -56,6 +58,8 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
         else if (shortcutType == AppShortcuts.colorsQuickAction.type)
           index = 1;
         else if (shortcutType == AppShortcuts.feedQuickAction.type) index = 2;
+
+        if (index != null) _bottomAppBarKey.currentState.animateTo(index);
 
         _onItemTapped(index);
       });
@@ -80,6 +84,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
           children: widgetsList,
         ),
         bottomNavigationBar: ConvexAppBar(
+          key: _bottomAppBarKey,
           backgroundColor: Theme.of(context).bottomAppBarTheme.color,
           color: Theme.of(context).primaryColor,
           curve: Curves.linear,
@@ -108,7 +113,9 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
           context: context,
           builder: (context) => MenuThings(),
         ),
-        icon: Icon(FluentIcons.navigation_24_regular),
+        icon: Icon(
+          FluentIcons.navigation_24_regular,
+        ),
       );
 
   void _onItemTapped(int index) {
