@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:random_color/random_color.dart';
 import 'package:solid_color_fills/UI/features/colorItem.dart';
-import 'package:solid_color_fills/UI/animations/scaleThis.dart';
+import 'package:solid_color_fills/UI/animations/scaleBounce.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({Key key}) : super(key: key);
@@ -37,7 +37,7 @@ class _FeedScreenState extends State<FeedScreen> {
 
             return (index >= colorsList.length)
                 ? null
-                : ScaleThis(
+                : ScaleBounce(
                     child: ColorItem(
                       mapEntry: colorsList.entries.elementAt(index),
                     ),

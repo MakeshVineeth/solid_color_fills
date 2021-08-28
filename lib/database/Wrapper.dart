@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:solid_color_fills/UI/intro_screen.dart';
+import 'package:solid_color_fills/screens/intro_screen.dart';
 import 'package:solid_color_fills/bottomNavigation.dart';
 
 class Wrapper extends StatefulWidget {

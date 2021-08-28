@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ScaleThis extends StatefulWidget {
+class ScaleBounce extends StatefulWidget {
   final Widget child;
 
-  const ScaleThis({@required this.child});
+  const ScaleBounce({@required this.child});
 
   @override
-  _ScaleThisState createState() => _ScaleThisState();
+  _ScaleBounceState createState() => _ScaleBounceState();
 }
 
-class _ScaleThisState extends State<ScaleThis> with TickerProviderStateMixin {
+class _ScaleBounceState extends State<ScaleBounce> with TickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
   final dur = const Duration(seconds: 1);

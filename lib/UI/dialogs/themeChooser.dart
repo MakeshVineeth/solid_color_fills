@@ -1,6 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:solid_color_fills/UI/menuThings.dart';
+import 'package:solid_color_fills/UI/dialogs/menuThings.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
 class ThemeChooser extends StatelessWidget {

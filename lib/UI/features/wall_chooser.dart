@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:solid_color_fills/UI/alertMsg.dart';
+import 'package:solid_color_fills/UI/dialogs/alertMsg.dart';
 import 'package:solid_color_fills/database/commons.dart';
 import 'package:solid_color_fills/database/helperFunctions.dart';
 import 'package:solid_color_fills/database/main_image_functions.dart';
-import 'package:solid_color_fills/UI/wall_image.dart';
+import 'package:solid_color_fills/UI/features/wall_image.dart';
 import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:system_properties/system_properties.dart';

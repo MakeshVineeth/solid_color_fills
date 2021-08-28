@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solid_color_fills/database/commons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:solid_color_fills/UI/wall_chooser.dart';
+import 'package:solid_color_fills/UI/features/wall_chooser.dart';
 import 'dart:ui';
 
 import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';

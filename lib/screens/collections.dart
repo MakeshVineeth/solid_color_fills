@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solid_color_fills/UI/features/colorItem.dart';
-import 'package:solid_color_fills/UI/animations/scaleThis.dart';
+import 'package:solid_color_fills/UI/animations/scaleBounce.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
 class HomeTab extends StatelessWidget {
@@ -23,7 +23,7 @@ class HomeTab extends StatelessWidget {
               mainAxisSpacing: spacing,
               children: List.generate(
                 fixedValues.colorsList.length,
-                (index) => ScaleThis(
+                (index) => ScaleBounce(
                   child: ColorItem(
                     mapEntry: fixedValues.colorsList.entries.elementAt(index),
                   ),
