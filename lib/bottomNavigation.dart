@@ -43,12 +43,13 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
   void initState() {
     super.initState();
     askForReview();
+    quickShortcuts();
   }
 
   void quickShortcuts() {
     if (Platform.isAndroid) {
       quickActions.initialize((shortcutType) {
-        int index = 0;
+        int index;
 
         if (shortcutType == AppShortcuts.collectionQuickAction.type)
           index = 0;
@@ -111,6 +112,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> {
       );
 
   void _onItemTapped(int index) {
-    if (mounted) setState(() => _currentIndex = index);
+    if (mounted && index != null && index < widgetsList.length)
+      setState(() => _currentIndex = index);
   }
 }
