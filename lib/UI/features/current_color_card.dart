@@ -12,36 +12,38 @@ class CurrentColorCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final object = ref.watch(commonProvider);
 
-    return Card(
-      child: InkWell(
-        borderRadius: fixedValues.fixedCardRadius,
-        onTap: () => openWallChooser(
-          context: context,
-          ref: ref,
-          transition: const Duration(milliseconds: 300),
-        ),
-        child: IgnorePointer(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Color:',
-                  style: FixedValues.buttonText(),
-                ),
-                SizedBox(width: 10),
-                CircleColor(
-                  circleSize: 35,
-                  color: object.color,
-                  elevation: 2,
-                ),
-                SizedBox(width: 10),
-                Text(
-                  object.colorTitle,
-                  style: FixedValues.buttonText(),
-                ),
-              ],
+    return Tooltip(
+      message: 'Click to set wallpaper with this color.',
+      child: Card(
+        child: InkWell(
+          borderRadius: fixedValues.fixedCardRadius,
+          onTap: () => openWallChooser(
+            context: context,
+            ref: ref,
+            transition: const Duration(milliseconds: 300),
+          ),
+          child: IgnorePointer(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleColor(
+                    circleSize: 35,
+                    color: object.color,
+                    elevation: 2,
+                  ),
+                  SizedBox(width: 10),
+                  Flexible(
+                    child: Text(
+                      object.colorTitle,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: FixedValues.buttonText(),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

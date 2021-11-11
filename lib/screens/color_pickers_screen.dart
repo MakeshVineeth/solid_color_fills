@@ -20,7 +20,7 @@ class CustomColorPicker extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Select a Tone.',
+                  'Select a Tone',
                   style: FixedValues.buttonText(),
                 ),
                 SizedBox(height: 10),
@@ -32,7 +32,7 @@ class CustomColorPicker extends ConsumerWidget {
                     child: MaterialPickerWidget(),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 5),
                 bottomWidget(context),
               ],
             ),
@@ -54,7 +54,15 @@ class CustomColorPicker extends ConsumerWidget {
               ),
               child: Text('Advanced Color Picker'),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 15),
+            Center(
+              child: Text(
+                'Selected Color',
+                style: FixedValues.buttonText().copyWith(
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
             CurrentColorCard(),
           ],
         ),
