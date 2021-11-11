@@ -28,7 +28,7 @@ void openWallChooser({
     }
 
     final ScreenSize newSize = ScreenSize(width, height);
-    final currentState = ref.read(screenSize);
+    final currentState = ref.read(screenSize.state);
 
     if (currentState.state.width != newSize.width) currentState.state = newSize;
   }

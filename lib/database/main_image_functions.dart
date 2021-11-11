@@ -11,7 +11,7 @@ import 'package:solid_color_fills/database/commons.dart';
 final imageProvision = FutureProvider<Uint8List>((ref) async {
   Uint8List uint8list;
   Color color = ref.watch(commonProvider).color;
-  final screen = ref.watch(screenSize).state;
+  final screen = ref.watch(screenSize.state).state;
 
   if (color != null) {
     try {
@@ -35,7 +35,7 @@ final imageProvision = FutureProvider<Uint8List>((ref) async {
 });
 
 final imageSetter = StateProvider<SetImage>((ref) {
-  Uint8List pngBytes = ref.watch(imageProvision).data?.value;
+  Uint8List pngBytes = ref.watch(imageProvision).asData?.value;
   return SetImage(pngBytes);
 });
 

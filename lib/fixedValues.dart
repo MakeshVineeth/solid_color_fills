@@ -80,14 +80,14 @@ class FixedValues {
       appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(color: fg),
         elevation: isDark ? 0 : elevation,
-        backgroundColor: Theme.of(context).brightness == Brightness.light
-            ? bg
-            : Colors.black,
-        brightness: brightness,
-        centerTitle: true,
-        textTheme: TextTheme(
-          headline6: Theme.of(context).textTheme.headline6.copyWith(color: fg),
+        backgroundColor: isDark ? Colors.black : bg,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: brightness,
+          statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
         ),
+        centerTitle: true,
+        titleTextStyle:
+            Theme.of(context).textTheme.headline6.copyWith(color: fg),
       ),
       bottomAppBarTheme: BottomAppBarTheme(
         color: (isDark) ? bottomNavBg : bg,

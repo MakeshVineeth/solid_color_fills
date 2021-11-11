@@ -25,7 +25,7 @@ class WallImage extends ConsumerWidget {
         firstChild: containerCustom(
           context: context,
           child: Image.memory(
-            imageObject?.data?.value ?? kTransparentImage,
+            imageObject?.asData?.value ?? kTransparentImage,
             fit: BoxFit.fill,
           ),
         ),
