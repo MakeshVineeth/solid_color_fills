@@ -20,24 +20,38 @@ class _AdvancedColorPickerState extends ConsumerState<AdvancedColorPicker> {
     return FadeScale(
       child: AlertDialog(
         shape: fixedValues.roundShape,
-        buttonPadding: EdgeInsets.all(15),
-        title: const Text('Pick a color!'),
+        buttonPadding: EdgeInsets.symmetric(horizontal: 15),
+        title: const Text(
+          'Pick a color',
+        ),
         content: SingleChildScrollView(
           physics:
               AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           child: ColorPicker(
             pickerColor: _color,
+            enableAlpha: false,
             onColorChanged: (color) => _color = color,
             showLabel: true,
-            pickerAreaHeightPercent: 0.8,
+            pickerAreaBorderRadius: fixedValues.fixedCardRadius,
           ),
         ),
         actions: [
           TextButton(
-            child: const Text('Choose'),
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: const Text(
+                'Select',
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(
-                    Theme.of(context).textTheme.button.color)),
+              foregroundColor: MaterialStateProperty.all(
+                  Theme.of(context).textTheme.button.color),
+              shape: MaterialStateProperty.all(fixedValues.roundShape),
+            ),
             onPressed: () => onTapping(context),
           ),
         ],
