@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,6 +14,7 @@ class AdvancedColorPicker extends ConsumerStatefulWidget {
 
 class _AdvancedColorPickerState extends ConsumerState<AdvancedColorPicker> {
   final FixedValues fixedValues = FixedValues();
+  final TextEditingController _textEditingController = TextEditingController();
   Color _color = Colors.blue;
 
   @override
@@ -30,11 +32,43 @@ class _AdvancedColorPickerState extends ConsumerState<AdvancedColorPicker> {
               AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           child: Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-            child: ColorPicker(
-              pickerColor: _color,
-              enableAlpha: false,
-              onColorChanged: (color) => _color = color,
-              pickerAreaBorderRadius: fixedValues.fixedCardRadius,
+            child: Column(
+              children: [
+                ColorPicker(
+                  pickerColor: _color,
+                  enableAlpha: false,
+                  hexInputController: _textEditingController,
+                  onColorChanged: (color) => _color = color,
+                  displayThumbColor: true,
+                  pickerAreaHeightPercent: 0.8,
+                  pickerAreaBorderRadius: fixedValues.fixedCardRadius,
+                ),
+                SizedBox(height: 5),
+                TextField(
+                  decoration: InputDecoration(
+                    counterText: "",
+                    prefixIcon: Icon(Icons.tag_rounded),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        String colorCode = _textEditingController.text;
+                        if (colorCode != null && colorCode.isNotEmpty)
+                          Clipboard.setData(ClipboardData(text: colorCode));
+                      },
+                      icon: Icon(
+                        Icons.content_paste_outlined,
+                      ),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: fixedValues.fixedCardRadius,
+                    ),
+                  ),
+                  scrollPhysics: AlwaysScrollableScrollPhysics(
+                      parent: BouncingScrollPhysics()),
+                  controller: _textEditingController,
+                  textCapitalization: TextCapitalization.characters,
+                  maxLength: 6,
+                ),
+              ],
             ),
           ),
         ),
