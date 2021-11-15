@@ -7,7 +7,6 @@ import 'package:solid_color_fills/UI/features/advanced_color_picker.dart';
 import 'package:solid_color_fills/UI/features/simple_rgb.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:solid_color_fills/database/commons.dart';
-import 'package:nil/nil.dart';
 
 class CustomColorPicker extends ConsumerWidget {
   @override
@@ -80,7 +79,7 @@ class CustomColorPicker extends ConsumerWidget {
                   child: CurrentColorCard(),
                 );
               else
-                return nil;
+                return Container();
             },
           ),
         ],

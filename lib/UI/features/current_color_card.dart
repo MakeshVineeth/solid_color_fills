@@ -12,31 +12,33 @@ class CurrentColorCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final object = ref.watch(commonProvider);
-
     return Tooltip(
       message: 'Click to set wallpaper with this color.',
       child: Hero(
-        tag: object.colorTitle.toLowerCase().replaceAll(' ', '_'),
+        tag: 'picker_color_hero',
         child: FadeScale(
           child: ScaleBounce(
             child: Card(
               elevation: elevation,
               shape: CircleBorder(),
               child: InkWell(
-                borderRadius: FixedValues().fixedCardRadius,
+                borderRadius: BorderRadius.circular(100),
                 onTap: () => openWallChooser(
                   context: context,
                   ref: ref,
-                  transition: const Duration(milliseconds: 400),
+                  transition: const Duration(milliseconds: 500),
                 ),
                 child: IgnorePointer(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CircleColor(
-                      circleSize: 50,
-                      color: object.color,
-                      elevation: elevation,
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        return CircleColor(
+                          circleSize: 50,
+                          color: ref.watch(commonProvider).color,
+                          elevation: elevation,
+                        );
+                      },
                     ),
                   ),
                 ),

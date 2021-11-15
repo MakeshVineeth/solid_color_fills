@@ -31,7 +31,6 @@ dependencies:
   quick_actions: ^0.6.0+7
   flutter_material_color_picker: ^1.1.0+2
   material_color_picker_wns: ^1.0.8
-  nil: ^1.1.1
 
 flutter_native_splash:
   color: "#ffffff"
