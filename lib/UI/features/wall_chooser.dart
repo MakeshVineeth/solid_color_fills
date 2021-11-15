@@ -32,7 +32,7 @@ class WallChooser extends ConsumerWidget {
           physics:
               AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           cacheExtent: 2000,
-          children: [
+          children: <Widget>[
             Container(
               padding: const EdgeInsets.all(20),
               constraints: BoxConstraints(minHeight: constraints.maxHeight),

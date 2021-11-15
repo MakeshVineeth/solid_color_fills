@@ -100,14 +100,15 @@ class FixedValues {
         shape: roundShape,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-        onPrimary: fg,
-        primary: bg,
-        padding: EdgeInsets.all(20),
-        shape: RoundedRectangleBorder(borderRadius: fixedCardRadius),
-        elevation: elevation,
-        enableFeedback: true,
-      )),
+        style: ElevatedButton.styleFrom(
+          onPrimary: fg,
+          primary: bg,
+          padding: EdgeInsets.all(20),
+          shape: RoundedRectangleBorder(borderRadius: fixedCardRadius),
+          elevation: elevation,
+          enableFeedback: true,
+        ),
+      ),
     );
 
     return themeData;
