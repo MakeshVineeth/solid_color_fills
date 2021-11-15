@@ -7,15 +7,14 @@ import 'package:solid_color_fills/UI/features/advanced_color_picker.dart';
 import 'package:solid_color_fills/UI/features/simple_rgb.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:solid_color_fills/database/commons.dart';
+import 'package:nil/nil.dart';
 
 class CustomColorPicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final object = ref.watch(commonProvider);
-
     return LayoutBuilder(
       builder: (context, constraints) => Stack(
-        children: [
+        children: <Widget>[
           ListView(
             physics:
                 AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
@@ -25,7 +24,7 @@ class CustomColorPicker extends ConsumerWidget {
                 constraints: BoxConstraints(minHeight: constraints.maxHeight),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     Text(
                       'Select a Tone',
                       style: FixedValues.buttonText(),
@@ -36,7 +35,9 @@ class CustomColorPicker extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(30.0)),
                       child: Container(
                         height: constraints.maxHeight / 1.5,
-                        child: MaterialPickerWidget(),
+                        child: MaterialPickerWidget(
+                          key: ValueKey(1),
+                        ),
                       ),
                     ),
                     SizedBox(height: 8),
@@ -68,12 +69,20 @@ class CustomColorPicker extends ConsumerWidget {
               ),
             ],
           ),
-          if (object.color != null && object.color != Colors.transparent)
-            Positioned(
-              right: 10,
-              bottom: 10,
-              child: CurrentColorCard(),
-            ),
+          Consumer(
+            builder: (context, ref, child) {
+              Color color = ref.watch(commonProvider).color;
+
+              if (color != null && color != Colors.transparent)
+                return Positioned(
+                  right: 10,
+                  bottom: 10,
+                  child: CurrentColorCard(),
+                );
+              else
+                return nil;
+            },
+          ),
         ],
       ),
     );
