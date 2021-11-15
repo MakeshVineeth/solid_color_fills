@@ -5,7 +5,6 @@ import 'package:solid_color_fills/UI/animations/fade_scale_widget.dart';
 import 'package:solid_color_fills/UI/animations/scaleBounce.dart';
 import 'package:solid_color_fills/database/commons.dart';
 import 'package:solid_color_fills/database/helperFunctions.dart';
-import 'package:solid_color_fills/fixedValues.dart';
 
 class CurrentColorCard extends ConsumerWidget {
   final double elevation = 5;
