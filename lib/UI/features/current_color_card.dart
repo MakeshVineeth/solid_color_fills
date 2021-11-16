@@ -25,22 +25,19 @@ class CurrentColorCard extends ConsumerWidget {
                 context: context,
                 ref: ref,
                 heroTag: heroTag,
-                transition: const Duration(milliseconds: 500),
               ),
               child: IgnorePointer(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Consumer(
-                    builder: (context, ref, child) {
-                      return Hero(
-                        tag: heroTag,
-                        child: CircleColor(
-                          circleSize: 50,
-                          color: ref.watch(commonProvider).color,
-                          elevation: elevation,
-                        ),
-                      );
-                    },
+                    builder: (context, ref, child) => Hero(
+                      tag: heroTag,
+                      child: CircleColor(
+                        circleSize: 50,
+                        color: ref.watch(commonProvider).color,
+                        elevation: elevation,
+                      ),
+                    ),
                   ),
                 ),
               ),
