@@ -1,7 +1,7 @@
 name: solid_color_fills
 description: A Wallpaper that lets you set any solid color as wallpaper.
-publish_to: 'none'
-version: 1.0.2+11
+publish_to: "none"
+version: 1.0.4+13
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -9,29 +9,43 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  adaptive_theme: ^2.2.0
-  animations: ^2.0.0
+  adaptive_theme: ^2.3.0
+  animations: ^2.0.2
   convex_bottom_bar: ^3.0.0
-  fluentui_system_icons: ^1.1.133
-  flutter_animator: ^3.1.1
-  flutter_colorpicker: ^0.4.0
-  flutter_riverpod: ^0.14.0+3
-  flutter_wallpaper_manager: ^0.0.3
+  fluentui_system_icons: ^1.1.149
+  flutter_animator: ^3.2.0
+  flutter_colorpicker: ^0.6.1
+  flutter_riverpod: ^1.0.0
+  in_app_review: ^2.0.3
   introduction_screen: ^2.1.0
-  material_color_picker_wns: ^1.0.8
   modal_bottom_sheet: ^2.0.0
   open_file: ^3.2.1
-  page_transition: ^2.0.2
-  path_provider: ^2.0.2
-  shared_preferences: ^2.0.6
+  page_transition: ^2.0.4
+  path_provider: ^2.0.6
+  shared_preferences: ^2.0.8
   system_properties: ^0.0.1
   transparent_image: ^2.0.0
-  url_launcher: ^6.0.7
-  in_app_review: ^2.0.2
+  url_launcher: ^6.0.12
+  wallpaper_manager_flutter: ^0.0.2
+  random_color: ^1.0.6-nullsafety
+  quick_actions: ^0.6.0+7
+  flutter_material_color_picker: ^1.1.0+2
+  material_color_picker_wns: ^1.0.8
+  flutter_displaymode: ^0.3.2
+
+flutter_native_splash:
+  color: "#ffffff"
+  color_dark: "#000000"
+  android: true
+  ios: false
+  web: false
+  image: assets/logo.png
+  android12: true
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^1.3.1
 
 flutter_icons:
   android: "launcher_icon"
