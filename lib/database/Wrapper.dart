@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solid_color_fills/screens/intro_screen.dart';
 import 'package:solid_color_fills/bottomNavigation.dart';
+import 'package:flutter_displaymode/flutter_displaymode.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({Key key}) : super(key: key);
@@ -14,17 +15,20 @@ class _WrapperState extends State<Wrapper> {
   Future<void> future;
   Widget currentChild = placeHolder();
 
-  Future<void> isFirstLaunch() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool showTutorial = prefs.getBool('first_launch') ?? true;
+  Future<void> initialTasks() async {
+    try {
+      await FlutterDisplayMode.setHighRefreshRate();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      bool showTutorial = prefs.getBool('first_launch') ?? true;
 
-    setState(() => currentChild =
-        showTutorial ? IntroScreen(function: hideTutorial) : ScaffoldHome());
+      setState(() => currentChild =
+          showTutorial ? IntroScreen(function: hideTutorial) : ScaffoldHome());
+    } catch (_) {}
   }
 
   @override
   void initState() {
-    future = isFirstLaunch();
+    future = initialTasks();
     super.initState();
   }
 

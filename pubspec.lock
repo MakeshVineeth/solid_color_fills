@@ -139,6 +139,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.1"
+  flutter_displaymode:
+    dependency: "direct main"
+    description:
+      name: flutter_displaymode
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.2"
   flutter_material_color_picker:
     dependency: "direct main"
     description:
