@@ -13,6 +13,7 @@ import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 void openWallChooser({
   @required WidgetRef ref,
   @required BuildContext context,
+  @required String heroTag,
   Duration transition = const Duration(milliseconds: 450),
 }) {
   Size size = window.physicalSize;
@@ -41,7 +42,7 @@ void openWallChooser({
       PageTransition(
         duration: transition,
         reverseDuration: transition,
-        child: WallChooser(),
+        child: WallChooser(heroTag: heroTag),
         type: PageTransitionType.fade,
       ),
     ).then((_) => ScaffoldMessenger.of(context).hideCurrentSnackBar());

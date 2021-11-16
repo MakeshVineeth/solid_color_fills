@@ -13,6 +13,9 @@ import 'package:system_properties/system_properties.dart';
 
 class WallChooser extends ConsumerWidget {
   final FixedValues fixedValues = FixedValues();
+  final String heroTag;
+
+  WallChooser({@required this.heroTag});
 
   final Map<String, int> buttons = {
     'Set As Home Screen': WallpaperManagerFlutter.HOME_SCREEN,
@@ -43,9 +46,7 @@ class WallChooser extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Hero(
-                        tag: object.colorTitle
-                            .toLowerCase()
-                            .replaceAll(' ', '_'),
+                        tag: heroTag,
                         child: colorWall(constraints: constraints),
                       ),
                       SizedBox(height: 5),

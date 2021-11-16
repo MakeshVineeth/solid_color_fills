@@ -6,7 +6,7 @@ import 'package:solid_color_fills/database/commons.dart';
 import 'package:solid_color_fills/database/helperFunctions.dart';
 
 class ColorItem extends ConsumerWidget {
-  final mapEntry;
+  final MapEntry<String, dynamic> mapEntry;
 
   ColorItem({@required this.mapEntry}) : assert(mapEntry != null);
 
@@ -14,13 +14,15 @@ class ColorItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final heroTag = mapEntry.key.toLowerCase().replaceAll(' ', '_');
+
     return Hero(
-      tag: mapEntry.key.toString().toLowerCase().replaceAll(' ', '_'),
+      tag: heroTag,
       child: Card(
         elevation: 3,
         shape: fixedValues.roundShape,
         child: InkWell(
-          onTap: () => changeColor(context, ref),
+          onTap: () => changeColor(context, ref, heroTag),
           borderRadius: fixedValues.fixedCardRadius,
           child: GridTile(
             child: Padding(
@@ -54,12 +56,12 @@ class ColorItem extends ConsumerWidget {
       return mapEntry.value;
   }
 
-  void changeColor(BuildContext context, WidgetRef ref) {
+  void changeColor(BuildContext context, WidgetRef ref, String heroTag) {
     ref.read(commonProvider.notifier).changeColors(
           colorValue: returnColorItem(),
           colorString: mapEntry.key,
         );
 
-    openWallChooser(context: context, ref: ref);
+    openWallChooser(context: context, ref: ref, heroTag: heroTag);
   }
 }
