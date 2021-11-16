@@ -32,6 +32,7 @@ dependencies:
   flutter_material_color_picker: ^1.1.0+2
   material_color_picker_wns: ^1.0.8
   flutter_displaymode: ^0.3.2
+  device_info_plus: ^3.1.1
 
 flutter_native_splash:
   color: "#ffffff"
