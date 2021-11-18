@@ -54,6 +54,22 @@ class FixedValues {
     'Caramel': '#8F614B',
     'Moon': '#989DA6',
     'Serenity': '#92A8D1',
+    'HackerNews': '#FF6600',
+    'Crimson': '#DC143C',
+    'Teal': Colors.teal,
+    'Cornflower Blue': '#6495ED',
+    'Royal Blue': '#4169E1',
+    'Corn Silk': '#FFF8DC',
+    'Forest Green': '#228B22',
+    'Silver': '#C0C0C0',
+    'Bisque': '#FFE4C4',
+    'Telegram': '#0088CC',
+    'Mauve': '#E0B0FF',
+    'Khaki': '#F0E68C',
+    'Indigo': Colors.indigo,
+    'Pink': Colors.pink,
+    'Sky Blue': '#87CEEB',
+    'Orchid': '#DA70D6'
   };
 
   ThemeData getTheme({
