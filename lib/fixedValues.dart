@@ -89,6 +89,7 @@ class FixedValues {
     }
 
     ThemeData themeData = ThemeData(
+      useMaterial3: true,
       brightness: brightness,
       primaryColor: primaryColor,
       scaffoldBackgroundColor: isDark ? Colors.black : bg,
