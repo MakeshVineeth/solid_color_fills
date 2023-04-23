@@ -50,14 +50,16 @@ class SetImage {
       String tempPath = (await getTemporaryDirectory()).path;
       String filePath = tempPath + '/temp.png';
       File file = File(filePath);
+      if (await file.exists()) await file.delete();
 
-      File fileWritten = await file.writeAsBytes(pngBytes!);
+      File fileWritten = await file.writeAsBytes(pngBytes!, flush: true);
       bool fileExists = await fileWritten.exists();
       if (!fileExists) return false;
 
       if (location != 4) {
         bool result = await AsyncWallpaper.setWallpaperFromFile(
             filePath: filePath, wallpaperLocation: location);
+        await fileWritten.delete();
         return result;
       }
 
