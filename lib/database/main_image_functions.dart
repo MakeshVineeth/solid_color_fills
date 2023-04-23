@@ -56,16 +56,20 @@ class SetImage {
       bool fileExists = await fileWritten.exists();
       if (!fileExists) return false;
 
-      if (location != 4) {
-        bool result = await AsyncWallpaper.setWallpaperFromFile(
-            filePath: filePath, wallpaperLocation: location);
-        await fileWritten.delete();
-        return result;
+      switch (location) {
+        case AsyncWallpaper.HOME_SCREEN:
+        case AsyncWallpaper.LOCK_SCREEN:
+        case AsyncWallpaper.BOTH_SCREENS:
+          bool result = await AsyncWallpaper.setWallpaperFromFile(
+              filePath: filePath, wallpaperLocation: location);
+          await fileWritten.delete();
+          return result;
+        case 4:
+          OpenResult openResult = await OpenFilex.open(filePath);
+          return openResult.type == ResultType.done;
+        default:
+          return false;
       }
-
-      OpenResult openResult = await OpenFilex.open(filePath);
-      if (openResult.type != ResultType.done) return false;
-      return true;
     } catch (_) {
       return false;
     }
