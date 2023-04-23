@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/database/main_image_functions.dart';
@@ -9,7 +10,7 @@ class WallImage extends ConsumerWidget {
   final FixedValues fixedValues = FixedValues();
   final BoxConstraints constraints;
 
-  WallImage({@required this.constraints}) : assert(constraints != null);
+  WallImage({required this.constraints});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +26,7 @@ class WallImage extends ConsumerWidget {
         firstChild: containerCustom(
           context: context,
           child: Image.memory(
-            imageObject?.asData?.value ?? kTransparentImage,
+            imageObject.asData?.value ?? kTransparentImage,
             fit: BoxFit.fill,
           ),
         ),
@@ -38,7 +39,7 @@ class WallImage extends ConsumerWidget {
   }
 
   Widget containerCustom(
-      {@required Widget child, @required BuildContext context}) {
+      {required Widget child, required BuildContext context}) {
     bool isHorizontal =
         MediaQuery.of(context).orientation == Orientation.landscape;
 

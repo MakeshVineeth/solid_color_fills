@@ -1,10 +1,10 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_review/in_app_review.dart';
-import 'package:solid_color_fills/screens/aboutPage.dart';
+import 'package:solid_color_fills/UI/dialogs/floating_modal.dart';
 import 'package:solid_color_fills/UI/dialogs/themeChooser.dart';
 import 'package:solid_color_fills/fixedValues.dart';
-import 'package:solid_color_fills/UI/dialogs/floating_modal.dart';
+import 'package:solid_color_fills/screens/aboutPage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MenuThings extends StatelessWidget {
@@ -20,7 +20,9 @@ class MenuThings extends StatelessWidget {
           icon: FluentIcons.dark_theme_24_regular,
           title: 'Change Theme',
           function: () => showFloatingModalBottomSheet(
-              context: context, builder: (context) => ThemeChooser()),
+              context: context,
+              builder: (context) => ThemeChooser(),
+              backgroundColor: null),
           context: context,
         ),
         menuItem(
@@ -51,14 +53,14 @@ class MenuThings extends StatelessWidget {
   }
 
   void launchUrl(
-      {@required String url,
+      {required String url,
       bool forceWebView = false,
       bool enableJavaScript = false}) async {
     try {
       url = Uri.encodeFull(url);
-      if (await canLaunch(url))
-        await launch(
-          url,
+      if (await canLaunchUrl(Uri.parse(url)))
+        launchUrl(
+          url: url,
           forceWebView: forceWebView,
           enableJavaScript: enableJavaScript,
         );
@@ -66,10 +68,10 @@ class MenuThings extends StatelessWidget {
   }
 
   Widget menuItem({
-    IconData icon,
-    @required String title,
-    @required Function function,
-    @required BuildContext context,
+    IconData? icon,
+    required String title,
+    required Function function,
+    required BuildContext context,
   }) =>
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
@@ -79,7 +81,7 @@ class MenuThings extends StatelessWidget {
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0))),
                   foregroundColor: MaterialStateProperty.all(
-                      Theme.of(context).textTheme.button.color),
+                      Theme.of(context).textTheme.labelLarge!.color),
                 ),
                 onPressed: () {
                   Navigator.pop(context);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ButtonLinks extends StatelessWidget {
-  final Function function;
+  final Function? function;
   final String title;
   final Color foregroundColor;
   final Color iconColor;
@@ -10,11 +10,11 @@ class ButtonLinks extends StatelessWidget {
 
   const ButtonLinks({
     this.function,
-    @required this.title,
+    required this.title,
     this.foregroundColor = Colors.white,
     this.iconColor = Colors.white,
     this.backgroundColor = Colors.green,
-    @required this.icon,
+    required this.icon,
   });
 
   @override
@@ -26,7 +26,7 @@ class ButtonLinks extends StatelessWidget {
           color: iconColor,
         ),
         onPressed: () {
-          if (function != null) function();
+          function!();
         },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(backgroundColor),

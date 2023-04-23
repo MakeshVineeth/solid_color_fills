@@ -7,9 +7,7 @@ class AlertMsg extends StatelessWidget {
   final String title;
   final String message;
 
-  AlertMsg({@required this.title, @required this.message})
-      : assert(message != null),
-        assert(title != null);
+  AlertMsg({required this.title, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +33,7 @@ class AlertMsg extends StatelessWidget {
                 ),
               ),
               foregroundColor: MaterialStateProperty.all(
-                  Theme.of(context).textTheme.button.color),
+                  Theme.of(context).textTheme.labelLarge!.color),
             ),
             child: const Text('OK'),
             onPressed: () => Navigator.of(context).pop(),

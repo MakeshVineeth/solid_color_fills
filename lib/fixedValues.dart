@@ -22,7 +22,7 @@ class FixedValues {
   final String lightThemeDesc = 'Light Theme';
   final String darkThemeDesc = 'Dark Theme';
   final String systemDefaultTheme = 'System Default';
-  final Color bottomNavBg = Colors.grey[900];
+  final Color bottomNavBg = Colors.grey[900]!;
 
   final String logo = 'logo.png';
   final double sigmaLevel = 5.0;
@@ -73,14 +73,14 @@ class FixedValues {
   };
 
   ThemeData getTheme({
-    @required Brightness brightness,
-    @required BuildContext context,
+    required Brightness brightness,
+    required BuildContext context,
   }) {
     Color fg = Colors.black;
     Color bg = Colors.white;
     double elevation = 3.0;
     bool isDark = brightness == Brightness.dark;
-    Color primaryColor = (isDark) ? Colors.amber : Colors.blue[600];
+    Color? primaryColor = (isDark) ? Colors.amber : Colors.blue[600];
 
     if (isDark) {
       bg = Colors.black54;
@@ -104,7 +104,7 @@ class FixedValues {
         ),
         centerTitle: true,
         titleTextStyle:
-            Theme.of(context).textTheme.headline6.copyWith(color: fg),
+            Theme.of(context).textTheme.titleLarge!.copyWith(color: fg),
       ),
       bottomAppBarTheme: BottomAppBarTheme(
         color: (isDark) ? bottomNavBg : bg,
@@ -118,8 +118,8 @@ class FixedValues {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          onPrimary: fg,
-          primary: bg,
+          foregroundColor: fg,
+          backgroundColor: bg,
           padding: EdgeInsets.all(20),
           shape: RoundedRectangleBorder(borderRadius: fixedCardRadius),
           elevation: elevation,

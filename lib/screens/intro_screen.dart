@@ -8,7 +8,7 @@ class IntroScreen extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
   final Function function;
 
-  IntroScreen({@required this.function}) : assert(function != null);
+  IntroScreen({required this.function});
 
   @override
   Widget build(BuildContext context) {

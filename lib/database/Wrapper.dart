@@ -1,20 +1,21 @@
 import 'dart:io';
+
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:solid_color_fills/screens/intro_screen.dart';
-import 'package:solid_color_fills/bottomNavigation.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:solid_color_fills/bottomNavigation.dart';
+import 'package:solid_color_fills/screens/intro_screen.dart';
 
 class Wrapper extends StatefulWidget {
-  const Wrapper({Key key}) : super(key: key);
+  const Wrapper({Key? key}) : super(key: key);
 
   @override
   _WrapperState createState() => _WrapperState();
 }
 
 class _WrapperState extends State<Wrapper> {
-  Future<void> future;
+  late Future<void> future;
   Widget currentChild = placeHolder();
 
   Future<void> initialTasks() async {
@@ -22,7 +23,7 @@ class _WrapperState extends State<Wrapper> {
       if (Platform.isAndroid) {
         DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-        int sdkVer = androidInfo.version.sdkInt;
+        int? sdkVer = androidInfo.version.sdkInt;
 
         if (sdkVer >= 23) await FlutterDisplayMode.setHighRefreshRate();
       }

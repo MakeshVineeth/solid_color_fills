@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
 import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
 class BlurredWindow extends StatefulWidget {
   final Widget child;
 
-  const BlurredWindow({@required this.child}) : assert(child != null);
+  const BlurredWindow({required this.child});
 
   @override
   _BlurredWindowState createState() => _BlurredWindowState();
@@ -14,7 +15,7 @@ class BlurredWindow extends StatefulWidget {
 class _BlurredWindowState extends State<BlurredWindow> {
   double _currentOpacity = 0;
   final Duration duration = const Duration(milliseconds: 1000);
-  Widget _currentChild;
+  late Widget _currentChild;
   final FixedValues _fixedValues = FixedValues();
 
   @override
@@ -59,7 +60,7 @@ class _BlurredWindowState extends State<BlurredWindow> {
 }
 
 Future<void> showBlurDialog(
-        {@required BuildContext context, @required Widget child}) =>
+        {required BuildContext context, required Widget child}) =>
     showDialog(
       context: context,
       barrierColor: Colors.transparent,

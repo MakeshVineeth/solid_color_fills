@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.makeshtech.solid_color_fills" xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <queries>
         <intent>
@@ -27,7 +27,9 @@
         android:name="${applicationName}"
         android:label="Solid Color Fills"
         android:icon="@mipmap/launcher_icon"
-        android:allowBackup="false">
+        android:allowBackup="false"
+        tools:replace="android:allowBackup"
+       >
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -1,26 +1,23 @@
+import 'package:async_wallpaper/async_wallpaper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:solid_color_fills/UI/animations/showBlurDialog.dart';
-import 'package:solid_color_fills/UI/dialogs/alertMsg.dart';
+import 'package:solid_color_fills/UI/features/wall_image.dart';
 import 'package:solid_color_fills/database/commons.dart';
 import 'package:solid_color_fills/database/helperFunctions.dart';
 import 'package:solid_color_fills/database/main_image_functions.dart';
-import 'package:solid_color_fills/UI/features/wall_image.dart';
-import 'package:wallpaper_manager_flutter/wallpaper_manager_flutter.dart';
 import 'package:solid_color_fills/fixedValues.dart';
-import 'package:system_properties/system_properties.dart';
 
 class WallChooser extends ConsumerWidget {
   final FixedValues fixedValues = FixedValues();
   final String heroTag;
 
-  WallChooser({@required this.heroTag});
+  WallChooser({required this.heroTag});
 
   final Map<String, int> buttons = {
-    'Set As Home Screen': WallpaperManagerFlutter.HOME_SCREEN,
-    'Set As Lock Screen': WallpaperManagerFlutter.LOCK_SCREEN,
-    'Set As Both': WallpaperManagerFlutter.BOTH_SCREENS,
+    'Set As Home Screen': AsyncWallpaper.HOME_SCREEN,
+    'Set As Lock Screen': AsyncWallpaper.LOCK_SCREEN,
+    'Set As Both': AsyncWallpaper.BOTH_SCREENS,
     'Open in Gallery': 4,
   };
 
@@ -95,7 +92,8 @@ class WallChooser extends ConsumerWidget {
                           text: 'Note: ',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Theme.of(context).textTheme.button.color,
+                            color:
+                                Theme.of(context).textTheme.labelLarge!.color,
                           ),
                           children: const <TextSpan>[
                             TextSpan(
@@ -119,7 +117,7 @@ class WallChooser extends ConsumerWidget {
     );
   }
 
-  Widget colorWall({@required BoxConstraints constraints}) => Card(
+  Widget colorWall({required BoxConstraints constraints}) => Card(
         shape: fixedValues.roundShape,
         elevation: 3,
         child: InkWell(
@@ -136,26 +134,25 @@ class WallChooser extends ConsumerWidget {
           .hideCurrentSnackBar(); // Hide existing snack bars if present.
 
       // Checks for MIUI device and displays Not Supported Message.
-      final String miuiCheck = await SystemProperties?.getSystemProperties(
-          "ro.miui.ui.version.name");
+      // final String miuiCheck = await SystemProperties?.getSystemProperties(
+      //     "ro.miui.ui.version.name");
+      //
+      // if (miuiCheck.trim().isNotEmpty &&
+      //     (location == WallpaperManagerFlutter.BOTH_SCREENS ||
+      //         location == WallpaperManagerFlutter.LOCK_SCREEN)) {
+      //   await showBlurDialog(
+      //     context: context,
+      //     child: AlertMsg(
+      //       title: 'MIUI Detected',
+      //       message:
+      //           'Due to MIUI Restrictions, Lockscreen Wallpaper cannot be changed by third-party apps, Please try \'Set as Home Screen\' instead.',
+      //     ),
+      //   );
+      //
+      //   return;
+      // }
 
-      if (miuiCheck != null &&
-          miuiCheck.trim().isNotEmpty &&
-          (location == WallpaperManagerFlutter.BOTH_SCREENS ||
-              location == WallpaperManagerFlutter.LOCK_SCREEN)) {
-        await showBlurDialog(
-          context: context,
-          child: AlertMsg(
-            title: 'MIUI Detected',
-            message:
-                'Due to MIUI Restrictions, Lockscreen Wallpaper cannot be changed by third-party apps, Please try \'Set as Home Screen\' instead.',
-          ),
-        );
-
-        return;
-      }
-
-      final SetImage setImageClass = ref.read(imageSetter.state).state;
+      final SetImage setImageClass = ref.read(imageSetter.notifier).state;
 
       setImageClass.setNow(location: location).then((val) {
         // If location is 4, means to open the gallery, no need to display message.

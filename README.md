@@ -1,16 +1,16 @@
 Solid Color Fills
 ======
 
-An Open-Source app that can set your favourite color as Homescreen or Lockscreen Wallpaper. **Make your device colorful using Solid Color Fills!**
+An Open-Source app that can set your favourite color as Home-screen or Lockscreen Wallpaper. **Make your device colorful using Solid Color Fills!**
 
 
 
-|                                         Collections                                          |                                       Color Picker                                       |
-| :------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: |
+|                                      Collections                                      |                                   Color Picker                                    |
+|:-------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
 | <img src="screenshots/Collections.png" alt="Image of Color Collections" width="200"/> | <img src="screenshots/Color_Picker.png" alt="Image of Color Picker" width="200"/> |
 
-|                                          Advanced Color Picker                                          |                                      Wallpaper Selection                                       |
-| :-----------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------: |
+|                                      Advanced Color Picker                                       |                                   Wallpaper Selection                                   |
+|:------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------:|
 | <img src="screenshots/Adv_Color_Picker.png" alt="Advanced Color Picker Screenshot" width="200"/> | <img src="screenshots/Set_Wallpaper.png" alt="Wallpaper Selection Window" width="200"/> |
 
 

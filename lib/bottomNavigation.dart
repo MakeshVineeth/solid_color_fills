@@ -1,18 +1,19 @@
 import 'dart:io';
+
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quick_actions/quick_actions.dart';
+import 'package:solid_color_fills/UI/animations/fade_indexed_stack.dart';
+import 'package:solid_color_fills/UI/dialogs/floating_modal.dart';
+import 'package:solid_color_fills/UI/dialogs/menuThings.dart';
+import 'package:solid_color_fills/UI/tabItem.dart';
 import 'package:solid_color_fills/database/app_shortcuts.dart';
 import 'package:solid_color_fills/database/helperFunctions.dart';
-import 'package:solid_color_fills/UI/dialogs/menuThings.dart';
 import 'package:solid_color_fills/fixedValues.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:solid_color_fills/UI/tabItem.dart';
-import 'package:solid_color_fills/UI/animations/fade_indexed_stack.dart';
-import 'package:solid_color_fills/screens/color_pickers_screen.dart';
-import 'package:solid_color_fills/UI/dialogs/floating_modal.dart';
 import 'package:solid_color_fills/screens/collections.dart';
+import 'package:solid_color_fills/screens/color_pickers_screen.dart';
 import 'package:solid_color_fills/screens/feed_screen.dart';
 
 class ScaffoldHome extends StatefulWidget {
@@ -56,7 +57,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> with RestorationMixin {
   void quickShortcuts() {
     if (Platform.isAndroid) {
       quickActions.initialize((shortcutType) {
-        int index;
+        int index = -1;
 
         if (shortcutType == AppShortcuts.collectionQuickAction.type)
           index = 0;
@@ -115,6 +116,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> with RestorationMixin {
         onPressed: () => showFloatingModalBottomSheet(
           context: context,
           builder: (context) => MenuThings(),
+          backgroundColor: null,
         ),
         icon: Icon(
           FluentIcons.navigation_24_regular,
@@ -122,10 +124,10 @@ class _ScaffoldHomeState extends State<ScaffoldHome> with RestorationMixin {
       );
 
   void _onItemTapped(int index) {
-    if (mounted && index != null && index < widgetsList.length) {
+    if (mounted && index < widgetsList.length) {
       setState(() => _currentIndex.value = index);
       _bottomAppBarKey.currentState
-          .animateTo(index); // ConvexAppBar doesn't navigate by itself.
+          ?.animateTo(index); // ConvexAppBar doesn't navigate by itself.
       setTabIndex(index);
     }
   }
@@ -134,7 +136,7 @@ class _ScaffoldHomeState extends State<ScaffoldHome> with RestorationMixin {
   String get restorationId => 'landing_page';
 
   @override
-  void restoreState(RestorationBucket oldBucket, bool initialRestore) {
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
     registerForRestoration(_currentIndex, restorationId);
   }
 }

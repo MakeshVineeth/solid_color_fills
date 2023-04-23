@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/animations/fade_scale_widget.dart';
 import 'package:solid_color_fills/database/commons.dart';
@@ -50,7 +50,7 @@ class _AdvancedColorPickerState extends ConsumerState<AdvancedColorPicker> {
                     suffixIcon: IconButton(
                       onPressed: () {
                         String colorCode = _textEditingController.text;
-                        if (colorCode != null && colorCode.isNotEmpty)
+                        if (colorCode.isNotEmpty)
                           Clipboard.setData(ClipboardData(text: colorCode));
                       },
                       icon: Icon(
@@ -85,7 +85,7 @@ class _AdvancedColorPickerState extends ConsumerState<AdvancedColorPicker> {
             ),
             style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all(
-                  Theme.of(context).textTheme.button.color),
+                  Theme.of(context).textTheme.labelLarge!.color),
               shape: MaterialStateProperty.all(fixedValues.roundShape),
             ),
             onPressed: () => onTapping(context),

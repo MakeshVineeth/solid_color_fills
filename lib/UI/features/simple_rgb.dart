@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/animations/fade_scale_widget.dart';
 import 'package:solid_color_fills/database/commons.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
 class SimpleRGB extends ConsumerStatefulWidget {
-  const SimpleRGB({Key key}) : super(key: key);
+  const SimpleRGB({Key? key}) : super(key: key);
 
   @override
   _SimpleRGBState createState() => _SimpleRGBState();
@@ -47,7 +47,7 @@ class _SimpleRGBState extends ConsumerState<SimpleRGB> {
             ),
             style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all(
-                  Theme.of(context).textTheme.button.color),
+                  Theme.of(context).textTheme.labelLarge!.color),
               shape: MaterialStateProperty.all(fixedValues.roundShape),
             ),
             onPressed: () => onTapping(context),

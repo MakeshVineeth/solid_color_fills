@@ -3,11 +3,11 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class FloatingModal extends StatelessWidget {
   final Widget child;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
-  const FloatingModal({Key key, @required this.child, this.backgroundColor})
-      : assert(child != null),
-        super(key: key);
+  const FloatingModal(
+      {required Key key, required this.child, this.backgroundColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,9 @@ class FloatingModal extends StatelessWidget {
 }
 
 Future<T> showFloatingModalBottomSheet<T>({
-  @required BuildContext context,
-  @required WidgetBuilder builder,
-  Color backgroundColor,
+  required BuildContext context,
+  required WidgetBuilder builder,
+  Color? backgroundColor,
 }) async {
   final result = await showCustomModalBottomSheet(
     context: context,
@@ -38,6 +38,7 @@ Future<T> showFloatingModalBottomSheet<T>({
     containerWidget: (_, animation, child) => FloatingModal(
       child: child,
       backgroundColor: backgroundColor,
+      key: UniqueKey(),
     ),
     bounce: true,
     expand: false,

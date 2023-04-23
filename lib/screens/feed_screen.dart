@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:random_color/random_color.dart';
-import 'package:solid_color_fills/UI/features/colorItem.dart';
 import 'package:solid_color_fills/UI/animations/scaleBounce.dart';
+import 'package:solid_color_fills/UI/features/colorItem.dart';
 
 class FeedScreen extends StatefulWidget {
-  const FeedScreen({Key key}) : super(key: key);
+  const FeedScreen({Key? key}) : super(key: key);
 
   @override
   _FeedScreenState createState() => _FeedScreenState();
@@ -52,13 +52,13 @@ class _FeedScreenState extends State<FeedScreen> {
     RandomColor _randomColor = RandomColor();
     List<Color> _randomList = _randomColor.randomColors(count: 10);
 
-    if (_randomList != null && _randomList.isNotEmpty) {
+    if (_randomList.isNotEmpty) {
       Map<String, dynamic> colorsMapped = {};
 
       for (Color colorItem in _randomList) {
         String colorName = getColorNameFromColor(colorItem).getName;
 
-        if (colorName != null) colorsMapped.addAll({colorName: colorItem});
+        colorsMapped.addAll({colorName: colorItem});
       }
 
       if (colorsMapped.isNotEmpty) colorsList.addAll(colorsMapped);

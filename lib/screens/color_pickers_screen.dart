@@ -72,7 +72,7 @@ class CustomColorPicker extends ConsumerWidget {
             builder: (context, ref, child) {
               Color color = ref.watch(commonProvider).color;
 
-              if (color != null && color != Colors.transparent)
+              if (color != Colors.transparent)
                 return Positioned(
                   right: 10,
                   bottom: 10,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:solid_color_fills/UI/dialogs/dialogTextBtn.dart';
 import 'package:solid_color_fills/UI/animations/showBlurDialog.dart';
+import 'package:solid_color_fills/UI/dialogs/dialogTextBtn.dart';
 import 'package:solid_color_fills/fixedValues.dart';
-import '../UI/buttons_links.dart';
-import '../UI/animations/fade_scale_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../UI/animations/fade_scale_widget.dart';
+import '../UI/buttons_links.dart';
 
 class AboutPage extends StatelessWidget {
   final FixedValues _fixedValues = FixedValues();
@@ -101,15 +102,15 @@ class AboutPage extends StatelessWidget {
       );
 
   Future<void> launchUrl({
-    @required String url,
+    required String url,
     bool forceWebView = false,
     bool enableJavaScript = false,
   }) async {
     try {
       final urlEncoded = Uri.encodeFull(url);
-      if (await canLaunch(urlEncoded))
-        await launch(
-          urlEncoded,
+      if (await canLaunchUrl(Uri.parse(urlEncoded)))
+        launchUrl(
+          url: urlEncoded,
           forceWebView: forceWebView,
           enableJavaScript: enableJavaScript,
         );

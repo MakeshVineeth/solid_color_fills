@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
+import 'package:flutter/material.dart';
 
 class FadeScale extends StatefulWidget {
   final Widget child;
 
-  const FadeScale({@required this.child}) : assert(child != null);
+  const FadeScale({required this.child});
 
   @override
   _FadeThisState createState() => _FadeThisState();
@@ -12,7 +12,7 @@ class FadeScale extends StatefulWidget {
 
 class _FadeThisState extends State<FadeScale>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
   Duration _duration = const Duration(milliseconds: 800);
 
   @override
@@ -35,7 +35,7 @@ class _FadeThisState extends State<FadeScale>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller,
-      builder: (BuildContext context, Widget child) => FadeScaleTransition(
+      builder: (BuildContext context, Widget? child) => FadeScaleTransition(
         animation: _controller,
         child: this.widget.child,
       ),

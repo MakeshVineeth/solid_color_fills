@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:solid_color_fills/fixedValues.dart';
 import 'package:solid_color_fills/database/commons.dart';
 import 'package:solid_color_fills/database/helperFunctions.dart';
+import 'package:solid_color_fills/fixedValues.dart';
 
 class ColorItem extends ConsumerWidget {
   final MapEntry<String, dynamic> mapEntry;
 
-  ColorItem({@required this.mapEntry}) : assert(mapEntry != null);
+  ColorItem({required this.mapEntry});
 
   final FixedValues fixedValues = FixedValues();
 
@@ -50,7 +50,7 @@ class ColorItem extends ConsumerWidget {
     if (mapEntry.value is String) {
       String hexCodeStr = mapEntry.value.toString().substring(1);
       String color = '0xFF$hexCodeStr';
-      return Color(int.tryParse(color));
+      return Color(int.tryParse(color)!);
     } else
       return mapEntry.value;
   }
