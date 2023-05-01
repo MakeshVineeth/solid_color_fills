@@ -57,7 +57,6 @@ class _FeedScreenState extends State<FeedScreen> {
 
       for (Color colorItem in _randomList) {
         String colorName = getColorNameFromColor(colorItem).getName;
-
         colorsMapped.addAll({colorName: colorItem});
       }
 

@@ -8,10 +8,12 @@ import 'package:solid_color_fills/database/helperFunctions.dart';
 
 class CurrentColorCard extends ConsumerWidget {
   final double elevation = 5;
-  final String heroTag = 'picker_color_hero';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Color color = ref.read(commonProvider).color;
+    String heroTag = 'picker_color_hero_' + color.toString();
+
     return Tooltip(
       message: 'Click to set wallpaper with this color.',
       child: FadeScale(
@@ -24,6 +26,7 @@ class CurrentColorCard extends ConsumerWidget {
               onTap: () => openWallChooser(
                 context: context,
                 ref: ref,
+                heroTag: heroTag,
               ),
               child: IgnorePointer(
                 child: Padding(
@@ -33,7 +36,7 @@ class CurrentColorCard extends ConsumerWidget {
                       tag: heroTag,
                       child: CircleColor(
                         circleSize: 50,
-                        color: ref.watch(commonProvider).color,
+                        color: color,
                         elevation: elevation,
                       ),
                     ),

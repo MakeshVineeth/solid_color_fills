@@ -12,10 +12,10 @@ import 'package:solid_color_fills/database/commons.dart';
 final FutureProvider<Uint8List> imageProvision =
     FutureProvider<Uint8List>((ref) async {
   Uint8List integerList = Uint8List(0);
-  final object = ref.read(commonProvider);
+  final object = ref.watch(commonProvider);
   Color color = object.color;
 
-  final screen = ref.read(screenSize);
+  final screen = ref.watch(screenSize);
 
   try {
     ui.PictureRecorder recorder = ui.PictureRecorder();

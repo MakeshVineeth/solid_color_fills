@@ -11,7 +11,9 @@ import '../../database/helperFunctions.dart';
 
 class WallChooser extends ConsumerWidget {
   final FixedValues fixedValues = FixedValues();
-  WallChooser();
+  final String heroTag;
+
+  WallChooser({required this.heroTag});
 
   final Map<String, int> buttons = {
     'Set As Home Screen': AsyncWallpaper.HOME_SCREEN,
@@ -41,7 +43,9 @@ class WallChooser extends ConsumerWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      colorWall(constraints: constraints),
+                      Hero(
+                          tag: heroTag,
+                          child: colorWall(constraints: constraints)),
                       SizedBox(height: 5),
                       Padding(
                         padding: const EdgeInsets.all(10.0),

@@ -12,6 +12,7 @@ void openWallChooser({
   required WidgetRef ref,
   required BuildContext context,
   Duration transition = const Duration(milliseconds: 450),
+  required String heroTag,
 }) {
   Size size = View.of(context).physicalSize;
 
@@ -39,7 +40,7 @@ void openWallChooser({
       PageTransition(
         duration: transition,
         reverseDuration: transition,
-        child: WallChooser(),
+        child: WallChooser(heroTag: heroTag),
         type: PageTransitionType.fade,
       ),
     ).then((_) => ScaffoldMessenger.of(context).hideCurrentSnackBar());
