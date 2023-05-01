@@ -34,7 +34,7 @@ class MenuThings extends StatelessWidget {
         menuItem(
           icon: FluentIcons.shield_24_regular,
           title: 'Privacy Policy',
-          function: () => launchUrl(
+          function: () => _launchUrl(
             url: 'https://makeshvineeth.github.io/privacy_policy/',
           ),
           context: context,
@@ -52,18 +52,10 @@ class MenuThings extends StatelessWidget {
     );
   }
 
-  void launchUrl(
-      {required String url,
-      bool forceWebView = false,
-      bool enableJavaScript = false}) async {
+  void _launchUrl({required String url}) async {
     try {
-      url = Uri.encodeFull(url);
-      if (await canLaunchUrl(Uri.parse(url)))
-        launchUrl(
-          url: url,
-          forceWebView: forceWebView,
-          enableJavaScript: enableJavaScript,
-        );
+      final uri = Uri.parse(url);
+      launchUrl(uri, mode: LaunchMode.externalApplication);
     } catch (_) {}
   }
 

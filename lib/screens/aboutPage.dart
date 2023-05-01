@@ -3,7 +3,6 @@ import 'package:solid_color_fills/UI/animations/showBlurDialog.dart';
 import 'package:solid_color_fills/UI/dialogs/dialogTextBtn.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../UI/animations/fade_scale_widget.dart';
 import '../UI/buttons_links.dart';
 
@@ -69,7 +68,7 @@ class AboutPage extends StatelessWidget {
                               title: 'Play Store',
                               icon: Icons.shop_outlined,
                               backgroundColor: Color(0xff078C30),
-                              function: () => launchUrl(
+                              function: () => _launchUrl(
                                   url:
                                       'https://play.google.com/store/apps/details?id=com.makeshtech.solid_color_fills'),
                             ),
@@ -78,7 +77,7 @@ class AboutPage extends StatelessWidget {
                               title: 'GitHub',
                               icon: Icons.code_outlined,
                               backgroundColor: Color(0xff24292E),
-                              function: () => launchUrl(
+                              function: () => _launchUrl(
                                   url:
                                       'https://github.com/MakeshVineeth/solid_color_fills'),
                             ),
@@ -101,20 +100,16 @@ class AboutPage extends StatelessWidget {
         width: 30,
       );
 
-  Future<void> launchUrl({
-    required String url,
-    bool forceWebView = false,
-    bool enableJavaScript = false,
-  }) async {
+  Future<void> _launchUrl({required String url}) async {
     try {
-      final urlEncoded = Uri.encodeFull(url);
-      if (await canLaunchUrl(Uri.parse(urlEncoded)))
-        launchUrl(
-          url: urlEncoded,
-          forceWebView: forceWebView,
-          enableJavaScript: enableJavaScript,
-        );
-    } catch (_) {}
+      final urlEncoded = Uri.parse(url);
+      launchUrl(
+        urlEncoded,
+        mode: LaunchMode.externalApplication,
+      );
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   final TextStyle appLegaleseStyle = TextStyle(

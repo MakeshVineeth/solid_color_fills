@@ -1,6 +1,5 @@
 import 'package:async_wallpaper/async_wallpaper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/features/wall_image.dart';
 import 'package:solid_color_fills/database/commons.dart';
@@ -164,7 +163,6 @@ class WallChooser extends ConsumerWidget {
             backgroundColor: Theme.of(context).primaryColor,
           );
 
-          HapticFeedback.vibrate();
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
           Navigator.pop(context);
         },
