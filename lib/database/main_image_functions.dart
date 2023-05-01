@@ -9,15 +9,18 @@ import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:solid_color_fills/database/commons.dart';
 
-final imageProvision = FutureProvider<Uint8List>((ref) async {
+final FutureProvider<Uint8List> imageProvision =
+    FutureProvider<Uint8List>((ref) async {
   Uint8List integerList = Uint8List(0);
-  Color color = ref.watch(commonProvider).color;
-  final screen = ref.watch(screenSize.notifier).state;
+  final object = ref.read(commonProvider);
+  Color color = object.color;
+
+  final screen = ref.read(screenSize);
 
   try {
     ui.PictureRecorder recorder = ui.PictureRecorder();
     Canvas c = Canvas(recorder);
-    c.drawColor(color, BlendMode.src); // etc
+    c.drawColor(color, BlendMode.src);
     ui.Picture p = recorder.endRecording();
 
     int width = screen.width;
@@ -33,26 +36,29 @@ final imageProvision = FutureProvider<Uint8List>((ref) async {
 });
 
 final imageSetter = StateProvider<SetImage>((ref) {
-  Uint8List pngBytes = ref.watch(imageProvision).asData!.value;
-  return SetImage(pngBytes);
+  Uint8List pngBytes = ref.read(imageProvision).asData!.value;
+  final object = ref.read(commonProvider);
+  String colorTitle = object.colorTitle;
+  return SetImage(pngBytes, colorTitle);
 });
 
 class SetImage {
-  Uint8List? pngBytes;
+  Uint8List _pngBytes;
+  final String _colorTitle;
 
-  SetImage(this.pngBytes);
+  SetImage(this._pngBytes, this._colorTitle);
 
   Future<bool> setNow({required int location}) async {
     // Returns true if success.
     try {
-      if (pngBytes == null) return false;
+      if (_pngBytes.isEmpty) return false;
 
       String tempPath = (await getTemporaryDirectory()).path;
-      String filePath = tempPath + '/temp.png';
+      String filePath = tempPath + '/Temp_' + _colorTitle + '.png';
       File file = File(filePath);
       if (await file.exists()) await file.delete();
 
-      File fileWritten = await file.writeAsBytes(pngBytes!, flush: true);
+      File fileWritten = await file.writeAsBytes(_pngBytes);
       bool fileExists = await fileWritten.exists();
       if (!fileExists) return false;
 
@@ -61,7 +67,8 @@ class SetImage {
         case AsyncWallpaper.LOCK_SCREEN:
         case AsyncWallpaper.BOTH_SCREENS:
           bool result = await AsyncWallpaper.setWallpaperFromFile(
-              filePath: filePath, wallpaperLocation: location);
+              filePath: filePath, wallpaperLocation: location, goToHome: true);
+
           await fileWritten.delete();
           return result;
         case 4:

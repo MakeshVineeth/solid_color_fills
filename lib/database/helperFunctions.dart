@@ -11,7 +11,6 @@ import 'package:solid_color_fills/fixedValues.dart';
 void openWallChooser({
   required WidgetRef ref,
   required BuildContext context,
-  required String heroTag,
   Duration transition = const Duration(milliseconds: 450),
 }) {
   Size size = View.of(context).physicalSize;
@@ -40,7 +39,7 @@ void openWallChooser({
       PageTransition(
         duration: transition,
         reverseDuration: transition,
-        child: WallChooser(heroTag: heroTag),
+        child: WallChooser(),
         type: PageTransitionType.fade,
       ),
     ).then((_) => ScaffoldMessenger.of(context).hideCurrentSnackBar());

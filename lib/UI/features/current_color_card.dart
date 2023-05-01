@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/animations/fade_scale_widget.dart';
 import 'package:solid_color_fills/UI/animations/scaleBounce.dart';
 import 'package:solid_color_fills/database/commons.dart';
@@ -24,7 +24,6 @@ class CurrentColorCard extends ConsumerWidget {
               onTap: () => openWallChooser(
                 context: context,
                 ref: ref,
-                heroTag: heroTag,
               ),
               child: IgnorePointer(
                 child: Padding(

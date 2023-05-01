@@ -13,31 +13,26 @@ class ColorItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final heroTag = mapEntry.key.toLowerCase().replaceAll(' ', '_');
-
-    return Hero(
-      tag: heroTag,
-      child: Card(
-        elevation: 3,
-        shape: fixedValues.roundShape,
-        child: InkWell(
-          onTap: () => changeColor(context, ref, heroTag),
-          borderRadius: fixedValues.fixedCardRadius,
-          child: GridTile(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(6, 6, 6, 30),
-              child: ClipRRect(
-                borderRadius: fixedValues.fixedCardRadius,
-                child: ColoredBox(color: returnColorItem()),
-              ),
+    return Card(
+      elevation: 3,
+      shape: fixedValues.roundShape,
+      child: InkWell(
+        onTap: () => changeColor(context, ref),
+        borderRadius: fixedValues.fixedCardRadius,
+        child: GridTile(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(6, 6, 6, 30),
+            child: ClipRRect(
+              borderRadius: fixedValues.fixedCardRadius,
+              child: ColoredBox(color: returnColorItem()),
             ),
-            footer: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
-                  mapEntry.key,
-                  style: fixedValues.colorTitleStyle,
-                ),
+          ),
+          footer: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                mapEntry.key,
+                style: fixedValues.colorTitleStyle,
               ),
             ),
           ),
@@ -55,12 +50,12 @@ class ColorItem extends ConsumerWidget {
       return mapEntry.value;
   }
 
-  void changeColor(BuildContext context, WidgetRef ref, String heroTag) {
+  void changeColor(BuildContext context, WidgetRef ref) {
     ref.read(commonProvider.notifier).changeColors(
           colorValue: returnColorItem(),
           colorString: mapEntry.key,
         );
 
-    openWallChooser(context: context, ref: ref, heroTag: heroTag);
+    openWallChooser(context: context, ref: ref);
   }
 }
