@@ -9,10 +9,10 @@ class SimpleRGB extends ConsumerStatefulWidget {
   const SimpleRGB({super.key});
 
   @override
-  _SimpleRGBState createState() => _SimpleRGBState();
+  SimpleRGBState createState() => SimpleRGBState();
 }
 
-class _SimpleRGBState extends ConsumerState<SimpleRGB> {
+ class SimpleRGBState extends ConsumerState<SimpleRGB> {
   final FixedValues fixedValues = FixedValues();
   Color _color = Colors.blue;
 

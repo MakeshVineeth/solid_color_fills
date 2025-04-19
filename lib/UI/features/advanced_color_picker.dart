@@ -10,10 +10,10 @@ class AdvancedColorPicker extends ConsumerStatefulWidget {
   const AdvancedColorPicker({super.key});
 
   @override
-  _AdvancedColorPickerState createState() => _AdvancedColorPickerState();
+  AdvancedColorPickerState createState() => AdvancedColorPickerState();
 }
 
-class _AdvancedColorPickerState extends ConsumerState<AdvancedColorPicker> {
+class AdvancedColorPickerState extends ConsumerState<AdvancedColorPicker> {
   final FixedValues fixedValues = FixedValues();
   final TextEditingController _textEditingController = TextEditingController();
   Color _color = Colors.blue;

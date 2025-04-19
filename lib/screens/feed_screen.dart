@@ -7,10 +7,10 @@ class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});
 
   @override
-  _FeedScreenState createState() => _FeedScreenState();
+  FeedScreenState createState() => FeedScreenState();
 }
 
-class _FeedScreenState extends State<FeedScreen> {
+class FeedScreenState extends State<FeedScreen> {
   final Map<String, dynamic> colorsList = {};
   final double spacing = 10.0;
 

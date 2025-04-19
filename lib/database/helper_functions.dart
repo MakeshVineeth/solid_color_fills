@@ -43,7 +43,11 @@ void openWallChooser({
         child: WallChooser(heroTag: heroTag),
         type: PageTransitionType.fade,
       ),
-    ).then((_) => ScaffoldMessenger.of(context).hideCurrentSnackBar());
+    ).then((_) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      }
+    });
   }
 }
 

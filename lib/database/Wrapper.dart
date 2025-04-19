@@ -10,10 +10,10 @@ class Wrapper extends StatefulWidget {
   const Wrapper({super.key});
 
   @override
-  _WrapperState createState() => _WrapperState();
+  WrapperState createState() => WrapperState();
 }
 
-class _WrapperState extends State<Wrapper> {
+class WrapperState extends State<Wrapper> {
   late Future<void> future;
   Widget currentChild = placeHolder();
 

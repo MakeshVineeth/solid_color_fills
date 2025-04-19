@@ -164,7 +164,10 @@ class WallChooser extends ConsumerWidget {
             outputMessage,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Theme.of(context).scaffoldBackgroundColor,
+              color:
+                  context.mounted
+                      ? Theme.of(context).scaffoldBackgroundColor
+                      : Colors.white,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -172,11 +175,14 @@ class WallChooser extends ConsumerWidget {
           behavior: SnackBarBehavior.floating,
           elevation: 6.0,
           shape: fixedValues.roundShape,
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor:
+              context.mounted ? Theme.of(context).primaryColor : Colors.black,
         );
 
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        Navigator.pop(context);
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Navigator.pop(context);
+        }
       });
     } catch (_) {}
   }

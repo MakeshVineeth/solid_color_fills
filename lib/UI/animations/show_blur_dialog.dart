@@ -9,10 +9,10 @@ class BlurredWindow extends StatefulWidget {
   const BlurredWindow({super.key, required this.child});
 
   @override
-  _BlurredWindowState createState() => _BlurredWindowState();
+  BlurredWindowState createState() => BlurredWindowState();
 }
 
-class _BlurredWindowState extends State<BlurredWindow> {
+class BlurredWindowState extends State<BlurredWindow> {
   double _currentOpacity = 0;
   final Duration duration = const Duration(milliseconds: 1000);
   late Widget _currentChild;

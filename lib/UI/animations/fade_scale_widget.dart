@@ -7,10 +7,10 @@ class FadeScale extends StatefulWidget {
   const FadeScale({super.key, required this.child});
 
   @override
-  _FadeThisState createState() => _FadeThisState();
+  FadeThisState createState() => FadeThisState();
 }
 
-class _FadeThisState extends State<FadeScale>
+class FadeThisState extends State<FadeScale>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   final Duration _duration = const Duration(milliseconds: 800);

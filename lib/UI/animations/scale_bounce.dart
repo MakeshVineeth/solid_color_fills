@@ -6,10 +6,10 @@ class ScaleBounce extends StatefulWidget {
   const ScaleBounce({super.key, required this.child});
 
   @override
-  _ScaleBounceState createState() => _ScaleBounceState();
+  ScaleBounceState createState() => ScaleBounceState();
 }
 
-class _ScaleBounceState extends State<ScaleBounce>
+class ScaleBounceState extends State<ScaleBounce>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
