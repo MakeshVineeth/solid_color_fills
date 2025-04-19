@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:solid_color_fills/database/Wrapper.dart';
-import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/database/wrapper.dart';
+import 'package:solid_color_fills/fixed_values.dart';
 
 void main() async => runZonedGuarded(() async {
       WidgetsFlutterBinding.ensureInitialized();

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:solid_color_fills/UI/animations/fade_indexed_stack.dart';
 import 'package:solid_color_fills/UI/dialogs/floating_modal.dart';
-import 'package:solid_color_fills/UI/dialogs/menuThings.dart';
-import 'package:solid_color_fills/UI/tabItem.dart';
+import 'package:solid_color_fills/UI/dialogs/menu_things.dart';
+import 'package:solid_color_fills/UI/tab_item.dart';
 import 'package:solid_color_fills/database/app_shortcuts.dart';
-import 'package:solid_color_fills/database/helperFunctions.dart';
-import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/database/helper_functions.dart';
+import 'package:solid_color_fills/fixed_values.dart';
 import 'package:solid_color_fills/screens/collections.dart';
 import 'package:solid_color_fills/screens/color_pickers_screen.dart';
 import 'package:solid_color_fills/screens/feed_screen.dart';

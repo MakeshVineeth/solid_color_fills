@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:random_color/random_color.dart';
-import 'package:solid_color_fills/UI/animations/scaleBounce.dart';
-import 'package:solid_color_fills/UI/features/colorItem.dart';
+import 'package:solid_color_fills/UI/animations/scale_bounce.dart';
+import 'package:solid_color_fills/UI/features/color_item.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});

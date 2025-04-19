@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/features/wall_image.dart';
 import 'package:solid_color_fills/database/commons.dart';
 import 'package:solid_color_fills/database/main_image_functions.dart';
-import 'package:solid_color_fills/fixedValues.dart';
-import '../../database/helperFunctions.dart';
+import 'package:solid_color_fills/fixed_values.dart';
+import '../../database/helper_functions.dart';
 
 class WallChooser extends ConsumerWidget {
   final FixedValues fixedValues = FixedValues();

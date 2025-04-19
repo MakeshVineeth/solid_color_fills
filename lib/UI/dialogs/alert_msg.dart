@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solid_color_fills/UI/animations/fade_scale_widget.dart';
-import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/fixed_values.dart';
 
 class AlertMsg extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();

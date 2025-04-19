@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/fixed_values.dart';
 
 class IntroScreen extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();

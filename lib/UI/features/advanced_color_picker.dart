@@ -4,7 +4,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:solid_color_fills/UI/animations/fade_scale_widget.dart';
 import 'package:solid_color_fills/database/commons.dart';
-import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/fixed_values.dart';
 
 class AdvancedColorPicker extends ConsumerStatefulWidget {
   const AdvancedColorPicker({super.key});

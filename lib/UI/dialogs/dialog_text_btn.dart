@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/fixed_values.dart';
 
 class DialogTextBtn extends StatelessWidget {
   final Function function;

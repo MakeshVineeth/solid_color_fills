@@ -36,7 +36,6 @@ dependencies:
   flutter_displaymode: ^0.6.0
   device_info_plus: ^11.3.3
   wallpaper_manager_plus: ^1.0.0
-  flutter_cache_manager: ^3.4.0
   app_review_plus: ^2.3.5
 
 flutter_native_splash:

@@ -6,7 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solid_color_fills/UI/features/wall_chooser.dart';
 import 'package:solid_color_fills/database/commons.dart';
-import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/fixed_values.dart';
 
 void openWallChooser({
   required WidgetRef ref,

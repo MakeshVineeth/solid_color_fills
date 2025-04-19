@@ -1,10 +1,9 @@
 import 'dart:io';
-
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:solid_color_fills/bottomNavigation.dart';
+import 'package:solid_color_fills/bottom_navigation.dart';
 import 'package:solid_color_fills/screens/intro_screen.dart';
 
 class Wrapper extends StatefulWidget {

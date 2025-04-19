@@ -7,7 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:solid_color_fills/database/commons.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 final FutureProvider<Uint8List> imageProvision = FutureProvider<Uint8List>((
   ref,

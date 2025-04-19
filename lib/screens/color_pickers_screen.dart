@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:solid_color_fills/UI/animations/showBlurDialog.dart';
+import 'package:solid_color_fills/UI/animations/show_blur_dialog.dart';
 import 'package:solid_color_fills/UI/features/material_picker_widget.dart';
 import 'package:solid_color_fills/UI/features/current_color_card.dart';
 import 'package:solid_color_fills/UI/features/advanced_color_picker.dart';
 import 'package:solid_color_fills/UI/features/simple_rgb.dart';
-import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/fixed_values.dart';
 import 'package:solid_color_fills/database/commons.dart';
 
 class CustomColorPicker extends ConsumerWidget {

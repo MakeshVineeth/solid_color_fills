@@ -2,9 +2,9 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:app_review_plus/app_review_plus.dart';
 import 'package:solid_color_fills/UI/dialogs/floating_modal.dart';
-import 'package:solid_color_fills/UI/dialogs/themeChooser.dart';
-import 'package:solid_color_fills/fixedValues.dart';
-import 'package:solid_color_fills/screens/aboutPage.dart';
+import 'package:solid_color_fills/UI/dialogs/theme_chooser.dart';
+import 'package:solid_color_fills/fixed_values.dart';
+import 'package:solid_color_fills/screens/about_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MenuThings extends StatelessWidget {

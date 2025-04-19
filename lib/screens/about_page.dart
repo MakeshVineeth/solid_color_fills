@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:solid_color_fills/UI/animations/showBlurDialog.dart';
-import 'package:solid_color_fills/UI/dialogs/dialogTextBtn.dart';
-import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/UI/animations/show_blur_dialog.dart';
+import 'package:solid_color_fills/UI/dialogs/dialog_text_btn.dart';
+import 'package:solid_color_fills/fixed_values.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../UI/animations/fade_scale_widget.dart';
 import '../UI/buttons_links.dart';

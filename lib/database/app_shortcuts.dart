@@ -1,5 +1,5 @@
 import 'package:quick_actions/quick_actions.dart';
-import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/fixed_values.dart';
 
 class AppShortcuts {
   static final List<ShortcutItem> shortcutsList = [

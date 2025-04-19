@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:solid_color_fills/UI/features/colorItem.dart';
-import 'package:solid_color_fills/UI/animations/scaleBounce.dart';
-import 'package:solid_color_fills/fixedValues.dart';
+import 'package:solid_color_fills/UI/features/color_item.dart';
+import 'package:solid_color_fills/UI/animations/scale_bounce.dart';
+import 'package:solid_color_fills/fixed_values.dart';
 
 class HomeTab extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
