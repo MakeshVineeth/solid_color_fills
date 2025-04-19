@@ -12,7 +12,7 @@ class DialogTextBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: ButtonStyle(
-        shape: MaterialStateProperty.all(_fixedValues.roundShape),
+        shape: WidgetStateProperty.all(_fixedValues.roundShape),
       ),
       onPressed: () => function(),
       child: Padding(

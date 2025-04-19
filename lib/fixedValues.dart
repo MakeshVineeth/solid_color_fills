@@ -111,7 +111,7 @@ class FixedValues {
         elevation: elevation,
       ),
       cardColor: bg,
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: bg,
         elevation: elevation,
         shape: roundShape,

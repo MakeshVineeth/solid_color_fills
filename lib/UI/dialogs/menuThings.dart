@@ -70,9 +70,9 @@ class MenuThings extends StatelessWidget {
         child: (icon != null)
             ? TextButton.icon(
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0))),
-                  foregroundColor: MaterialStateProperty.all(
+                  foregroundColor: WidgetStateProperty.all(
                       Theme.of(context).textTheme.labelLarge!.color),
                 ),
                 onPressed: () {

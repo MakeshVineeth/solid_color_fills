@@ -1,7 +1,7 @@
 name: solid_color_fills
 description: A Wallpaper that lets you set any solid color as wallpaper.
 publish_to: "none"
-version: 1.0.6+15
+version: 2.0.0+1
 
 environment:
   sdk: '>=2.14.0 <3.0.0'
@@ -9,29 +9,29 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  adaptive_theme: ^3.2.0
-  animations: ^2.0.7
+  adaptive_theme: ^3.7.0
+  animations: ^2.0.11
   convex_bottom_bar: ^3.2.0
-  fluentui_system_icons: ^1.1.199
+  fluentui_system_icons: ^1.1.273
   flutter_animator: ^3.2.2
-  flutter_colorpicker: ^1.0.3
-  flutter_riverpod: ^2.3.5
-  in_app_review: ^2.0.6
-  introduction_screen: ^3.1.8
-  modal_bottom_sheet: ^3.0.0-pre
-  open_filex: ^4.3.2
-  page_transition: ^2.0.9
-  path_provider: ^2.0.14
-  shared_preferences: ^2.1.0
+  flutter_colorpicker: ^1.1.0
+  flutter_riverpod: ^2.6.1
+  in_app_review: ^2.0.10
+  introduction_screen: ^3.1.17
+  modal_bottom_sheet: ^3.0.0
+  open_filex: ^4.7.0
+  page_transition: ^2.2.1
+  path_provider: ^2.1.5
+  shared_preferences: ^2.5.3
   transparent_image: ^2.0.1
-  url_launcher: ^6.1.10
+  url_launcher: ^6.3.1
   random_color: ^1.0.6-nullsafety
-  quick_actions: ^1.0.2
-  flutter_material_color_picker: ^1.1.0+2
+  quick_actions: ^1.1.0
+  flutter_material_color_picker: ^1.2.0
   material_color_picker_wns: ^1.0.8
   flutter_displaymode: ^0.6.0
-  device_info_plus: ^8.2.0
-  async_wallpaper: ^2.0.2
+  device_info_plus: ^11.3.3
+  async_wallpaper: ^2.1.0
 
 flutter_native_splash:
   color: "#ffffff"
@@ -45,7 +45,7 @@ flutter_native_splash:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_native_splash: ^2.2.19
+  flutter_native_splash: ^2.4.6
 
 flutter_icons:
   android: "launcher_icon"

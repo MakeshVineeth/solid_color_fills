@@ -27,12 +27,12 @@ class AlertMsg extends StatelessWidget {
         actions: <Widget>[
           TextButton(
             style: ButtonStyle(
-              shape: MaterialStateProperty.all(
+              shape: WidgetStateProperty.all(
                 RoundedRectangleBorder(
                   borderRadius: fixedValues.fixedCardRadius,
                 ),
               ),
-              foregroundColor: MaterialStateProperty.all(
+              foregroundColor: WidgetStateProperty.all(
                   Theme.of(context).textTheme.labelLarge!.color),
             ),
             child: const Text('OK'),

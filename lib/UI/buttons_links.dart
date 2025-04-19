@@ -29,11 +29,11 @@ class ButtonLinks extends StatelessWidget {
           function!();
         },
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(backgroundColor),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          backgroundColor: WidgetStateProperty.all(backgroundColor),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0))),
-          overlayColor: MaterialStateProperty.all(Colors.white10),
-          padding: MaterialStateProperty.all(
+          overlayColor: WidgetStateProperty.all(Colors.white10),
+          padding: WidgetStateProperty.all(
               const EdgeInsets.symmetric(vertical: 12.0)),
         ),
         label: Text(

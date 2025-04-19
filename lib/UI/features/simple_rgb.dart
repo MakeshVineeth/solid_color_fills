@@ -46,9 +46,9 @@ class _SimpleRGBState extends ConsumerState<SimpleRGB> {
               ),
             ),
             style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all(
+              foregroundColor: WidgetStateProperty.all(
                   Theme.of(context).textTheme.labelLarge!.color),
-              shape: MaterialStateProperty.all(fixedValues.roundShape),
+              shape: WidgetStateProperty.all(fixedValues.roundShape),
             ),
             onPressed: () => onTapping(context),
           ),
