@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ScaleBounce extends StatefulWidget {
   final Widget child;
 
-  const ScaleBounce({required this.child});
+  const ScaleBounce({super.key, required this.child});
 
   @override
   _ScaleBounceState createState() => _ScaleBounceState();

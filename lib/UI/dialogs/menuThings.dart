@@ -1,6 +1,6 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:in_app_review/in_app_review.dart';
+import 'package:app_review_plus/app_review_plus.dart';
 import 'package:solid_color_fills/UI/dialogs/floating_modal.dart';
 import 'package:solid_color_fills/UI/dialogs/themeChooser.dart';
 import 'package:solid_color_fills/fixedValues.dart';
@@ -9,6 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MenuThings extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
+
+  MenuThings({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class MenuThings extends StatelessWidget {
         menuItem(
           context: context,
           icon: FluentIcons.info_28_regular,
-          title: 'About ' + fixedValues.appTitle,
+          title: 'About ${fixedValues.appTitle}',
           function: () => AboutPage.showAboutDialogFunc(context),
         ),
         menuItem(
@@ -43,8 +45,7 @@ class MenuThings extends StatelessWidget {
           icon: FluentIcons.star_emphasis_24_regular,
           title: 'Rate us on Play Store',
           function: () {
-            final InAppReview inAppReview = InAppReview.instance;
-            inAppReview.openStoreListing();
+            AppReview.storeListing;
           },
           context: context,
         )

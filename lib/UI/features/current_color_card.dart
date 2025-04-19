@@ -9,10 +9,12 @@ import 'package:solid_color_fills/database/helperFunctions.dart';
 class CurrentColorCard extends ConsumerWidget {
   final double elevation = 5;
 
+  const CurrentColorCard({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Color color = ref.read(commonProvider).color;
-    String heroTag = 'picker_color_hero_' + color.toString();
+    String heroTag = 'picker_color_hero_$color';
 
     return Tooltip(
       message: 'Click to set wallpaper with this color.',

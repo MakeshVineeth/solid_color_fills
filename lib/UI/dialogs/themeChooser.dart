@@ -7,6 +7,8 @@ class ThemeChooser extends StatelessWidget {
   final MenuThings menuThings = MenuThings();
   final FixedValues fixedValues = FixedValues();
 
+  ThemeChooser({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(

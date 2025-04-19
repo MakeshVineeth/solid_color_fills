@@ -59,7 +59,7 @@ class AboutPage extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       physics: AlwaysScrollableScrollPhysics(
                           parent: BouncingScrollPhysics()),
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width / 1.5,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -96,7 +96,7 @@ class AboutPage extends StatelessWidget {
   }
 
   Widget applicationIconImg() => Image(
-        image: AssetImage('assets/' + _fixedValues.logo),
+        image: AssetImage('assets/${_fixedValues.logo}'),
         width: 30,
       );
 
@@ -115,6 +115,8 @@ class AboutPage extends StatelessWidget {
   final TextStyle appLegaleseStyle = TextStyle(
       // any styles
       );
+
+  AboutPage({super.key});
 
   static void showAboutDialogFunc(BuildContext context) async {
     try {

@@ -19,12 +19,13 @@ class ColorProvider extends StateNotifier<ColorDetails> {
     colorValue = colorValue;
 
     // Color value will be something like Color(0xff...) so we're trimming here.
-    if (colorString != null)
+    if (colorString != null) {
       colorString = colorString.split('0x').length == 2
           ? convertColorStr(colorString)
           : colorString;
-    else
+    } else {
       colorString = _initialText;
+    }
 
     state = ColorDetails(color: colorValue, colorTitle: colorString);
   }

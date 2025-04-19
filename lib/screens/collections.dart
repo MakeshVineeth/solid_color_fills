@@ -7,6 +7,8 @@ class HomeTab extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
   final double spacing = 10.0;
 
+  HomeTab({super.key});
+
   @override
   Widget build(BuildContext context) {
     return OrientationBuilder(

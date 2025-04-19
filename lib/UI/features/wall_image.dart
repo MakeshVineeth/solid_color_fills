@@ -10,7 +10,7 @@ class WallImage extends ConsumerWidget {
   final FixedValues fixedValues = FixedValues();
   final BoxConstraints constraints;
 
-  WallImage({required this.constraints});
+  WallImage({super.key, required this.constraints});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -43,7 +43,7 @@ class WallImage extends ConsumerWidget {
     bool isHorizontal =
         MediaQuery.of(context).orientation == Orientation.landscape;
 
-    if (isHorizontal)
+    if (isHorizontal) {
       return Container(
         padding: const EdgeInsets.all(8),
         width: 300,
@@ -53,7 +53,7 @@ class WallImage extends ConsumerWidget {
           child: child,
         ),
       );
-    else
+    } else {
       return Container(
         padding: const EdgeInsets.all(8),
         width: constraints.maxWidth / 1.8,
@@ -63,5 +63,6 @@ class WallImage extends ConsumerWidget {
           child: child,
         ),
       );
+    }
   }
 }

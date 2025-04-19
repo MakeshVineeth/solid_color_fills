@@ -9,6 +9,8 @@ import 'package:solid_color_fills/fixedValues.dart';
 import 'package:solid_color_fills/database/commons.dart';
 
 class CustomColorPicker extends ConsumerWidget {
+  const CustomColorPicker({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return LayoutBuilder(
@@ -32,7 +34,7 @@ class CustomColorPicker extends ConsumerWidget {
                     Card(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0)),
-                      child: Container(
+                      child: SizedBox(
                         height: constraints.maxHeight / 1.5,
                         child: MaterialPickerWidget(
                           key: ValueKey(1),
@@ -40,7 +42,7 @@ class CustomColorPicker extends ConsumerWidget {
                       ),
                     ),
                     SizedBox(height: 8),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width / 1.5,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -72,14 +74,15 @@ class CustomColorPicker extends ConsumerWidget {
             builder: (context, ref, child) {
               Color color = ref.watch(commonProvider).color;
 
-              if (color != Colors.transparent)
+              if (color != Colors.transparent) {
                 return Positioned(
                   right: 10,
                   bottom: 10,
                   child: CurrentColorCard(),
                 );
-              else
+              } else {
                 return Container();
+              }
             },
           ),
         ],

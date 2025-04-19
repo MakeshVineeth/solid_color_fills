@@ -5,7 +5,7 @@ class FadeIndexedStack extends StatefulWidget {
   final List<Widget> children;
   final Duration duration;
 
-  const FadeIndexedStack({
+  const FadeIndexedStack({super.key, 
     required this.index,
     required this.children,
     this.duration = const Duration(

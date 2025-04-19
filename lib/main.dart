@@ -17,7 +17,7 @@ void main() async => runZonedGuarded(() async {
 class MaterialHome extends StatelessWidget {
   final AdaptiveThemeMode initialTheme;
 
-  MaterialHome({required this.initialTheme});
+  MaterialHome({super.key, required this.initialTheme});
 
   final FixedValues fixedValues = FixedValues();
 

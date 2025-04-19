@@ -8,7 +8,7 @@ import 'package:solid_color_fills/bottomNavigation.dart';
 import 'package:solid_color_fills/screens/intro_screen.dart';
 
 class Wrapper extends StatefulWidget {
-  const Wrapper({Key? key}) : super(key: key);
+  const Wrapper({super.key});
 
   @override
   _WrapperState createState() => _WrapperState();

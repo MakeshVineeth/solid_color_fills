@@ -6,7 +6,7 @@ import 'package:solid_color_fills/fixedValues.dart';
 class BlurredWindow extends StatefulWidget {
   final Widget child;
 
-  const BlurredWindow({required this.child});
+  const BlurredWindow({super.key, required this.child});
 
   @override
   _BlurredWindowState createState() => _BlurredWindowState();
@@ -22,7 +22,7 @@ class _BlurredWindowState extends State<BlurredWindow> {
   void initState() {
     super.initState();
 
-    if (mounted)
+    if (mounted) {
       setState(() {
         _currentOpacity = 1;
         _currentChild = BackdropFilter(
@@ -31,6 +31,7 @@ class _BlurredWindowState extends State<BlurredWindow> {
           child: widget.child,
         );
       });
+    }
   }
 
   @override
@@ -48,7 +49,7 @@ class _BlurredWindowState extends State<BlurredWindow> {
             child: SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(
                     parent: BouncingScrollPhysics()),
-                child: Container(
+                child: SizedBox(
                     height: constraints.maxHeight,
                     width: constraints.maxWidth,
                     child: Center(child: _currentChild))),

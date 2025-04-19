@@ -8,7 +8,7 @@ class IntroScreen extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
   final Function function;
 
-  IntroScreen({required this.function});
+  IntroScreen({super.key, required this.function});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class IntroScreen extends StatelessWidget {
             showSkipButton: true,
             pages: [
               PageViewModel(
-                title: 'Welcome to ' + fixedValues.appTitle,
+                title: 'Welcome to ${fixedValues.appTitle}',
                 body:
                     'Click Next to proceed to the Tutorial or you can skip it now.',
                 image: Center(

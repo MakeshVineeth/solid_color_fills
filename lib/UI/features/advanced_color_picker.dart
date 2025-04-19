@@ -7,6 +7,8 @@ import 'package:solid_color_fills/database/commons.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
 class AdvancedColorPicker extends ConsumerStatefulWidget {
+  const AdvancedColorPicker({super.key});
+
   @override
   _AdvancedColorPickerState createState() => _AdvancedColorPickerState();
 }
@@ -50,8 +52,9 @@ class _AdvancedColorPickerState extends ConsumerState<AdvancedColorPicker> {
                     suffixIcon: IconButton(
                       onPressed: () {
                         String colorCode = _textEditingController.text;
-                        if (colorCode.isNotEmpty)
+                        if (colorCode.isNotEmpty) {
                           Clipboard.setData(ClipboardData(text: colorCode));
+                        }
                       },
                       icon: Icon(
                         Icons.content_paste_outlined,
@@ -73,22 +76,22 @@ class _AdvancedColorPickerState extends ConsumerState<AdvancedColorPicker> {
         ),
         actions: [
           TextButton(
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: const Text(
-                'Select',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
             style: ButtonStyle(
               foregroundColor: WidgetStateProperty.all(
                   Theme.of(context).textTheme.labelLarge!.color),
               shape: WidgetStateProperty.all(fixedValues.roundShape),
             ),
             onPressed: () => onTapping(context),
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: const Text(
+                'Select',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ],
       ),

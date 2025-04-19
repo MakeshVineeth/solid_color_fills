@@ -17,6 +17,8 @@ import 'package:solid_color_fills/screens/color_pickers_screen.dart';
 import 'package:solid_color_fills/screens/feed_screen.dart';
 
 class ScaffoldHome extends StatefulWidget {
+  const ScaffoldHome({super.key});
+
   @override
   _ScaffoldHomeState createState() => _ScaffoldHomeState();
 }
@@ -59,9 +61,9 @@ class _ScaffoldHomeState extends State<ScaffoldHome> with RestorationMixin {
       quickActions.initialize((shortcutType) {
         int index = -1;
 
-        if (shortcutType == AppShortcuts.collectionQuickAction.type)
+        if (shortcutType == AppShortcuts.collectionQuickAction.type) {
           index = 0;
-        else if (shortcutType == AppShortcuts.colorsQuickAction.type)
+        } else if (shortcutType == AppShortcuts.colorsQuickAction.type)
           index = 1;
         else if (shortcutType == AppShortcuts.feedQuickAction.type) index = 2;
 

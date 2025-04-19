@@ -6,7 +6,7 @@ import 'package:solid_color_fills/database/commons.dart';
 import 'package:solid_color_fills/fixedValues.dart';
 
 class SimpleRGB extends ConsumerStatefulWidget {
-  const SimpleRGB({Key? key}) : super(key: key);
+  const SimpleRGB({super.key});
 
   @override
   _SimpleRGBState createState() => _SimpleRGBState();
@@ -35,22 +35,22 @@ class _SimpleRGBState extends ConsumerState<SimpleRGB> {
         ),
         actions: [
           TextButton(
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: const Text(
-                'Select',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
             style: ButtonStyle(
               foregroundColor: WidgetStateProperty.all(
                   Theme.of(context).textTheme.labelLarge!.color),
               shape: WidgetStateProperty.all(fixedValues.roundShape),
             ),
             onPressed: () => onTapping(context),
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: const Text(
+                'Select',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ],
       ),

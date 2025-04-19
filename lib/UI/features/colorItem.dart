@@ -8,7 +8,7 @@ import 'package:solid_color_fills/fixedValues.dart';
 class ColorItem extends ConsumerWidget {
   final MapEntry<String, dynamic> mapEntry;
 
-  ColorItem({required this.mapEntry});
+  ColorItem({super.key, required this.mapEntry});
 
   final FixedValues fixedValues = FixedValues();
   final Random random = Random();
@@ -28,13 +28,6 @@ class ColorItem extends ConsumerWidget {
           onTap: () => changeColor(context, ref, heroTag),
           borderRadius: fixedValues.fixedCardRadius,
           child: GridTile(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(6, 6, 6, 30),
-              child: ClipRRect(
-                borderRadius: fixedValues.fixedCardRadius,
-                child: ColoredBox(color: returnColorItem()),
-              ),
-            ),
             footer: Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -42,6 +35,13 @@ class ColorItem extends ConsumerWidget {
                   mapEntry.key,
                   style: fixedValues.colorTitleStyle,
                 ),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(6, 6, 6, 30),
+              child: ClipRRect(
+                borderRadius: fixedValues.fixedCardRadius,
+                child: ColoredBox(color: returnColorItem()),
               ),
             ),
           ),
@@ -55,8 +55,9 @@ class ColorItem extends ConsumerWidget {
       String hexCodeStr = mapEntry.value.toString().substring(1);
       String color = '0xFF$hexCodeStr';
       return Color(int.tryParse(color)!);
-    } else
+    } else {
       return mapEntry.value;
+    }
   }
 
   void changeColor(BuildContext context, WidgetRef ref, String heroTag) {

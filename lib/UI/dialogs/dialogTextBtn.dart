@@ -6,7 +6,7 @@ class DialogTextBtn extends StatelessWidget {
   final String title;
   final FixedValues _fixedValues = FixedValues();
 
-  DialogTextBtn({required this.function, required this.title});
+  DialogTextBtn({super.key, required this.function, required this.title});
 
   @override
   Widget build(BuildContext context) {

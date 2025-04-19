@@ -1,16 +1,17 @@
 import 'dart:io';
 import 'dart:ui' as ui;
-
-import 'package:async_wallpaper/async_wallpaper.dart';
+import 'package:wallpaper_manager_plus/wallpaper_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:solid_color_fills/database/commons.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
-final FutureProvider<Uint8List> imageProvision =
-    FutureProvider<Uint8List>((ref) async {
+final FutureProvider<Uint8List> imageProvision = FutureProvider<Uint8List>((
+  ref,
+) async {
   Uint8List integerList = Uint8List(0);
   final object = ref.watch(commonProvider);
   Color color = object.color;
@@ -28,8 +29,10 @@ final FutureProvider<Uint8List> imageProvision =
     ui.Image image = await p.toImage(width, height);
     ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 
-    integerList = byteData!.buffer
-        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
+    integerList = byteData!.buffer.asUint8List(
+      byteData.offsetInBytes,
+      byteData.lengthInBytes,
+    );
   } catch (_) {}
 
   return integerList;
@@ -43,7 +46,7 @@ final imageSetter = StateProvider<SetImage>((ref) {
 });
 
 class SetImage {
-  Uint8List _pngBytes;
+  final Uint8List _pngBytes;
   final String _colorTitle;
 
   SetImage(this._pngBytes, this._colorTitle);
@@ -54,7 +57,7 @@ class SetImage {
       if (_pngBytes.isEmpty) return false;
 
       String tempPath = (await getTemporaryDirectory()).path;
-      String filePath = tempPath + '/Temp_' + _colorTitle + '.png';
+      String filePath = '$tempPath/Temp_$_colorTitle.png';
       File file = File(filePath);
       if (await file.exists()) await file.delete();
 
@@ -63,14 +66,16 @@ class SetImage {
       if (!fileExists) return false;
 
       switch (location) {
-        case AsyncWallpaper.HOME_SCREEN:
-        case AsyncWallpaper.LOCK_SCREEN:
-        case AsyncWallpaper.BOTH_SCREENS:
-          bool result = await AsyncWallpaper.setWallpaperFromFile(
-              filePath: filePath, wallpaperLocation: location, goToHome: true);
+        case WallpaperManagerPlus.homeScreen:
+        case WallpaperManagerPlus.lockScreen:
+        case WallpaperManagerPlus.bothScreens:
+          String? result = await WallpaperManagerPlus().setWallpaper(
+            fileWritten,
+            location,
+          );
 
           await fileWritten.delete();
-          return result;
+          return result != null;
         case 4:
           OpenResult openResult = await OpenFilex.open(filePath);
           return openResult.type == ResultType.done;

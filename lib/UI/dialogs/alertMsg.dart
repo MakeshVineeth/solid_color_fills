@@ -7,7 +7,7 @@ class AlertMsg extends StatelessWidget {
   final String title;
   final String message;
 
-  AlertMsg({required this.title, required this.message});
+  AlertMsg({super.key, required this.title, required this.message});
 
   @override
   Widget build(BuildContext context) {

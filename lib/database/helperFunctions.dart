@@ -1,7 +1,7 @@
-import 'package:async_wallpaper/async_wallpaper.dart';
+import 'package:wallpaper_manager_plus/wallpaper_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:in_app_review/in_app_review.dart';
+import 'package:app_review_plus/app_review_plus.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solid_color_fills/UI/features/wall_chooser.dart';
@@ -34,7 +34,7 @@ void openWallChooser({
 
   final color = ref.read(commonProvider).color;
 
-  if (color != Colors.transparent)
+  if (color != Colors.transparent) {
     Navigator.push(
       context,
       PageTransition(
@@ -44,6 +44,7 @@ void openWallChooser({
         type: PageTransitionType.fade,
       ),
     ).then((_) => ScaffoldMessenger.of(context).hideCurrentSnackBar());
+  }
 }
 
 Future<void> askForReview({bool action = false}) async {
@@ -64,19 +65,19 @@ Future<void> askForReview({bool action = false}) async {
     if (dateStr == null) {
       await prefs.setString(dateStrPrefs, now.toString());
       dateCheck = now;
-    } else
+    } else {
       dateCheck = DateTime.tryParse(dateStr)!;
+    }
 
     Duration difference = now.difference(dateCheck);
 
     if ((action && reviewAskedCount == 0) || difference.inHours >= 7) {
-      final InAppReview inAppReview = InAppReview.instance;
-      final bool isAvailable = await inAppReview.isAvailable();
+      final bool isAvailable = await AppReview.isRequestReviewAvailable;
 
       if (isAvailable) {
         Future.delayed(const Duration(seconds: 1), () async {
           await prefs.setInt(reviewCountPrefs, ++reviewAskedCount);
-          await inAppReview.requestReview();
+          await AppReview.requestReview;
         });
       }
     }
@@ -87,13 +88,13 @@ String wallpaperLocationText(int location) {
   String message;
 
   switch (location) {
-    case AsyncWallpaper.HOME_SCREEN:
+    case WallpaperManagerPlus.homeScreen:
       message = 'Home Screen.';
       break;
-    case AsyncWallpaper.LOCK_SCREEN:
+    case WallpaperManagerPlus.lockScreen:
       message = 'Lock Screen.';
       break;
-    case AsyncWallpaper.BOTH_SCREENS:
+    case WallpaperManagerPlus.bothScreens:
       message = 'Home Screen & Lock Screen.';
       break;
     default:

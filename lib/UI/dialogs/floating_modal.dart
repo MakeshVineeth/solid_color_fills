@@ -36,9 +36,9 @@ Future<T> showFloatingModalBottomSheet<T>({
     context: context,
     builder: builder,
     containerWidget: (_, animation, child) => FloatingModal(
-      child: child,
       backgroundColor: backgroundColor,
       key: UniqueKey(),
+      child: child,
     ),
     bounce: true,
     expand: false,
