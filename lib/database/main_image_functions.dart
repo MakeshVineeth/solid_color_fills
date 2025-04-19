@@ -38,8 +38,8 @@ final FutureProvider<Uint8List> imageProvision = FutureProvider<Uint8List>((
 });
 
 final imageSetter = StateProvider<SetImage>((ref) {
-  Uint8List pngBytes = ref.read(imageProvision).asData!.value;
-  final object = ref.read(commonProvider);
+  Uint8List pngBytes = ref.watch(imageProvision).asData!.value;
+  final object = ref.watch(commonProvider);
   String colorTitle = object.colorTitle;
   return SetImage(pngBytes, colorTitle);
 });

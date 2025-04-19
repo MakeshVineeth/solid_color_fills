@@ -144,7 +144,7 @@ class WallChooser extends ConsumerWidget {
         context,
       ).hideCurrentSnackBar(); // Hide existing snack bars if present.
 
-      final SetImage setImageClass = ref.read(imageSetter);
+      final SetImage setImageClass = ref.watch(imageSetter);
       setImageClass.setNow(location: location).then((val) {
         // If location is 4, means to open the gallery, no need to display message.
         if (location == 4) return;
