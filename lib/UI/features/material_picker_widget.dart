@@ -18,7 +18,7 @@ class MaterialPickerWidget extends ConsumerWidget {
       onColorChange: (Color color) =>
           ref.read(commonProvider.notifier).changeColors(
                 colorValue: color,
-                colorString: color.toString(),
+                colorString: 'Custom Color',
               ),
     );
   }

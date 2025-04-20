@@ -6,6 +6,7 @@ import 'package:solid_color_fills/UI/dialogs/theme_chooser.dart';
 import 'package:solid_color_fills/fixed_values.dart';
 import 'package:solid_color_fills/screens/about_page.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
 
 class MenuThings extends StatelessWidget {
   final FixedValues fixedValues = FixedValues();
@@ -21,10 +22,12 @@ class MenuThings extends StatelessWidget {
         menuItem(
           icon: FluentIcons.dark_theme_24_regular,
           title: 'Change Theme',
-          function: () => showFloatingModalBottomSheet(
-              context: context,
-              builder: (context) => ThemeChooser(),
-              backgroundColor: null),
+          function:
+              () => showFloatingModalBottomSheet(
+                context: context,
+                builder: (context) => ThemeChooser(),
+                backgroundColor: null,
+              ),
           context: context,
         ),
         menuItem(
@@ -36,9 +39,10 @@ class MenuThings extends StatelessWidget {
         menuItem(
           icon: FluentIcons.shield_24_regular,
           title: 'Privacy Policy',
-          function: () => _launchUrl(
-            url: 'https://makeshvineeth.github.io/privacy_policy/',
-          ),
+          function:
+              () => _launchUrl(
+                url: 'https://makeshvineeth.github.io/privacy_policy/',
+              ),
           context: context,
         ),
         menuItem(
@@ -48,7 +52,36 @@ class MenuThings extends StatelessWidget {
             AppReview.storeListing;
           },
           context: context,
-        )
+        ),
+        menuItem(
+          icon: FluentIcons.share_24_regular,
+          title: 'Share with Friends',
+          function: () async {
+            final result = await Share.share(
+              'Check out this Amazing App - https://play.google.com/store/apps/details?id=com.makeshtech.solid_color_fills',
+            );
+
+            if (result.status == ShareResultStatus.success) {
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Thank you for sharing our App!'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              }
+            }
+          },
+          context: context,
+        ),
+        menuItem(
+          icon: FluentIcons.earth_24_regular,
+          title: 'Visit Our Website',
+          function: () {
+            _launchUrl(url: 'https://makeshvineeth.github.io/');
+          },
+          context: context,
+        ),
       ],
     );
   }
@@ -65,46 +98,43 @@ class MenuThings extends StatelessWidget {
     required String title,
     required Function function,
     required BuildContext context,
-  }) =>
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-        child: (icon != null)
+  }) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+    child:
+        (icon != null)
             ? TextButton.icon(
-                style: ButtonStyle(
-                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0))),
-                  foregroundColor: WidgetStateProperty.all(
-                      Theme.of(context).textTheme.labelLarge!.color),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                  function();
-                },
-                icon: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  child: Icon(
-                    icon,
+              style: ButtonStyle(
+                shape: WidgetStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                label: Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    height: 1,
-                  ),
-                ),
-              )
-            : MaterialButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                onPressed: () {
-                  Navigator.pop(context);
-                  function();
-                },
-                child: Text(
-                  title,
-                  style: TextStyle(fontWeight: FontWeight.w600),
+                foregroundColor: WidgetStateProperty.all(
+                  Theme.of(context).textTheme.labelLarge!.color,
                 ),
               ),
-      );
+              onPressed: () {
+                Navigator.pop(context);
+                function();
+              },
+              icon: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
+                child: Icon(icon),
+              ),
+              label: Text(
+                title,
+                style: TextStyle(fontWeight: FontWeight.w600, height: 1),
+              ),
+            )
+            : MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                function();
+              },
+              child: Text(title, style: TextStyle(fontWeight: FontWeight.w600)),
+            ),
+  );
 }

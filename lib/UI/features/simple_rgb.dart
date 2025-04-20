@@ -60,7 +60,7 @@ class SimpleRGB extends ConsumerStatefulWidget {
   void onTapping(BuildContext context) {
     ref.read(commonProvider.notifier).changeColors(
           colorValue: _color,
-          colorString: _color.toString(),
+          colorString: 'Custom Color',
         );
 
     Navigator.of(context).pop();

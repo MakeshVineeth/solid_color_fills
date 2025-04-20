@@ -181,7 +181,6 @@ class WallChooser extends ConsumerWidget {
 
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          Navigator.pop(context);
         }
       });
     } catch (_) {}
