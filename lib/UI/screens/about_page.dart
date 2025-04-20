@@ -3,8 +3,8 @@ import 'package:solid_color_fills/UI/animations/show_blur_dialog.dart';
 import 'package:solid_color_fills/UI/dialogs/dialog_text_btn.dart';
 import 'package:solid_color_fills/fixed_values.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../UI/animations/fade_scale_widget.dart';
-import '../UI/buttons_links.dart';
+import '../animations/fade_scale_widget.dart';
+import '../essentials/buttons_links.dart';
 
 class AboutPage extends StatelessWidget {
   final FixedValues _fixedValues = FixedValues();

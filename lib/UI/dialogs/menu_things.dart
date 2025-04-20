@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:app_review_plus/app_review_plus.dart';
 import 'package:solid_color_fills/UI/dialogs/floating_modal.dart';
 import 'package:solid_color_fills/UI/dialogs/theme_chooser.dart';
+import 'package:solid_color_fills/UI/screens/troubleshooting_page.dart';
 import 'package:solid_color_fills/fixed_values.dart';
-import 'package:solid_color_fills/screens/about_page.dart';
+import 'package:solid_color_fills/UI/screens/about_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -28,6 +29,14 @@ class MenuThings extends StatelessWidget {
                 builder: (context) => ThemeChooser(),
                 backgroundColor: null,
               ),
+          context: context,
+        ),
+        menuItem(
+          icon: FluentIcons.question_circle_24_regular,
+          title: 'Troubleshooting',
+          function: () {
+            TroubleshootingPage.showTroubleShootDialogFunc(context);
+          },
           context: context,
         ),
         menuItem(
