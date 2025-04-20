@@ -11,11 +11,12 @@ class FixedValues {
 
   final String appLegalese =
       'An App that lets you set your favorite color as Device Wallpaper. Not satisfied with default colors? Then you can choose your own color by using the Color Picker provided in the app. Solid Color Fills has Beautiful UI and Privacy Friendly.';
-  final String appVersion = '1.0.5';
+  final String appVersion = '2.0.0';
 
   final BorderRadius fixedCardRadius = BorderRadius.circular(20.0);
-  final roundShape =
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0));
+  final roundShape = RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(20.0),
+  );
   final colorTitleStyle = TextStyle(fontWeight: FontWeight.w600);
   final logoFile = 'logo.png';
 
@@ -69,7 +70,7 @@ class FixedValues {
     'Indigo': Colors.indigo,
     'Pink': Colors.pink,
     'Sky Blue': '#87CEEB',
-    'Orchid': '#DA70D6'
+    'Orchid': '#DA70D6',
   };
 
   ThemeData getTheme({
@@ -103,8 +104,9 @@ class FixedValues {
           statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
         ),
         centerTitle: true,
-        titleTextStyle:
-            Theme.of(context).textTheme.titleLarge!.copyWith(color: fg),
+        titleTextStyle: Theme.of(
+          context,
+        ).textTheme.titleLarge!.copyWith(color: fg),
       ),
       bottomAppBarTheme: BottomAppBarTheme(
         color: (isDark) ? bottomNavBg : bg,
@@ -149,8 +151,8 @@ class FixedValues {
   }
 
   static TextStyle buttonText() => const TextStyle(
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.5,
-        fontSize: 15,
-      );
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.5,
+    fontSize: 15,
+  );
 }
