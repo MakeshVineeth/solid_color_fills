@@ -47,7 +47,7 @@ class FixedValues {
     'Midnight Blue': '#2C3E50',
     'Foursquare': '#F94877',
     'Reddit': '#FF4500',
-    'WhatsApp': '#075E54',
+    'Classic WhatsApp': '#075E54',
     'Twitch': '#9146ff',
     'Facebook': '#1877F2',
     'Classic Blue': '#34568B',
