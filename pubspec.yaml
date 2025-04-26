@@ -37,7 +37,7 @@ dependencies:
   device_info_plus: ^11.3.3
   wallpaper_manager_plus: ^1.0.0
   app_review_plus: ^2.3.5
-  share_plus: ^10.1.4
+  share_plus: ^11.0.0
 
 flutter_native_splash:
   color: "#ffffff"

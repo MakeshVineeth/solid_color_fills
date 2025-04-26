@@ -66,8 +66,19 @@ class MenuThings extends StatelessWidget {
           icon: FluentIcons.share_24_regular,
           title: 'Share with Friends',
           function: () async {
-            final result = await Share.share(
-              'Check out this Amazing App - https://play.google.com/store/apps/details?id=com.makeshtech.solid_color_fills',
+            final result = await SharePlus.instance.share(
+              ShareParams(
+                text:
+                    'Check out this Amazing App - https://play.google.com/store/apps/details?id=com.makeshtech.solid_color_fills',
+                subject: 'Solid Color Fills',
+                title: 'Share Solid Color Fills',
+                uri: Uri(
+                  scheme: 'https',
+                  host: 'play.google.com',
+                  path: 'store/apps/details',
+                  queryParameters: {'id': 'com.makeshtech.solid_color_fills'},
+                ),
+              ),
             );
 
             if (result.status == ShareResultStatus.success) {
