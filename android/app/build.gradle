@@ -42,10 +42,6 @@ android {
         targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-
-        ndk {
-                debugSymbolLevel 'FULL'
-        }
     }
     
     signingConfigs {
@@ -60,8 +56,6 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            minifyEnabled true
-            shrinkResources true
         }
     }
     namespace 'com.makeshtech.solid_color_fills'
