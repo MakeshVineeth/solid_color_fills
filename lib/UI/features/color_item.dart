@@ -34,6 +34,9 @@ class ColorItem extends ConsumerWidget {
                 child: Text(
                   mapEntry.key,
                   style: fixedValues.colorTitleStyle,
+                  textAlign: TextAlign.center,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),

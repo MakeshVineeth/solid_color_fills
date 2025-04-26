@@ -68,10 +68,8 @@ class MenuThings extends StatelessWidget {
           function: () async {
             final result = await SharePlus.instance.share(
               ShareParams(
-                text:
-                    'Check out this Amazing App - https://play.google.com/store/apps/details?id=com.makeshtech.solid_color_fills',
                 subject: 'Solid Color Fills',
-                title: 'Share Solid Color Fills',
+                title: 'Check out this amazing app called Solid Color Fills!',
                 uri: Uri(
                   scheme: 'https',
                   host: 'play.google.com',
