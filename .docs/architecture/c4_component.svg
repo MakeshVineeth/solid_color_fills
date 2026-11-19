@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 780" width="100%" height="100%" style="background-color: #1e1e2e; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#89dceb" />
+    </marker>
+  </defs>
+
+  <!-- Title Header -->
+  <text x="575" y="40" text-anchor="middle" fill="#cdd6f4" font-size="24" font-weight="700">[Component] Solid Color Fills Feature Architecture</text>
+  <text x="575" y="65" text-anchor="middle" fill="#a6adc8" font-size="14">C4 Model - Level 3: Component Diagram</text>
+
+  <!-- Container Box -->
+  <rect x="50" y="90" width="1050" height="650" rx="20" fill="#181825" stroke="#45475a" stroke-width="2" stroke-dasharray="6,6"/>
+  <text x="80" y="125" fill="#a6adc8" font-size="16" font-weight="600">Application Feature Modules (lib/src/features/ &amp; core/)</text>
+
+  <!-- Wallpaper Feature Component -->
+  <g transform="translate(100, 160)" filter="url(#shadow)">
+    <rect width="270" height="150" rx="14" fill="#01579b" stroke="#039be5" stroke-width="2"/>
+    <text x="135" y="32" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">Wallpaper Feature</text>
+    <text x="135" y="52" text-anchor="middle" fill="#b3e5fc" font-size="11">[Domain &amp; Presentation]</text>
+    <text x="135" y="80" text-anchor="middle" fill="#e1f5fe" font-size="11">• WallpaperController</text>
+    <text x="135" y="100" text-anchor="middle" fill="#e1f5fe" font-size="11">• WallpaperConfirmationScreen</text>
+    <text x="135" y="120" text-anchor="middle" fill="#e1f5fe" font-size="11">• WallpaperTarget (Home/Lock/Both)</text>
+  </g>
+
+  <!-- Collections Feature Component -->
+  <g transform="translate(440, 160)" filter="url(#shadow)">
+    <rect width="270" height="150" rx="14" fill="#0277bd" stroke="#29b6f6" stroke-width="2"/>
+    <text x="135" y="32" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">Collections Feature</text>
+    <text x="135" y="52" text-anchor="middle" fill="#b3e5fc" font-size="11">[Domain &amp; Presentation]</text>
+    <text x="135" y="80" text-anchor="middle" fill="#e1f5fe" font-size="11">• CollectionsController</text>
+    <text x="135" y="100" text-anchor="middle" fill="#e1f5fe" font-size="11">• CollectionsScreen &amp; Search</text>
+    <text x="135" y="120" text-anchor="middle" fill="#e1f5fe" font-size="11">• ColorGridCard Swatches</text>
+  </g>
+
+  <!-- Color Picker Feature Component -->
+  <g transform="translate(780, 160)" filter="url(#shadow)">
+    <rect width="270" height="150" rx="14" fill="#00695c" stroke="#26a69a" stroke-width="2"/>
+    <text x="135" y="32" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">Color Picker Feature</text>
+    <text x="135" y="52" text-anchor="middle" fill="#80cbc4" font-size="11">[Custom Color Studio]</text>
+    <text x="135" y="80" text-anchor="middle" fill="#e0f2f1" font-size="11">• ColorPickerController</text>
+    <text x="135" y="100" text-anchor="middle" fill="#e0f2f1" font-size="11">• RGBChannelSliders (R, G, B)</text>
+    <text x="135" y="120" text-anchor="middle" fill="#e0f2f1" font-size="11">• MaterialPaletteSelector</text>
+  </g>
+
+  <!-- Feed Feature Component -->
+  <g transform="translate(100, 360)" filter="url(#shadow)">
+    <rect width="270" height="150" rx="14" fill="#283593" stroke="#5c6bc0" stroke-width="2"/>
+    <text x="135" y="32" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">Feed Feature</text>
+    <text x="135" y="52" text-anchor="middle" fill="#9fa8da" font-size="11">[Infinite Stream]</text>
+    <text x="135" y="80" text-anchor="middle" fill="#e8eaf6" font-size="11">• FeedController</text>
+    <text x="135" y="100" text-anchor="middle" fill="#e8eaf6" font-size="11">• RandomColorGenerator (Pure HSL)</text>
+    <text x="135" y="120" text-anchor="middle" fill="#e8eaf6" font-size="11">• Natural Color Namer</text>
+  </g>
+
+  <!-- Canvas Engine Component -->
+  <g transform="translate(440, 360)" filter="url(#shadow)">
+    <rect width="270" height="150" rx="14" fill="#4a148c" stroke="#ab47bc" stroke-width="2"/>
+    <text x="135" y="32" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">Canvas Engine</text>
+    <text x="135" y="52" text-anchor="middle" fill="#ce93d8" font-size="11">[Data: Image Generation]</text>
+    <text x="135" y="80" text-anchor="middle" fill="#f3e5f5" font-size="11">• CanvasImageService</text>
+    <text x="135" y="100" text-anchor="middle" fill="#f3e5f5" font-size="11">• PictureRecorder &amp; UI Canvas</text>
+    <text x="135" y="120" text-anchor="middle" fill="#f3e5f5" font-size="11">• PNG Byte Encoder</text>
+  </g>
+
+  <!-- Platform & Wallpaper Driver Component -->
+  <g transform="translate(780, 360)" filter="url(#shadow)">
+    <rect width="270" height="150" rx="14" fill="#37474f" stroke="#78909c" stroke-width="2"/>
+    <text x="135" y="32" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">Wallpaper Repo</text>
+    <text x="135" y="52" text-anchor="middle" fill="#b0bec5" font-size="11">[Data: Infrastructure]</text>
+    <text x="135" y="80" text-anchor="middle" fill="#eceff1" font-size="11">• WallpaperRepositoryImpl</text>
+    <text x="135" y="100" text-anchor="middle" fill="#eceff1" font-size="11">• WallpaperManagerPlus Bridge</text>
+    <text x="135" y="120" text-anchor="middle" fill="#eceff1" font-size="11">• File Cache &amp; Cleanup</text>
+  </g>
+
+  <!-- Core Services Component -->
+  <g transform="translate(270, 560)" filter="url(#shadow)">
+    <rect width="610" height="130" rx="14" fill="#212121" stroke="#616161" stroke-width="2"/>
+    <text x="305" y="30" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">Core Infrastructure &amp; Security Services (lib/src/core/)</text>
+    <text x="305" y="50" text-anchor="middle" fill="#bdbdbd" font-size="11">[Cross-Cutting Primitives]</text>
+    <text x="305" y="78" text-anchor="middle" fill="#eeeeee" font-size="11">• PreferencesService (SharedPreferences) • InputValidator (OWASP M4 Regex)</text>
+    <text x="305" y="98" text-anchor="middle" fill="#eeeeee" font-size="11">• WindowSecurityManager (FLAG_SECURE) • AppTheme &amp; M3 Dynamic Colors</text>
+    <text x="305" y="118" text-anchor="middle" fill="#eeeeee" font-size="11">• ResponsiveWrapper (Compact / Medium / Expanded Layout Breakpoints)</text>
+  </g>
+
+  <!-- Connectors -->
+  <path d="M 235 310 L 235 360" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 370 235 L 440 235" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 710 235 L 780 235" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 370 280 L 440 380" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 710 435 L 780 435" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 575 510 L 575 560" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

@@ -47,3 +47,18 @@ app.*.map.json
 android/build/reports/problems/problems-report.html
 /android/app/.cxx
 android/.kotlin/sessions/
+
+# Keystores, signing keys & private properties (NEVER commit to VCS)
+*.jks
+*.keystore
+*.p12
+*.key
+**/key.properties
+android/key.properties
+**/keystore
+android/keystore
+android/app/keystore
+.android/
+android/build/
+android/.gradle/
+

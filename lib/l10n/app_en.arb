@@ -1,0 +1,97 @@
+{
+  "@@locale": "en",
+  "appTitle": "Solid Color Fills",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "collections": "Collections",
+  "@collections": {
+    "description": "Collections tab label"
+  },
+  "colorPicker": "Color Picker",
+  "@colorPicker": {
+    "description": "Color picker tab label"
+  },
+  "feed": "Feed",
+  "@feed": {
+    "description": "Feed / Random tab label"
+  },
+  "setWallpaper": "Set Wallpaper",
+  "@setWallpaper": {
+    "description": "Action to set wallpaper"
+  },
+  "homeScreen": "Set As Home Screen",
+  "@homeScreen": {
+    "description": "Set wallpaper on home screen"
+  },
+  "lockScreen": "Set As Lock Screen",
+  "@lockScreen": {
+    "description": "Set wallpaper on lock screen"
+  },
+  "bothScreens": "Set As Both",
+  "@bothScreens": {
+    "description": "Set wallpaper on both home and lock screens"
+  },
+  "openInGallery": "Open in Gallery",
+  "@openInGallery": {
+    "description": "Open generated solid color image in gallery"
+  },
+  "wallpaperConfirmation": "Wallpaper Confirmation",
+  "@wallpaperConfirmation": {
+    "description": "Wallpaper confirmation screen title"
+  },
+  "colorInfo": "Color Info: {colorName}",
+  "@colorInfo": {
+    "description": "Color name display",
+    "placeholders": {
+      "colorName": {
+        "type": "String",
+        "example": "Pitch Black"
+      }
+    }
+  },
+  "pickAColor": "Pick a Color",
+  "@pickAColor": {
+    "description": "Title of custom color dialog"
+  },
+  "select": "Select",
+  "@select": {
+    "description": "Button to confirm selection"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings label"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme selection label"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About page title"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy link label"
+  },
+  "troubleshooting": "Troubleshooting",
+  "@troubleshooting": {
+    "description": "Troubleshooting link label"
+  },
+  "rateApp": "Rate App",
+  "@rateApp": {
+    "description": "Rate app action"
+  },
+  "shareApp": "Share App",
+  "@shareApp": {
+    "description": "Share app action"
+  },
+  "wallpaperSuccess": "Wallpaper set successfully!",
+  "@wallpaperSuccess": {
+    "description": "Success message when wallpaper is applied"
+  },
+  "wallpaperFailed": "Failed to set wallpaper. Please try again.",
+  "@wallpaperFailed": {
+    "description": "Error message when wallpaper setting fails"
+  }
+}

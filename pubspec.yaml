@@ -1,43 +1,50 @@
 name: solid_color_fills
-description: A Wallpaper that lets you set any solid color as wallpaper.
+description: A modern, privacy-first Flutter wallpaper app for custom and curated solid colors.
 publish_to: "none"
-version: 2.0.0+20
+version: 2.1.0+21
 
 environment:
-  sdk: ^3.8.0-171.0.dev
+  sdk: '>=3.5.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
-
-  adaptive_theme: ^3.7.0
-  animations: ^2.0.11
-  convex_bottom_bar: ^3.2.0
+  # UI, Layout & Icons
+  cupertino_icons: ^2.0.0
   fluentui_system_icons: ^1.1.273
-  flutter_animator: ^3.2.2
+
+  # Color Picking & Customization
   flutter_colorpicker: ^1.1.0
-  flutter_riverpod: ^2.6.1
-  introduction_screen: ^3.1.17
-  modal_bottom_sheet: ^3.0.0
-  open_filex: ^4.7.0
-  page_transition: ^2.2.1
-  path_provider: ^2.1.5
+
+  # State Management & Preferences
+  provider: ^6.1.5
   shared_preferences: ^2.5.3
-  transparent_image: ^2.0.1
-  url_launcher: ^6.3.1
-  random_color: ^1.0.6-nullsafety
+
+  # System, Storage & Wallpaper Integration
+  wallpaper_manager_plus: ^2.0.4
+  path_provider: ^2.1.5
+  open_filex: ^5.0.0
+  device_info_plus: ^13.3.0
+  package_info_plus: ^10.2.2
+  flutter_displaymode: ^0.7.0
   quick_actions: ^1.1.0
-  flutter_material_color_picker: ^1.2.0
-  material_color_picker_wns: ^1.0.8
-  flutter_displaymode: ^0.6.0
-  device_info_plus: ^11.3.3
-  wallpaper_manager_plus: ^1.0.0
-  app_review_plus: ^2.3.5
-  share_plus: ^11.0.0
+  share_plus: ^13.3.1
+  flutter_windowmanager_plus: ^1.1.1
+  url_launcher: ^6.3.1
+  adaptive_theme: 3.7.0
+
+  # Localization
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  mocktail: ^1.0.4
+  flutter_native_splash: ^2.4.6
 
 flutter_native_splash:
   color: "#ffffff"
@@ -48,23 +55,12 @@ flutter_native_splash:
   image: assets/logo.png
   android12: true
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_native_splash: ^2.4.6
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^5.0.0
-
 flutter_icons:
   android: "launcher_icon"
   image_path: "assets/logo.png"
 
 flutter:
+  generate: true
   uses-material-design: true
   assets:
     - assets/

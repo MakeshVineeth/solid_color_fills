@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 750" width="100%" height="100%" style="background-color: #1e1e2e; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#89dceb" />
+    </marker>
+  </defs>
+
+  <!-- Title Header -->
+  <text x="550" y="40" text-anchor="middle" fill="#cdd6f4" font-size="24" font-weight="700">[Container] Solid Color Fills Architecture</text>
+  <text x="550" y="65" text-anchor="middle" fill="#a6adc8" font-size="14">C4 Model - Level 2: Container Diagram</text>
+
+  <!-- User on Left -->
+  <g transform="translate(40, 280)" filter="url(#shadow)">
+    <rect width="160" height="130" rx="14" fill="#0277bd" stroke="#29b6f6" stroke-width="2"/>
+    <circle cx="80" cy="35" r="16" fill="#81d4fa"/>
+    <text x="80" y="80" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">App User</text>
+    <text x="80" y="98" text-anchor="middle" fill="#b3e5fc" font-size="10">[Person]</text>
+    <text x="80" y="115" text-anchor="middle" fill="#e1f5fe" font-size="9">Selects colors &amp; themes</text>
+  </g>
+
+  <!-- Container Box -->
+  <rect x="240" y="90" width="560" height="630" rx="20" fill="#181825" stroke="#45475a" stroke-width="2" stroke-dasharray="6,6"/>
+  <text x="270" y="125" fill="#a6adc8" font-size="16" font-weight="600">Solid Color Fills [Flutter Mobile Client]</text>
+
+  <!-- Presentation Layer Container -->
+  <g transform="translate(280, 150)" filter="url(#shadow)">
+    <rect width="210" height="130" rx="12" fill="#01579b" stroke="#039be5" stroke-width="2"/>
+    <text x="105" y="30" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Presentation Layer</text>
+    <text x="105" y="48" text-anchor="middle" fill="#b3e5fc" font-size="10">[Flutter UI / Material 3]</text>
+    <text x="105" y="72" text-anchor="middle" fill="#e1f5fe" font-size="10">• Adaptive Navigation Shell</text>
+    <text x="105" y="90" text-anchor="middle" fill="#e1f5fe" font-size="10">• Curated Swatch Grids</text>
+    <text x="105" y="108" text-anchor="middle" fill="#e1f5fe" font-size="10">• Custom RGB &amp; Hex Studio</text>
+  </g>
+
+  <!-- State Controllers Container -->
+  <g transform="translate(540, 150)" filter="url(#shadow)">
+    <rect width="220" height="130" rx="12" fill="#0277bd" stroke="#29b6f6" stroke-width="2"/>
+    <text x="110" y="30" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">State Controllers</text>
+    <text x="110" y="48" text-anchor="middle" fill="#b3e5fc" font-size="10">[ChangeNotifier / Provider]</text>
+    <text x="110" y="72" text-anchor="middle" fill="#e1f5fe" font-size="10">• WallpaperController</text>
+    <text x="110" y="90" text-anchor="middle" fill="#e1f5fe" font-size="10">• CollectionsController</text>
+    <text x="110" y="108" text-anchor="middle" fill="#e1f5fe" font-size="10">• ColorPickerController</text>
+  </g>
+
+  <!-- Canvas Image Encoding Service Container -->
+  <g transform="translate(280, 340)" filter="url(#shadow)">
+    <rect width="210" height="130" rx="12" fill="#00695c" stroke="#26a69a" stroke-width="2"/>
+    <text x="105" y="30" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Canvas Service</text>
+    <text x="105" y="48" text-anchor="middle" fill="#80cbc4" font-size="10">[Dart UI Canvas Engine]</text>
+    <text x="105" y="72" text-anchor="middle" fill="#e0f2f1" font-size="10">• PictureRecorder &amp; Canvas</text>
+    <text x="105" y="90" text-anchor="middle" fill="#e0f2f1" font-size="10">• High-DPI PNG Encoding</text>
+    <text x="105" y="108" text-anchor="middle" fill="#e0f2f1" font-size="10">• Physical Pixel Scaling</text>
+  </g>
+
+  <!-- Domain Logic Container -->
+  <g transform="translate(540, 340)" filter="url(#shadow)">
+    <rect width="220" height="130" rx="12" fill="#283593" stroke="#5c6bc0" stroke-width="2"/>
+    <text x="110" y="30" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Domain Layer</text>
+    <text x="110" y="48" text-anchor="middle" fill="#9fa8da" font-size="10">[Pure Dart Logic]</text>
+    <text x="110" y="72" text-anchor="middle" fill="#e8eaf6" font-size="10">• RandomColorGenerator (HSL)</text>
+    <text x="110" y="90" text-anchor="middle" fill="#e8eaf6" font-size="10">• InputValidator (OWASP M4)</text>
+    <text x="110" y="108" text-anchor="middle" fill="#e8eaf6" font-size="10">• Abstract Repo Contracts</text>
+  </g>
+
+  <!-- Local Storage Container -->
+  <g transform="translate(280, 520)" filter="url(#shadow)">
+    <rect width="210" height="130" rx="12" fill="#37474f" stroke="#78909c" stroke-width="2"/>
+    <text x="105" y="30" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Local Storage</text>
+    <text x="105" y="48" text-anchor="middle" fill="#b0bec5" font-size="10">[SharedPreferences]</text>
+    <text x="105" y="72" text-anchor="middle" fill="#eceff1" font-size="10">• Theme mode preferences</text>
+    <text x="105" y="90" text-anchor="middle" fill="#eceff1" font-size="10">• Active navigation tab</text>
+    <text x="105" y="108" text-anchor="middle" fill="#eceff1" font-size="10">• First-launch onboarding</text>
+  </g>
+
+  <!-- Platform Channels Container -->
+  <g transform="translate(540, 520)" filter="url(#shadow)">
+    <rect width="220" height="130" rx="12" fill="#4a148c" stroke="#ab47bc" stroke-width="2"/>
+    <text x="110" y="30" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">Platform Channels</text>
+    <text x="110" y="48" text-anchor="middle" fill="#ce93d8" font-size="10">[Wallpaper Driver]</text>
+    <text x="110" y="72" text-anchor="middle" fill="#f3e5f5" font-size="10">• WallpaperManagerPlus</text>
+    <text x="110" y="90" text-anchor="middle" fill="#f3e5f5" font-size="10">• OpenFilex Gallery Handler</text>
+    <text x="110" y="108" text-anchor="middle" fill="#f3e5f5" font-size="10">• QuickActions Shortcuts</text>
+  </g>
+
+  <!-- External Systems on Right -->
+  <g transform="translate(850, 220)" filter="url(#shadow)">
+    <rect width="210" height="110" rx="14" fill="#263238" stroke="#607d8b" stroke-width="2"/>
+    <text x="105" y="35" text-anchor="middle" fill="#eceff1" font-size="14" font-weight="700">Android OS</text>
+    <text x="105" y="55" text-anchor="middle" fill="#b0bec5" font-size="11">[WallpaperManager]</text>
+    <text x="105" y="80" text-anchor="middle" fill="#cfd8dc" font-size="10">Applies bitmap to Window</text>
+  </g>
+
+  <g transform="translate(850, 420)" filter="url(#shadow)">
+    <rect width="210" height="110" rx="14" fill="#263238" stroke="#607d8b" stroke-width="2"/>
+    <text x="105" y="35" text-anchor="middle" fill="#eceff1" font-size="14" font-weight="700">Device File System</text>
+    <text x="105" y="55" text-anchor="middle" fill="#b0bec5" font-size="11">[App Cache &amp; Storage]</text>
+    <text x="105" y="80" text-anchor="middle" fill="#cfd8dc" font-size="10">Caches rendered PNGs</text>
+  </g>
+
+  <!-- Arrows -->
+  <path d="M 200 345 L 280 230" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 490 215 L 540 215" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 640 280 L 640 340" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 385 280 L 385 340" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 640 470 L 640 520" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 760 585 L 850 300" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 490 405 L 850 460" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Enforce zero-network release build by stripping INTERNET leaked by wallpaper_manager_plus -->
+    <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
+
+    <application>
+        <!-- Remove unused exported LiveWallpaperService from wallpaper_manager_plus -->
+        <service
+            android:name="np.com.sawin.wallpaper_manager_plus.LiveWallpaperService"
+            tools:node="remove" />
+    </application>
+</manifest>
