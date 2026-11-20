@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" width="100%" height="100%" style="background-color: #1e1e2e; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#89dceb" />
+    </marker>
+  </defs>
+
+  <!-- Title Header -->
+  <text x="500" y="45" text-anchor="middle" fill="#cdd6f4" font-size="24" font-weight="700">[System Context] Solid Color Fills</text>
+  <text x="500" y="70" text-anchor="middle" fill="#a6adc8" font-size="14">C4 Model - Level 1: System Context Diagram</text>
+
+  <!-- Mobile App User (Person) -->
+  <g transform="translate(80, 230)" filter="url(#shadow)">
+    <rect width="220" height="150" rx="16" fill="#0277bd" stroke="#29b6f6" stroke-width="2"/>
+    <circle cx="110" cy="40" r="18" fill="#81d4fa"/>
+    <path d="M 85 80 Q 110 60 135 80 Z" fill="#81d4fa"/>
+    <text x="110" y="105" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">Mobile App User</text>
+    <text x="110" y="125" text-anchor="middle" fill="#e1f5fe" font-size="11">[Person]</text>
+    <text x="110" y="142" text-anchor="middle" fill="#b3e5fc" font-size="10">Customizes colors &amp; sets wallpapers</text>
+  </g>
+
+  <!-- Main System: Solid Color Fills -->
+  <g transform="translate(380, 205)" filter="url(#shadow)">
+    <rect width="280" height="190" rx="16" fill="#01579b" stroke="#039be5" stroke-width="3"/>
+    <rect x="25" y="20" width="40" height="40" rx="8" fill="#0277bd"/>
+    <text x="45" y="47" text-anchor="middle" fill="#81d4fa" font-size="22">🎨</text>
+    <text x="150" y="75" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="700">Solid Color Fills</text>
+    <text x="150" y="98" text-anchor="middle" fill="#b3e5fc" font-size="12">[Software System]</text>
+    <text x="150" y="125" text-anchor="middle" fill="#e1f5fe" font-size="11">Privacy-first Flutter mobile application</text>
+    <text x="150" y="145" text-anchor="middle" fill="#e1f5fe" font-size="11">generating solid swatches, custom RGB/Hex</text>
+    <text x="150" y="165" text-anchor="middle" fill="#e1f5fe" font-size="11">&amp; orchestrating wallpaper installation.</text>
+  </g>
+
+  <!-- External System 1: Android WallpaperManager -->
+  <g transform="translate(730, 110)" filter="url(#shadow)">
+    <rect width="220" height="135" rx="14" fill="#37474F" stroke="#78909C" stroke-width="2"/>
+    <text x="110" y="40" text-anchor="middle" fill="#eceff1" font-size="15" font-weight="700">Android Subsystem</text>
+    <text x="110" y="60" text-anchor="middle" fill="#b0bec5" font-size="12">[WallpaperManager API]</text>
+    <text x="110" y="88" text-anchor="middle" fill="#cfd8dc" font-size="11">Applies bitmap stream to</text>
+    <text x="110" y="106" text-anchor="middle" fill="#cfd8dc" font-size="11">Home Screen &amp; Lock Screen</text>
+  </g>
+
+  <!-- External System 2: System Gallery App -->
+  <g transform="translate(730, 275)" filter="url(#shadow)">
+    <rect width="220" height="135" rx="14" fill="#37474F" stroke="#78909C" stroke-width="2"/>
+    <text x="110" y="40" text-anchor="middle" fill="#eceff1" font-size="15" font-weight="700">Stock Gallery App</text>
+    <text x="110" y="60" text-anchor="middle" fill="#b0bec5" font-size="12">[System Application]</text>
+    <text x="110" y="88" text-anchor="middle" fill="#cfd8dc" font-size="11">Displays exported color images</text>
+    <text x="110" y="106" text-anchor="middle" fill="#cfd8dc" font-size="11">for OEM lockscreen workaround</text>
+  </g>
+
+  <!-- External System 3: Google Play Store -->
+  <g transform="translate(730, 440)" filter="url(#shadow)">
+    <rect width="220" height="120" rx="14" fill="#37474F" stroke="#78909C" stroke-width="2"/>
+    <text x="110" y="38" text-anchor="middle" fill="#eceff1" font-size="15" font-weight="700">Google Play Store</text>
+    <text x="110" y="58" text-anchor="middle" fill="#b0bec5" font-size="12">[App Distribution]</text>
+    <text x="110" y="86" text-anchor="middle" fill="#cfd8dc" font-size="11">App bundle delivery, reviews</text>
+    <text x="110" y="104" text-anchor="middle" fill="#cfd8dc" font-size="11">&amp; store listing updates</text>
+  </g>
+
+  <!-- Relationship: User -> Solid Color Fills -->
+  <path d="M 300 300 L 380 300" fill="none" stroke="#89dceb" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="340" y="290" text-anchor="middle" fill="#cdd6f4" font-size="11">Uses app</text>
+
+  <!-- Relationship: Solid Color Fills -> Android WallpaperManager -->
+  <path d="M 660 250 L 730 190" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="705" y="210" text-anchor="middle" fill="#cdd6f4" font-size="11">Set wallpaper</text>
+
+  <!-- Relationship: Solid Color Fills -> Stock Gallery App -->
+  <path d="M 660 310 L 730 330" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="705" y="315" text-anchor="middle" fill="#cdd6f4" font-size="11">Open image</text>
+
+  <!-- Relationship: Solid Color Fills -> Google Play Store -->
+  <path d="M 660 360 L 730 460" fill="none" stroke="#89dceb" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="715" y="415" text-anchor="middle" fill="#cdd6f4" font-size="11">Rate &amp; Update</text>
+</svg>

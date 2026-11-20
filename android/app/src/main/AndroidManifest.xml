@@ -10,13 +10,29 @@
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" tools:node="remove"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove"/>
 
-   <application
+    <!-- Compatibility with TV, Tablet, Desktop, Chromebook -->
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <uses-feature android:name="android.software.leanback" android:required="false" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="market" />
+        </intent>
+    </queries>
+
+    <application
         android:name="${applicationName}"
         android:label="Solid Color Fills"
         android:icon="@mipmap/launcher_icon"
         android:allowBackup="false"
         tools:replace="android:allowBackup"
-       >
+        android:networkSecurityConfig="@xml/network_security_config">
+        
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -24,15 +40,12 @@
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:exported="true"
+            android:resizeableActivity="true"
             android:windowSoftInputMode="adjustResize">
-            <!-- Specifies an Android theme to apply to this Activity as soon as
-                 the Android process has started. This theme is visible to the user
-                 while the Flutter UI initializes. After that, this theme continues
-                 to determine the Window background behind the Flutter UI. -->
+            
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/NormalTheme"
-              />
+              android:resource="@style/NormalTheme" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -44,8 +57,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- Don't delete the meta-data below.
-             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
