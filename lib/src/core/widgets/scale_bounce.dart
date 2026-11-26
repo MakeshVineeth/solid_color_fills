@@ -21,6 +21,9 @@ class ScaleBounce extends StatefulWidget {
 
 class _ScaleBounceState extends State<ScaleBounce>
     with SingleTickerProviderStateMixin {
+  static const Animation<double> _identityScale =
+      AlwaysStoppedAnimation<double>(1.0);
+
   AnimationController? _controller;
   CurvedAnimation? _curvedAnimation;
   Animation<double>? _scaleAnimation;
@@ -88,12 +91,10 @@ class _ScaleBounceState extends State<ScaleBounce>
           unawaited(controller.reverse());
         }
       },
-      child: scaleAnimation == null
-          ? widget.child
-          : ScaleTransition(
-              scale: scaleAnimation,
-              child: widget.child,
-            ),
+      child: ScaleTransition(
+        scale: scaleAnimation ?? _identityScale,
+        child: widget.child,
+      ),
     );
   }
 }
