@@ -13,6 +13,7 @@ import 'package:solid_color_fills/src/core/widgets/fade_indexed_stack.dart';
 import 'package:solid_color_fills/src/core/widgets/scale_bounce.dart';
 import 'package:solid_color_fills/src/features/collections/domain/entities/solid_color_item.dart';
 import 'package:solid_color_fills/src/features/collections/presentation/controllers/collections_controller.dart';
+import 'package:solid_color_fills/src/features/collections/presentation/widgets/color_grid_card.dart';
 import 'package:solid_color_fills/src/features/color_picker/presentation/controllers/color_picker_controller.dart';
 import 'package:solid_color_fills/src/features/feed/presentation/controllers/feed_controller.dart';
 import 'package:solid_color_fills/src/features/home/presentation/screens/home_screen.dart';
@@ -311,17 +312,23 @@ void main() {
       await tester.pumpAndSettle();
     });
 
-    testWidgets('ScaleBounce lazily animates on pointer press/release/cancel',
+    testWidgets(
+        'ScaleBounce lazily allocates animation without dropping first InkWell tap',
         (tester) async {
+      var tapCount = 0;
+
       await tester.pumpWidget(
-        const MaterialApp(
+        MaterialApp(
           home: Scaffold(
             body: Center(
               child: ScaleBounce(
-                child: SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: Text('Tap'),
+                child: InkWell(
+                  onTap: () => tapCount++,
+                  child: const SizedBox(
+                    width: 80,
+                    height: 80,
+                    child: Center(child: Text('Tap')),
+                  ),
                 ),
               ),
             ),
@@ -333,15 +340,49 @@ void main() {
         of: find.byType(ScaleBounce),
         matching: find.byType(ScaleTransition),
       );
-      expect(scaleFinder, findsNothing);
+      expect(scaleFinder, findsOneWidget);
+      final initialTransition = tester.widget<ScaleTransition>(scaleFinder);
+      expect(initialTransition.scale, isA<AlwaysStoppedAnimation<double>>());
+      expect(initialTransition.scale.value, equals(1.0));
 
       final gesture = await tester.startGesture(tester.getCenter(find.text('Tap')));
-      await tester.pump();
-      expect(scaleFinder, findsOneWidget);
+      await tester.pump(const Duration(milliseconds: 50));
+      final activeTransition = tester.widget<ScaleTransition>(scaleFinder);
+      expect(activeTransition.scale, isNot(isA<AlwaysStoppedAnimation<double>>()));
 
       await gesture.up();
       await tester.pumpAndSettle();
+
+      expect(tapCount, equals(1));
       expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('ColorGridCard opens wallpaper on the very first touch',
+        (tester) async {
+      var tapped = 0;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 180,
+              height: 220,
+              child: ColorGridCard(
+                item: const SolidColorItem(name: 'Amber', color: Colors.amber),
+                heroTag: 'first_touch_test',
+                onTap: () => tapped++,
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final gesture = await tester.startGesture(tester.getCenter(find.text('Amber')));
+      await tester.pump(const Duration(milliseconds: 50));
+      await gesture.up();
+      await tester.pumpAndSettle();
+
+      expect(tapped, equals(1));
     });
   });
 
