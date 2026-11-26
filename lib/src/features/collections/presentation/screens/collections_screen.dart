@@ -27,7 +27,7 @@ class CollectionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
+        MediaQuery.orientationOf(context) == Orientation.portrait;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -38,6 +38,7 @@ class CollectionsScreen extends StatelessWidget {
             final items = controller.colors;
 
             return GridView.builder(
+              addAutomaticKeepAlives: false,
               padding: const EdgeInsets.all(15.0),
               physics: const AlwaysScrollableScrollPhysics(
                 parent: BouncingScrollPhysics(),

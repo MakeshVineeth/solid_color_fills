@@ -18,6 +18,10 @@ class AdvancedColorPickerDialog extends StatefulWidget {
 }
 
 class _AdvancedColorPickerDialogState extends State<AdvancedColorPickerDialog> {
+  static final List<TextInputFormatter> _hexInputFormatters = [
+    FilteringTextInputFormatter.allow(RegExp(r'[0-9a-fA-F]')),
+  ];
+
   final TextEditingController _textEditingController = TextEditingController();
   late Color _currentColor;
 
@@ -64,7 +68,7 @@ class _AdvancedColorPickerDialogState extends State<AdvancedColorPickerDialog> {
                 displayThumbColor: true,
                 pickerAreaHeightPercent: 0.8,
                 pickerAreaBorderRadius: AppConstants.cardRadius,
-                portraitOnly: MediaQuery.of(context).size.width < 720,
+                portraitOnly: MediaQuery.sizeOf(context).width < 720,
               ),
               const SizedBox(height: 5),
               TextField(
@@ -75,13 +79,11 @@ class _AdvancedColorPickerDialogState extends State<AdvancedColorPickerDialog> {
                     onPressed: _copyHex,
                     icon: const Icon(Icons.content_paste_outlined),
                   ),
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                     borderRadius: AppConstants.cardRadius,
                   ),
                 ),
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9a-fA-F]')),
-                ],
+                inputFormatters: _hexInputFormatters,
                 scrollPhysics: const AlwaysScrollableScrollPhysics(
                   parent: BouncingScrollPhysics(),
                 ),

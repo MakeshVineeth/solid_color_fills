@@ -11,12 +11,8 @@ class PlatformUtils {
   static Future<void> optimizeDisplayRefreshRate() async {
     if (!Platform.isAndroid) return;
     try {
-      final deviceInfo = DeviceInfoPlugin();
-      final androidInfo = await deviceInfo.androidInfo;
-      if (androidInfo.version.sdkInt >= 23) {
-        await FlutterDisplayMode.setHighRefreshRate();
-        AppLogger.info('High display refresh rate enabled.');
-      }
+      await FlutterDisplayMode.setHighRefreshRate();
+      AppLogger.info('High display refresh rate enabled.');
     } catch (e, stack) {
       AppLogger.error('Failed to configure display refresh rate', e, stack);
     }

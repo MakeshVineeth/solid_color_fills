@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:solid_color_fills/src/core/storage/preferences_service.dart';
 import 'package:solid_color_fills/src/core/utils/platform_utils.dart';
@@ -7,10 +9,14 @@ import 'package:solid_color_fills/src/features/onboarding/presentation/screens/o
 /// Routes user to either Onboarding or HomeScreen based on first launch flag.
 class WrapperScreen extends StatefulWidget {
   final PreferencesService preferencesService;
+  final bool? initialShowOnboarding;
+  final int? initialTabIndex;
 
   const WrapperScreen({
     super.key,
     required this.preferencesService,
+    this.initialShowOnboarding,
+    this.initialTabIndex,
   });
 
   @override
@@ -18,14 +24,24 @@ class WrapperScreen extends StatefulWidget {
 }
 
 class _WrapperScreenState extends State<WrapperScreen> {
-  bool _isLoading = true;
-  bool _showOnboarding = true;
+  late bool _isLoading;
+  late bool _showOnboarding;
 
   @override
   void initState() {
     super.initState();
-    PlatformUtils.optimizeDisplayRefreshRate();
-    _checkFirstLaunch();
+    if (widget.initialShowOnboarding != null) {
+      _showOnboarding = widget.initialShowOnboarding!;
+      _isLoading = false;
+    } else {
+      _showOnboarding = true;
+      _isLoading = true;
+      unawaited(_checkFirstLaunch());
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unawaited(PlatformUtils.optimizeDisplayRefreshRate());
+    });
   }
 
   Future<void> _checkFirstLaunch() async {
@@ -55,7 +71,10 @@ class _WrapperScreenState extends State<WrapperScreen> {
               preferencesService: widget.preferencesService,
               onCompleted: () => setState(() => _showOnboarding = false),
             )
-          : HomeScreen(preferencesService: widget.preferencesService),
+          : HomeScreen(
+              preferencesService: widget.preferencesService,
+              initialTabIndex: widget.initialTabIndex,
+            ),
     );
   }
 }

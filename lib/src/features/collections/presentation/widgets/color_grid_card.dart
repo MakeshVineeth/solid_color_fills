@@ -34,9 +34,11 @@ class ColorGridCard extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(6.0, 6.0, 6.0, 2.0),
-                    child: ClipRRect(
-                      borderRadius: AppConstants.cardRadius,
-                      child: ColoredBox(color: item.color),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: item.color,
+                        borderRadius: AppConstants.cardRadius,
+                      ),
                     ),
                   ),
                 ),

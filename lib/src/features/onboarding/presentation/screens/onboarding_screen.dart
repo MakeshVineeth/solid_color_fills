@@ -22,6 +22,7 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
+  double _devicePixelRatio = 1.0;
 
   final List<_TutorialPageData> _pages = const [
     _TutorialPageData(
@@ -56,6 +57,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     ),
   ];
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
+  }
+
   Future<void> _finishOnboarding() async {
     await widget.preferencesService.setFirstLaunchCompleted();
     widget.onCompleted();
@@ -63,6 +70,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   void dispose() {
+    final tutorialCacheHeight = (280 * _devicePixelRatio).round();
+    final imageCache = PaintingBinding.instance.imageCache;
+    for (final page in _pages) {
+      if (!page.isLogo) {
+        imageCache.evict(
+          ResizeImage.resizeIfNeeded(
+            null,
+            tutorialCacheHeight,
+            AssetImage(page.imagePath),
+          ),
+        );
+      }
+    }
     _pageController.dispose();
     super.dispose();
   }
@@ -72,6 +92,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final isLastPage = _currentIndex == _pages.length - 1;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final iconBrightness = isDark ? Brightness.light : Brightness.dark;
+    final logoCacheHeight = (120 * _devicePixelRatio).round();
+    final tutorialCacheHeight = (280 * _devicePixelRatio).round();
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
@@ -118,6 +140,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   ? Image.asset(
                                       page.imagePath,
                                       height: 120,
+                                      cacheHeight: logoCacheHeight,
                                       fit: BoxFit.contain,
                                     )
                                   : Container(
@@ -135,6 +158,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       clipBehavior: Clip.antiAlias,
                                       child: Image.asset(
                                         page.imagePath,
+                                        cacheHeight: tutorialCacheHeight,
                                         fit: BoxFit.contain,
                                       ),
                                     ),

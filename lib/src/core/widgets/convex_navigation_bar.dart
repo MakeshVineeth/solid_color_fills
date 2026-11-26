@@ -51,18 +51,33 @@ class _ConvexNavigationBarState extends State<ConvexNavigationBar>
   static const double _activeCircleSize = 60.0;
 
   late final AnimationController _controller;
-  late Animation<double> _percentAnimation;
+  late final CurvedAnimation _curvedAnimation;
+  late final CurvedAnimation _scaleCurvedAnimation;
+  late final Tween<double> _percentTween;
+  late final Animation<double> _percentAnimation;
+  late final Animation<double> _activeScaleAnimation;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 150),
+      duration: const Duration(milliseconds: 160),
       vsync: this,
+      value: 1.0,
     );
-    _percentAnimation = AlwaysStoppedAnimation<double>(
-      _tabCenterPercent(widget.currentIndex),
+    _curvedAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: widget.curve,
     );
+    _scaleCurvedAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeOutBack,
+    );
+    final initialPercent = _tabCenterPercent(widget.currentIndex);
+    _percentTween = Tween<double>(begin: initialPercent, end: initialPercent);
+    _percentAnimation = _percentTween.animate(_curvedAnimation);
+    _activeScaleAnimation = Tween<double>(begin: 0.85, end: 1.0)
+        .animate(_scaleCurvedAnimation);
   }
 
   double _tabCenterPercent(int index) {
@@ -75,26 +90,28 @@ class _ConvexNavigationBarState extends State<ConvexNavigationBar>
   @override
   void didUpdateWidget(ConvexNavigationBar oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (widget.curve != oldWidget.curve) {
+      _curvedAnimation.curve = widget.curve;
+    }
     if (widget.currentIndex != oldWidget.currentIndex ||
         widget.items.length != oldWidget.items.length) {
-      final begin = _percentAnimation.value;
-      final end = _tabCenterPercent(widget.currentIndex);
-      _percentAnimation = Tween<double>(begin: begin, end: end).animate(
-        CurvedAnimation(parent: _controller, curve: widget.curve),
-      );
+      _percentTween.begin = _percentAnimation.value;
+      _percentTween.end = _tabCenterPercent(widget.currentIndex);
       unawaited(_controller.forward(from: 0));
     }
   }
 
   @override
   void dispose() {
+    _scaleCurvedAnimation.dispose();
+    _curvedAnimation.dispose();
     _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final bottomPadding = math.max(MediaQuery.of(context).padding.bottom, 0.0);
+    final bottomPadding = math.max(MediaQuery.paddingOf(context).bottom, 0.0);
     final totalHeight = widget.height + bottomPadding;
     final textDirection = Directionality.of(context);
     final count = widget.items.length;
@@ -105,19 +122,22 @@ class _ConvexNavigationBarState extends State<ConvexNavigationBar>
       clipBehavior: Clip.none,
       alignment: Alignment.bottomCenter,
       children: [
-        SizedBox(
-          height: totalHeight,
-          width: double.infinity,
-          child: CustomPaint(
-            painter: _ConvexBarPainter(
-              top: _curveTop,
-              width: _convexSize,
-              height: _convexSize,
-              color: widget.backgroundColor,
-              shadowColor: Colors.black38,
-              sigma: widget.elevation,
-              leftPercent: _percentAnimation,
-              textDirection: textDirection,
+        RepaintBoundary(
+          child: SizedBox(
+            height: totalHeight,
+            width: double.infinity,
+            child: CustomPaint(
+              isComplex: true,
+              painter: _ConvexBarPainter(
+                top: _curveTop,
+                width: _convexSize,
+                height: _convexSize,
+                color: widget.backgroundColor,
+                shadowColor: Colors.black38,
+                sigma: widget.elevation,
+                leftPercent: _percentAnimation,
+                textDirection: textDirection,
+              ),
             ),
           ),
         ),
@@ -148,13 +168,8 @@ class _ConvexNavigationBarState extends State<ConvexNavigationBar>
               behavior: HitTestBehavior.opaque,
               onTap: () => widget.onTap(widget.currentIndex),
               child: Center(
-                child: TweenAnimationBuilder<double>(
-                  key: ValueKey(widget.currentIndex),
-                  tween: Tween<double>(begin: 0.85, end: 1.0),
-                  duration: const Duration(milliseconds: 180),
-                  curve: Curves.easeOutBack,
-                  builder: (context, scale, child) =>
-                      Transform.scale(scale: scale, child: child),
+                child: ScaleTransition(
+                  scale: _activeScaleAnimation,
                   child: Container(
                     width: _activeCircleSize,
                     height: _activeCircleSize,
@@ -227,6 +242,9 @@ class _ConvexBarPainter extends CustomPainter {
   final double sigma;
   final Paint _paint;
   final Paint _shadowPaint;
+  Path? _cachedPath;
+  Size? _cachedSize;
+  double? _cachedPercent;
 
   _ConvexBarPainter({
     required this.top,
@@ -249,17 +267,26 @@ class _ConvexBarPainter extends CustomPainter {
     if (size.width <= 0 || size.height <= 0) {
       return;
     }
-    final host = Rect.fromLTWH(0, 0, size.width, size.height);
     final percent = textDirection == TextDirection.rtl
         ? (1.0 - leftPercent.value)
         : leftPercent.value;
-    final guest = Rect.fromLTWH(
-      size.width * percent - width / 2.0,
-      top,
-      width,
-      height,
-    );
-    final path = _buildConvexPath(host, guest);
+
+    final path = (_cachedPath != null &&
+            _cachedSize == size &&
+            _cachedPercent == percent)
+        ? _cachedPath!
+        : (_cachedPath = _buildConvexPath(
+            Rect.fromLTWH(0, 0, size.width, size.height),
+            Rect.fromLTWH(
+              size.width * percent - width / 2.0,
+              top,
+              width,
+              height,
+            ),
+          ));
+    _cachedSize = size;
+    _cachedPercent = percent;
+
     if (sigma > 0) {
       canvas.drawPath(path, _shadowPaint);
     }
@@ -277,7 +304,8 @@ class _ConvexBarPainter extends CustomPainter {
 
     final r = notchRadius;
     final a = -1.0 * r - s2;
-    final b = host.top - guest.center.dy;
+    final guestCenter = guest.center;
+    final b = host.top - guestCenter.dy;
     final denom = a * a + b * b;
     final discriminant = b * b * r * r * (denom - r * r);
     if (denom == 0 || discriminant < 0) {
@@ -291,28 +319,36 @@ class _ConvexBarPainter extends CustomPainter {
     final p2yB = -math.sqrt(math.max(0.0, r * r - p2xB * p2xB));
 
     final cmp = b < 0 ? -1.0 : 1.0;
-    final chosenP2 =
-        cmp * p2yA > cmp * p2yB ? Offset(p2xA, p2yA) : Offset(p2xB, p2yB);
+    final chooseA = cmp * p2yA > cmp * p2yB;
+    final p2OffsetX = chooseA ? p2xA : p2xB;
+    final p2OffsetY = chooseA ? p2yA : p2yB;
 
-    final p = [
-      Offset(a - s1, b) + guest.center,
-      Offset(a, b) + guest.center,
-      chosenP2 + guest.center,
-      Offset(-chosenP2.dx, chosenP2.dy) + guest.center,
-      Offset(-a, b) + guest.center,
-      Offset(-(a - s1), b) + guest.center,
-    ];
+    final cx = guestCenter.dx;
+    final cy = guestCenter.dy;
+
+    final p0x = a - s1 + cx;
+    final p0y = b + cy;
+    final p1x = a + cx;
+    final p1y = b + cy;
+    final p2x = p2OffsetX + cx;
+    final p2y = p2OffsetY + cy;
+    final p3x = -p2OffsetX + cx;
+    final p3y = p2y;
+    final p4x = -a + cx;
+    final p4y = p1y;
+    final p5x = -(a - s1) + cx;
+    final p5y = p0y;
 
     return Path()
       ..moveTo(host.left, host.top)
-      ..lineTo(p[0].dx, p[0].dy)
-      ..quadraticBezierTo(p[1].dx, p[1].dy, p[2].dx, p[2].dy)
+      ..lineTo(p0x, p0y)
+      ..quadraticBezierTo(p1x, p1y, p2x, p2y)
       ..arcToPoint(
-        p[3],
+        Offset(p3x, p3y),
         radius: Radius.circular(notchRadius),
         clockwise: true,
       )
-      ..quadraticBezierTo(p[4].dx, p[4].dy, p[5].dx, p[5].dy)
+      ..quadraticBezierTo(p4x, p4y, p5x, p5y)
       ..lineTo(host.right, host.top)
       ..lineTo(host.right, host.bottom)
       ..lineTo(host.left, host.bottom)

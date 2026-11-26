@@ -8,10 +8,10 @@ class TroubleshootingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    return const AlertDialog(
       shape: AppConstants.roundShape,
-      buttonPadding: const EdgeInsets.all(10.0),
-      content: const SingleChildScrollView(
+      buttonPadding: EdgeInsets.all(10.0),
+      content: SingleChildScrollView(
         physics: BouncingScrollPhysics(
           parent: AlwaysScrollableScrollPhysics(),
         ),
