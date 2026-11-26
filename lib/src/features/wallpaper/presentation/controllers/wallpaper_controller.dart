@@ -13,6 +13,8 @@ class WallpaperController extends ChangeNotifier {
   Color _selectedColor = Colors.blue;
   String _colorTitle = 'Blue';
   Uint8List? _cachedImageBytes;
+  int? _cachedWidth;
+  int? _cachedHeight;
   bool _isLoading = false;
   bool? _lastOperationSuccess;
   String? _errorMessage;
@@ -34,22 +36,45 @@ class WallpaperController extends ChangeNotifier {
     _selectedColor = color;
     _colorTitle = title ?? ColorUtils.toHex(color);
     _cachedImageBytes = null;
+    _cachedWidth = null;
+    _cachedHeight = null;
     _lastOperationSuccess = null;
     _errorMessage = null;
     notifyListeners();
   }
 
-  Future<Uint8List> prepareImageBytes({required int width, required int height}) async {
-    if (_cachedImageBytes != null && _cachedImageBytes!.isNotEmpty) {
+  /// Releases cached encoded PNG bytes without notifying listeners.
+  void clearCache() {
+    _cachedImageBytes = null;
+    _cachedWidth = null;
+    _cachedHeight = null;
+  }
+
+  Future<Uint8List> prepareImageBytes({
+    required int width,
+    required int height,
+  }) async {
+    if (_cachedImageBytes != null &&
+        _cachedImageBytes!.isNotEmpty &&
+        _cachedWidth == width &&
+        _cachedHeight == height) {
       return _cachedImageBytes!;
     }
-    _cachedImageBytes = await _canvasImageService.generateSolidColorPng(
+    final bytes = await _canvasImageService.generateSolidColorPng(
       color: _selectedColor,
       width: width,
       height: height,
     );
-    notifyListeners();
-    return _cachedImageBytes!;
+    _cachedImageBytes = bytes;
+    _cachedWidth = width;
+    _cachedHeight = height;
+    return bytes;
+  }
+
+  @override
+  void dispose() {
+    clearCache();
+    super.dispose();
   }
 
   Future<bool> applyWallpaper({

@@ -6,11 +6,11 @@ class ColorUtils {
 
   /// Converts a [Color] to a hex string format '#RRGGBB'.
   static String toHex(Color color, {bool includeHash = true}) {
-    final r = (color.r * 255).round().toRadixString(16).padLeft(2, '0');
-    final g = (color.g * 255).round().toRadixString(16).padLeft(2, '0');
-    final b = (color.b * 255).round().toRadixString(16).padLeft(2, '0');
-    final prefix = includeHash ? '#' : '';
-    return '$prefix$r$g$b'.toUpperCase();
+    final hex = (color.toARGB32() & 0x00FFFFFF)
+        .toRadixString(16)
+        .padLeft(6, '0')
+        .toUpperCase();
+    return includeHash ? '#$hex' : hex;
   }
 
   /// Parses a hex color string into a [Color]. Returns fallback if invalid.

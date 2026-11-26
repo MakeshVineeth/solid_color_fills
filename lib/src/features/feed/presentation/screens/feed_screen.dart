@@ -17,6 +17,7 @@ class FeedScreen extends StatefulWidget {
 
 class _FeedScreenState extends State<FeedScreen> {
   final ScrollController _scrollController = ScrollController();
+  bool _isLoadingMore = false;
 
   @override
   void initState() {
@@ -32,14 +33,22 @@ class _FeedScreenState extends State<FeedScreen> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent - 400) {
-      context.read<FeedController>().loadMore(15);
-    }
+    if (_isLoadingMore || !_scrollController.hasClients) return;
+    final position = _scrollController.position;
+    if (position.pixels < position.maxScrollExtent - 400) return;
+    final controller = context.read<FeedController>();
+    if (!controller.hasMore) return;
+
+    _isLoadingMore = true;
+    controller.loadMore(15);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _isLoadingMore = false;
+    });
   }
 
   @override
   void dispose() {
+    _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     super.dispose();
   }
@@ -59,7 +68,7 @@ class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
+        MediaQuery.orientationOf(context) == Orientation.portrait;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -73,6 +82,7 @@ class _FeedScreenState extends State<FeedScreen> {
               onRefresh: () async => controller.refresh(),
               child: GridView.builder(
                 controller: _scrollController,
+                addAutomaticKeepAlives: false,
                 padding: const EdgeInsets.all(15.0),
                 physics: const AlwaysScrollableScrollPhysics(
                   parent: BouncingScrollPhysics(),

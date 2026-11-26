@@ -59,7 +59,7 @@ class ColorPickerScreen extends StatelessWidget {
                       SizedBox(
                         width: constraints.maxWidth > 500
                             ? 320
-                            : MediaQuery.of(context).size.width / 1.5,
+                            : MediaQuery.sizeOf(context).width / 1.5,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -113,9 +113,10 @@ class ColorPickerScreen extends StatelessWidget {
               ],
             ),
             // Floating circular current-color FAB at bottom-right
-            Consumer<ColorPickerController>(
-              builder: (context, controller, child) {
-                if (!controller.isColorSelected) {
+            Selector<ColorPickerController, bool>(
+              selector: (_, controller) => controller.isColorSelected,
+              builder: (context, isSelected, child) {
+                if (!isSelected) {
                   return const SizedBox.shrink();
                 }
                 return const Positioned(

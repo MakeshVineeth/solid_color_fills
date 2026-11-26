@@ -19,10 +19,12 @@ import 'package:solid_color_fills/src/features/shortcuts/services/quick_actions_
 /// Uses pure-Flutter ConvexNavigationBar faithful to the original design.
 class HomeScreen extends StatefulWidget {
   final PreferencesService preferencesService;
+  final int? initialTabIndex;
 
   const HomeScreen({
     super.key,
     required this.preferencesService,
+    this.initialTabIndex,
   });
 
   @override
@@ -30,7 +32,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0;
+  late int _currentIndex;
   bool _hasUserSelectedTab = false;
   late final QuickActionsService _quickActionsService;
 
@@ -43,7 +45,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    unawaited(_loadInitialTab());
+    final initialTab = widget.initialTabIndex;
+    if (initialTab != null) {
+      _currentIndex = initialTab.clamp(0, _screens.length - 1);
+    } else {
+      _currentIndex = 0;
+      unawaited(_loadInitialTab());
+    }
     _initServices();
   }
 
@@ -65,7 +73,17 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
     );
-    _quickActionsService.initialize();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _quickActionsService.initialize();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _quickActionsService.dispose();
+    super.dispose();
   }
 
   void _onTabChanged(int index) {
@@ -127,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
           activeColor: primaryColor,
           elevation: bottomBarElevation,
           height:
-              (MediaQuery.of(context).orientation == Orientation.portrait)
+              (MediaQuery.orientationOf(context) == Orientation.portrait)
                   ? 60
                   : 55,
           items: [

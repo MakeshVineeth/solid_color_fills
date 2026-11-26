@@ -9,7 +9,7 @@ import 'package:solid_color_fills/src/features/wallpaper/presentation/controller
 
 /// Screen displaying the wallpaper preview with application action buttons.
 /// Faithfully preserves the original elevated shadowed card preview aesthetic.
-class WallpaperConfirmationScreen extends StatelessWidget {
+class WallpaperConfirmationScreen extends StatefulWidget {
   final String heroTag;
 
   const WallpaperConfirmationScreen({
@@ -18,14 +18,35 @@ class WallpaperConfirmationScreen extends StatelessWidget {
   });
 
   @override
+  State<WallpaperConfirmationScreen> createState() =>
+      _WallpaperConfirmationScreenState();
+}
+
+class _WallpaperConfirmationScreenState
+    extends State<WallpaperConfirmationScreen> {
+  WallpaperController? _wallpaperController;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _wallpaperController = context.read<WallpaperController>();
+  }
+
+  @override
+  void dispose() {
+    _wallpaperController?.clearCache();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final overlayBrightness = isDark ? Brightness.light : Brightness.dark;
-    final mediaQuery = MediaQuery.of(context);
-    final devicePixelRatio = mediaQuery.devicePixelRatio;
-    var screenPixelWidth = (mediaQuery.size.width * devicePixelRatio).round();
-    var screenPixelHeight = (mediaQuery.size.height * devicePixelRatio).round();
+    final screenSize = MediaQuery.sizeOf(context);
+    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
+    var screenPixelWidth = (screenSize.width * devicePixelRatio).round();
+    var screenPixelHeight = (screenSize.height * devicePixelRatio).round();
 
     // Normalize to portrait orientation for solid wallpaper generation
     if (screenPixelWidth > screenPixelHeight) {
@@ -42,195 +63,214 @@ class WallpaperConfirmationScreen extends StatelessWidget {
         statusBarIconBrightness: overlayBrightness,
       ),
       child: Scaffold(
-      appBar: AppBar(
-        title: Text(l10n?.wallpaperConfirmation ?? 'Wallpaper Confirmation'),
-      ),
-      body: SafeArea(
-        child: ResponsiveWrapper(
-          maxWidth: 600,
-          child: Consumer<WallpaperController>(
-            builder: (context, controller, child) {
-              final color = controller.selectedColor;
-              final title = controller.colorTitle;
+        appBar: AppBar(
+          title: Text(l10n?.wallpaperConfirmation ?? 'Wallpaper Confirmation'),
+        ),
+        body: SafeArea(
+          child: ResponsiveWrapper(
+            maxWidth: 600,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isLandscape =
+                    MediaQuery.orientationOf(context) == Orientation.landscape;
 
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  final isLandscape =
-                      MediaQuery.of(context).orientation ==
-                      Orientation.landscape;
+                final previewWidth =
+                    isLandscape ? 300.0 : constraints.maxWidth / 1.8;
+                final previewHeight = isLandscape
+                    ? constraints.maxHeight / 2
+                    : constraints.maxHeight / 1.8;
 
-                  final previewWidth =
-                      isLandscape ? 300.0 : constraints.maxWidth / 1.8;
-                  final previewHeight = isLandscape
-                      ? constraints.maxHeight / 2
-                      : constraints.maxHeight / 1.8;
+                final buttonWidth = isLandscape
+                    ? constraints.maxWidth / 3
+                    : constraints.maxWidth / 2;
 
-                  final buttonWidth = isLandscape
-                      ? constraints.maxWidth / 3
-                      : constraints.maxWidth / 2;
-
-                  return ListView(
-                    physics: const AlwaysScrollableScrollPhysics(
-                      parent: BouncingScrollPhysics(),
-                    ),
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        constraints: BoxConstraints(
-                          minHeight: constraints.maxHeight,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Elevated Shadowed Card Preview
-                            Hero(
-                              tag: heroTag,
-                              child: Card(
-                                elevation: 3.0,
-                                shape: AppConstants.roundShape,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ClipRRect(
-                                    borderRadius: AppConstants.cardRadius,
-                                    child: SizedBox(
-                                      width: previewWidth,
-                                      height: previewHeight,
-                                      child: ColoredBox(color: color),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-
-                            // Direct Color Info Title
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                'Color Info: $title',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-
-                            // Action Buttons Column
-                            if (controller.isLoading)
-                              const Center(
-                                child: Padding(
-                                  padding: EdgeInsets.all(24.0),
-                                  child: CircularProgressIndicator(),
-                                ),
-                              )
-                            else ...[
-                              SizedBox(
-                                width: buttonWidth,
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 3,
-                                      ),
-                                      child: _ActionButton(
-                                        label: 'Set As Home Screen',
-                                        onPressed: () => _applyWallpaper(
-                                          context,
-                                          controller,
-                                          WallpaperTarget.homeScreen,
-                                          screenPixelWidth,
-                                          screenPixelHeight,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 3,
-                                      ),
-                                      child: _ActionButton(
-                                        label: 'Set As Lock Screen',
-                                        onPressed: () => _applyWallpaper(
-                                          context,
-                                          controller,
-                                          WallpaperTarget.lockScreen,
-                                          screenPixelWidth,
-                                          screenPixelHeight,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 3,
-                                      ),
-                                      child: _ActionButton(
-                                        label: 'Set As Both',
-                                        onPressed: () => _applyWallpaper(
-                                          context,
-                                          controller,
-                                          WallpaperTarget.bothScreens,
-                                          screenPixelWidth,
-                                          screenPixelHeight,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 3,
-                                      ),
-                                      child: _ActionButton(
-                                        label: 'Open in Gallery',
-                                        onPressed: () => _applyWallpaper(
-                                          context,
-                                          controller,
-                                          WallpaperTarget.gallery,
-                                          screenPixelWidth,
-                                          screenPixelHeight,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 12),
-
-                              // Original Helpful Lock Screen Note
-                              RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  text: 'Note: ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .labelLarge
-                                        ?.color,
-                                  ),
-                                  children: const [
-                                    TextSpan(
-                                      text:
-                                          'Use the Open in Gallery option if you\'re having troubles changing the lock screen wallpaper.',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ],
-                        ),
+                return ListView(
+                  physics: const AlwaysScrollableScrollPhysics(
+                    parent: BouncingScrollPhysics(),
+                  ),
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
                       ),
-                    ],
-                  );
-                },
-              );
-            },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Selector<WallpaperController,
+                              ({Color color, String title})>(
+                            selector: (_, controller) => (
+                              color: controller.selectedColor,
+                              title: controller.colorTitle,
+                            ),
+                            builder: (context, selection, _) => Column(
+                              children: [
+                                // Elevated Shadowed Card Preview
+                                Hero(
+                                  tag: widget.heroTag,
+                                  child: Card(
+                                    elevation: 3.0,
+                                    shape: AppConstants.roundShape,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: SizedBox(
+                                        width: previewWidth,
+                                        height: previewHeight,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                            color: selection.color,
+                                            borderRadius:
+                                                AppConstants.cardRadius,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+
+                                // Direct Color Info Title
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    'Color Info: ${selection.title}',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          // Action Buttons Column
+                          Selector<WallpaperController, bool>(
+                            selector: (_, controller) => controller.isLoading,
+                            builder: (context, isLoading, _) {
+                              if (isLoading) {
+                                return const Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(24.0),
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+                              }
+
+                              return Column(
+                                children: [
+                                  SizedBox(
+                                    width: buttonWidth,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 3,
+                                          ),
+                                          child: _ActionButton(
+                                            label: 'Set As Home Screen',
+                                            onPressed: () => _applyWallpaper(
+                                              context,
+                                              context
+                                                  .read<WallpaperController>(),
+                                              WallpaperTarget.homeScreen,
+                                              screenPixelWidth,
+                                              screenPixelHeight,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 3,
+                                          ),
+                                          child: _ActionButton(
+                                            label: 'Set As Lock Screen',
+                                            onPressed: () => _applyWallpaper(
+                                              context,
+                                              context
+                                                  .read<WallpaperController>(),
+                                              WallpaperTarget.lockScreen,
+                                              screenPixelWidth,
+                                              screenPixelHeight,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 3,
+                                          ),
+                                          child: _ActionButton(
+                                            label: 'Set As Both',
+                                            onPressed: () => _applyWallpaper(
+                                              context,
+                                              context
+                                                  .read<WallpaperController>(),
+                                              WallpaperTarget.bothScreens,
+                                              screenPixelWidth,
+                                              screenPixelHeight,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 3,
+                                          ),
+                                          child: _ActionButton(
+                                            label: 'Open in Gallery',
+                                            onPressed: () => _applyWallpaper(
+                                              context,
+                                              context
+                                                  .read<WallpaperController>(),
+                                              WallpaperTarget.gallery,
+                                              screenPixelWidth,
+                                              screenPixelHeight,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+
+                                  // Original Helpful Lock Screen Note
+                                  RichText(
+                                    textAlign: TextAlign.center,
+                                    text: TextSpan(
+                                      text: 'Note: ',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge
+                                            ?.color,
+                                      ),
+                                      children: const [
+                                        TextSpan(
+                                          text:
+                                              'Use the Open in Gallery option if you\'re having troubles changing the lock screen wallpaper.',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),
-    ),
     );
   }
 

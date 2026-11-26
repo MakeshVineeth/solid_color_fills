@@ -126,7 +126,7 @@ class _MaterialPickerWidgetState extends State<MaterialPickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceHeight = MediaQuery.of(context).size.height;
+    final deviceHeight = MediaQuery.sizeOf(context).height;
     final circleSize = (deviceHeight <= 600) ? 50.0 : 60.0;
 
     return LayoutBuilder(
@@ -165,9 +165,11 @@ class _ColorCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = ThemeData.estimateBrightnessForColor(color);
-    final checkColor =
-        brightness == Brightness.light ? Colors.black : Colors.white;
+    final checkColor = isSelected
+        ? (ThemeData.estimateBrightnessForColor(color) == Brightness.light
+            ? Colors.black
+            : Colors.white)
+        : null;
 
     return Material(
       elevation: 4.0,
@@ -177,9 +179,11 @@ class _ColorCircle extends StatelessWidget {
       child: InkWell(
         customBorder: const CircleBorder(),
         onTap: onTap,
-        child: Center(
-          child: isSelected ? Icon(Icons.check, color: checkColor) : null,
-        ),
+        child: checkColor == null
+            ? null
+            : Center(
+                child: Icon(Icons.check, color: checkColor),
+              ),
       ),
     );
   }

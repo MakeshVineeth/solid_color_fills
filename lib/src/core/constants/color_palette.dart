@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solid_color_fills/src/core/utils/color_utils.dart';
 
 /// Curated collections of solid colors with aesthetic presets.
 class ColorPalette {
@@ -66,43 +67,44 @@ class ColorPalette {
     Colors.black,
   ];
 
+  static final Map<int, String> _argbToName = _buildArgbToNameMap();
+
+  static Map<int, String> _buildArgbToNameMap() {
+    final map = <int, String>{};
+    for (final entry in curatedColors.entries) {
+      map.putIfAbsent(entry.value.toARGB32(), () => entry.key);
+    }
+    const primaryEntries = <MapEntry<Color, String>>[
+      MapEntry(Colors.red, 'Red'),
+      MapEntry(Colors.pink, 'Pink'),
+      MapEntry(Colors.purple, 'Purple'),
+      MapEntry(Colors.deepPurple, 'Deep Purple'),
+      MapEntry(Colors.indigo, 'Indigo'),
+      MapEntry(Colors.blue, 'Blue'),
+      MapEntry(Colors.lightBlue, 'Light Blue'),
+      MapEntry(Colors.cyan, 'Cyan'),
+      MapEntry(Colors.teal, 'Teal'),
+      MapEntry(Colors.green, 'Green'),
+      MapEntry(Colors.lightGreen, 'Light Green'),
+      MapEntry(Colors.lime, 'Lime'),
+      MapEntry(Colors.yellow, 'Yellow'),
+      MapEntry(Colors.amber, 'Amber'),
+      MapEntry(Colors.orange, 'Orange'),
+      MapEntry(Colors.deepOrange, 'Deep Orange'),
+      MapEntry(Colors.brown, 'Brown'),
+      MapEntry(Colors.grey, 'Grey'),
+      MapEntry(Colors.blueGrey, 'Blue Grey'),
+      MapEntry(Colors.black, 'Pitch Black'),
+      MapEntry(Colors.white, 'White'),
+    ];
+    for (final entry in primaryEntries) {
+      map.putIfAbsent(entry.key.toARGB32(), () => entry.value);
+    }
+    return Map<int, String>.unmodifiable(map);
+  }
+
   /// Finds a human-readable display name for a given color.
   static String findName(Color color) {
-    final targetArgb = color.toARGB32();
-    for (final entry in curatedColors.entries) {
-      if (entry.value.toARGB32() == targetArgb) {
-        return entry.key;
-      }
-    }
-    final primaryNames = <int, String>{
-      Colors.red.toARGB32(): 'Red',
-      Colors.pink.toARGB32(): 'Pink',
-      Colors.purple.toARGB32(): 'Purple',
-      Colors.deepPurple.toARGB32(): 'Deep Purple',
-      Colors.indigo.toARGB32(): 'Indigo',
-      Colors.blue.toARGB32(): 'Blue',
-      Colors.lightBlue.toARGB32(): 'Light Blue',
-      Colors.cyan.toARGB32(): 'Cyan',
-      Colors.teal.toARGB32(): 'Teal',
-      Colors.green.toARGB32(): 'Green',
-      Colors.lightGreen.toARGB32(): 'Light Green',
-      Colors.lime.toARGB32(): 'Lime',
-      Colors.yellow.toARGB32(): 'Yellow',
-      Colors.amber.toARGB32(): 'Amber',
-      Colors.orange.toARGB32(): 'Orange',
-      Colors.deepOrange.toARGB32(): 'Deep Orange',
-      Colors.brown.toARGB32(): 'Brown',
-      Colors.grey.toARGB32(): 'Grey',
-      Colors.blueGrey.toARGB32(): 'Blue Grey',
-      Colors.black.toARGB32(): 'Pitch Black',
-      Colors.white.toARGB32(): 'White',
-    };
-    if (primaryNames.containsKey(targetArgb)) {
-      return primaryNames[targetArgb]!;
-    }
-    final r = (color.r * 255).round().toRadixString(16).padLeft(2, '0');
-    final g = (color.g * 255).round().toRadixString(16).padLeft(2, '0');
-    final b = (color.b * 255).round().toRadixString(16).padLeft(2, '0');
-    return '#$r$g$b'.toUpperCase();
+    return _argbToName[color.toARGB32()] ?? ColorUtils.toHex(color);
   }
 }

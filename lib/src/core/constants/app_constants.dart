@@ -27,9 +27,11 @@ class AppConstants {
 
   // Shapes & Radii
   static const double defaultRadius = 20.0;
-  static final BorderRadius cardRadius = BorderRadius.circular(defaultRadius);
-  static final RoundedRectangleBorder roundShape = RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(defaultRadius),
+  static const BorderRadius cardRadius = BorderRadius.all(
+    Radius.circular(defaultRadius),
+  );
+  static const RoundedRectangleBorder roundShape = RoundedRectangleBorder(
+    borderRadius: cardRadius,
   );
 
   // Animations

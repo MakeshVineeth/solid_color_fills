@@ -16,19 +16,26 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
-  String _versionInfo = '2.1.0';
+  static String? _cachedVersion;
+
+  late String _versionInfo = _cachedVersion ?? '2.1.0';
 
   @override
   void initState() {
     super.initState();
-    unawaited(_loadPackageInfo());
+    if (_cachedVersion == null) {
+      unawaited(_loadPackageInfo());
+    }
   }
 
   Future<void> _loadPackageInfo() async {
     try {
       final info = await PackageInfo.fromPlatform();
-      if (mounted && info.version.isNotEmpty) {
-        setState(() => _versionInfo = info.version);
+      if (info.version.isNotEmpty) {
+        _cachedVersion = info.version;
+        if (mounted) {
+          setState(() => _versionInfo = info.version);
+        }
       }
     } catch (_) {}
   }
@@ -53,10 +60,12 @@ class _AboutScreenState extends State<AboutScreen> {
     }
   }
 
-  Widget _buildAppIcon() {
+  Widget _buildAppIcon(BuildContext context) {
+    final cacheWidth = (30 * MediaQuery.devicePixelRatioOf(context)).round();
     return Image.asset(
       AppConstants.logoAsset,
       width: 30,
+      cacheWidth: cacheWidth,
       errorBuilder: (_, __, ___) => const Icon(Icons.wallpaper, size: 30),
     );
   }
@@ -80,7 +89,7 @@ class _AboutScreenState extends State<AboutScreen> {
             applicationLegalese: AppStrings.appLegalese,
             applicationIcon: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: _buildAppIcon(),
+              child: _buildAppIcon(context),
             ),
           ),
         ),
@@ -92,7 +101,7 @@ class _AboutScreenState extends State<AboutScreen> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildAppIcon(),
+            _buildAppIcon(context),
             const SizedBox(width: 10),
             Expanded(
               child: Column(

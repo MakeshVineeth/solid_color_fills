@@ -7,6 +7,7 @@ import 'package:solid_color_fills/src/core/utils/logger.dart';
 class QuickActionsService {
   final QuickActions _quickActions;
   final ValueChanged<int>? onShortcutSelected;
+  bool _isDisposed = false;
 
   QuickActionsService({
     QuickActions quickActions = const QuickActions(),
@@ -22,6 +23,7 @@ class QuickActionsService {
 
     try {
       _quickActions.initialize((shortcutType) {
+        if (_isDisposed) return;
         AppLogger.info('Quick action triggered: $shortcutType');
         switch (shortcutType) {
           case actionCollection:
@@ -61,5 +63,9 @@ class QuickActionsService {
     } catch (e, stack) {
       AppLogger.error('Failed to initialize quick actions', e, stack);
     }
+  }
+
+  void dispose() {
+    _isDisposed = true;
   }
 }

@@ -10,14 +10,20 @@ import 'package:wallpaper_manager_plus/wallpaper_manager_plus.dart';
 /// Concrete implementation of [WallpaperRepository].
 class WallpaperRepositoryImpl implements WallpaperRepository {
   static const int _maxFilenameLength = 40;
+  static final RegExp _invalidFilenameChars = RegExp(r'[^a-zA-Z0-9_\-]');
 
   final WallpaperManagerPlus _wallpaperManager;
+  Directory? _cachedTempDir;
 
   WallpaperRepositoryImpl({WallpaperManagerPlus? wallpaperManager})
       : _wallpaperManager = wallpaperManager ?? WallpaperManagerPlus();
 
+  Future<Directory> _getTempDir() async {
+    return _cachedTempDir ??= await getTemporaryDirectory();
+  }
+
   String _sanitizeFilename(String colorTitle) {
-    final cleaned = colorTitle.replaceAll(RegExp(r'[^a-zA-Z0-9_\-]'), '_');
+    final cleaned = colorTitle.replaceAll(_invalidFilenameChars, '_');
     if (cleaned.isEmpty) {
       return 'solid';
     }
@@ -52,7 +58,7 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
     File? tempFile;
     try {
       final sanitizedTitle = _sanitizeFilename(colorTitle);
-      final tempDir = await getTemporaryDirectory();
+      final tempDir = await _getTempDir();
       final filePath = '${tempDir.path}/wallpaper_$sanitizedTitle.png';
 
       tempFile = File(filePath);
@@ -60,7 +66,7 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
         await tempFile.delete();
       }
 
-      await tempFile.writeAsBytes(imageBytes);
+      await tempFile.writeAsBytes(imageBytes, flush: true);
 
       final int locationFlag;
       switch (target) {
@@ -101,12 +107,12 @@ class WallpaperRepositoryImpl implements WallpaperRepository {
 
     try {
       final sanitizedTitle = _sanitizeFilename(colorTitle);
-      final tempDir = await getTemporaryDirectory();
+      final tempDir = await _getTempDir();
       await _sweepStaleTempWallpapers(tempDir);
 
       final filePath = '${tempDir.path}/wallpaper_$sanitizedTitle.png';
       final file = File(filePath);
-      await file.writeAsBytes(imageBytes);
+      await file.writeAsBytes(imageBytes, flush: true);
 
       final openResult = await OpenFilex.open(filePath);
       AppLogger.info('OpenFilex result: ${openResult.type}');

@@ -4,37 +4,38 @@ import 'package:solid_color_fills/src/features/collections/domain/entities/solid
 
 /// Controller managing curated collections and search filtering.
 class CollectionsController extends ChangeNotifier {
-  final List<SolidColorItem> _allColors = [];
-  String _searchQuery = '';
-
-  CollectionsController() {
-    _loadCuratedColors();
-  }
-
-  void _loadCuratedColors() {
-    for (final entry in ColorPalette.curatedColors.entries) {
-      _allColors.add(SolidColorItem(
+  static final List<SolidColorItem> _curatedColors =
+      List<SolidColorItem>.unmodifiable([
+    for (final entry in ColorPalette.curatedColors.entries)
+      SolidColorItem(
         name: entry.key,
         color: entry.value,
-      ));
-    }
-  }
+      ),
+  ]);
 
-  List<SolidColorItem> get colors {
-    if (_searchQuery.trim().isEmpty) {
-      return List.unmodifiable(_allColors);
-    }
-    final query = _searchQuery.toLowerCase().trim();
-    return List.unmodifiable(
-      _allColors.where((item) => item.name.toLowerCase().contains(query)),
-    );
-  }
+  List<SolidColorItem> _visibleColors = _curatedColors;
+  String _searchQuery = '';
+
+  List<SolidColorItem> get colors => _visibleColors;
 
   String get searchQuery => _searchQuery;
+
+  void _updateVisibleColors() {
+    final trimmed = _searchQuery.trim();
+    if (trimmed.isEmpty) {
+      _visibleColors = _curatedColors;
+      return;
+    }
+    final query = trimmed.toLowerCase();
+    _visibleColors = List<SolidColorItem>.unmodifiable(
+      _curatedColors.where((item) => item.name.toLowerCase().contains(query)),
+    );
+  }
 
   void setSearchQuery(String query) {
     if (_searchQuery != query) {
       _searchQuery = query;
+      _updateVisibleColors();
       notifyListeners();
     }
   }
@@ -42,6 +43,7 @@ class CollectionsController extends ChangeNotifier {
   void clearSearch() {
     if (_searchQuery.isNotEmpty) {
       _searchQuery = '';
+      _visibleColors = _curatedColors;
       notifyListeners();
     }
   }

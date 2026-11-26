@@ -6,7 +6,13 @@ import 'package:solid_color_fills/src/core/constants/app_constants.dart';
 class AppTheme {
   const AppTheme._();
 
-  static ThemeData get lightTheme {
+  static ThemeData? _lightTheme;
+  static ThemeData? _darkTheme;
+
+  static ThemeData get lightTheme => _lightTheme ??= _buildLightTheme();
+  static ThemeData get darkTheme => _darkTheme ??= _buildDarkTheme();
+
+  static ThemeData _buildLightTheme() {
     final colorScheme = ColorScheme.fromSeed(
       seedColor: Colors.blue,
       brightness: Brightness.light,
@@ -38,7 +44,7 @@ class AppTheme {
         elevation: 3.0,
       ),
       cardColor: Colors.white,
-      cardTheme: CardThemeData(
+      cardTheme: const CardThemeData(
         color: Colors.white,
         surfaceTintColor: Colors.transparent,
         elevation: 3.0,
@@ -60,16 +66,16 @@ class AppTheme {
           ),
         ),
       ),
-      dialogTheme: DialogThemeData(
+      dialogTheme: const DialogThemeData(
         shape: AppConstants.roundShape,
-        backgroundColor: const Color(0xFFECE6F0),
+        backgroundColor: Color(0xFFECE6F0),
         surfaceTintColor: Colors.transparent,
         elevation: 6,
       ),
     );
   }
 
-  static ThemeData get darkTheme {
+  static ThemeData _buildDarkTheme() {
     final colorScheme = ColorScheme.fromSeed(
       seedColor: Colors.amber,
       brightness: Brightness.dark,
@@ -102,8 +108,8 @@ class AppTheme {
         elevation: 10.0,
       ),
       cardColor: const Color(0xFF1E1E1E),
-      cardTheme: CardThemeData(
-        color: const Color(0xFF1E1E1E),
+      cardTheme: const CardThemeData(
+        color: Color(0xFF1E1E1E),
         surfaceTintColor: Colors.transparent,
         elevation: 10.0,
         shape: AppConstants.roundShape,
@@ -124,9 +130,9 @@ class AppTheme {
           ),
         ),
       ),
-      dialogTheme: DialogThemeData(
+      dialogTheme: const DialogThemeData(
         shape: AppConstants.roundShape,
-        backgroundColor: const Color(0xFF242424),
+        backgroundColor: Color(0xFF242424),
         surfaceTintColor: Colors.transparent,
         elevation: 8,
       ),

@@ -6,7 +6,7 @@ Future<T?> showFloatingModalBottomSheet<T>({
   required WidgetBuilder builder,
 }) {
   final isDark = Theme.of(context).brightness == Brightness.dark;
-  final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+  final isPortrait = MediaQuery.orientationOf(context) == Orientation.portrait;
 
   return showModalBottomSheet<T>(
     context: context,

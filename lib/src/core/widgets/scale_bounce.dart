@@ -1,6 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-/// Micro-interaction scale bounce effect on press.
+/// Micro-interaction scale bounce effect on press with lazy animation allocation.
 class ScaleBounce extends StatefulWidget {
   final Widget child;
   final Duration duration;
@@ -19,35 +21,79 @@ class ScaleBounce extends StatefulWidget {
 
 class _ScaleBounceState extends State<ScaleBounce>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _scaleAnimation;
+  AnimationController? _controller;
+  CurvedAnimation? _curvedAnimation;
+  Animation<double>? _scaleAnimation;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this, duration: widget.duration);
+  void _ensureController() {
+    if (_controller != null) return;
+    final controller = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    );
+    final curved = CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeInOut,
+    );
+    _controller = controller;
+    _curvedAnimation = curved;
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: widget.scaleFactor,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    ).animate(curved);
+    setState(() {});
+  }
+
+  @override
+  void didUpdateWidget(ScaleBounce oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final controller = _controller;
+    if (controller == null) return;
+
+    if (widget.duration != oldWidget.duration) {
+      controller.duration = widget.duration;
+    }
+    if (widget.scaleFactor != oldWidget.scaleFactor && _curvedAnimation != null) {
+      _scaleAnimation = Tween<double>(
+        begin: 1.0,
+        end: widget.scaleFactor,
+      ).animate(_curvedAnimation!);
+    }
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _curvedAnimation?.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final scaleAnimation = _scaleAnimation;
     return Listener(
-      onPointerDown: (_) => _controller.forward(),
-      onPointerUp: (_) => _controller.reverse(),
-      onPointerCancel: (_) => _controller.reverse(),
-      child: ScaleTransition(
-        scale: _scaleAnimation,
-        child: widget.child,
-      ),
+      onPointerDown: (_) {
+        _ensureController();
+        unawaited(_controller!.forward());
+      },
+      onPointerUp: (_) {
+        final controller = _controller;
+        if (controller != null) {
+          unawaited(controller.reverse());
+        }
+      },
+      onPointerCancel: (_) {
+        final controller = _controller;
+        if (controller != null) {
+          unawaited(controller.reverse());
+        }
+      },
+      child: scaleAnimation == null
+          ? widget.child
+          : ScaleTransition(
+              scale: scaleAnimation,
+              child: widget.child,
+            ),
     );
   }
 }

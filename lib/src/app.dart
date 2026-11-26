@@ -19,24 +19,30 @@ class SolidColorFillsApp extends StatelessWidget {
   final AdaptiveThemeMode? savedThemeMode;
   final PreferencesService preferencesService;
   final WallpaperRepository? wallpaperRepository;
+  final bool? initialShowOnboarding;
+  final int? initialTabIndex;
 
   const SolidColorFillsApp({
     super.key,
     this.savedThemeMode,
     required this.preferencesService,
     this.wallpaperRepository,
+    this.initialShowOnboarding,
+    this.initialTabIndex,
   });
 
   @override
   Widget build(BuildContext context) {
-    final repo = wallpaperRepository ?? WallpaperRepositoryImpl();
-
     return MultiProvider(
       providers: [
         Provider<PreferencesService>.value(value: preferencesService),
-        Provider<WallpaperRepository>.value(value: repo),
+        Provider<WallpaperRepository>(
+          create: (_) => wallpaperRepository ?? WallpaperRepositoryImpl(),
+        ),
         ChangeNotifierProvider<WallpaperController>(
-          create: (_) => WallpaperController(repository: repo),
+          create: (context) => WallpaperController(
+            repository: context.read<WallpaperRepository>(),
+          ),
         ),
         ChangeNotifierProvider<CollectionsController>(
           create: (_) => CollectionsController(),
@@ -64,7 +70,11 @@ class SolidColorFillsApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.supportedLocales,
-          home: WrapperScreen(preferencesService: preferencesService),
+          home: WrapperScreen(
+            preferencesService: preferencesService,
+            initialShowOnboarding: initialShowOnboarding,
+            initialTabIndex: initialTabIndex,
+          ),
         ),
       ),
     );
