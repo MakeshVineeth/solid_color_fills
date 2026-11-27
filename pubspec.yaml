@@ -1,7 +1,7 @@
 name: solid_color_fills
 description: A modern, privacy-first Flutter wallpaper app for custom and curated solid colors.
 publish_to: "none"
-version: 2.1.0+21
+version: 2.1.1+22
 
 environment:
   sdk: '>=3.5.0 <4.0.0'
