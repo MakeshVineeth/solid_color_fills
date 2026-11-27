@@ -115,29 +115,29 @@ class _ConvexNavigationBarState extends State<ConvexNavigationBar>
     final totalHeight = widget.height + bottomPadding;
     final textDirection = Directionality.of(context);
     final count = widget.items.length;
-    final baseDx = count > 1 ? widget.currentIndex / (count - 1) : 0.0;
-    final dx = textDirection == TextDirection.rtl ? 1.0 - baseDx : baseDx;
+    if (count == 0) {
+      return SizedBox(height: totalHeight);
+    }
+    final activeIndex = widget.currentIndex.clamp(0, count - 1);
 
     return Stack(
       clipBehavior: Clip.none,
       alignment: Alignment.bottomCenter,
       children: [
-        RepaintBoundary(
-          child: SizedBox(
-            height: totalHeight,
-            width: double.infinity,
-            child: CustomPaint(
-              isComplex: true,
-              painter: _ConvexBarPainter(
-                top: _curveTop,
-                width: _convexSize,
-                height: _convexSize,
-                color: widget.backgroundColor,
-                shadowColor: Colors.black38,
-                sigma: widget.elevation,
-                leftPercent: _percentAnimation,
-                textDirection: textDirection,
-              ),
+        SizedBox(
+          height: totalHeight,
+          width: double.infinity,
+          child: CustomPaint(
+            isComplex: true,
+            painter: _ConvexBarPainter(
+              top: _curveTop,
+              width: _convexSize,
+              height: _convexSize,
+              color: widget.backgroundColor,
+              shadowColor: Colors.black38,
+              sigma: widget.elevation,
+              leftPercent: _percentAnimation,
+              textDirection: textDirection,
             ),
           ),
         ),
@@ -147,7 +147,7 @@ class _ConvexNavigationBarState extends State<ConvexNavigationBar>
           child: Row(
             children: [
               for (var i = 0; i < count; i++)
-                if (i == widget.currentIndex)
+                if (i == activeIndex)
                   const Expanded(child: SizedBox.shrink())
                 else
                   _InactiveTabSlot(
@@ -161,26 +161,44 @@ class _ConvexNavigationBarState extends State<ConvexNavigationBar>
         Positioned.fill(
           top: _curveTop,
           bottom: bottomPadding,
-          child: FractionallySizedBox(
-            widthFactor: count > 0 ? 1 / count : 1.0,
-            alignment: FractionalOffset(dx, 0),
-            child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () => widget.onTap(widget.currentIndex),
-              child: Center(
-                child: ScaleTransition(
-                  scale: _activeScaleAnimation,
-                  child: Container(
-                    width: _activeCircleSize,
-                    height: _activeCircleSize,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: widget.activeColor,
-                    ),
-                    child: Icon(
-                      widget.items[widget.currentIndex].icon,
-                      size: 28,
-                      color: widget.backgroundColor,
+          child: AnimatedBuilder(
+            animation: _percentAnimation,
+            builder: (context, child) {
+              final animBaseDx = count > 1
+                  ? (count * _percentAnimation.value - 0.5) / (count - 1)
+                  : 0.0;
+              final animDx =
+                  textDirection == TextDirection.rtl ? 1.0 - animBaseDx : animBaseDx;
+
+              return FractionallySizedBox(
+                widthFactor: 1 / count,
+                alignment: FractionalOffset(animDx, 0),
+                child: child,
+              );
+            },
+            child: Semantics(
+              button: true,
+              selected: true,
+              excludeSemantics: true,
+              label: widget.items[activeIndex].title,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => widget.onTap(activeIndex),
+                child: Center(
+                  child: ScaleTransition(
+                    scale: _activeScaleAnimation,
+                    child: Container(
+                      width: _activeCircleSize,
+                      height: _activeCircleSize,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: widget.activeColor,
+                      ),
+                      child: Icon(
+                        widget.items[activeIndex].icon,
+                        size: 28,
+                        color: widget.backgroundColor,
+                      ),
                     ),
                   ),
                 ),
@@ -207,25 +225,31 @@ class _InactiveTabSlot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 2),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(item.icon, size: 24, color: color),
-              const SizedBox(height: 2),
-              Flexible(
-                child: Text(
-                  item.title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: color, fontSize: 13),
+      child: Semantics(
+        button: true,
+        selected: false,
+        excludeSemantics: true,
+        label: item.title,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 2),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(item.icon, size: 24, color: color),
+                const SizedBox(height: 2),
+                Flexible(
+                  child: Text(
+                    item.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(color: color, fontSize: 13),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

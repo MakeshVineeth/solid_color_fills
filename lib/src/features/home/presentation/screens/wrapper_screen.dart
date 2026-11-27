@@ -64,17 +64,20 @@ class _WrapperScreenState extends State<WrapperScreen> {
       );
     }
 
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 350),
-      child: _showOnboarding
-          ? OnboardingScreen(
-              preferencesService: widget.preferencesService,
-              onCompleted: () => setState(() => _showOnboarding = false),
-            )
-          : HomeScreen(
-              preferencesService: widget.preferencesService,
-              initialTabIndex: widget.initialTabIndex,
-            ),
+    return ColoredBox(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 350),
+        child: _showOnboarding
+            ? OnboardingScreen(
+                preferencesService: widget.preferencesService,
+                onCompleted: () => setState(() => _showOnboarding = false),
+              )
+            : HomeScreen(
+                preferencesService: widget.preferencesService,
+                initialTabIndex: widget.initialTabIndex,
+              ),
+      ),
     );
   }
 }

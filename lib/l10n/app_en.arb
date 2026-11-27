@@ -93,5 +93,29 @@
   "wallpaperFailed": "Failed to set wallpaper. Please try again.",
   "@wallpaperFailed": {
     "description": "Error message when wallpaper setting fails"
+  },
+  "searchCollections": "Search collections...",
+  "@searchCollections": {
+    "description": "Search hint text for Collections tab"
+  },
+  "searchFeed": "Search feed...",
+  "@searchFeed": {
+    "description": "Search hint text for Feed tab"
+  },
+  "searchColors": "Search colors...",
+  "@searchColors": {
+    "description": "Generic search hint text for colors"
+  },
+  "clearSearch": "Clear search",
+  "@clearSearch": {
+    "description": "Action label and tooltip to clear active search query"
+  },
+  "noMatchingColors": "No matching colors",
+  "@noMatchingColors": {
+    "description": "Empty state text when no colors match the search query"
+  },
+  "loadMore": "Load more",
+  "@loadMore": {
+    "description": "Button label to load additional feed colors"
   }
 }

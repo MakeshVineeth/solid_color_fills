@@ -75,4 +75,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wallpaperFailed => 'Failed to set wallpaper. Please try again.';
+
+  @override
+  String get searchCollections => 'Search collections...';
+
+  @override
+  String get searchFeed => 'Search feed...';
+
+  @override
+  String get searchColors => 'Search colors...';
+
+  @override
+  String get clearSearch => 'Clear search';
+
+  @override
+  String get noMatchingColors => 'No matching colors';
+
+  @override
+  String get loadMore => 'Load more';
 }

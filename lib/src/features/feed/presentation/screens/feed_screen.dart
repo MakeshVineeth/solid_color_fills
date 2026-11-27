@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:solid_color_fills/src/core/constants/app_constants.dart';
+import 'package:solid_color_fills/l10n/app_localizations.dart';
+import 'package:solid_color_fills/src/core/widgets/minimal_search_bar.dart';
+import 'package:solid_color_fills/src/core/widgets/search_empty_state.dart';
 import 'package:solid_color_fills/src/features/collections/presentation/widgets/color_grid_card.dart';
-import 'package:solid_color_fills/src/features/color_picker/presentation/controllers/color_picker_controller.dart';
 import 'package:solid_color_fills/src/features/feed/presentation/controllers/feed_controller.dart';
-import 'package:solid_color_fills/src/features/wallpaper/presentation/controllers/wallpaper_controller.dart';
-import 'package:solid_color_fills/src/features/wallpaper/presentation/screens/wallpaper_confirmation_screen.dart';
+import 'package:solid_color_fills/src/features/wallpaper/presentation/utils/wallpaper_navigation.dart';
 
-/// Screen displaying an infinite feed of randomly generated solid colors.
+/// Screen displaying a searchable infinite feed of randomly generated solid colors.
 class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});
 
@@ -24,12 +24,20 @@ class _FeedScreenState extends State<FeedScreen> {
     super.initState();
     _scrollController.addListener(_onScroll);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted &&
-          _scrollController.hasClients &&
+      if (!mounted || !_scrollController.hasClients) return;
+      final controller = context.read<FeedController>();
+      if (!controller.isSearching &&
+          controller.hasMore &&
           _scrollController.position.maxScrollExtent < 100) {
-        context.read<FeedController>().loadMore(20);
+        controller.loadMore(20);
       }
     });
+  }
+
+  void _resetScroll() {
+    if (_scrollController.hasClients && _scrollController.offset > 0) {
+      _scrollController.jumpTo(0);
+    }
   }
 
   void _onScroll() {
@@ -37,7 +45,7 @@ class _FeedScreenState extends State<FeedScreen> {
     final position = _scrollController.position;
     if (position.pixels < position.maxScrollExtent - 400) return;
     final controller = context.read<FeedController>();
-    if (!controller.hasMore) return;
+    if (controller.isSearching || !controller.hasMore) return;
 
     _isLoadingMore = true;
     controller.loadMore(15);
@@ -53,79 +61,141 @@ class _FeedScreenState extends State<FeedScreen> {
     super.dispose();
   }
 
-  int _calculateCrossAxisCount(double width) {
-    if (width < AppConstants.compactBreakpoint) {
-      return 2;
-    } else if (width < AppConstants.mediumBreakpoint) {
-      return 3;
-    } else if (width < AppConstants.expandedBreakpoint) {
-      return 4;
-    } else {
-      return 6;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final isPortrait =
         MediaQuery.orientationOf(context) == Orientation.portrait;
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final crossAxisCount = _calculateCrossAxisCount(constraints.maxWidth);
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 10, 15, 6),
+          child: Selector<FeedController, String>(
+            selector: (_, c) => c.searchQuery,
+            builder: (context, query, _) => MinimalSearchBar(
+              initialQuery: query,
+              hintText: l10n?.searchFeed ?? 'Search feed...',
+              clearTooltip: l10n?.clearSearch ?? 'Clear search',
+              onChanged: (value) {
+                _resetScroll();
+                context.read<FeedController>().setSearchQuery(value);
+              },
+              onClear: () {
+                _resetScroll();
+                context.read<FeedController>().clearSearch();
+              },
+            ),
+          ),
+        ),
+        Expanded(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final crossAxisCount =
+                  adaptiveColorGridCrossAxisCount(constraints.maxWidth);
 
-        return Consumer<FeedController>(
-          builder: (context, controller, child) {
-            final items = controller.colors;
+              return Consumer<FeedController>(
+                builder: (context, controller, _) {
+                  final items = controller.colors;
 
-            return RefreshIndicator(
-              onRefresh: () async => controller.refresh(),
-              child: GridView.builder(
-                controller: _scrollController,
-                addAutomaticKeepAlives: false,
-                padding: const EdgeInsets.all(15.0),
-                physics: const AlwaysScrollableScrollPhysics(
-                  parent: BouncingScrollPhysics(),
-                ),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: crossAxisCount,
-                  childAspectRatio: isPortrait ? 0.70 : 1.2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                ),
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  final item = items[index];
-                  final heroTag = 'feed_${item.name}_$index';
+                  if (items.isEmpty && controller.isSearching) {
+                    return RefreshIndicator(
+                      onRefresh: () async => controller.refresh(),
+                      child: CustomScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(
+                          parent: BouncingScrollPhysics(),
+                        ),
+                        slivers: [
+                          SliverFillRemaining(
+                            hasScrollBody: false,
+                            child: SearchEmptyState(
+                              message:
+                                  l10n?.noMatchingColors ?? 'No matching colors',
+                              actions: [
+                                if (controller.hasMore)
+                                  TextButton(
+                                    onPressed: () => controller.loadMore(40),
+                                    child: Text(l10n?.loadMore ?? 'Load more'),
+                                  ),
+                                TextButton(
+                                  onPressed: () {
+                                    _resetScroll();
+                                    controller.clearSearch();
+                                  },
+                                  child:
+                                      Text(l10n?.clearSearch ?? 'Clear search'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
 
-                  return ColorGridCard(
-                    item: item,
-                    heroTag: heroTag,
-                    onTap: () {
-                      FocusManager.instance.primaryFocus?.unfocus();
-                      context.read<WallpaperController>().setColor(
-                            color: item.color,
-                            title: item.name,
-                          );
-                      context.read<ColorPickerController>().setColor(
-                            item.color,
-                            title: item.name,
-                          );
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (_) => WallpaperConfirmationScreen(
-                            heroTag: heroTag,
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: RefreshIndicator(
+                          onRefresh: () async => controller.refresh(),
+                          child: GridView.builder(
+                            controller: _scrollController,
+                            addAutomaticKeepAlives: false,
+                            padding: const EdgeInsets.fromLTRB(
+                              15.0,
+                              6.0,
+                              15.0,
+                              15.0,
+                            ),
+                            keyboardDismissBehavior:
+                                ScrollViewKeyboardDismissBehavior.onDrag,
+                            physics: const AlwaysScrollableScrollPhysics(
+                              parent: BouncingScrollPhysics(),
+                            ),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: crossAxisCount,
+                              childAspectRatio: isPortrait ? 0.70 : 1.2,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
+                            ),
+                            itemCount: items.length,
+                            itemBuilder: (context, index) {
+                              final item = items[index];
+                              final heroTag = 'feed_${identityHashCode(item)}';
+
+                              return ColorGridCard(
+                                item: item,
+                                heroTag: heroTag,
+                                onTap: () => openWallpaperConfirmation(
+                                  context,
+                                  item: item,
+                                  heroTag: heroTag,
+                                ),
+                              );
+                            },
                           ),
                         ),
-                      );
-                    },
+                      ),
+                      if (controller.isSearching && controller.hasMore)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 2),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              visualDensity: VisualDensity.compact,
+                            ),
+                            onPressed: () => controller.loadMore(40),
+                            child: Text(l10n?.loadMore ?? 'Load more'),
+                          ),
+                        ),
+                    ],
                   );
                 },
-              ),
-            );
-          },
-        );
-      },
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

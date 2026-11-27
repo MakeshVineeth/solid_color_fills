@@ -225,6 +225,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to set wallpaper. Please try again.'**
   String get wallpaperFailed;
+
+  /// Search hint text for Collections tab
+  ///
+  /// In en, this message translates to:
+  /// **'Search collections...'**
+  String get searchCollections;
+
+  /// Search hint text for Feed tab
+  ///
+  /// In en, this message translates to:
+  /// **'Search feed...'**
+  String get searchFeed;
+
+  /// Generic search hint text for colors
+  ///
+  /// In en, this message translates to:
+  /// **'Search colors...'**
+  String get searchColors;
+
+  /// Action label and tooltip to clear active search query
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get clearSearch;
+
+  /// Empty state text when no colors match the search query
+  ///
+  /// In en, this message translates to:
+  /// **'No matching colors'**
+  String get noMatchingColors;
+
+  /// Button label to load additional feed colors
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get loadMore;
 }
 
 class _AppLocalizationsDelegate

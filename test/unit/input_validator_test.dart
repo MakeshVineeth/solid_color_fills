@@ -25,7 +25,25 @@ void main() {
     test('sanitizeText trims and clamps length', () {
       expect(InputValidator.sanitizeText('  hello  '), equals('hello'));
       final longString = 'a' * 100;
-      expect(InputValidator.sanitizeText(longString, maxLength: 20).length, equals(20));
+      expect(
+        InputValidator.sanitizeText(longString, maxLength: 20).length,
+        equals(20),
+      );
+    });
+
+    test('sanitizeText strips control and BiDi chars and collapses whitespace', () {
+      expect(
+        InputValidator.sanitizeText('  Amber\u0000\n\t   Red\u202E\u2066  '),
+        equals('Amber Red'),
+      );
+      expect(
+        InputValidator.sanitizeText('\u0007\u001F\u007F   \u202A\u2069'),
+        isEmpty,
+      );
+      expect(
+        InputValidator.sanitizeText('Pastel Mint'),
+        equals('Pastel Mint'),
+      );
     });
   });
 }

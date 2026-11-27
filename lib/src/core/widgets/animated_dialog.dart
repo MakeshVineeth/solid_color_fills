@@ -82,9 +82,11 @@ class _AnimatedDialogTransitionState extends State<_AnimatedDialogTransition> {
             if (sigma < 0.05) {
               return const SizedBox.shrink();
             }
-            return BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
-              child: const SizedBox.expand(),
+            return IgnorePointer(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: sigma, sigmaY: sigma),
+                child: const SizedBox.expand(),
+              ),
             );
           },
         ),

@@ -1,9 +1,16 @@
-/// Sanitizes and validates user color hex inputs (OWASP M4).
+/// Sanitizes and validates user color hex and search text inputs (OWASP M4).
 class InputValidator {
   const InputValidator._();
 
+  static const int maxSearchLength = 50;
+
   static final RegExp _hexColorRegex =
       RegExp(r'^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$');
+
+  static final RegExp disallowedTextPattern =
+      RegExp(r'[\x00-\x1F\x7F\u202A-\u202E\u2066-\u2069]');
+
+  static final RegExp _multiWhitespace = RegExp(r'\s+');
 
   /// Validates whether a hex color string is in valid #RRGGBB or #AARRGGBB format.
   static bool isValidHexColor(String input) {
@@ -24,12 +31,15 @@ class InputValidator {
     return digits.toUpperCase();
   }
 
-  /// Sanitizes text input to prevent overflow or unexpected characters.
-  static String sanitizeText(String input, {int maxLength = 50}) {
-    final trimmed = input.trim();
-    if (trimmed.length > maxLength) {
-      return trimmed.substring(0, maxLength);
+  /// Strips control/BiDi characters, collapses whitespace, and caps length.
+  static String sanitizeText(String input, {int maxLength = maxSearchLength}) {
+    final normalized = input
+        .replaceAll(disallowedTextPattern, '')
+        .replaceAll(_multiWhitespace, ' ')
+        .trim();
+    if (normalized.length > maxLength) {
+      return normalized.substring(0, maxLength).trimRight();
     }
-    return trimmed;
+    return normalized;
   }
 }

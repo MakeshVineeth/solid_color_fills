@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solid_color_fills/src/core/constants/color_palette.dart';
+import 'package:solid_color_fills/src/core/security/input_validator.dart';
 import 'package:solid_color_fills/src/features/collections/domain/entities/solid_color_item.dart';
 
 /// Controller managing curated collections and search filtering.
@@ -20,21 +21,23 @@ class CollectionsController extends ChangeNotifier {
 
   String get searchQuery => _searchQuery;
 
+  bool get isSearching => _searchQuery.isNotEmpty;
+
   void _updateVisibleColors() {
-    final trimmed = _searchQuery.trim();
-    if (trimmed.isEmpty) {
+    if (_searchQuery.isEmpty) {
       _visibleColors = _curatedColors;
       return;
     }
-    final query = trimmed.toLowerCase();
+    final query = _searchQuery.toLowerCase();
     _visibleColors = List<SolidColorItem>.unmodifiable(
       _curatedColors.where((item) => item.name.toLowerCase().contains(query)),
     );
   }
 
   void setSearchQuery(String query) {
-    if (_searchQuery != query) {
-      _searchQuery = query;
+    final sanitized = InputValidator.sanitizeText(query);
+    if (_searchQuery != sanitized) {
+      _searchQuery = sanitized;
       _updateVisibleColors();
       notifyListeners();
     }

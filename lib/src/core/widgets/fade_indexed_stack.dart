@@ -12,7 +12,7 @@ class FadeIndexedStack extends StatefulWidget {
     super.key,
     required this.index,
     required this.children,
-    this.duration = const Duration(milliseconds: 250),
+    this.duration = const Duration(milliseconds: 140),
   });
 
   @override
@@ -22,6 +22,8 @@ class FadeIndexedStack extends StatefulWidget {
 class _FadeIndexedStackState extends State<FadeIndexedStack>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
+  late final CurvedAnimation _fadeCurve;
+  late final Animation<double> _opacityAnimation;
   late List<bool> _activated;
 
   @override
@@ -32,6 +34,14 @@ class _FadeIndexedStackState extends State<FadeIndexedStack>
       duration: widget.duration,
       value: 1.0,
     );
+    _fadeCurve = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeOut,
+    );
+    _opacityAnimation = Tween<double>(
+      begin: 0.35,
+      end: 1.0,
+    ).animate(_fadeCurve);
     _activated = List<bool>.generate(
       widget.children.length,
       (i) => i == widget.index,
@@ -41,6 +51,9 @@ class _FadeIndexedStackState extends State<FadeIndexedStack>
   @override
   void didUpdateWidget(FadeIndexedStack oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (widget.duration != oldWidget.duration) {
+      _controller.duration = widget.duration;
+    }
     if (widget.children.length != _activated.length) {
       final oldActivated = _activated;
       _activated = List<bool>.generate(
@@ -58,6 +71,7 @@ class _FadeIndexedStackState extends State<FadeIndexedStack>
 
   @override
   void dispose() {
+    _fadeCurve.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -65,7 +79,7 @@ class _FadeIndexedStackState extends State<FadeIndexedStack>
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
-      opacity: _controller,
+      opacity: _opacityAnimation,
       child: IndexedStack(
         index: widget.index,
         children: [

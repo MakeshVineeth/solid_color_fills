@@ -66,16 +66,25 @@ Widget createTestHarness({
 
 void main() {
   group('Screen Widget Tests', () {
-    testWidgets('CollectionsScreen renders curated color grid without search bar', (tester) async {
+    testWidgets('CollectionsScreen renders curated color grid and filters via search bar', (tester) async {
       await tester.pumpWidget(createTestHarness(child: const Scaffold(body: CollectionsScreen())));
       await tester.pumpAndSettle();
 
       expect(find.byType(GridView), findsOneWidget);
+      expect(find.byType(TextField), findsOneWidget);
       expect(find.text('Amber'), findsWidgets);
       expect(find.text('Red'), findsWidgets);
       expect(find.text('Green'), findsWidgets);
       expect(find.text('Blue'), findsWidgets);
-      expect(find.byType(TextField), findsNothing);
+
+      await tester.enterText(find.byType(TextField), 'Amber');
+      await tester.pumpAndSettle();
+      expect(find.text('Amber'), findsWidgets);
+      expect(find.text('Blue'), findsNothing);
+
+      await tester.tap(find.byIcon(Icons.close_rounded));
+      await tester.pumpAndSettle();
+      expect(find.text('Blue'), findsWidgets);
     });
 
     testWidgets('ColorPickerScreen renders tone picker, buttons, and floating FAB', (tester) async {
@@ -179,10 +188,19 @@ void main() {
       expect(find.text('VIEW LICENSES'), findsOneWidget);
     });
 
-    testWidgets('FeedScreen renders infinite grid', (tester) async {
+    testWidgets('FeedScreen renders infinite grid and filters via search bar', (tester) async {
       await tester.pumpWidget(createTestHarness(child: const Scaffold(body: FeedScreen())));
       await tester.pumpAndSettle();
 
+      expect(find.byType(GridView), findsOneWidget);
+      expect(find.byType(TextField), findsOneWidget);
+
+      await tester.enterText(find.byType(TextField), 'zzzzzz');
+      await tester.pumpAndSettle();
+      expect(find.text('No matching colors'), findsOneWidget);
+
+      await tester.tap(find.text('Clear search'));
+      await tester.pumpAndSettle();
       expect(find.byType(GridView), findsOneWidget);
     });
 
